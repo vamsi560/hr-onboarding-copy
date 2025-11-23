@@ -1,0 +1,258 @@
+.dashboard-header {
+  margin-bottom: 24px;
+}
+
+.dashboard-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 8px 0;
+}
+
+.dashboard-subtitle {
+  font-size: 16px;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Progress Timeline */
+.progress-timeline-card {
+  margin-bottom: 24px;
+  padding: 32px;
+}
+
+.progress-timeline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.timeline-node {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.node-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  border: 3px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.timeline-node.completed .node-circle {
+  background: var(--brand);
+  border-color: var(--brand);
+}
+
+.timeline-node.active .node-circle {
+  background: var(--brand);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 4px rgba(30, 58, 95, 0.1);
+}
+
+.checkmark {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.node-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.node-date {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.timeline-connector {
+  flex: 1;
+  height: 4px;
+  background: #e2e8f0;
+  margin: 0 -24px;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-connector.completed {
+  background: var(--brand);
+}
+
+.timeline-connector.active {
+  background: linear-gradient(90deg, var(--brand) 0%, #e2e8f0 100%);
+}
+
+.progress-summary-card {
+  margin-bottom: 24px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.dashboard-grid .card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.dashboard-grid .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+/* Tasks Section */
+.tasks-card {
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 20px 0;
+}
+
+.tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.task-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.task-item:hover {
+  background: #f8f9fa;
+}
+
+.task-checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #e2e8f0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.task-checkbox:hover {
+  border-color: var(--brand);
+}
+
+.task-checkbox.completed {
+  background: var(--brand);
+  border-color: var(--brand);
+}
+
+.checkmark-small {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.task-content {
+  flex: 1;
+}
+
+.task-name {
+  font-size: 15px;
+  color: var(--text);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.task-date {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.dashboard-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.dashboard-card:hover::before {
+  transform: scaleX(1);
+}
+
+.card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.card-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.dashboard-card:hover .card-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.dashboard-card h4 {
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

@@ -1,0 +1,17 @@
+.breadcrumbs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.breadcrumbs span {
+  color: var(--muted);
+}
+
+.breadcrumbs span.current {
+  color: var(--text);
+  font-weight: 500;
+}
+

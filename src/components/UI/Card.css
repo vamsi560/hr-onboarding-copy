@@ -1,0 +1,24 @@
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 6px 18px var(--shadow);
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+body.dark .card {
+  background: var(--dark-card);
+  color: var(--dark-text);
+  border: 1px solid var(--dark-border);
+}
+
+body.dark .card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}

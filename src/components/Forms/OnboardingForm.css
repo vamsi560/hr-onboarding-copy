@@ -1,0 +1,82 @@
+.form-step {
+  animation: fadeIn 0.3s;
+}
+
+.step-indicator {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.step {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--border);
+  color: var(--muted);
+  font-weight: 600;
+  position: relative;
+}
+
+.step.active {
+  background: var(--brand);
+  color: #fff;
+}
+
+.step.completed {
+  background: var(--success);
+  color: #fff;
+}
+
+.step-connector {
+  width: 16px;
+  height: 2px;
+  background: var(--border);
+  margin: 0 -4px;
+}
+
+.step.completed + .step-connector {
+  background: var(--success);
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.form-group {
+  flex: 1;
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+  }
+}
+
