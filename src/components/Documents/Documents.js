@@ -130,9 +130,6 @@ Date: ______________________________________________________
     { id: 'criminal', name: 'Criminal Verification Form', category: 'other', icon: '🔒' }
   ];
 
-  const [uploadingDoc, setUploadingDoc] = useState(null);
-  const fileInputRefs = useRef({});
-
   const handleDocumentUpload = (docType, e) => {
     const file = e.target.files[0];
     if (file) {
