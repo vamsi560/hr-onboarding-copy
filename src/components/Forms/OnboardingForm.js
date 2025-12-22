@@ -129,6 +129,23 @@ const OnboardingForm = () => {
                   placeholder="Street, City, State"
                 />
               </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Upload Photo</label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="input"
+                    onChange={(e) => {
+                      const file = e.target.files && e.target.files[0];
+                      handleChange('photoFileName', file ? file.name : '');
+                    }}
+                  />
+                  <div className="small">
+                    Recent passport-size photo. JPG/PNG, max 5MB.
+                  </div>
+                </div>
+              </div>
               <div className="form-actions">
                 <Button type="button" variant="secondary" onClick={() => window.location.hash = '#dashboard'}>
                   Back
@@ -172,6 +189,26 @@ const OnboardingForm = () => {
                   onChange={(e) => handleChange('joiningDate', e.target.value)}
                 />
               </div>
+              <div className="form-group">
+                <label>Certifications</label>
+                <textarea
+                  className="input"
+                  rows="3"
+                  value={formValues.certifications || ''}
+                  onChange={(e) => handleChange('certifications', e.target.value)}
+                  placeholder="List your key certifications (e.g., AWS, Azure, PMP)"
+                />
+              </div>
+              <div className="form-group">
+                <label>Skills</label>
+                <textarea
+                  className="input"
+                  rows="3"
+                  value={formValues.skills || ''}
+                  onChange={(e) => handleChange('skills', e.target.value)}
+                  placeholder="List primary skills and technologies"
+                />
+              </div>
               <div className="form-actions">
                 <Button type="button" variant="secondary" onClick={prevStep}>Previous</Button>
                 <Button type="button" onClick={nextStep}>Next</Button>
@@ -209,6 +246,36 @@ const OnboardingForm = () => {
                   rows="3"
                   placeholder="Any additional information..."
                 />
+              </div>
+              <div className="form-group">
+                <label>Visa Status</label>
+                <div className="visa-options">
+                  <label>
+                    <input
+                      type="radio"
+                      name="hasVisa"
+                      value="yes"
+                      checked={formValues.hasVisa === 'yes'}
+                      onChange={(e) => handleChange('hasVisa', e.target.value)}
+                    />
+                    Yes
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="hasVisa"
+                      value="no"
+                      checked={formValues.hasVisa === 'no'}
+                      onChange={(e) => handleChange('hasVisa', e.target.value)}
+                    />
+                    No
+                  </label>
+                </div>
+                {formValues.hasVisa === 'yes' && (
+                  <div className="small">
+                    Please upload your Visa document under the <strong>Identity</strong> category in the Documents tab.
+                  </div>
+                )}
               </div>
               <div className="form-actions">
                 <Button type="button" variant="secondary" onClick={prevStep}>Previous</Button>

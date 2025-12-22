@@ -1,15 +1,26 @@
 import React from 'react';
+import { useApp } from '../../context/AppContext';
 import './Sidebar.css';
 
 const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose }) => {
-  const menuItems = [
+  const { userRole, location } = useApp();
+
+  const candidateMenuItems = [
     { id: 'dashboard', label: 'Dashboard' },
     { id: 'form', label: 'Onboarding Form' },
     { id: 'documents', label: 'Documents' },
     { id: 'validation', label: 'AI Validation' },
-    { id: 'hr', label: 'HR Review' },
     { id: 'support', label: 'Support' }
   ];
+
+  const hrMenuItems = [
+    { id: 'hr', label: 'HR Dashboard' },
+    { id: 'exceptions', label: 'Exceptions' },
+    { id: 'workflows', label: 'Workflows' },
+    { id: 'support', label: 'Support' }
+  ];
+
+  const menuItems = userRole === 'hr' ? hrMenuItems : candidateMenuItems;
 
   return (
     <>
@@ -19,10 +30,16 @@ const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose }) => {
           {/* User Profile Section */}
           <div className="sidebar-profile">
             <div className="profile-avatar">
-              <div className="avatar-circle">JD</div>
+              <div className="avatar-circle">
+                {userRole === 'hr' ? 'RR' : 'ST'}
+              </div>
             </div>
-            <div className="profile-name">John Doe</div>
-            <div className="profile-role">New Employee</div>
+            <div className="profile-name">
+              {userRole === 'hr' ? 'Raghavendra Raju' : 'Shashank Tudum'}
+            </div>
+            <div className="profile-role">
+              {userRole === 'hr' ? 'HR' : 'New Employee'} • {location === 'us' ? 'US' : 'India'}
+            </div>
           </div>
 
           {/* Navigation Menu */}

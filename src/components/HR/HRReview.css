@@ -79,6 +79,14 @@
   background: #f59e0b;
 }
 
+.hr-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
 @media (max-width: 600px) {
   .hr-filters {
     flex-direction: column;
@@ -87,5 +95,27 @@
   .candidates-table {
     font-size: 12px;
   }
+}
+
+.workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.workflow-card {
+  padding: 12px;
+}
+
+.workflow-card h4 {
+  margin: 0 0 8px;
+}
+
+.workflow-card ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  color: var(--muted);
 }
 

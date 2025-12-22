@@ -3,6 +3,7 @@ import Card from '../UI/Card';
 import Button from '../UI/Button';
 import Input from '../UI/Input';
 import { useToast } from '../../context/ToastContext';
+import { useApp } from '../../context/AppContext';
 import './Login.css';
 
 const Login = ({ onLogin, onDemo }) => {
@@ -10,7 +11,10 @@ const Login = ({ onLogin, onDemo }) => {
   const [password, setPassword] = useState('');
   const [passwordStrength, setPasswordStrength] = useState('');
   const [isAnimating, setIsAnimating] = useState(false);
+  const [loginType, setLoginType] = useState('candidate');
+  const [location, setLocation] = useState('india');
   const { showToast } = useToast();
+  const { setUserRole, setLocation: setAppLocation } = useApp();
 
   useEffect(() => {
     setIsAnimating(true);
@@ -43,6 +47,10 @@ const Login = ({ onLogin, onDemo }) => {
       return;
     }
     
+    // Persist selected role and location into app context
+    setUserRole(loginType === 'hr' ? 'hr' : 'candidate');
+    setAppLocation(location);
+
     onLogin();
     showToast('Login successful!', 'success');
   };
@@ -81,6 +89,32 @@ const Login = ({ onLogin, onDemo }) => {
           </div>
           
           <form onSubmit={handleSubmit} className="login-form">
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="loginType">Login As</label>
+                <select
+                  id="loginType"
+                  className="login-select"
+                  value={loginType}
+                  onChange={(e) => setLoginType(e.target.value)}
+                >
+                  <option value="candidate">Candidate</option>
+                  <option value="hr">HR</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="location">Location</label>
+                <select
+                  id="location"
+                  className="login-select"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                >
+                  <option value="india">India</option>
+                  <option value="us">US</option>
+                </select>
+              </div>
+            </div>
             <div className="form-group">
               <label htmlFor="email">Email Address</label>
               <Input

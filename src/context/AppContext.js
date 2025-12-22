@@ -16,11 +16,17 @@ export const AppProvider = ({ children }) => {
     const saved = localStorage.getItem('formData');
     return saved ? JSON.parse(saved) : {};
   });
+  const [userRole, setUserRole] = useState(() => {
+    return localStorage.getItem('userRole') || 'candidate';
+  });
+  const [location, setLocation] = useState(() => {
+    return localStorage.getItem('location') || 'india';
+  });
   const [documents, setDocuments] = useState([]);
   const [candidates, setCandidates] = useState([
-    { id: 1, name: 'John Doe', status: 'ready', docs: 12, total: 12, dept: 'engineering', selected: false },
-    { id: 2, name: 'Sarah Lee', status: 'pending', docs: 9, total: 12, dept: 'sales', selected: false },
-    { id: 3, name: 'Mike Johnson', status: 'ready', docs: 12, total: 12, dept: 'engineering', selected: false }
+    { id: 1, name: 'Sai Surya Vamsi Sapireddy', status: 'ready', docs: 12, total: 12, dept: 'engineering', selected: false, pending: [] },
+    { id: 2, name: 'Shashank Tudum', status: 'pending', docs: 9, total: 12, dept: 'sales', selected: false, pending: ['Identity proof', 'Visa document'] },
+    { id: 3, name: 'Pankaj Kumar', status: 'pending', docs: 10, total: 12, dept: 'engineering', selected: false, pending: ['Financial documents', 'Photo'] }
   ]);
   const [chatHistory, setChatHistory] = useState(() => {
     const saved = localStorage.getItem('chatHistory');
@@ -32,6 +38,14 @@ export const AppProvider = ({ children }) => {
     document.body.classList.toggle('dark', darkMode);
     localStorage.setItem('darkMode', darkMode);
   }, [darkMode]);
+
+  useEffect(() => {
+    localStorage.setItem('userRole', userRole);
+  }, [userRole]);
+
+  useEffect(() => {
+    localStorage.setItem('location', location);
+  }, [location]);
 
   useEffect(() => {
     localStorage.setItem('formData', JSON.stringify(formData));
@@ -67,6 +81,10 @@ export const AppProvider = ({ children }) => {
     toggleDarkMode,
     formData,
     updateFormData,
+    userRole,
+    setUserRole,
+    location,
+    setLocation,
     documents,
     setDocuments,
     addDocument,

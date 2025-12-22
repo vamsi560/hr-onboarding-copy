@@ -3,6 +3,7 @@ import { useApp } from '../../context/AppContext';
 import Card from '../UI/Card';
 import Button from '../UI/Button';
 import Breadcrumbs from '../UI/Breadcrumbs';
+import HRCandidateWorkflow from './HRCandidateWorkflow';
 import './HRReview.css';
 
 const HRReview = () => {
@@ -10,6 +11,7 @@ const HRReview = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [deptFilter, setDeptFilter] = useState('');
+  const [selectedCandidateId, setSelectedCandidateId] = useState(null);
 
   const filteredCandidates = candidates.filter(c => {
     const matchesSearch = !searchTerm || c.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -30,11 +32,36 @@ const HRReview = () => {
     setCandidates(prev => prev.map(c => ({ ...c, selected: checked })));
   };
 
+  const handleCandidateClick = (candidateId) => {
+    setSelectedCandidateId(candidateId);
+  };
+
+  const handleBackToWorkflows = () => {
+    setSelectedCandidateId(null);
+  };
+
+  if (selectedCandidateId) {
+    return (
+      <HRCandidateWorkflow
+        candidateId={selectedCandidateId}
+        onBack={handleBackToWorkflows}
+      />
+    );
+  }
+
   return (
     <div className="hr-review">
       <Breadcrumbs items={[{ label: 'Home' }, { label: 'HR Review' }]} />
       <Card>
-        <h3>HR Review Dashboard</h3>
+        <div className="hr-header-row">
+          <div>
+            <h3>HR Review Dashboard</h3>
+            <p className="small">View onboarding status for all employees.</p>
+          </div>
+          <Button>
+            Register New Candidate
+          </Button>
+        </div>
         <Card style={{ marginTop: '12px' }}>
           <div className="hr-filters">
             <input
@@ -93,15 +120,25 @@ const HRReview = () => {
             </thead>
             <tbody>
               {filteredCandidates.map(candidate => (
-                <tr key={candidate.id} className={candidate.selected ? 'selected' : ''}>
-                  <td>
+                <tr 
+                  key={candidate.id} 
+                  className={candidate.selected ? 'selected' : ''}
+                  style={{ cursor: 'pointer' }}
+                  onClick={(e) => {
+                    // Don't trigger if clicking checkbox or button
+                    if (e.target.type !== 'checkbox' && e.target.tagName !== 'BUTTON') {
+                      handleCandidateClick(candidate.id);
+                    }
+                  }}
+                >
+                  <td onClick={(e) => e.stopPropagation()}>
                     <input
                       type="checkbox"
                       checked={candidate.selected}
                       onChange={() => toggleCandidate(candidate.id)}
                     />
                   </td>
-                  <td>{candidate.name}</td>
+                  <td style={{ fontWeight: '500', color: 'var(--brand)' }}>{candidate.name}</td>
                   <td>
                     <div className="flex">
                       <span className={`status-dot status-${candidate.status === 'ready' ? 'approved' : 'pending'}`}></span>
@@ -110,7 +147,14 @@ const HRReview = () => {
                   </td>
                   <td>{candidate.docs}/{candidate.total}</td>
                   <td>{candidate.dept}</td>
-                  <td><Button variant="secondary">Review</Button></td>
+                  <td onClick={(e) => e.stopPropagation()}>
+                    <Button 
+                      variant="secondary"
+                      onClick={() => handleCandidateClick(candidate.id)}
+                    >
+                      Review
+                    </Button>
+                  </td>
                 </tr>
               ))}
             </tbody>

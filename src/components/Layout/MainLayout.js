@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useApp } from '../../context/AppContext';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Dashboard from '../Dashboard/Dashboard';
@@ -6,6 +7,8 @@ import OnboardingForm from '../Forms/OnboardingForm';
 import Documents from '../Documents/Documents';
 import Validation from '../Validation/Validation';
 import HRReview from '../HR/HRReview';
+import HRExceptions from '../HR/HRExceptions';
+import HRWorkflows from '../HR/HRWorkflows';
 import Support from '../Support/Support';
 import ChatWidget from '../Chat/ChatWidget';
 import ToastContainer from '../UI/ToastContainer';
@@ -13,7 +16,8 @@ import LoadingOverlay from '../UI/LoadingOverlay';
 import './MainLayout.css';
 
 const MainLayout = ({ onLogout }) => {
-  const [activeView, setActiveView] = useState('dashboard');
+  const { userRole } = useApp();
+  const [activeView, setActiveView] = useState(userRole === 'hr' ? 'hr' : 'dashboard');
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   const views = {
@@ -22,7 +26,9 @@ const MainLayout = ({ onLogout }) => {
     documents: Documents,
     validation: Validation,
     hr: HRReview,
-    support: Support
+    support: Support,
+    exceptions: HRExceptions,
+    workflows: HRWorkflows
   };
 
   const ActiveComponent = views[activeView] || Dashboard;

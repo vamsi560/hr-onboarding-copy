@@ -39,6 +39,38 @@
   background: #f1f5f9;
 }
 
+.document-category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 16px 0 24px;
+}
+
+.document-category-card {
+  padding: 12px;
+}
+
+.document-category-card h4 {
+  margin: 0 0 8px;
+}
+
+.document-category-card ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.document-category-card.resumes {
+  border: 2px solid var(--brand);
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+}
+
+.document-category-card.resumes h4 {
+  color: var(--brand);
+  font-weight: 600;
+}
+
 .doc-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -94,9 +126,39 @@
   font-weight: 300;
 }
 
+.resume-upload-section {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.resume-upload-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.criminal-verification-card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 2px solid var(--border);
+}
+
+.criminal-verification-card h4 {
+  color: var(--text);
+  font-weight: 600;
+}
+
 @media (max-width: 600px) {
   .search-filter {
     flex-direction: column;
+  }
+  
+  .resume-upload-buttons {
+    flex-direction: column;
+  }
+  
+  .resume-upload-buttons button {
+    width: 100%;
   }
 }
 
