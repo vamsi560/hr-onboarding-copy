@@ -7,7 +7,7 @@ import Breadcrumbs from '../UI/Breadcrumbs';
 import './Documents.css';
 
 const Documents = () => {
-  const { documents, addDocument } = useApp();
+  const { documents, addDocument, logAction } = useApp();
   const { showToast } = useToast();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
@@ -118,16 +118,16 @@ Date: ______________________________________________________
 
 
   const documentTypes = [
-    { id: 'aadhar', name: 'Aadhaar / Passport', category: 'identity', icon: '🆔' },
-    { id: 'visa', name: 'Visa Document', category: 'identity', icon: '✈️' },
-    { id: 'photo', name: 'Passport Size Photo', category: 'identity', icon: '📷' },
-    { id: 'degree', name: 'Highest Degree Certificate', category: 'education', icon: '🎓' },
-    { id: 'payslip', name: 'Last 3 Months Pay Slips', category: 'financial', icon: '💰' },
-    { id: 'pf', name: 'PF Account Statement', category: 'financial', icon: '📊' },
-    { id: 'resume1', name: 'Resume Type 1 (ValueMomentum)', category: 'resumes', icon: '📄' },
-    { id: 'resume2', name: 'Resume Type 2 (ValueMomentum)', category: 'resumes', icon: '📄' },
-    { id: 'nda', name: 'NDA / Contract', category: 'other', icon: '📋' },
-    { id: 'criminal', name: 'Criminal Verification Form', category: 'other', icon: '🔒' }
+    { id: 'aadhar', name: 'Aadhaar / Passport', category: 'identity' },
+    { id: 'visa', name: 'Visa Document', category: 'identity' },
+    { id: 'photo', name: 'Passport Size Photo', category: 'identity' },
+    { id: 'degree', name: 'Highest Degree Certificate', category: 'education' },
+    { id: 'payslip', name: 'Last 3 Months Pay Slips', category: 'financial' },
+    { id: 'pf', name: 'PF Account Statement', category: 'financial' },
+    { id: 'resume1', name: 'Resume Type 1 (ValueMomentum)', category: 'resumes' },
+    { id: 'resume2', name: 'Resume Type 2 (ValueMomentum)', category: 'resumes' },
+    { id: 'nda', name: 'NDA / Contract', category: 'other' },
+    { id: 'criminal', name: 'Criminal Verification Form', category: 'other' }
   ];
 
   const handleDocumentUpload = (docType, e) => {
@@ -157,6 +157,14 @@ Date: ______________________________________________________
       
       addDocument(newDoc);
       showToast(`${docTypeInfo.name} uploaded successfully`, 'success');
+      if (logAction) {
+        logAction('document_uploaded', { 
+          documentType: docTypeInfo.name, 
+          fileName: file.name, 
+          fileSize: file.size,
+          category: docTypeInfo.category
+        });
+      }
       e.target.value = '';
       setUploadingDoc(null);
     }
@@ -185,50 +193,209 @@ Date: ______________________________________________________
         <h3>Document Upload Center</h3>
         <p className="small">Upload the required documents. AI will validate and provide feedback.</p>
 
-        <div className="document-types-grid">
-          {documentTypes.map(docType => {
-            const uploadedDoc = getDocumentStatus(docType.id);
-            return (
-              <Card 
-                key={docType.id} 
-                className={`document-type-card ${uploadedDoc ? 'uploaded' : ''}`}
-                onClick={() => {
-                  if (!fileInputRefs.current[docType.id]) {
-                    fileInputRefs.current[docType.id] = document.createElement('input');
-                    fileInputRefs.current[docType.id].type = 'file';
-                    fileInputRefs.current[docType.id].accept = docType.id === 'criminal' ? '.pdf,.doc,.docx,.txt' : '.pdf,.doc,.docx,.jpg,.png';
-                    fileInputRefs.current[docType.id].onchange = (e) => handleDocumentUpload(docType.id, e);
-                  }
-                  fileInputRefs.current[docType.id].click();
-                }}
-              >
-                <div className="document-type-icon">{docType.icon}</div>
-                <h4>{docType.name}</h4>
-                {uploadedDoc ? (
-                  <div className="document-status">
-                    <span className="status-badge status-uploaded">✓ Uploaded</span>
-                    <div className="small" style={{ marginTop: '4px' }}>{uploadedDoc.file}</div>
-                  </div>
-                ) : (
-                  <div className="document-status">
-                    <span className="status-badge status-pending">Pending</span>
-                  </div>
-                )}
-                {docType.id === 'criminal' && (
-                  <Button
-                    variant="secondary"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      downloadCriminalVerificationForm();
+        {/* Document Categories */}
+        <div className="document-categories-container">
+          {/* Identity Category */}
+          <div className="document-category-section">
+            <h4 className="category-title">Identity Documents</h4>
+            <p className="category-description">Upload identity verification documents</p>
+            <div className="document-types-grid">
+              {documentTypes.filter(dt => dt.category === 'identity').map(docType => {
+                const uploadedDoc = getDocumentStatus(docType.id);
+                return (
+                  <Card 
+                    key={docType.id} 
+                    className={`document-type-card ${uploadedDoc ? 'uploaded' : ''}`}
+                    onClick={() => {
+                      if (!fileInputRefs.current[docType.id]) {
+                        fileInputRefs.current[docType.id] = document.createElement('input');
+                        fileInputRefs.current[docType.id].type = 'file';
+                        fileInputRefs.current[docType.id].accept = '.pdf,.doc,.docx,.jpg,.png';
+                        fileInputRefs.current[docType.id].onchange = (e) => handleDocumentUpload(docType.id, e);
+                      }
+                      fileInputRefs.current[docType.id].click();
                     }}
-                    style={{ marginTop: '8px', fontSize: '12px' }}
                   >
-                    Download Form
-                  </Button>
-                )}
-              </Card>
-            );
-          })}
+                    <h5>{docType.name}</h5>
+                    {uploadedDoc ? (
+                      <div className="document-status">
+                        <span className="status-badge status-uploaded">Uploaded</span>
+                        <div className="small" style={{ marginTop: '4px' }}>{uploadedDoc.file}</div>
+                      </div>
+                    ) : (
+                      <div className="document-status">
+                        <span className="status-badge status-pending">Pending</span>
+                      </div>
+                    )}
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Education Category */}
+          <div className="document-category-section">
+            <h4 className="category-title">Education Documents</h4>
+            <p className="category-description">Upload educational qualification certificates</p>
+            <div className="document-types-grid">
+              {documentTypes.filter(dt => dt.category === 'education').map(docType => {
+                const uploadedDoc = getDocumentStatus(docType.id);
+                return (
+                  <Card 
+                    key={docType.id} 
+                    className={`document-type-card ${uploadedDoc ? 'uploaded' : ''}`}
+                    onClick={() => {
+                      if (!fileInputRefs.current[docType.id]) {
+                        fileInputRefs.current[docType.id] = document.createElement('input');
+                        fileInputRefs.current[docType.id].type = 'file';
+                        fileInputRefs.current[docType.id].accept = '.pdf,.doc,.docx,.jpg,.png';
+                        fileInputRefs.current[docType.id].onchange = (e) => handleDocumentUpload(docType.id, e);
+                      }
+                      fileInputRefs.current[docType.id].click();
+                    }}
+                  >
+                    <h5>{docType.name}</h5>
+                    {uploadedDoc ? (
+                      <div className="document-status">
+                        <span className="status-badge status-uploaded">Uploaded</span>
+                        <div className="small" style={{ marginTop: '4px' }}>{uploadedDoc.file}</div>
+                      </div>
+                    ) : (
+                      <div className="document-status">
+                        <span className="status-badge status-pending">Pending</span>
+                      </div>
+                    )}
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Financial Category */}
+          <div className="document-category-section">
+            <h4 className="category-title">Financial Documents</h4>
+            <p className="category-description">Upload financial and employment-related documents</p>
+            <div className="document-types-grid">
+              {documentTypes.filter(dt => dt.category === 'financial').map(docType => {
+                const uploadedDoc = getDocumentStatus(docType.id);
+                return (
+                  <Card 
+                    key={docType.id} 
+                    className={`document-type-card ${uploadedDoc ? 'uploaded' : ''}`}
+                    onClick={() => {
+                      if (!fileInputRefs.current[docType.id]) {
+                        fileInputRefs.current[docType.id] = document.createElement('input');
+                        fileInputRefs.current[docType.id].type = 'file';
+                        fileInputRefs.current[docType.id].accept = '.pdf,.doc,.docx,.jpg,.png';
+                        fileInputRefs.current[docType.id].onchange = (e) => handleDocumentUpload(docType.id, e);
+                      }
+                      fileInputRefs.current[docType.id].click();
+                    }}
+                  >
+                    <h5>{docType.name}</h5>
+                    {uploadedDoc ? (
+                      <div className="document-status">
+                        <span className="status-badge status-uploaded">Uploaded</span>
+                        <div className="small" style={{ marginTop: '4px' }}>{uploadedDoc.file}</div>
+                      </div>
+                    ) : (
+                      <div className="document-status">
+                        <span className="status-badge status-pending">Pending</span>
+                      </div>
+                    )}
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Resumes Category */}
+          <div className="document-category-section">
+            <h4 className="category-title">Resumes</h4>
+            <p className="category-description">Upload resumes in ValueMomentum format</p>
+            <div className="document-types-grid">
+              {documentTypes.filter(dt => dt.category === 'resumes').map(docType => {
+                const uploadedDoc = getDocumentStatus(docType.id);
+                return (
+                  <Card 
+                    key={docType.id} 
+                    className={`document-type-card ${uploadedDoc ? 'uploaded' : ''}`}
+                    onClick={() => {
+                      if (!fileInputRefs.current[docType.id]) {
+                        fileInputRefs.current[docType.id] = document.createElement('input');
+                        fileInputRefs.current[docType.id].type = 'file';
+                        fileInputRefs.current[docType.id].accept = '.pdf,.doc,.docx';
+                        fileInputRefs.current[docType.id].onchange = (e) => handleDocumentUpload(docType.id, e);
+                      }
+                      fileInputRefs.current[docType.id].click();
+                    }}
+                  >
+                    <h5>{docType.name}</h5>
+                    {uploadedDoc ? (
+                      <div className="document-status">
+                        <span className="status-badge status-uploaded">Uploaded</span>
+                        <div className="small" style={{ marginTop: '4px' }}>{uploadedDoc.file}</div>
+                      </div>
+                    ) : (
+                      <div className="document-status">
+                        <span className="status-badge status-pending">Pending</span>
+                      </div>
+                    )}
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Other Category */}
+          <div className="document-category-section">
+            <h4 className="category-title">Other Documents</h4>
+            <p className="category-description">Upload additional required documents</p>
+            <div className="document-types-grid">
+              {documentTypes.filter(dt => dt.category === 'other').map(docType => {
+                const uploadedDoc = getDocumentStatus(docType.id);
+                return (
+                  <Card 
+                    key={docType.id} 
+                    className={`document-type-card ${uploadedDoc ? 'uploaded' : ''}`}
+                    onClick={() => {
+                      if (!fileInputRefs.current[docType.id]) {
+                        fileInputRefs.current[docType.id] = document.createElement('input');
+                        fileInputRefs.current[docType.id].type = 'file';
+                        fileInputRefs.current[docType.id].accept = docType.id === 'criminal' ? '.pdf,.doc,.docx,.txt' : '.pdf,.doc,.docx,.jpg,.png';
+                        fileInputRefs.current[docType.id].onchange = (e) => handleDocumentUpload(docType.id, e);
+                      }
+                      fileInputRefs.current[docType.id].click();
+                    }}
+                  >
+                    <h5>{docType.name}</h5>
+                    {uploadedDoc ? (
+                      <div className="document-status">
+                        <span className="status-badge status-uploaded">Uploaded</span>
+                        <div className="small" style={{ marginTop: '4px' }}>{uploadedDoc.file}</div>
+                      </div>
+                    ) : (
+                      <div className="document-status">
+                        <span className="status-badge status-pending">Pending</span>
+                      </div>
+                    )}
+                    {docType.id === 'criminal' && (
+                      <Button
+                        variant="secondary"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          downloadCriminalVerificationForm();
+                        }}
+                        style={{ marginTop: '8px', fontSize: '12px' }}
+                      >
+                        Download Form
+                      </Button>
+                    )}
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         <div className="search-filter">

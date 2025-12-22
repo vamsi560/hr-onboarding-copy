@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import Card from '../UI/Card';
+import Button from '../UI/Button';
 import Breadcrumbs from '../UI/Breadcrumbs';
 import './HRAnalytics.css';
 
 const HRAnalytics = () => {
-  const { candidates } = useApp();
+  const { candidates, logAction } = useApp();
   const [sortField, setSortField] = useState(null);
   const [sortDirection, setSortDirection] = useState('asc');
 
@@ -200,11 +201,112 @@ const HRAnalytics = () => {
     return sortDirection === 'asc' ? '↑' : '↓';
   };
 
+  const exportToCSV = () => {
+    const headers = ['Name', 'Position', 'Department', 'Hiring Lead', 'Offer Date', 'Accept Date', 'Onboarding Progress', 'Tasks Completed', 'Tasks Total'];
+    const csvContent = [
+      headers.join(','),
+      ...sortedData.map(row => [
+        `"${row.name}"`,
+        `"${row.position}"`,
+        `"${row.department}"`,
+        `"${row.hiringLead}"`,
+        row.offerDate,
+        row.acceptDate,
+        `${row.onboardingProgress}%`,
+        row.tasksCompleted,
+        row.tasksTotal
+      ].join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `candidate_analytics_${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    if (logAction) {
+      logAction('export_csv', { filename: `candidate_analytics_${new Date().toISOString().split('T')[0]}.csv` });
+    }
+  };
+
+  const exportToPDF = () => {
+    // Simple PDF generation using window.print() or a library
+    // For a production app, you'd use jsPDF or similar
+    const printWindow = window.open('', '_blank');
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Candidate Analytics Report</title>
+          <style>
+            body { font-family: Arial, sans-serif; padding: 20px; }
+            h1 { color: #333; }
+            table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
+            @media print { body { margin: 0; } }
+          </style>
+        </head>
+        <body>
+          <h1>Candidate Analytics Report</h1>
+          <p>Generated: ${new Date().toLocaleString()}</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Department</th>
+                <th>Hiring Lead</th>
+                <th>Offer Date</th>
+                <th>Accept Date</th>
+                <th>Onboarding Progress</th>
+                <th>Tasks</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${sortedData.map(row => `
+                <tr>
+                  <td>${row.name}</td>
+                  <td>${row.position}</td>
+                  <td>${row.department}</td>
+                  <td>${row.hiringLead}</td>
+                  <td>${row.offerDate}</td>
+                  <td>${row.acceptDate}</td>
+                  <td>${row.onboardingProgress}%</td>
+                  <td>${row.tasksCompleted}/${row.tasksTotal}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </body>
+      </html>
+    `;
+    printWindow.document.write(htmlContent);
+    printWindow.document.close();
+    printWindow.print();
+    
+    if (logAction) {
+      logAction('export_pdf', { timestamp: new Date().toISOString() });
+    }
+  };
+
   return (
     <div className="hr-analytics">
       <Breadcrumbs items={[{ label: 'Home' }, { label: 'Analytics' }]} />
       <div className="analytics-header">
         <h1>Analytics</h1>
+        <div className="export-buttons">
+          <Button variant="secondary" onClick={exportToCSV}>
+            Export CSV
+          </Button>
+          <Button variant="secondary" onClick={exportToPDF}>
+            Export PDF
+          </Button>
+        </div>
       </div>
 
       {/* KPI Cards */}

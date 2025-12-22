@@ -217,7 +217,6 @@ const HRChat = () => {
 
           <div className="chat-search-section">
             <div className="chat-search-bar">
-              <span className="search-icon">🔍</span>
               <input
                 type="text"
                 placeholder="Search"
@@ -262,13 +261,13 @@ const HRChat = () => {
                   {chat.messages.some(m => m.type === 'voice' || m.type === 'files' || m.type === 'photo') && (
                     <div className="chat-attachments">
                       {chat.messages.find(m => m.type === 'voice') && (
-                        <span className="attachment-icon">🎤 Voice message ({chat.messages.find(m => m.type === 'voice')?.duration})</span>
+                        <span className="attachment-icon">Voice message ({chat.messages.find(m => m.type === 'voice')?.duration})</span>
                       )}
                       {chat.messages.find(m => m.type === 'files') && (
-                        <span className="attachment-icon">📄 Files (x{chat.messages.find(m => m.type === 'files')?.fileCount})</span>
+                        <span className="attachment-icon">Files (x{chat.messages.find(m => m.type === 'files')?.fileCount})</span>
                       )}
                       {chat.messages.find(m => m.type === 'photo') && (
-                        <span className="attachment-icon">📷 Photo</span>
+                        <span className="attachment-icon">Photo</span>
                       )}
                     </div>
                   )}
@@ -309,7 +308,6 @@ const HRChat = () => {
                     )}
                     {message.type === 'file' && (
                       <div className="message-file">
-                        <span className="file-icon">📄</span>
                         <div>
                           {message.link ? (
                             <a href="#" className="file-link">{message.fileName}</a>
@@ -322,19 +320,16 @@ const HRChat = () => {
                     )}
                     {message.type === 'voice' && (
                       <div className="message-voice">
-                        <span className="voice-icon">🎤</span>
                         <span>Voice message ({message.duration})</span>
                       </div>
                     )}
                     {message.type === 'files' && (
                       <div className="message-files">
-                        <span className="file-icon">📄</span>
                         <span>Files (x{message.fileCount})</span>
                       </div>
                     )}
                     {message.type === 'photo' && (
                       <div className="message-photo">
-                        <span className="photo-icon">📷</span>
                         <span>Photo</span>
                       </div>
                     )}
@@ -347,9 +342,9 @@ const HRChat = () => {
               <div className="conversation-input">
                 <button className="input-action-btn">+</button>
                 <div className="input-attachments">
-                  <button className="attachment-btn" title="Document">📄</button>
-                  <button className="attachment-btn" title="Photo">📷</button>
-                  <button className="attachment-btn" title="Folder">📁</button>
+                  <button className="attachment-btn" title="Document">Doc</button>
+                  <button className="attachment-btn" title="Photo">Img</button>
+                  <button className="attachment-btn" title="Folder">Folder</button>
                 </div>
                 <input
                   type="text"
@@ -359,14 +354,14 @@ const HRChat = () => {
                   onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                 />
                 <div className="input-actions">
-                  <button className="emoji-btn" title="Emoji">😊</button>
-                  <button className="send-btn" onClick={handleSendMessage} title="Send">✈️</button>
+                  <button className="emoji-btn" title="Emoji">Emoji</button>
+                  <button className="send-btn" onClick={handleSendMessage} title="Send">Send</button>
                 </div>
               </div>
             </>
           ) : (
             <div className="no-chat-selected">
-              <div className="no-chat-icon">💬</div>
+              <div className="no-chat-icon"></div>
               <h3>Select a chat to start messaging</h3>
               <p>Choose a conversation from the list to view messages and communicate with employees.</p>
             </div>

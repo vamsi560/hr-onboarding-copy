@@ -97,18 +97,9 @@
   margin-bottom: 12px;
 }
 
-.chat-search-bar .search-icon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
-  color: var(--muted);
-}
-
 .chat-search-bar input {
   width: 100%;
-  padding: 10px 12px 10px 40px;
+  padding: 10px 12px;
   border: 1px solid #e9ecef;
   border-radius: 8px;
   font-size: 14px;
@@ -457,13 +448,14 @@
 
 .attachment-btn {
   background: transparent;
-  border: none;
-  font-size: 18px;
+  border: 1px solid var(--border);
+  font-size: 11px;
   color: var(--muted);
   cursor: pointer;
-  padding: 6px;
+  padding: 6px 10px;
   border-radius: 6px;
   transition: background 0.2s;
+  font-weight: 500;
 }
 
 .attachment-btn:hover {
@@ -491,12 +483,13 @@
 
 .emoji-btn {
   background: transparent;
-  border: none;
-  font-size: 20px;
+  border: 1px solid var(--border);
+  font-size: 12px;
   cursor: pointer;
-  padding: 6px;
+  padding: 6px 10px;
   border-radius: 6px;
   transition: background 0.2s;
+  color: var(--muted);
 }
 
 .emoji-btn:hover {
@@ -507,15 +500,11 @@
   background: var(--brand);
   border: none;
   color: white;
-  font-size: 18px;
+  font-size: 13px;
   cursor: pointer;
-  padding: 8px 12px;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
   transition: background 0.2s;
 }
 
@@ -534,7 +523,10 @@
 }
 
 .no-chat-icon {
-  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--border);
   margin-bottom: 16px;
 }
 

@@ -1,0 +1,190 @@
+.audit-log {
+  padding: 20px;
+}
+
+.audit-log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.audit-log-stats {
+  display: flex;
+  gap: 16px;
+}
+
+.stat-item {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.stat-item strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.audit-log-filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 200px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 14px;
+  min-width: 150px;
+}
+
+.audit-log-table-container {
+  overflow-x: auto;
+  margin-top: 16px;
+}
+
+.audit-log-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.audit-log-table thead {
+  background: var(--bg-secondary);
+  border-bottom: 2px solid var(--border);
+}
+
+.audit-log-table th {
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.audit-log-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.audit-log-table tbody tr:hover {
+  background: var(--bg-secondary);
+}
+
+.timestamp-cell {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.role-badge.hr {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.role-badge.candidate {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.action-cell {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.details-cell {
+  max-width: 300px;
+}
+
+.details-cell details {
+  cursor: pointer;
+}
+
+.details-cell summary {
+  color: var(--brand);
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.details-cell summary:hover {
+  text-decoration: underline;
+}
+
+.details-cell pre {
+  margin-top: 8px;
+  padding: 8px;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  font-size: 12px;
+  overflow-x: auto;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+}
+
+.muted {
+  color: var(--muted);
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .audit-log-header {
+    flex-direction: column;
+  }
+
+  .audit-log-filters {
+    flex-direction: column;
+  }
+
+  .search-box,
+  .filter-select {
+    width: 100%;
+  }
+
+  .audit-log-table {
+    font-size: 12px;
+  }
+
+  .audit-log-table th,
+  .audit-log-table td {
+    padding: 8px 4px;
+  }
+
+  .timestamp-cell {
+    font-size: 11px;
+  }
+}
+

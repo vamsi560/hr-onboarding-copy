@@ -102,9 +102,175 @@
   margin-top: 20px;
 }
 
+.certification-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.certification-category-card {
+  padding: 16px;
+  background: #fafbfc;
+  border: 1px solid var(--border);
+}
+
+.certification-category-card h5 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.certification-item {
+  margin-bottom: 12px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+}
+
+.certification-item:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Auto-save indicator */
+.form-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.auto-save-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.auto-save-indicator.saving {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.auto-save-indicator.saved {
+  background: #d4edda;
+  color: #155724;
+}
+
+.auto-save-indicator.error {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.save-spinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.save-checkmark {
+  font-weight: bold;
+}
+
+.save-error {
+  font-weight: bold;
+}
+
+.certification-item-card {
+  padding: 16px;
+  margin-bottom: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
 @media (max-width: 600px) {
   .form-row {
     flex-direction: column;
+  }
+
+  .certification-categories {
+    grid-template-columns: 1fr;
+  }
+
+  .form-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .auto-save-indicator {
+    align-self: flex-start;
+  }
+
+  /* Mobile-optimized form inputs */
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .input,
+  .form-group textarea,
+  .form-group select {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 12px;
+    min-height: 44px; /* Minimum touch target size */
+    width: 100%;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+
+  .form-actions button {
+    width: 100%;
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  .certification-item-card {
+    padding: 12px;
+  }
+
+  .visa-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .visa-options label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    min-height: 44px;
+  }
+
+  .visa-options input[type="radio"] {
+    width: 20px;
+    height: 20px;
   }
 }
 

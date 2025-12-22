@@ -14,7 +14,7 @@ const Login = ({ onLogin, onDemo }) => {
   const [loginType, setLoginType] = useState('candidate');
   const [location, setLocation] = useState('india');
   const { showToast } = useToast();
-  const { setUserRole, setLocation: setAppLocation } = useApp();
+  const { setUserRole, setLocation: setAppLocation, logAction } = useApp();
 
   useEffect(() => {
     setIsAnimating(true);
@@ -48,8 +48,13 @@ const Login = ({ onLogin, onDemo }) => {
     }
     
     // Persist selected role and location into app context
-    setUserRole(loginType === 'hr' ? 'hr' : 'candidate');
+    const role = loginType === 'hr' ? 'hr' : 'candidate';
+    setUserRole(role);
     setAppLocation(location);
+
+    if (logAction) {
+      logAction('login', { email, role, location });
+    }
 
     onLogin();
     showToast('Login successful!', 'success');
@@ -99,8 +104,8 @@ const Login = ({ onLogin, onDemo }) => {
                     value={loginType}
                     onChange={(e) => setLoginType(e.target.value)}
                   >
-                    <option value="candidate">👤 Candidate</option>
-                    <option value="hr">👔 HR</option>
+                    <option value="candidate">Candidate</option>
+                    <option value="hr">HR</option>
                   </select>
                   <span className="select-arrow">▼</span>
                 </div>
@@ -114,8 +119,8 @@ const Login = ({ onLogin, onDemo }) => {
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                   >
-                    <option value="india">🇮🇳 India</option>
-                    <option value="us">🇺🇸 US</option>
+                    <option value="india">India</option>
+                    <option value="us">US</option>
                   </select>
                   <span className="select-arrow">▼</span>
                 </div>

@@ -33,6 +33,10 @@ export const AppProvider = ({ children }) => {
     return saved ? JSON.parse(saved) : [];
   });
   const [validationHistory, setValidationHistory] = useState([]);
+  const [auditLog, setAuditLog] = useState(() => {
+    const saved = localStorage.getItem('auditLog');
+    return saved ? JSON.parse(saved) : [];
+  });
 
   useEffect(() => {
     document.body.classList.toggle('dark', darkMode);
@@ -55,8 +59,24 @@ export const AppProvider = ({ children }) => {
     localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
   }, [chatHistory]);
 
+  useEffect(() => {
+    localStorage.setItem('auditLog', JSON.stringify(auditLog));
+  }, [auditLog]);
+
   const toggleDarkMode = () => {
     setDarkMode(prev => !prev);
+  };
+
+  const logAction = (action, details = {}) => {
+    const logEntry = {
+      id: Date.now(),
+      timestamp: new Date().toISOString(),
+      userRole: userRole,
+      action: action,
+      details: details,
+      location: location
+    };
+    setAuditLog(prev => [logEntry, ...prev].slice(0, 1000)); // Keep last 1000 entries
   };
 
   const updateFormData = (data) => {
@@ -94,7 +114,9 @@ export const AppProvider = ({ children }) => {
     chatHistory,
     addChatMessage,
     validationHistory,
-    setValidationHistory
+    setValidationHistory,
+    auditLog,
+    logAction
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

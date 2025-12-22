@@ -116,15 +116,15 @@ const HRCandidateWorkflow = ({ candidateId, onBack }) => {
     switch (type) {
       case 'checkmark':
         return (
-          <span className="type-icon-checkmark" title="Task">✓</span>
+          <span className="type-icon-checkmark" title="Task">Task</span>
         );
       case 'monitor':
         return (
-          <span className="type-icon-monitor" title="Training">🖥</span>
+          <span className="type-icon-monitor" title="Training">Training</span>
         );
       case 'document':
         return (
-          <span className="type-icon-document" title="Document">📄</span>
+          <span className="type-icon-document" title="Document">Doc</span>
         );
       default:
         return <span className="type-icon-default">•</span>;
@@ -216,10 +216,10 @@ const HRCandidateWorkflow = ({ candidateId, onBack }) => {
                           <td>{task.dueDate}</td>
                           <td>
                             <div className="task-actions">
-                              <button className="action-btn" title="View">👁</button>
-                              <button className="action-btn" title="Edit">✏</button>
-                              <button className="action-btn" title="Folder">📁</button>
-                              <button className="action-btn" title="Delete">🗑</button>
+                              <button className="action-btn" title="View">View</button>
+                              <button className="action-btn" title="Edit">Edit</button>
+                              <button className="action-btn" title="Folder">Folder</button>
+                              <button className="action-btn" title="Delete">Delete</button>
                             </div>
                           </td>
                         </tr>

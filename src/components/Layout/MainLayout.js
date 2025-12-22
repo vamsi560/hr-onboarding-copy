@@ -11,6 +11,7 @@ import HRExceptions from '../HR/HRExceptions';
 import HRWorkflows from '../HR/HRWorkflows';
 import HRAnalytics from '../HR/HRAnalytics';
 import HRChat from '../HR/HRChat';
+import AuditLog from '../HR/AuditLog';
 import RegisterCandidate from '../HR/RegisterCandidate';
 import Support from '../Support/Support';
 import ChatWidget from '../Chat/ChatWidget';
@@ -33,14 +34,15 @@ const MainLayout = ({ onLogout }) => {
     exceptions: HRExceptions,
     workflows: HRWorkflows,
     analytics: HRAnalytics,
-    chat: HRChat
+    chat: HRChat,
+    auditlog: AuditLog
   };
 
   const ActiveComponent = views[activeView] || Dashboard;
 
   const handleNavClick = (view) => {
-    // Only allow chat view for HR users
-    if (view === 'chat' && userRole !== 'hr') {
+    // Only allow HR-specific views for HR users
+    if ((view === 'chat' || view === 'auditlog') && userRole !== 'hr') {
       return;
     }
     setActiveView(view);

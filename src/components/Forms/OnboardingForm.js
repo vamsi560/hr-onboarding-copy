@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useApp } from '../../context/AppContext';
 import { useToast } from '../../context/ToastContext';
 import Card from '../UI/Card';
@@ -8,10 +8,12 @@ import Breadcrumbs from '../UI/Breadcrumbs';
 import './OnboardingForm.css';
 
 const OnboardingForm = () => {
-  const { formData, updateFormData } = useApp();
+  const { formData, updateFormData, logAction } = useApp();
   const { showToast } = useToast();
   const [currentStep, setCurrentStep] = useState(1);
   const [formValues, setFormValues] = useState(formData);
+  const [saveStatus, setSaveStatus] = useState('saved'); // 'saving', 'saved', 'error'
+  const saveTimeoutRef = useRef(null);
 
   useEffect(() => {
     setFormValues(formData);
@@ -20,8 +22,46 @@ const OnboardingForm = () => {
   const handleChange = (field, value) => {
     const newValues = { ...formValues, [field]: value };
     setFormValues(newValues);
-    updateFormData(newValues);
+    
+    // Debounced auto-save
+    setSaveStatus('saving');
+    
+    if (saveTimeoutRef.current) {
+      clearTimeout(saveTimeoutRef.current);
+    }
+    
+    saveTimeoutRef.current = setTimeout(() => {
+      try {
+        updateFormData(newValues);
+        setSaveStatus('saved');
+        if (logAction) {
+          logAction('form_field_updated', { field, value: value?.substring(0, 50) });
+        }
+      } catch (error) {
+        setSaveStatus('error');
+      }
+    }, 1000); // Save after 1 second of inactivity
   };
+
+  const handleCertificationChange = (index, field, value) => {
+    const currentCerts = formValues.certifications || [];
+    const updatedCerts = [...currentCerts];
+    updatedCerts[index] = { ...updatedCerts[index], [field]: value };
+    handleChange('certifications', updatedCerts);
+  };
+
+  const addCertification = () => {
+    const currentCerts = formValues.certifications || [];
+    handleChange('certifications', [...currentCerts, { name: '', number: '', document: '' }]);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (saveTimeoutRef.current) {
+        clearTimeout(saveTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const validateStep = (step) => {
     const step1Fields = ['firstName', 'lastName', 'email', 'mobile'];
@@ -65,7 +105,29 @@ const OnboardingForm = () => {
       </div>
       <Breadcrumbs items={[{ label: 'Home' }, { label: 'Onboarding Form' }]} />
       <Card>
-        <h3>Onboarding Form</h3>
+        <div className="form-header-row">
+          <h3>Onboarding Form</h3>
+          <div className={`auto-save-indicator ${saveStatus}`}>
+            {saveStatus === 'saving' && (
+              <>
+                <span className="save-spinner"></span>
+                <span>Saving...</span>
+              </>
+            )}
+            {saveStatus === 'saved' && (
+              <>
+                <span className="save-checkmark">✓</span>
+                <span>Saved</span>
+              </>
+            )}
+            {saveStatus === 'error' && (
+              <>
+                <span className="save-error">✕</span>
+                <span>Error saving</span>
+              </>
+            )}
+          </div>
+        </div>
         <div className="step-indicator">
           {[1, 2, 3].map(step => (
             <React.Fragment key={step}>
@@ -197,30 +259,22 @@ const OnboardingForm = () => {
               <div className="form-group">
                 <label>Certifications</label>
                 {(formValues.certifications && formValues.certifications.length > 0 ? formValues.certifications : [{ name: '', number: '', document: '' }]).map((cert, index) => (
-                  <div key={index} className="certification-item" style={{ marginBottom: '16px', padding: '12px', border: '1px solid var(--border)', borderRadius: '8px', background: '#fafbfc' }}>
+                  <Card key={index} className="certification-item-card">
                     <div className="form-row">
                       <div className="form-group">
+                        <label>Certification Name</label>
                         <Input
                           placeholder="Certification Name"
                           value={cert.name || ''}
-                          onChange={(e) => {
-                            const current = formValues.certifications || [{ name: '', number: '', document: '' }];
-                            const updated = [...current];
-                            updated[index] = { ...updated[index], name: e.target.value };
-                            handleChange('certifications', updated);
-                          }}
+                          onChange={(e) => handleCertificationChange(index, 'name', e.target.value)}
                         />
                       </div>
                       <div className="form-group">
+                        <label>Certification Number</label>
                         <Input
                           placeholder="Certification Number"
                           value={cert.number || ''}
-                          onChange={(e) => {
-                            const current = formValues.certifications || [{ name: '', number: '', document: '' }];
-                            const updated = [...current];
-                            updated[index] = { ...updated[index], number: e.target.value };
-                            handleChange('certifications', updated);
-                          }}
+                          onChange={(e) => handleCertificationChange(index, 'number', e.target.value)}
                         />
                       </div>
                     </div>
@@ -232,22 +286,16 @@ const OnboardingForm = () => {
                         className="input"
                         onChange={(e) => {
                           const file = e.target.files && e.target.files[0];
-                          const current = formValues.certifications || [{ name: '', number: '', document: '' }];
-                          const updated = [...current];
-                          updated[index] = { ...updated[index], document: file ? file.name : '' };
-                          handleChange('certifications', updated);
+                          handleCertificationChange(index, 'document', file ? file.name : '');
                         }}
                       />
                     </div>
-                  </div>
+                  </Card>
                 ))}
                 <Button
                   type="button"
                   variant="secondary"
-                  onClick={() => {
-                    const current = formValues.certifications || [{ name: '', number: '', document: '' }];
-                    handleChange('certifications', [...current, { name: '', number: '', document: '' }]);
-                  }}
+                  onClick={addCertification}
                   style={{ marginTop: '8px', fontSize: '14px' }}
                 >
                   + Add More Certifications
