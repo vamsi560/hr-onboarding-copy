@@ -58,6 +58,11 @@ const OnboardingForm = () => {
 
   return (
     <div className="onboarding-form">
+      <div className="back-button-container">
+        <button className="back-button" onClick={() => window.location.hash = '#dashboard'}>
+          ← Back
+        </button>
+      </div>
       <Breadcrumbs items={[{ label: 'Home' }, { label: 'Onboarding Form' }]} />
       <Card>
         <h3>Onboarding Form</h3>
@@ -191,13 +196,62 @@ const OnboardingForm = () => {
               </div>
               <div className="form-group">
                 <label>Certifications</label>
-                <textarea
-                  className="input"
-                  rows="3"
-                  value={formValues.certifications || ''}
-                  onChange={(e) => handleChange('certifications', e.target.value)}
-                  placeholder="List your key certifications (e.g., AWS, Azure, PMP)"
-                />
+                {(formValues.certifications && formValues.certifications.length > 0 ? formValues.certifications : [{ name: '', number: '', document: '' }]).map((cert, index) => (
+                  <div key={index} className="certification-item" style={{ marginBottom: '16px', padding: '12px', border: '1px solid var(--border)', borderRadius: '8px', background: '#fafbfc' }}>
+                    <div className="form-row">
+                      <div className="form-group">
+                        <Input
+                          placeholder="Certification Name"
+                          value={cert.name || ''}
+                          onChange={(e) => {
+                            const current = formValues.certifications || [{ name: '', number: '', document: '' }];
+                            const updated = [...current];
+                            updated[index] = { ...updated[index], name: e.target.value };
+                            handleChange('certifications', updated);
+                          }}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <Input
+                          placeholder="Certification Number"
+                          value={cert.number || ''}
+                          onChange={(e) => {
+                            const current = formValues.certifications || [{ name: '', number: '', document: '' }];
+                            const updated = [...current];
+                            updated[index] = { ...updated[index], number: e.target.value };
+                            handleChange('certifications', updated);
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label>Certification Document Upload</label>
+                      <input
+                        type="file"
+                        accept=".pdf,.doc,.docx,.jpg,.png"
+                        className="input"
+                        onChange={(e) => {
+                          const file = e.target.files && e.target.files[0];
+                          const current = formValues.certifications || [{ name: '', number: '', document: '' }];
+                          const updated = [...current];
+                          updated[index] = { ...updated[index], document: file ? file.name : '' };
+                          handleChange('certifications', updated);
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => {
+                    const current = formValues.certifications || [{ name: '', number: '', document: '' }];
+                    handleChange('certifications', [...current, { name: '', number: '', document: '' }]);
+                  }}
+                  style={{ marginTop: '8px', fontSize: '14px' }}
+                >
+                  + Add More Certifications
+                </Button>
               </div>
               <div className="form-group">
                 <label>Skills</label>

@@ -9,6 +9,9 @@ import Validation from '../Validation/Validation';
 import HRReview from '../HR/HRReview';
 import HRExceptions from '../HR/HRExceptions';
 import HRWorkflows from '../HR/HRWorkflows';
+import HRAnalytics from '../HR/HRAnalytics';
+import HRChat from '../HR/HRChat';
+import RegisterCandidate from '../HR/RegisterCandidate';
 import Support from '../Support/Support';
 import ChatWidget from '../Chat/ChatWidget';
 import ToastContainer from '../UI/ToastContainer';
@@ -28,12 +31,18 @@ const MainLayout = ({ onLogout }) => {
     hr: HRReview,
     support: Support,
     exceptions: HRExceptions,
-    workflows: HRWorkflows
+    workflows: HRWorkflows,
+    analytics: HRAnalytics,
+    chat: HRChat
   };
 
   const ActiveComponent = views[activeView] || Dashboard;
 
   const handleNavClick = (view) => {
+    // Only allow chat view for HR users
+    if (view === 'chat' && userRole !== 'hr') {
+      return;
+    }
     setActiveView(view);
     if (window.innerWidth <= 900) {
       setIsMobileNavOpen(false);

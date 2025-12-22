@@ -1,3 +1,31 @@
+.onboarding-form {
+  position: relative;
+}
+
+.back-button-container {
+  margin-bottom: 16px;
+}
+
+.back-button {
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-button:hover {
+  background: #f8f9fa;
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
 .form-step {
   animation: fadeIn 0.3s;
 }

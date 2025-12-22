@@ -92,27 +92,33 @@ const Login = ({ onLogin, onDemo }) => {
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="loginType">Login As</label>
-                <select
-                  id="loginType"
-                  className="login-select"
-                  value={loginType}
-                  onChange={(e) => setLoginType(e.target.value)}
-                >
-                  <option value="candidate">Candidate</option>
-                  <option value="hr">HR</option>
-                </select>
+                <div className="custom-select-wrapper">
+                  <select
+                    id="loginType"
+                    className="custom-select"
+                    value={loginType}
+                    onChange={(e) => setLoginType(e.target.value)}
+                  >
+                    <option value="candidate">👤 Candidate</option>
+                    <option value="hr">👔 HR</option>
+                  </select>
+                  <span className="select-arrow">▼</span>
+                </div>
               </div>
               <div className="form-group">
                 <label htmlFor="location">Location</label>
-                <select
-                  id="location"
-                  className="login-select"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                >
-                  <option value="india">India</option>
-                  <option value="us">US</option>
-                </select>
+                <div className="custom-select-wrapper">
+                  <select
+                    id="location"
+                    className="custom-select"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                  >
+                    <option value="india">🇮🇳 India</option>
+                    <option value="us">🇺🇸 US</option>
+                  </select>
+                  <span className="select-arrow">▼</span>
+                </div>
               </div>
             </div>
             <div className="form-group">

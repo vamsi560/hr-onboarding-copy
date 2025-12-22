@@ -21,8 +21,10 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <div className="dashboard-header">
-        <h1 className="dashboard-title">Onboarding</h1>
-        <p className="dashboard-subtitle">New Hire Packet (in progress)</p>
+        <div>
+          <h1 className="dashboard-title">Onboarding</h1>
+          <p className="dashboard-subtitle">New Hire Packet (in progress)</p>
+        </div>
       </div>
 
       {/* Progress Timeline */}

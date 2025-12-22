@@ -12,9 +12,8 @@ const Documents = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
-  const resumeType1InputRef = useRef(null);
-  const resumeType2InputRef = useRef(null);
-  const criminalFormInputRef = useRef(null);
+  const [uploadingDoc, setUploadingDoc] = useState(null);
+  const fileInputRefs = useRef({});
 
   const documentCategories = {
     identity: [
@@ -117,66 +116,57 @@ Date: ______________________________________________________
     showToast('Criminal Verification form downloaded. Please fill and upload.', 'success');
   };
 
-  const handleResumeUpload = (e, resumeType) => {
+
+  const documentTypes = [
+    { id: 'aadhar', name: 'Aadhaar / Passport', category: 'identity', icon: '🆔' },
+    { id: 'visa', name: 'Visa Document', category: 'identity', icon: '✈️' },
+    { id: 'photo', name: 'Passport Size Photo', category: 'identity', icon: '📷' },
+    { id: 'degree', name: 'Highest Degree Certificate', category: 'education', icon: '🎓' },
+    { id: 'payslip', name: 'Last 3 Months Pay Slips', category: 'financial', icon: '💰' },
+    { id: 'pf', name: 'PF Account Statement', category: 'financial', icon: '📊' },
+    { id: 'resume1', name: 'Resume Type 1 (ValueMomentum)', category: 'resumes', icon: '📄' },
+    { id: 'resume2', name: 'Resume Type 2 (ValueMomentum)', category: 'resumes', icon: '📄' },
+    { id: 'nda', name: 'NDA / Contract', category: 'other', icon: '📋' },
+    { id: 'criminal', name: 'Criminal Verification Form', category: 'other', icon: '🔒' }
+  ];
+
+  const [uploadingDoc, setUploadingDoc] = useState(null);
+  const fileInputRefs = useRef({});
+
+  const handleDocumentUpload = (docType, e) => {
     const file = e.target.files[0];
     if (file) {
-      // Validate file type
-      const validTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword'];
+      const validTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword', 'image/jpeg', 'image/png', 'text/plain'];
       if (!validTypes.includes(file.type)) {
-        showToast('Please upload PDF or DOCX format only', 'error');
+        showToast('Please upload valid file format', 'error');
         return;
       }
       
-      // Validate file size (10MB)
       if (file.size > 10 * 1024 * 1024) {
         showToast('File size should be less than 10MB', 'error');
         return;
       }
 
+      const docTypeInfo = documentTypes.find(dt => dt.id === docType);
       const newDoc = {
         id: Date.now(),
-        title: `Resume Type ${resumeType} (ValueMomentum Format)`,
-        category: 'resumes',
+        title: docTypeInfo.name,
+        category: docTypeInfo.category,
         status: 'uploaded',
         file: file.name,
-        uploadedAt: new Date().toISOString()
+        uploadedAt: new Date().toISOString(),
+        docType: docType
       };
       
       addDocument(newDoc);
-      showToast(`Resume Type ${resumeType} uploaded successfully`, 'success');
-      e.target.value = ''; // Reset input
+      showToast(`${docTypeInfo.name} uploaded successfully`, 'success');
+      e.target.value = '';
+      setUploadingDoc(null);
     }
   };
 
-  const handleCriminalFormUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      // Validate file type
-      const validTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword', 'text/plain'];
-      if (!validTypes.includes(file.type)) {
-        showToast('Please upload PDF, DOCX, or TXT format only', 'error');
-        return;
-      }
-      
-      // Validate file size (10MB)
-      if (file.size > 10 * 1024 * 1024) {
-        showToast('File size should be less than 10MB', 'error');
-        return;
-      }
-
-      const newDoc = {
-        id: Date.now(),
-        title: 'Criminal Verification Form',
-        category: 'other',
-        status: 'uploaded',
-        file: file.name,
-        uploadedAt: new Date().toISOString()
-      };
-      
-      addDocument(newDoc);
-      showToast('Criminal Verification form uploaded successfully', 'success');
-      e.target.value = ''; // Reset input
-    }
+  const getDocumentStatus = (docType) => {
+    return documents.find(doc => doc.docType === docType);
   };
 
   const filteredDocuments = documents.filter(doc => {
@@ -188,114 +178,61 @@ Date: ______________________________________________________
 
   return (
     <div className="documents">
+      <div className="back-button-container">
+        <button className="back-button" onClick={() => window.location.hash = '#dashboard'}>
+          ← Back
+        </button>
+      </div>
       <Breadcrumbs items={[{ label: 'Home' }, { label: 'Documents' }]} />
       <Card>
         <h3>Document Upload Center</h3>
         <p className="small">Upload the required documents. AI will validate and provide feedback.</p>
 
-        <div className="document-category-grid">
-          <Card className="document-category-card identity">
-            <h4>Identity</h4>
-            <ul>
-              <li>Aadhaar / Passport</li>
-              <li>Visa (if applicable)</li>
-              <li>Recent passport-size photo</li>
-            </ul>
-          </Card>
-          <Card className="document-category-card education">
-            <h4>Education</h4>
-            <ul>
-              <li>Highest degree certificate</li>
-            </ul>
-          </Card>
-          <Card className="document-category-card financial">
-            <h4>Financial</h4>
-            <ul>
-              <li>Last three months pay slips</li>
-              <li>PF account statement (if available)</li>
-            </ul>
-          </Card>
-          <Card className="document-category-card resumes">
-            <h4>Resumes</h4>
-            <ul>
-              <li>Resume Type 1 (ValueMomentum format)</li>
-              <li>Resume Type 2 (ValueMomentum format)</li>
-            </ul>
-              <div className="resume-upload-section">
-              <div className="resume-upload-buttons">
-                <input
-                  ref={resumeType1InputRef}
-                  type="file"
-                  accept=".pdf,.doc,.docx"
-                  style={{ display: 'none' }}
-                  onChange={(e) => handleResumeUpload(e, 1)}
-                />
-                <Button 
-                  variant="secondary" 
-                  onClick={() => resumeType1InputRef.current?.click()}
-                  style={{ fontSize: '12px', padding: '6px 12px' }}
-                >
-                  Upload Type 1
-                </Button>
-                <input
-                  ref={resumeType2InputRef}
-                  type="file"
-                  accept=".pdf,.doc,.docx"
-                  style={{ display: 'none' }}
-                  onChange={(e) => handleResumeUpload(e, 2)}
-                />
-                <Button 
-                  variant="secondary" 
-                  onClick={() => resumeType2InputRef.current?.click()}
-                  style={{ fontSize: '12px', padding: '6px 12px' }}
-                >
-                  Upload Type 2
-                </Button>
-              </div>
-              <p className="small" style={{ marginTop: '8px', color: 'var(--muted)', fontSize: '11px' }}>
-                Both resumes must be in ValueMomentum format
-              </p>
-            </div>
-          </Card>
-          <Card className="document-category-card other">
-            <h4>Others</h4>
-            <ul>
-              <li>NDA / Contract</li>
-              <li>Any other supporting documents</li>
-            </ul>
-          </Card>
+        <div className="document-types-grid">
+          {documentTypes.map(docType => {
+            const uploadedDoc = getDocumentStatus(docType.id);
+            return (
+              <Card 
+                key={docType.id} 
+                className={`document-type-card ${uploadedDoc ? 'uploaded' : ''}`}
+                onClick={() => {
+                  if (!fileInputRefs.current[docType.id]) {
+                    fileInputRefs.current[docType.id] = document.createElement('input');
+                    fileInputRefs.current[docType.id].type = 'file';
+                    fileInputRefs.current[docType.id].accept = docType.id === 'criminal' ? '.pdf,.doc,.docx,.txt' : '.pdf,.doc,.docx,.jpg,.png';
+                    fileInputRefs.current[docType.id].onchange = (e) => handleDocumentUpload(docType.id, e);
+                  }
+                  fileInputRefs.current[docType.id].click();
+                }}
+              >
+                <div className="document-type-icon">{docType.icon}</div>
+                <h4>{docType.name}</h4>
+                {uploadedDoc ? (
+                  <div className="document-status">
+                    <span className="status-badge status-uploaded">✓ Uploaded</span>
+                    <div className="small" style={{ marginTop: '4px' }}>{uploadedDoc.file}</div>
+                  </div>
+                ) : (
+                  <div className="document-status">
+                    <span className="status-badge status-pending">Pending</span>
+                  </div>
+                )}
+                {docType.id === 'criminal' && (
+                  <Button
+                    variant="secondary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      downloadCriminalVerificationForm();
+                    }}
+                    style={{ marginTop: '8px', fontSize: '12px' }}
+                  >
+                    Download Form
+                  </Button>
+                )}
+              </Card>
+            );
+          })}
         </div>
-
-        {/* Criminal Verification Form Section */}
-        <Card className="criminal-verification-card" style={{ marginBottom: '24px', padding: '20px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
-            <div style={{ flex: 1 }}>
-              <h4 style={{ margin: '0 0 8px 0' }}>Criminal Verification Form</h4>
-              <p className="small" style={{ margin: '0 0 12px 0', color: 'var(--muted)' }}>
-                Download the form, fill it out, and upload the completed form here.
-              </p>
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                <Button onClick={downloadCriminalVerificationForm}>
-                  Download Form
-                </Button>
-                <input
-                  ref={criminalFormInputRef}
-                  type="file"
-                  id="criminal-form"
-                  accept=".pdf,.doc,.docx,.txt"
-                  style={{ display: 'none' }}
-                  onChange={handleCriminalFormUpload}
-                />
-                <Button 
-                  variant="secondary"
-                  onClick={() => criminalFormInputRef.current?.click()}
-                >
-                  Upload Filled Form
-                </Button>
-              </div>
-            </div>
-          </div>
-        </Card>
 
         <div className="search-filter">
           <input
@@ -330,35 +267,41 @@ Date: ______________________________________________________
           </select>
         </div>
 
-        <div className="upload-area">
-          <div>Drag & drop files here or click to browse</div>
-          <div className="small" style={{ marginTop: '8px' }}>
-            Accepted formats: PDF, DOCX, XLSX, JPG, PNG — Max 10MB per file
-          </div>
-        </div>
-
-        {filteredDocuments.length === 0 ? (
-          <div className="empty-state">
-            <div className="empty-state-icon">DOC</div>
-            <div>No documents yet. Upload your first document to get started.</div>
-          </div>
-        ) : (
-          <div className="doc-grid">
-            {filteredDocuments.map(doc => (
-              <Card key={doc.id} className="doc-card">
-                <div className="doc-meta">
-                  <strong>{doc.title}</strong>
-                  <div className="small">{doc.status.toUpperCase()}</div>
-                </div>
-                <div className="small">
-                  Status: <span className={`status-dot status-${doc.status}`}></span> {doc.status}
-                </div>
-                <div style={{ marginTop: '8px', display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
-                  {doc.file && <Button variant="secondary">View</Button>}
-                  <Button>{doc.file ? 'Re-upload' : 'Upload'}</Button>
-                </div>
-              </Card>
-            ))}
+        {filteredDocuments.length > 0 && (
+          <div style={{ marginTop: '24px' }}>
+            <h4 style={{ marginBottom: '16px' }}>Uploaded Documents</h4>
+            <div className="doc-grid">
+              {filteredDocuments.map(doc => (
+                <Card key={doc.id} className="doc-card">
+                  <div className="doc-meta">
+                    <strong>{doc.title}</strong>
+                    <div className="small">{doc.status.toUpperCase()}</div>
+                  </div>
+                  <div className="small" style={{ marginTop: '8px' }}>
+                    <span className={`status-dot status-${doc.status}`}></span> {doc.status}
+                  </div>
+                  {doc.file && (
+                    <div className="small" style={{ marginTop: '4px', color: 'var(--muted)' }}>
+                      {doc.file}
+                    </div>
+                  )}
+                  <div style={{ marginTop: '12px', display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
+                    {doc.file && <Button variant="secondary" style={{ fontSize: '12px' }}>View</Button>}
+                    <Button 
+                      style={{ fontSize: '12px' }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (fileInputRefs.current[doc.docType]) {
+                          fileInputRefs.current[doc.docType].click();
+                        }
+                      }}
+                    >
+                      {doc.file ? 'Re-upload' : 'Upload'}
+                    </Button>
+                  </div>
+                </Card>
+              ))}
+            </div>
           </div>
         )}
       </Card>

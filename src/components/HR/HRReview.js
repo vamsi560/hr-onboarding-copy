@@ -4,6 +4,7 @@ import Card from '../UI/Card';
 import Button from '../UI/Button';
 import Breadcrumbs from '../UI/Breadcrumbs';
 import HRCandidateWorkflow from './HRCandidateWorkflow';
+import RegisterCandidate from './RegisterCandidate';
 import './HRReview.css';
 
 const HRReview = () => {
@@ -12,6 +13,7 @@ const HRReview = () => {
   const [statusFilter, setStatusFilter] = useState('');
   const [deptFilter, setDeptFilter] = useState('');
   const [selectedCandidateId, setSelectedCandidateId] = useState(null);
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
 
   const filteredCandidates = candidates.filter(c => {
     const matchesSearch = !searchTerm || c.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -40,11 +42,24 @@ const HRReview = () => {
     setSelectedCandidateId(null);
   };
 
+  const handleRegisterSuccess = () => {
+    setShowRegisterForm(false);
+  };
+
   if (selectedCandidateId) {
     return (
       <HRCandidateWorkflow
         candidateId={selectedCandidateId}
         onBack={handleBackToWorkflows}
+      />
+    );
+  }
+
+  if (showRegisterForm) {
+    return (
+      <RegisterCandidate
+        onBack={() => setShowRegisterForm(false)}
+        onSuccess={handleRegisterSuccess}
       />
     );
   }
@@ -58,7 +73,7 @@ const HRReview = () => {
             <h3>HR Review Dashboard</h3>
             <p className="small">View onboarding status for all employees.</p>
           </div>
-          <Button>
+          <Button onClick={() => setShowRegisterForm(true)}>
             Register New Candidate
           </Button>
         </div>
@@ -102,63 +117,59 @@ const HRReview = () => {
             </div>
           )}
 
-          <table className="candidates-table">
-            <thead>
-              <tr>
-                <th>
+          <div className="candidates-cards-grid">
+            {filteredCandidates.map(candidate => (
+              <Card 
+                key={candidate.id} 
+                className={`candidate-card ${candidate.selected ? 'selected' : ''}`}
+                onClick={() => handleCandidateClick(candidate.id)}
+              >
+                <div className="candidate-card-header">
                   <input
                     type="checkbox"
-                    onChange={(e) => toggleSelectAll(e.target.checked)}
+                    checked={candidate.selected}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      toggleCandidate(candidate.id);
+                    }}
+                    onClick={(e) => e.stopPropagation()}
                   />
-                </th>
-                <th>Name</th>
-                <th>Status</th>
-                <th>Docs</th>
-                <th>Department</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredCandidates.map(candidate => (
-                <tr 
-                  key={candidate.id} 
-                  className={candidate.selected ? 'selected' : ''}
-                  style={{ cursor: 'pointer' }}
-                  onClick={(e) => {
-                    // Don't trigger if clicking checkbox or button
-                    if (e.target.type !== 'checkbox' && e.target.tagName !== 'BUTTON') {
-                      handleCandidateClick(candidate.id);
-                    }
-                  }}
-                >
-                  <td onClick={(e) => e.stopPropagation()}>
-                    <input
-                      type="checkbox"
-                      checked={candidate.selected}
-                      onChange={() => toggleCandidate(candidate.id)}
-                    />
-                  </td>
-                  <td style={{ fontWeight: '500', color: 'var(--brand)' }}>{candidate.name}</td>
-                  <td>
-                    <div className="flex">
-                      <span className={`status-dot status-${candidate.status === 'ready' ? 'approved' : 'pending'}`}></span>
-                      <span className="small">{candidate.status}</span>
+                  <div className="candidate-avatar">
+                    {candidate.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()}
+                  </div>
+                </div>
+                <div className="candidate-card-body">
+                  <h4 className="candidate-name">{candidate.name}</h4>
+                  <div className="candidate-info">
+                    <span className="candidate-dept">{candidate.dept}</span>
+                    <span className={`status-badge status-${candidate.status === 'ready' ? 'approved' : 'pending'}`}>
+                      {candidate.status}
+                    </span>
+                  </div>
+                  <div className="candidate-docs">
+                    <span className="docs-progress">{candidate.docs}/{candidate.total} Documents</span>
+                    <div className="docs-progress-bar">
+                      <div 
+                        className="docs-progress-fill" 
+                        style={{ width: `${(candidate.docs / candidate.total) * 100}%` }}
+                      ></div>
                     </div>
-                  </td>
-                  <td>{candidate.docs}/{candidate.total}</td>
-                  <td>{candidate.dept}</td>
-                  <td onClick={(e) => e.stopPropagation()}>
-                    <Button 
-                      variant="secondary"
-                      onClick={() => handleCandidateClick(candidate.id)}
-                    >
-                      Review
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </div>
+                </div>
+                <div className="candidate-card-footer">
+                  <Button 
+                    variant="secondary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleCandidateClick(candidate.id);
+                    }}
+                  >
+                    View Details →
+                  </Button>
+                </div>
+              </Card>
+            ))}
+          </div>
         </Card>
       </Card>
     </div>

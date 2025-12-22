@@ -27,11 +27,21 @@ const HRExceptions = () => {
             {candidates.map(candidate => (
               <tr key={candidate.id}>
                 <td>{candidate.name}</td>
-                <td>{candidate.status}</td>
                 <td>
-                  {candidate.pending && candidate.pending.length > 0
-                    ? candidate.pending.join(', ')
-                    : 'No exceptions'}
+                  <span className={`chip chip-${candidate.status === 'ready' ? 'green' : 'orange'}`}>
+                    {candidate.status}
+                  </span>
+                </td>
+                <td>
+                  {candidate.pending && candidate.pending.length > 0 ? (
+                    <div className="pending-chips">
+                      {candidate.pending.map((item, index) => (
+                        <span key={index} className="chip chip-red">{item}</span>
+                      ))}
+                    </div>
+                  ) : (
+                    <span className="chip chip-green">All Complete ✓</span>
+                  )}
                 </td>
               </tr>
             ))}

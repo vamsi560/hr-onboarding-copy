@@ -17,6 +17,8 @@ const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose }) => {
     { id: 'hr', label: 'HR Dashboard' },
     { id: 'exceptions', label: 'Exceptions' },
     { id: 'workflows', label: 'Workflows' },
+    { id: 'analytics', label: 'Analytics' },
+    { id: 'chat', label: 'Chat' },
     { id: 'support', label: 'Support' }
   ];
 

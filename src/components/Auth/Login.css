@@ -195,6 +195,62 @@
   margin-bottom: 8px;
 }
 
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.custom-select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.custom-select {
+  width: 100%;
+  padding: 12px 40px 12px 16px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 15px;
+  background: white;
+  cursor: pointer;
+  appearance: none;
+  transition: all 0.3s ease;
+  color: var(--text);
+}
+
+.custom-select:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 4px rgba(30, 58, 95, 0.1);
+  outline: none;
+}
+
+.custom-select:hover {
+  border-color: var(--brand);
+}
+
+.select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--muted);
+  font-size: 12px;
+  transition: transform 0.3s ease;
+}
+
+.custom-select-wrapper:hover .select-arrow {
+  color: var(--brand);
+}
+
+.custom-select:focus + .select-arrow {
+  transform: translateY(-50%) rotate(180deg);
+  color: var(--brand);
+}
+
 .login-input {
   width: 100%;
   padding: 12px 16px;
