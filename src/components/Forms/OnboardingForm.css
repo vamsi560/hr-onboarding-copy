@@ -274,3 +274,110 @@
   }
 }
 
+/* Consent Section Styles */
+.consent-section {
+  margin: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.consent-item {
+  padding: 16px;
+  background: #f8f9fa;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.consent-item:hover {
+  background: #f1f5f9;
+  border-color: var(--brand);
+}
+
+.consent-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.consent-checkbox input[type="checkbox"] {
+  margin-top: 4px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.consent-text {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.consent-text strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Signature Section Styles */
+.signature-section {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 2px solid var(--border);
+}
+
+.signature-box-container {
+  margin-top: 12px;
+}
+
+.signature-box {
+  padding: 20px;
+  background: #fafbfc;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.signature-display {
+  width: 100%;
+}
+
+.signature-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  font-family: 'Courier New', monospace;
+  padding: 12px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .consent-item {
+    padding: 12px;
+  }
+
+  .consent-text {
+    font-size: 13px;
+  }
+
+  .signature-box {
+    padding: 16px;
+    min-height: 60px;
+  }
+
+  .signature-text {
+    font-size: 16px;
+  }
+}
+

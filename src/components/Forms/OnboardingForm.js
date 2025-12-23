@@ -77,7 +77,7 @@ const OnboardingForm = () => {
 
   const nextStep = () => {
     if (validateStep(currentStep)) {
-      if (currentStep < 3) {
+      if (currentStep < 4) {
         setCurrentStep(currentStep + 1);
       }
     }
@@ -129,12 +129,12 @@ const OnboardingForm = () => {
           </div>
         </div>
         <div className="step-indicator">
-          {[1, 2, 3].map(step => (
+          {[1, 2, 3, 4].map(step => (
             <React.Fragment key={step}>
               <div className={`step ${currentStep === step ? 'active' : ''} ${currentStep > step ? 'completed' : ''}`}>
                 {step}
               </div>
-              {step < 3 && <div className="step-connector"></div>}
+              {step < 4 && <div className="step-connector"></div>}
             </React.Fragment>
           ))}
         </div>
@@ -257,6 +257,15 @@ const OnboardingForm = () => {
                 />
               </div>
               <div className="form-group">
+                <label>LinkedIn URL</label>
+                <Input
+                  type="url"
+                  value={formValues.linkedinUrl || ''}
+                  onChange={(e) => handleChange('linkedinUrl', e.target.value)}
+                  placeholder="https://www.linkedin.com/in/yourprofile"
+                />
+              </div>
+              <div className="form-group">
                 <label>Certifications</label>
                 {(formValues.certifications && formValues.certifications.length > 0 ? formValues.certifications : [{ name: '', number: '', document: '' }]).map((cert, index) => (
                   <Card key={index} className="certification-item-card">
@@ -375,10 +384,125 @@ const OnboardingForm = () => {
                 </div>
                 {formValues.hasVisa === 'yes' && (
                   <div className="small">
-                    Please upload your Visa document under the <strong>Identity</strong> category in the Documents tab.
+                    Please upload your Visa document under the <strong>Government ID</strong> category in the Documents tab.
                   </div>
                 )}
               </div>
+              <div className="form-actions">
+                <Button type="button" variant="secondary" onClick={prevStep}>Previous</Button>
+                <Button type="button" onClick={nextStep}>Next</Button>
+              </div>
+            </div>
+          )}
+
+          {/* Step 4: Consent & Signature */}
+          {currentStep === 4 && (
+            <div className="form-step">
+              <h4>Consent & Signature</h4>
+              
+              <div className="consent-section">
+                <div className="consent-item">
+                  <label className="consent-checkbox">
+                    <input
+                      type="checkbox"
+                      checked={formValues.consentInformation || false}
+                      onChange={(e) => handleChange('consentInformation', e.target.checked)}
+                      required
+                    />
+                    <span className="consent-text">
+                      <strong>Information Consent:</strong> I hereby confirm that all the information provided in this onboarding form is accurate, complete, and true to the best of my knowledge. I understand that providing false or misleading information may result in termination of my employment or other legal consequences.
+                    </span>
+                  </label>
+                </div>
+
+                <div className="consent-item">
+                  <label className="consent-checkbox">
+                    <input
+                      type="checkbox"
+                      checked={formValues.consentDocuments || false}
+                      onChange={(e) => handleChange('consentDocuments', e.target.checked)}
+                      required
+                    />
+                    <span className="consent-text">
+                      <strong>Document Consent:</strong> I consent to the collection, storage, and processing of all documents uploaded during the onboarding process. I understand that these documents will be used for verification purposes and will be stored securely in accordance with company policies and applicable data protection laws.
+                    </span>
+                  </label>
+                </div>
+
+                <div className="consent-item">
+                  <label className="consent-checkbox">
+                    <input
+                      type="checkbox"
+                      checked={formValues.consentBackgroundCheck || false}
+                      onChange={(e) => handleChange('consentBackgroundCheck', e.target.checked)}
+                      required
+                    />
+                    <span className="consent-text">
+                      <strong>Background Check Consent:</strong> I consent to ValueMomentum conducting background checks, including but not limited to employment verification, education verification, criminal record checks, and reference checks. I authorize all previous employers, educational institutions, and other relevant parties to release information about me.
+                    </span>
+                  </label>
+                </div>
+
+                <div className="consent-item">
+                  <label className="consent-checkbox">
+                    <input
+                      type="checkbox"
+                      checked={formValues.consentDataProcessing || false}
+                      onChange={(e) => handleChange('consentDataProcessing', e.target.checked)}
+                      required
+                    />
+                    <span className="consent-text">
+                      <strong>Data Processing Consent:</strong> I consent to ValueMomentum processing my personal data for employment-related purposes, including payroll, benefits administration, performance management, and compliance with legal obligations. I understand that my data will be handled in accordance with applicable privacy laws and company policies.
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <div className="signature-section">
+                <div className="form-group">
+                  <label>Digital Signature *</label>
+                  <div className="signature-box-container">
+                    <div className="signature-box">
+                      {formValues.signature ? (
+                        <div className="signature-display">
+                          <div className="signature-text">{formValues.signature}</div>
+                          <Button
+                            type="button"
+                            variant="secondary"
+                            onClick={() => handleChange('signature', '')}
+                            style={{ fontSize: '12px', marginTop: '8px' }}
+                          >
+                            Clear Signature
+                          </Button>
+                        </div>
+                      ) : (
+                        <Input
+                          type="text"
+                          value={formValues.signature || ''}
+                          onChange={(e) => handleChange('signature', e.target.value)}
+                          placeholder="Type your full name to sign"
+                          required
+                        />
+                      )}
+                    </div>
+                    <div className="small" style={{ marginTop: '8px', color: 'var(--muted)' }}>
+                      By typing your full name, you are providing your digital signature and agreeing to all the consents above.
+                    </div>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>Date</label>
+                    <Input
+                      type="date"
+                      value={formValues.signatureDate || new Date().toISOString().split('T')[0]}
+                      onChange={(e) => handleChange('signatureDate', e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
               <div className="form-actions">
                 <Button type="button" variant="secondary" onClick={prevStep}>Previous</Button>
                 <Button type="submit">Save & Complete</Button>
