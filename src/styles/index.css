@@ -1,16 +1,30 @@
 :root {
-  --brand: #1e3a5f;
-  --brand2: #2c5282;
-  --bg: #f8f9fa;
-  --card: #ffffff;
-  --muted: #64748b;
-  --error: #dc3545;
-  --success: #28a745;
-  --warning: #ffc107;
-  --info: #17a2b8;
-  --text: #1a202c;
-  --border: #e2e8f0;
-  --shadow: rgba(0, 0, 0, 0.08);
+  /* Brand Colors - ValueMomentum */
+  --brand: #1e3a5f;              /* Primary brand color - Dark Blue */
+  --brand2: #2c5282;             /* Secondary brand color - Medium Blue */
+  --brand-light: #3b82f6;        /* Light brand blue for accents */
+  --brand-lighter: #0ea5e9;      /* Sky blue for highlights */
+  
+  /* Backgrounds */
+  --bg: #f8f9fa;                 /* Main background */
+  --card: #ffffff;                /* Card background */
+  --header-bg: #ffffff;          /* Header background - Professional white */
+  
+  /* Text Colors */
+  --text: #1a202c;               /* Primary text */
+  --muted: #64748b;              /* Secondary text */
+  
+  /* Status Colors - Professional Palette */
+  --success: #28a745;            /* Success green */
+  --error: #dc3545;              /* Error red */
+  --warning: #f59e0b;            /* Warning amber - Professional */
+  --info: #3b82f6;               /* Info blue - Matches brand */
+  
+  /* UI Colors */
+  --border: #e2e8f0;             /* Borders */
+  --shadow: rgba(0, 0, 0, 0.08); /* Shadows */
+  
+  /* Dark Mode */
   --dark-bg: #1a202c;
   --dark-card: #2d3748;
   --dark-text: #e2e8f0;

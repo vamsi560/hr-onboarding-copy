@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useApp } from '../../context/AppContext';
+import Icon from '../UI/Icon';
 import './Header.css';
 
 const Header = ({ onMenuClick, onLogout }) => {
-  const { darkMode, toggleDarkMode } = useApp();
+  const { darkMode, toggleDarkMode, userRole } = useApp();
   const [currentDateTime, setCurrentDateTime] = useState('');
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const userMenuRef = useRef(null);
+  const notificationsRef = useRef(null);
 
   useEffect(() => {
     const updateDateTime = () => {
@@ -26,6 +31,30 @@ const Header = ({ onMenuClick, onLogout }) => {
     return () => clearInterval(interval);
   }, []);
 
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setShowUserMenu(false);
+      }
+      if (notificationsRef.current && !notificationsRef.current.contains(event.target)) {
+        setShowNotifications(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Mock notifications data
+  const notifications = [
+    { id: 1, type: 'info', message: 'Document approval pending', time: '2 hours ago', read: false },
+    { id: 2, type: 'success', message: 'Onboarding form completed', time: '5 hours ago', read: false },
+    { id: 3, type: 'warning', message: 'Document expiry in 7 days', time: '1 day ago', read: true },
+  ];
+
+  const unreadCount = notifications.filter(n => !n.read).length;
+
   return (
     <header className="app-header">
       <div className="header-left">
@@ -35,10 +64,17 @@ const Header = ({ onMenuClick, onLogout }) => {
           aria-label="Toggle menu"
           title="Menu"
         >
-          ☰
+          <Icon name="menu" size={20} />
         </button>
+        <div className="header-logo">
+          <img 
+            src={process.env.PUBLIC_URL + "/images/ValueMomentum_logo.png"} 
+            alt="ValueMomentum" 
+            className="header-logo-image"
+          />
+        </div>
         <div className="header-search">
-          <span className="search-icon">⌕</span>
+          <Icon name="search" size={18} className="search-icon" />
           <input 
             type="text" 
             placeholder="Search for..." 
@@ -52,31 +88,96 @@ const Header = ({ onMenuClick, onLogout }) => {
       </div>
 
       <div className="header-right">
-        <button className="header-icon-btn" title="Messages">
-          <span className="icon">✉</span>
-        </button>
-        <button className="header-icon-btn" title="Notifications">
-          <span className="icon">🔔</span>
-          <span className="notification-badge">3</span>
-        </button>
-        <button className="header-icon-btn" title="Alerts">
-          <span className="icon">⚠</span>
-          <span className="notification-badge">2</span>
-        </button>
+        <div className="header-notifications" ref={notificationsRef}>
+          <button 
+            className="header-icon-btn" 
+            title="Notifications"
+            onClick={() => setShowNotifications(!showNotifications)}
+          >
+            <Icon name="bell" size={20} />
+            {unreadCount > 0 && (
+              <span className="notification-badge">{unreadCount}</span>
+            )}
+          </button>
+          {showNotifications && (
+            <div className="notifications-panel">
+              <div className="notifications-header">
+                <h4>Notifications</h4>
+                <button className="mark-all-read">Mark all as read</button>
+              </div>
+              <div className="notifications-list">
+                {notifications.length === 0 ? (
+                  <div className="notification-empty">No notifications</div>
+                ) : (
+                  notifications.map(notification => (
+                    <div 
+                      key={notification.id} 
+                      className={`notification-item ${!notification.read ? 'unread' : ''}`}
+                    >
+                      <div className="notification-content">
+                        <div className="notification-message">{notification.message}</div>
+                        <div className="notification-time">{notification.time}</div>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+              <div className="notifications-footer">
+                <button>View all notifications</button>
+              </div>
+            </div>
+          )}
+        </div>
+
         <button 
           className="header-icon-btn" 
           onClick={toggleDarkMode}
-          title="Settings"
+          title="Toggle dark mode"
         >
-          <span className="icon">⚙</span>
+          <Icon name="settings" size={20} />
         </button>
-        <button 
-          className="header-icon-btn" 
-          onClick={onLogout}
-          title="Logout"
-        >
-          <span className="icon">→</span>
-        </button>
+
+        <div className="header-user-menu" ref={userMenuRef}>
+          <button 
+            className="header-user-btn"
+            onClick={() => setShowUserMenu(!showUserMenu)}
+          >
+            <div className="user-avatar-small">
+              {userRole === 'hr' ? 'RR' : 'ST'}
+            </div>
+            <span className="user-name">{userRole === 'hr' ? 'Raghavendra Raju' : 'Shashank Tudum'}</span>
+            <Icon name="chevronDown" size={16} />
+          </button>
+          {showUserMenu && (
+            <div className="user-menu-dropdown">
+              <div className="user-menu-header">
+                <div className="user-menu-avatar">
+                  {userRole === 'hr' ? 'RR' : 'ST'}
+                </div>
+                <div>
+                  <div className="user-menu-name">{userRole === 'hr' ? 'Raghavendra Raju' : 'Shashank Tudum'}</div>
+                  <div className="user-menu-email">{userRole === 'hr' ? 'raghavendra@valuemomentum.com' : 'shashank@valuemomentum.com'}</div>
+                </div>
+              </div>
+              <div className="user-menu-divider"></div>
+              <div className="user-menu-items">
+                <button className="user-menu-item">
+                  <Icon name="user" size={18} />
+                  <span>Profile</span>
+                </button>
+                <button className="user-menu-item">
+                  <Icon name="settings" size={18} />
+                  <span>Settings</span>
+                </button>
+                <div className="user-menu-divider"></div>
+                <button className="user-menu-item" onClick={onLogout}>
+                  <Icon name="logout" size={18} />
+                  <span>Logout</span>
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );

@@ -1,0 +1,115 @@
+.tooltip-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 1000;
+  padding: 8px 12px;
+  background: #1a202c;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 6px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  animation: tooltipFadeIn 0.2s ease;
+  max-width: 250px;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.tooltip-top {
+  bottom: 100%;
+  margin-bottom: 8px;
+}
+
+.tooltip-bottom {
+  top: 100%;
+  margin-top: 8px;
+}
+
+.tooltip-left {
+  right: 100%;
+  margin-right: 8px;
+}
+
+.tooltip-right {
+  left: 100%;
+  margin-left: 8px;
+}
+
+.tooltip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.tooltip-arrow-top {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0 6px;
+  border-color: #1a202c transparent transparent transparent;
+}
+
+.tooltip-arrow-bottom {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 6px 6px 6px;
+  border-color: transparent transparent #1a202c transparent;
+}
+
+.tooltip-arrow-left {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 6px 0 6px 6px;
+  border-color: transparent transparent transparent #1a202c;
+}
+
+.tooltip-arrow-right {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 6px 6px 6px 0;
+  border-color: transparent #1a202c transparent transparent;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body.dark .tooltip {
+  background: #2d3748;
+  color: #e2e8f0;
+}
+
+body.dark .tooltip-arrow-top {
+  border-color: #2d3748 transparent transparent transparent;
+}
+
+body.dark .tooltip-arrow-bottom {
+  border-color: transparent transparent #2d3748 transparent;
+}
+
+body.dark .tooltip-arrow-left {
+  border-color: transparent transparent transparent #2d3748;
+}
+
+body.dark .tooltip-arrow-right {
+  border-color: transparent #2d3748 transparent transparent;
+}
+

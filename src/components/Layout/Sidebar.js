@@ -1,28 +1,29 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
+import Icon from '../UI/Icon';
 import './Sidebar.css';
 
 const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose }) => {
   const { userRole, location } = useApp();
 
   const candidateMenuItems = [
-    { id: 'dashboard', label: 'Dashboard' },
-    { id: 'form', label: 'Onboarding Form' },
-    { id: 'documents', label: 'Documents' },
-    { id: 'validation', label: 'AI Validation' },
-    { id: 'support', label: 'Support' }
+    { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
+    { id: 'form', label: 'Onboarding Form', icon: 'form' },
+    { id: 'documents', label: 'Documents', icon: 'documents' },
+    { id: 'validation', label: 'AI Validation', icon: 'validation' },
+    { id: 'support', label: 'Support', icon: 'support' }
   ];
 
   const hrMenuItems = [
-    { id: 'hr', label: 'HR Dashboard' },
-    { id: 'exceptions', label: 'Exceptions' },
-    { id: 'workflows', label: 'Workflows' },
-    { id: 'references', label: 'Reference Checks' },
-    { id: 'expiry', label: 'Document Expiry' },
-    { id: 'analytics', label: 'Analytics' },
-    { id: 'chat', label: 'Chat' },
-    { id: 'auditlog', label: 'Audit Log' },
-    { id: 'support', label: 'Support' }
+    { id: 'hr', label: 'HR Dashboard', icon: 'hr' },
+    { id: 'exceptions', label: 'Exceptions', icon: 'exceptions', badge: 3 },
+    { id: 'workflows', label: 'Workflows', icon: 'workflows' },
+    { id: 'references', label: 'Reference Checks', icon: 'references' },
+    { id: 'expiry', label: 'Document Expiry', icon: 'expiry', badge: 2 },
+    { id: 'analytics', label: 'Analytics', icon: 'analytics' },
+    { id: 'chat', label: 'Chat', icon: 'chat' },
+    { id: 'auditlog', label: 'Audit Log', icon: 'auditlog' },
+    { id: 'support', label: 'Support', icon: 'support' }
   ];
 
   const menuItems = userRole === 'hr' ? hrMenuItems : candidateMenuItems;
@@ -55,7 +56,11 @@ const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose }) => {
                 className={activeView === item.id ? 'active' : ''}
                 onClick={() => onNavClick(item.id)}
               >
+                <Icon name={item.icon} size={20} className="nav-icon" />
                 <span className="nav-label">{item.label}</span>
+                {item.badge && (
+                  <span className="nav-badge">{item.badge}</span>
+                )}
                 {activeView === item.id && <span className="active-dot"></span>}
               </li>
             ))}

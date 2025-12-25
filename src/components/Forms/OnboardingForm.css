@@ -149,7 +149,9 @@
 }
 
 .form-group label {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-weight: 600;
   font-size: 13px;
   margin-bottom: 8px;
@@ -157,22 +159,75 @@
   letter-spacing: 0.2px;
 }
 
-.form-group label::after {
-  content: '';
-  display: inline-block;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--brand);
-  margin-left: 6px;
-  opacity: 0;
+.field-help-icon {
+  color: var(--muted);
+  cursor: help;
+  opacity: 0.6;
   transition: opacity 0.2s ease;
 }
 
-.form-group:has(input:focus) label::after,
-.form-group:has(textarea:focus) label::after,
-.form-group:has(select:focus) label::after {
+.field-help-icon:hover {
   opacity: 1;
+  color: var(--brand);
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper .input {
+  padding-right: 36px;
+}
+
+.field-status-icon {
+  position: absolute;
+  right: 12px;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.valid-icon {
+  color: var(--success);
+  animation: fadeIn 0.2s ease;
+}
+
+.error-icon {
+  color: var(--error);
+  animation: fadeIn 0.2s ease;
+}
+
+.field-error-message {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--error);
+  font-weight: 500;
+}
+
+.field-error-message .icon {
+  flex-shrink: 0;
+}
+
+.input.valid {
+  border-color: var(--success);
+  padding-right: 36px;
+}
+
+.input.valid:focus {
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+.input.error {
+  border-color: var(--error);
+  padding-right: 36px;
+}
+
+.input.error:focus {
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
 }
 
 .form-group textarea {

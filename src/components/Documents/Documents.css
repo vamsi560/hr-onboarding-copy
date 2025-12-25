@@ -200,7 +200,7 @@
 }
 
 .status-uploaded {
-  background: #17a2b8;
+  background: var(--info);
 }
 
 .empty-state {

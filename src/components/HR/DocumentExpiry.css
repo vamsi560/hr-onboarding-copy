@@ -46,7 +46,7 @@
 }
 
 .summary-attention .summary-value {
-  color: #ffc107;
+  color: var(--warning);
 }
 
 .summary-valid .summary-value {
@@ -149,7 +149,7 @@
 }
 
 .expiry-card.expiry-attention {
-  border-left-color: #ffc107;
+  border-left-color: var(--warning);
   background: #fffef5;
 }
 

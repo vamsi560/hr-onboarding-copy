@@ -4,6 +4,7 @@ import Card from '../UI/Card';
 import Button from '../UI/Button';
 import ProgressBar from '../UI/ProgressBar';
 import Breadcrumbs from '../UI/Breadcrumbs';
+import Icon from '../UI/Icon';
 import { calculateProgress } from '../../utils/progress';
 import './Dashboard.css';
 
@@ -32,8 +33,17 @@ const Dashboard = () => {
     <div className="dashboard">
       <div className="dashboard-header">
         <div className="dashboard-welcome">
-          <h1 className="dashboard-title">{getGreeting()}! 👋</h1>
-          <p className="dashboard-subtitle">Welcome to your onboarding journey</p>
+          <div className="dashboard-branding">
+            <img 
+              src={process.env.PUBLIC_URL + "/images/ValueMomentum_logo.png"} 
+              alt="ValueMomentum" 
+              className="dashboard-logo"
+            />
+            <div className="dashboard-welcome-text">
+              <h1 className="dashboard-title">{getGreeting()}! 👋</h1>
+              <p className="dashboard-subtitle">Welcome to your ValueMomentum onboarding journey</p>
+            </div>
+          </div>
         </div>
         <div className="dashboard-stats-mini">
           <div className="stat-mini">
@@ -192,7 +202,7 @@ const Dashboard = () => {
       <div className="dashboard-grid">
         <Card className="dashboard-card enhanced-action-card" onClick={() => window.location.hash = '#documents'}>
           <div className="card-icon-wrapper">
-            <div className="card-icon" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+            <div className="card-icon" style={{ background: 'linear-gradient(135deg, var(--brand) 0%, var(--brand2) 100%)' }}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M14 2V8H20" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -213,7 +223,7 @@ const Dashboard = () => {
 
         <Card className="dashboard-card enhanced-action-card" onClick={() => window.location.hash = '#form'}>
           <div className="card-icon-wrapper">
-            <div className="card-icon" style={{ background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' }}>
+            <div className="card-icon" style={{ background: 'linear-gradient(135deg, var(--brand2) 0%, var(--brand-light) 100%)' }}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M2 17L12 22L22 17" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -235,7 +245,7 @@ const Dashboard = () => {
 
         <Card className="dashboard-card enhanced-action-card" onClick={() => window.location.hash = '#validation'}>
           <div className="card-icon-wrapper">
-            <div className="card-icon" style={{ background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)' }}>
+            <div className="card-icon" style={{ background: 'linear-gradient(135deg, var(--brand-lighter) 0%, var(--brand-light) 100%)' }}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>

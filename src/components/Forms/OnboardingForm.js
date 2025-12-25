@@ -5,6 +5,8 @@ import Card from '../UI/Card';
 import Button from '../UI/Button';
 import Input from '../UI/Input';
 import Breadcrumbs from '../UI/Breadcrumbs';
+import Icon from '../UI/Icon';
+import Tooltip from '../UI/Tooltip';
 import './OnboardingForm.css';
 
 const OnboardingForm = () => {
@@ -13,15 +15,64 @@ const OnboardingForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formValues, setFormValues] = useState(formData);
   const [saveStatus, setSaveStatus] = useState('saved'); // 'saving', 'saved', 'error'
+  const [fieldErrors, setFieldErrors] = useState({});
+  const [touchedFields, setTouchedFields] = useState({});
   const saveTimeoutRef = useRef(null);
 
   useEffect(() => {
     setFormValues(formData);
   }, [formData]);
 
+  const validateField = (field, value) => {
+    const errors = {};
+    
+    switch (field) {
+      case 'email':
+        if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          errors[field] = 'Please enter a valid email address';
+        }
+        break;
+      case 'mobile':
+        if (value && !/^[\d\s\+\-\(\)]+$/.test(value)) {
+          errors[field] = 'Please enter a valid phone number';
+        }
+        break;
+      case 'linkedinUrl':
+        if (value && !/^https?:\/\/(www\.)?linkedin\.com\/in\/.+/.test(value)) {
+          errors[field] = 'Please enter a valid LinkedIn profile URL';
+        }
+        break;
+      case 'firstName':
+      case 'lastName':
+        if (!value || value.trim().length < 2) {
+          errors[field] = 'This field must be at least 2 characters';
+        }
+        break;
+      default:
+        break;
+    }
+    
+    return errors;
+  };
+
   const handleChange = (field, value) => {
     const newValues = { ...formValues, [field]: value };
     setFormValues(newValues);
+    
+    // Real-time validation
+    if (touchedFields[field]) {
+      const errors = validateField(field, value);
+      setFieldErrors(prev => ({ ...prev, ...errors }));
+      if (errors[field]) {
+        delete fieldErrors[field];
+      } else {
+        setFieldErrors(prev => {
+          const newErrors = { ...prev };
+          delete newErrors[field];
+          return newErrors;
+        });
+      }
+    }
     
     // Debounced auto-save
     setSaveStatus('saving');
@@ -41,6 +92,12 @@ const OnboardingForm = () => {
         setSaveStatus('error');
       }
     }, 1000); // Save after 1 second of inactivity
+  };
+
+  const handleBlur = (field) => {
+    setTouchedFields(prev => ({ ...prev, [field]: true }));
+    const errors = validateField(field, formValues[field]);
+    setFieldErrors(prev => ({ ...prev, ...errors }));
   };
 
   const handleCertificationChange = (index, field, value) => {
@@ -154,48 +211,137 @@ const OnboardingForm = () => {
               <h4>Personal Information</h4>
               <div className="form-row">
                 <div className="form-group">
-                  <label>First Name *</label>
-                  <Input
-                    value={formValues.firstName || ''}
-                    onChange={(e) => handleChange('firstName', e.target.value)}
-                    placeholder="John"
-                    required
-                  />
+                  <label>
+                    First Name *
+                    <Tooltip content="Enter your legal first name as it appears on official documents">
+                      <Icon name="info" size={14} className="field-help-icon" />
+                    </Tooltip>
+                  </label>
+                  <div className="input-wrapper">
+                    <Input
+                      value={formValues.firstName || ''}
+                      onChange={(e) => handleChange('firstName', e.target.value)}
+                      onBlur={() => handleBlur('firstName')}
+                      placeholder="John"
+                      className={fieldErrors.firstName ? 'error' : touchedFields.firstName && formValues.firstName ? 'valid' : ''}
+                      required
+                    />
+                    {touchedFields.firstName && formValues.firstName && !fieldErrors.firstName && (
+                      <Icon name="check" size={16} className="field-status-icon valid-icon" />
+                    )}
+                    {fieldErrors.firstName && (
+                      <Icon name="x" size={16} className="field-status-icon error-icon" />
+                    )}
+                  </div>
+                  {fieldErrors.firstName && (
+                    <div className="field-error-message">
+                      <Icon name="alert" size={14} />
+                      {fieldErrors.firstName}
+                    </div>
+                  )}
                 </div>
                 <div className="form-group">
-                  <label>Last Name *</label>
-                  <Input
-                    value={formValues.lastName || ''}
-                    onChange={(e) => handleChange('lastName', e.target.value)}
-                    placeholder="Doe"
-                    required
-                  />
+                  <label>
+                    Last Name *
+                    <Tooltip content="Enter your legal last name (surname) as it appears on official documents">
+                      <Icon name="info" size={14} className="field-help-icon" />
+                    </Tooltip>
+                  </label>
+                  <div className="input-wrapper">
+                    <Input
+                      value={formValues.lastName || ''}
+                      onChange={(e) => handleChange('lastName', e.target.value)}
+                      onBlur={() => handleBlur('lastName')}
+                      placeholder="Doe"
+                      className={fieldErrors.lastName ? 'error' : touchedFields.lastName && formValues.lastName ? 'valid' : ''}
+                      required
+                    />
+                    {touchedFields.lastName && formValues.lastName && !fieldErrors.lastName && (
+                      <Icon name="check" size={16} className="field-status-icon valid-icon" />
+                    )}
+                    {fieldErrors.lastName && (
+                      <Icon name="x" size={16} className="field-status-icon error-icon" />
+                    )}
+                  </div>
+                  {fieldErrors.lastName && (
+                    <div className="field-error-message">
+                      <Icon name="alert" size={14} />
+                      {fieldErrors.lastName}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="form-row">
                 <div className="form-group">
-                  <label>Email *</label>
-                  <Input
-                    type="email"
-                    value={formValues.email || ''}
-                    onChange={(e) => handleChange('email', e.target.value)}
-                    placeholder="you@domain.com"
-                    required
-                  />
+                  <label>
+                    Email *
+                    <Tooltip content="Enter your professional email address. This will be used for all communications.">
+                      <Icon name="info" size={14} className="field-help-icon" />
+                    </Tooltip>
+                  </label>
+                  <div className="input-wrapper">
+                    <Input
+                      type="email"
+                      value={formValues.email || ''}
+                      onChange={(e) => handleChange('email', e.target.value)}
+                      onBlur={() => handleBlur('email')}
+                      placeholder="you@domain.com"
+                      className={fieldErrors.email ? 'error' : touchedFields.email && formValues.email && !fieldErrors.email ? 'valid' : ''}
+                      required
+                    />
+                    {touchedFields.email && formValues.email && !fieldErrors.email && (
+                      <Icon name="check" size={16} className="field-status-icon valid-icon" />
+                    )}
+                    {fieldErrors.email && (
+                      <Icon name="x" size={16} className="field-status-icon error-icon" />
+                    )}
+                  </div>
+                  {fieldErrors.email && (
+                    <div className="field-error-message">
+                      <Icon name="alert" size={14} />
+                      {fieldErrors.email}
+                    </div>
+                  )}
                 </div>
                 <div className="form-group">
-                  <label>Mobile *</label>
-                  <Input
-                    type="tel"
-                    value={formValues.mobile || ''}
-                    onChange={(e) => handleChange('mobile', e.target.value)}
-                    placeholder="+1 555 555 5555"
-                    required
-                  />
+                  <label>
+                    Mobile *
+                    <Tooltip content="Enter your mobile number with country code (e.g., +1 555 555 5555)">
+                      <Icon name="info" size={14} className="field-help-icon" />
+                    </Tooltip>
+                  </label>
+                  <div className="input-wrapper">
+                    <Input
+                      type="tel"
+                      value={formValues.mobile || ''}
+                      onChange={(e) => handleChange('mobile', e.target.value)}
+                      onBlur={() => handleBlur('mobile')}
+                      placeholder="+1 555 555 5555"
+                      className={fieldErrors.mobile ? 'error' : touchedFields.mobile && formValues.mobile && !fieldErrors.mobile ? 'valid' : ''}
+                      required
+                    />
+                    {touchedFields.mobile && formValues.mobile && !fieldErrors.mobile && (
+                      <Icon name="check" size={16} className="field-status-icon valid-icon" />
+                    )}
+                    {fieldErrors.mobile && (
+                      <Icon name="x" size={16} className="field-status-icon error-icon" />
+                    )}
+                  </div>
+                  {fieldErrors.mobile && (
+                    <div className="field-error-message">
+                      <Icon name="alert" size={14} />
+                      {fieldErrors.mobile}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="form-group">
-                <label>Address</label>
+                <label>
+                  Address
+                  <Tooltip content="Enter your complete address including street, city, state, and postal code">
+                    <Icon name="info" size={14} className="field-help-icon" />
+                  </Tooltip>
+                </label>
                 <textarea
                   className="input"
                   value={formValues.address || ''}
@@ -265,13 +411,34 @@ const OnboardingForm = () => {
                 />
               </div>
               <div className="form-group">
-                <label>LinkedIn URL</label>
-                <Input
-                  type="url"
-                  value={formValues.linkedinUrl || ''}
-                  onChange={(e) => handleChange('linkedinUrl', e.target.value)}
-                  placeholder="https://www.linkedin.com/in/yourprofile"
-                />
+                <label>
+                  LinkedIn URL
+                  <Tooltip content="Enter your LinkedIn profile URL (e.g., https://www.linkedin.com/in/yourprofile)">
+                    <Icon name="info" size={14} className="field-help-icon" />
+                  </Tooltip>
+                </label>
+                <div className="input-wrapper">
+                  <Input
+                    type="url"
+                    value={formValues.linkedinUrl || ''}
+                    onChange={(e) => handleChange('linkedinUrl', e.target.value)}
+                    onBlur={() => handleBlur('linkedinUrl')}
+                    placeholder="https://www.linkedin.com/in/yourprofile"
+                    className={fieldErrors.linkedinUrl ? 'error' : touchedFields.linkedinUrl && formValues.linkedinUrl && !fieldErrors.linkedinUrl ? 'valid' : ''}
+                  />
+                  {touchedFields.linkedinUrl && formValues.linkedinUrl && !fieldErrors.linkedinUrl && (
+                    <Icon name="check" size={16} className="field-status-icon valid-icon" />
+                  )}
+                  {fieldErrors.linkedinUrl && (
+                    <Icon name="x" size={16} className="field-status-icon error-icon" />
+                  )}
+                </div>
+                {fieldErrors.linkedinUrl && (
+                  <div className="field-error-message">
+                    <Icon name="alert" size={14} />
+                    {fieldErrors.linkedinUrl}
+                  </div>
+                )}
               </div>
               <div className="form-group">
                 <label>Certifications</label>
