@@ -13,6 +13,8 @@ import HRAnalytics from '../HR/HRAnalytics';
 import HRChat from '../HR/HRChat';
 import AuditLog from '../HR/AuditLog';
 import RegisterCandidate from '../HR/RegisterCandidate';
+import ReferenceCheck from '../HR/ReferenceCheck';
+import DocumentExpiry from '../HR/DocumentExpiry';
 import Support from '../Support/Support';
 import ChatWidget from '../Chat/ChatWidget';
 import ToastContainer from '../UI/ToastContainer';
@@ -33,6 +35,8 @@ const MainLayout = ({ onLogout }) => {
     support: Support,
     exceptions: HRExceptions,
     workflows: HRWorkflows,
+    references: ReferenceCheck,
+    expiry: DocumentExpiry,
     analytics: HRAnalytics,
     chat: HRChat,
     auditlog: AuditLog
@@ -42,7 +46,8 @@ const MainLayout = ({ onLogout }) => {
 
   const handleNavClick = (view) => {
     // Only allow HR-specific views for HR users
-    if ((view === 'chat' || view === 'auditlog') && userRole !== 'hr') {
+    const hrOnlyViews = ['chat', 'auditlog', 'references', 'expiry', 'exceptions', 'workflows', 'analytics', 'hr'];
+    if (hrOnlyViews.includes(view) && userRole !== 'hr') {
       return;
     }
     setActiveView(view);

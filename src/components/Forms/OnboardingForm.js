@@ -348,6 +348,121 @@ const OnboardingForm = () => {
                   placeholder="+1 555 555 5555"
                 />
               </div>
+              
+              <div className="form-group">
+                <label>References</label>
+                <p className="small" style={{ marginBottom: '12px', color: 'var(--muted)' }}>
+                  Provide contact details for professional references (previous managers, colleagues, etc.)
+                </p>
+                {(formValues.references && formValues.references.length > 0 ? formValues.references : [{ name: '', email: '', phone: '', company: '', position: '', relationship: '' }]).map((ref, index) => (
+                  <Card key={index} className="certification-item-card">
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label>Reference Name *</label>
+                        <Input
+                          placeholder="John Doe"
+                          value={ref.name || ''}
+                          onChange={(e) => {
+                            const currentRefs = formValues.references || [];
+                            const updatedRefs = [...currentRefs];
+                            updatedRefs[index] = { ...updatedRefs[index], name: e.target.value };
+                            handleChange('references', updatedRefs);
+                          }}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Email *</label>
+                        <Input
+                          type="email"
+                          placeholder="john@company.com"
+                          value={ref.email || ''}
+                          onChange={(e) => {
+                            const currentRefs = formValues.references || [];
+                            const updatedRefs = [...currentRefs];
+                            updatedRefs[index] = { ...updatedRefs[index], email: e.target.value };
+                            handleChange('references', updatedRefs);
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label>Phone</label>
+                        <Input
+                          type="tel"
+                          placeholder="+1 555 555 5555"
+                          value={ref.phone || ''}
+                          onChange={(e) => {
+                            const currentRefs = formValues.references || [];
+                            const updatedRefs = [...currentRefs];
+                            updatedRefs[index] = { ...updatedRefs[index], phone: e.target.value };
+                            handleChange('references', updatedRefs);
+                          }}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Company</label>
+                        <Input
+                          placeholder="Previous Company"
+                          value={ref.company || ''}
+                          onChange={(e) => {
+                            const currentRefs = formValues.references || [];
+                            const updatedRefs = [...currentRefs];
+                            updatedRefs[index] = { ...updatedRefs[index], company: e.target.value };
+                            handleChange('references', updatedRefs);
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label>Position</label>
+                        <Input
+                          placeholder="Manager, Director, etc."
+                          value={ref.position || ''}
+                          onChange={(e) => {
+                            const currentRefs = formValues.references || [];
+                            const updatedRefs = [...currentRefs];
+                            updatedRefs[index] = { ...updatedRefs[index], position: e.target.value };
+                            handleChange('references', updatedRefs);
+                          }}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Relationship *</label>
+                        <select
+                          className="input"
+                          value={ref.relationship || ''}
+                          onChange={(e) => {
+                            const currentRefs = formValues.references || [];
+                            const updatedRefs = [...currentRefs];
+                            updatedRefs[index] = { ...updatedRefs[index], relationship: e.target.value };
+                            handleChange('references', updatedRefs);
+                          }}
+                        >
+                          <option value="">Select Relationship</option>
+                          <option value="manager">Previous Manager</option>
+                          <option value="colleague">Colleague</option>
+                          <option value="client">Client</option>
+                          <option value="other">Other</option>
+                        </select>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => {
+                    const currentRefs = formValues.references || [];
+                    handleChange('references', [...currentRefs, { name: '', email: '', phone: '', company: '', position: '', relationship: '' }]);
+                  }}
+                  style={{ marginTop: '8px', fontSize: '14px' }}
+                >
+                  + Add More References
+                </Button>
+              </div>
+
               <div className="form-group">
                 <label>Notes</label>
                 <textarea
@@ -385,6 +500,59 @@ const OnboardingForm = () => {
                 {formValues.hasVisa === 'yes' && (
                   <div className="small">
                     Please upload your Visa document under the <strong>Government ID</strong> category in the Documents tab.
+                  </div>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label>Document Expiry Dates</label>
+                <p className="small" style={{ marginBottom: '12px', color: 'var(--muted)' }}>
+                  Please provide expiry dates for important documents
+                </p>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>Passport Expiry Date</label>
+                    <Input
+                      type="date"
+                      value={formValues.passportExpiry || ''}
+                      onChange={(e) => handleChange('passportExpiry', e.target.value)}
+                    />
+                  </div>
+                  {formValues.hasVisa === 'yes' && (
+                    <div className="form-group">
+                      <label>Visa Expiry Date</label>
+                      <Input
+                        type="date"
+                        value={formValues.visaExpiry || ''}
+                        onChange={(e) => handleChange('visaExpiry', e.target.value)}
+                      />
+                    </div>
+                  )}
+                </div>
+                {(formValues.certifications && formValues.certifications.length > 0) && (
+                  <div style={{ marginTop: '12px' }}>
+                    <label className="small" style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>
+                      Certification Expiry Dates
+                    </label>
+                    {formValues.certifications.map((cert, index) => (
+                      cert.name && (
+                        <div key={index} className="form-row" style={{ marginBottom: '8px' }}>
+                          <div className="form-group">
+                            <label className="small">{cert.name} Expiry</label>
+                            <Input
+                              type="date"
+                              value={cert.expiryDate || ''}
+                              onChange={(e) => {
+                                const currentCerts = formValues.certifications || [];
+                                const updatedCerts = [...currentCerts];
+                                updatedCerts[index] = { ...updatedCerts[index], expiryDate: e.target.value };
+                                handleChange('certifications', updatedCerts);
+                              }}
+                            />
+                          </div>
+                        </div>
+                      )
+                    ))}
                   </div>
                 )}
               </div>

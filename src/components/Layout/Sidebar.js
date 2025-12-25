@@ -17,6 +17,8 @@ const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose }) => {
     { id: 'hr', label: 'HR Dashboard' },
     { id: 'exceptions', label: 'Exceptions' },
     { id: 'workflows', label: 'Workflows' },
+    { id: 'references', label: 'Reference Checks' },
+    { id: 'expiry', label: 'Document Expiry' },
     { id: 'analytics', label: 'Analytics' },
     { id: 'chat', label: 'Chat' },
     { id: 'auditlog', label: 'Audit Log' },

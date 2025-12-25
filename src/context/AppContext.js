@@ -37,6 +37,14 @@ export const AppProvider = ({ children }) => {
     const saved = localStorage.getItem('auditLog');
     return saved ? JSON.parse(saved) : [];
   });
+  const [referenceChecks, setReferenceChecks] = useState(() => {
+    const saved = localStorage.getItem('referenceChecks');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [documentExpiry, setDocumentExpiry] = useState(() => {
+    const saved = localStorage.getItem('documentExpiry');
+    return saved ? JSON.parse(saved) : [];
+  });
 
   useEffect(() => {
     document.body.classList.toggle('dark', darkMode);
@@ -62,6 +70,14 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('auditLog', JSON.stringify(auditLog));
   }, [auditLog]);
+
+  useEffect(() => {
+    localStorage.setItem('referenceChecks', JSON.stringify(referenceChecks));
+  }, [referenceChecks]);
+
+  useEffect(() => {
+    localStorage.setItem('documentExpiry', JSON.stringify(documentExpiry));
+  }, [documentExpiry]);
 
   const toggleDarkMode = () => {
     setDarkMode(prev => !prev);
@@ -116,7 +132,11 @@ export const AppProvider = ({ children }) => {
     validationHistory,
     setValidationHistory,
     auditLog,
-    logAction
+    logAction,
+    referenceChecks,
+    setReferenceChecks,
+    documentExpiry,
+    setDocumentExpiry
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
