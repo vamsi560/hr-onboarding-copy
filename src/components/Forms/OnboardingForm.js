@@ -129,12 +129,20 @@ const OnboardingForm = () => {
           </div>
         </div>
         <div className="step-indicator">
-          {[1, 2, 3, 4].map(step => (
-            <React.Fragment key={step}>
-              <div className={`step ${currentStep === step ? 'active' : ''} ${currentStep > step ? 'completed' : ''}`}>
-                {step}
+          {[
+            { num: 1, label: 'Personal' },
+            { num: 2, label: 'Professional' },
+            { num: 3, label: 'Additional' },
+            { num: 4, label: 'Consent' }
+          ].map((step, index) => (
+            <React.Fragment key={step.num}>
+              <div 
+                className={`step ${currentStep === step.num ? 'active' : ''} ${currentStep > step.num ? 'completed' : ''}`}
+                data-label={step.label}
+              >
+                {currentStep > step.num ? '' : step.num}
               </div>
-              {step < 4 && <div className="step-connector"></div>}
+              {index < 3 && <div className={`step-connector ${currentStep > step.num ? 'completed' : ''}`}></div>}
             </React.Fragment>
           ))}
         </div>

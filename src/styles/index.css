@@ -29,9 +29,11 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(180deg, var(--bg), #ffffff);
+  background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+  background-attachment: fixed;
   color: var(--text);
   min-height: 100vh;
+  line-height: 1.6;
 }
 
 body.dark {
