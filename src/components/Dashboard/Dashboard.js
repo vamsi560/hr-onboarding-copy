@@ -38,12 +38,6 @@ const badgeList = [
   { key: 'handbook', label: 'Handbook Read', condition: (formData) => formData.handbookRead }
 ];
 
-const quickLinks = [
-  { label: 'Download Offer Letter', icon: 'download', onClick: () => alert('Download Offer Letter') },
-  { label: 'Update Bank Details', icon: 'edit', onClick: () => alert('Update Bank Details') },
-  { label: 'Contact HR', icon: 'mail', onClick: () => window.location.href = 'mailto:hr@valuemomentum.com' }
-];
-
 const getGreeting = (name) => {
   const hour = new Date().getHours();
   let greet = 'Hello';
@@ -98,7 +92,7 @@ const Dashboard = () => {
 
   return (
     <div className="modern-dashboard">
-      {/* Notification Bell */}
+      {/* Notification Bell and Header */}
       <div className="dashboard-header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div className="dashboard-header-title">
           <h1>{getGreeting(candidateName)}</h1>
@@ -111,145 +105,9 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      {/* Onboarding Timeline/Stepper */}
-      <div className="onboarding-timeline">
-        {onboardingPhases.map((phase, idx) => (
-          <div key={phase.label} className={`timeline-phase${idx <= 1 ? ' completed' : ''}${idx === 1 ? ' active' : ''}`}>
-            <div className="timeline-dot"></div>
-            <div className="timeline-label">{phase.label}</div>
-            <div className="timeline-date">{phase.date}</div>
-            {idx < onboardingPhases.length - 1 && <div className="timeline-connector"></div>}
-          </div>
-        ))}
-      </div>
-      {/* Profile Completion Meter */}
-      <div className="profile-completion-row">
-        <div className="profile-completion-label">Profile Completion</div>
-        <div className="profile-completion-bar">
-          <div className="profile-completion-fill" style={{ width: `${profileCompletion}%` }}></div>
-        </div>
-        <div className="profile-completion-percent">{profileCompletion}%</div>
-        {profileCompletion < 100 && (
-          <div className="profile-next-step">Next: {pendingTasks[0] || 'All steps complete!'}</div>
-        )}
-      </div>
-      {/* Badges & Achievements */}
-      <div className="badges-row">
-        {earnedBadges.map(badge => (
-          <span key={badge.key} className="badge-earned">🏅 {badge.label}</span>
-        ))}
-      </div>
-      {/* Quick Links Panel */}
-      <div className="quick-links-row">
-        {quickLinks.map(link => (
-          <Button key={link.label} className="quick-link-btn" onClick={link.onClick}>
-            <Icon name={link.icon} size={16} /> {link.label}
-          </Button>
-        ))}
-      </div>
       {/* ...existing dashboard grid and cards... */}
       <div className="dashboard-main-grid">
-        <div className="dashboard-col dashboard-progress-col">
-          <Card className="dashboard-progress-card">
-            <div className="progress-circle-container">
-              <svg className="progress-circle" width="90" height="90">
-                <circle cx="45" cy="45" r="40" stroke="#e6e6e6" strokeWidth="8" fill="none" />
-                <circle
-                  cx="45" cy="45" r="40"
-                  stroke="#2e7d32"
-                  strokeWidth="8"
-                  fill="none"
-                  strokeDasharray={2 * Math.PI * 40}
-                  strokeDashoffset={2 * Math.PI * 40 * (1 - progress / 100)}
-                  strokeLinecap="round"
-                  style={{ transition: 'stroke-dashoffset 0.6s' }}
-                />
-                <text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="1.3em" fill="#2e7d32">{progress}%</text>
-              </svg>
-              <div className="progress-tasks-label">{completedTasks} of {totalTasks} Tasks Completed</div>
-            </div>
-          </Card>
-          <Card className="dashboard-pending-card">
-            <h3>Pending Tasks</h3>
-            <ul className="pending-tasks-list">
-              {pendingTasks.length === 0 ? (
-                <li className="task-done">All tasks completed!</li>
-              ) : (
-                pendingTasks.map((task, idx) => (
-                  <li key={idx} className="task-pending">{task} {task === 'Upload Documents' && <span className="pending-badge">Pending</span>}</li>
-                ))
-              )}
-            </ul>
-            <Button className="view-tasks-btn">View All Tasks</Button>
-          </Card>
-        </div>
-        <div className="dashboard-col dashboard-center-col">
-          <Card className="dashboard-welcome-card">
-            <h2>Welcome to the Team!</h2>
-            <p>We're excited to have you on board! Explore the tasks below to get started on your onboarding journey.</p>
-            <Button className="welcome-video-btn">Watch Welcome Video</Button>
-          </Card>
-          <div className="dashboard-row">
-            <Card className="dashboard-date-card">
-              <h4>Your Start Date</h4>
-              <div><b>Joining Date:</b> {joiningDate}</div>
-              <div><b>Location:</b> {officeLocation}</div>
-            </Card>
-            <Card className="dashboard-resources-card">
-              <h4>Helpful Resources</h4>
-              <div className="resources-grid">
-                {resources.map((res, idx) => (
-                  <a key={idx} href={res.link} className="resource-item" title={res.name}>
-                    <span className="resource-icon">{res.icon}</span>
-                    <span className="resource-label">{res.name}</span>
-                  </a>
-                ))}
-              </div>
-            </Card>
-          </div>
-        </div>
-        <div className="dashboard-col dashboard-profile-col">
-          <Card className="dashboard-profile-card">
-            <div className="profile-row">
-              <img src={candidatePhoto} alt={candidateName} className="profile-photo" />
-              <div className="profile-info">
-                <div className="profile-name">{candidateName}</div>
-                <div className="profile-role">{candidateRole}</div>
-                <div className="profile-date"><b>Starting Date:</b> {joiningDate}</div>
-                <div className="profile-location"><b>Location:</b> {officeLocation}</div>
-                <Button className="email-hr-btn">Email HR</Button>
-              </div>
-            </div>
-          </Card>
-          <Card className="dashboard-events-card">
-            <h4>Upcoming Events</h4>
-            <ul className="events-list">
-              {events.map((event, idx) => (
-                <li key={idx} className="event-item">
-                  <span className="event-name">{event.name}</span>
-                  <span className="event-date">{event.date}</span>
-                </li>
-              ))}
-            </ul>
-            <Button className="view-calendar-btn">View Calendar</Button>
-          </Card>
-          {/* Recent Activity Feed */}
-          <Card className="dashboard-activity-card">
-            <h4>Recent Activity</h4>
-            <ul className="activity-list">
-              {recentActivity.length === 0 ? (
-                <li className="activity-empty">No recent activity.</li>
-              ) : (
-                recentActivity.map((act, idx) => (
-                  <li key={idx} className="activity-item">
-                    <span className="activity-action">{act.action}</span>
-                    <span className="activity-time">{new Date(act.timestamp).toLocaleString()}</span>
-                  </li>
-                ))
-              )}
-            </ul>
-          </Card>
-        </div>
+        {/* ...existing code... */}
       </div>
       <div className="dashboard-footer-row">
         <div className="dashboard-footer-left">
