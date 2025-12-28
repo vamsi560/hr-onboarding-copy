@@ -54,7 +54,6 @@ const getRandomTip = () => {
 
 const Dashboard = () => {
   const { formData, userRole, location, documents, auditLog } = useApp();
-  // Updated default candidate info
   const candidateName = formData.fullName || 'Shashank Tudum';
   const candidateRole = formData.role || 'Software Engineer';
   const candidatePhoto = formData.photoUrl || process.env.PUBLIC_URL + '/images/shashank.jpg';
@@ -79,15 +78,11 @@ const Dashboard = () => {
     { name: 'Benefits Info', icon: '🩺', link: '#' },
     { name: 'Office Map', icon: '📍', link: '#' },
   ];
-  // Profile completion calculation (fields + docs)
   const profileFields = ['personalDetailsCompleted', 'offerLetterSigned', 'handbookRead'];
   const filledFields = profileFields.filter(f => formData[f]).length;
   const profileCompletion = Math.round(((filledFields + (documents?.length > 0 ? 1 : 0)) / (profileFields.length + 1)) * 100);
-  // Badges
   const earnedBadges = badgeList.filter(b => b.condition(formData, documents));
-  // Recent activity (last 5 actions)
   const recentActivity = useMemo(() => (auditLog || []).slice(0, 5), [auditLog]);
-  // Notification count (pending tasks + events)
   const notificationCount = pendingTasks.length + events.length;
 
   return (
@@ -105,9 +100,109 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      {/* ...existing dashboard grid and cards... */}
+      {/* Main dashboard grid and cards (restored) */}
       <div className="dashboard-main-grid">
-        {/* ...existing code... */}
+        <div className="dashboard-col dashboard-progress-col">
+          <Card className="dashboard-progress-card">
+            <div className="progress-circle-container">
+              <svg className="progress-circle" width="90" height="90">
+                <circle cx="45" cy="45" r="40" stroke="#e6e6e6" strokeWidth="8" fill="none" />
+                <circle
+                  cx="45" cy="45" r="40"
+                  stroke="#2e7d32"
+                  strokeWidth="8"
+                  fill="none"
+                  strokeDasharray={2 * Math.PI * 40}
+                  strokeDashoffset={2 * Math.PI * 40 * (1 - progress / 100)}
+                  strokeLinecap="round"
+                  style={{ transition: 'stroke-dashoffset 0.6s' }}
+                />
+                <text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize="1.3em" fill="#2e7d32">{progress}%</text>
+              </svg>
+              <div className="progress-tasks-label">{completedTasks} of {totalTasks} Tasks Completed</div>
+            </div>
+          </Card>
+          <Card className="dashboard-pending-card">
+            <h3>Pending Tasks</h3>
+            <ul className="pending-tasks-list">
+              {pendingTasks.length === 0 ? (
+                <li className="task-done">All tasks completed!</li>
+              ) : (
+                pendingTasks.map((task, idx) => (
+                  <li key={idx} className="task-pending">{task} {task === 'Upload Documents' && <span className="pending-badge">Pending</span>}</li>
+                ))
+              )}
+            </ul>
+            <Button className="view-tasks-btn">View All Tasks</Button>
+          </Card>
+        </div>
+        <div className="dashboard-col dashboard-center-col">
+          <Card className="dashboard-welcome-card">
+            <h2>Welcome to the Team!</h2>
+            <p>We're excited to have you on board! Explore the tasks below to get started on your onboarding journey.</p>
+            <Button className="welcome-video-btn">Watch Welcome Video</Button>
+          </Card>
+          <div className="dashboard-row">
+            <Card className="dashboard-date-card">
+              <h4>Your Start Date</h4>
+              <div><b>Joining Date:</b> {joiningDate}</div>
+              <div><b>Location:</b> {officeLocation}</div>
+            </Card>
+            <Card className="dashboard-resources-card">
+              <h4>Helpful Resources</h4>
+              <div className="resources-grid">
+                {resources.map((res, idx) => (
+                  <a key={idx} href={res.link} className="resource-item" title={res.name}>
+                    <span className="resource-icon">{res.icon}</span>
+                    <span className="resource-label">{res.name}</span>
+                  </a>
+                ))}
+              </div>
+            </Card>
+          </div>
+        </div>
+        <div className="dashboard-col dashboard-profile-col">
+          <Card className="dashboard-profile-card">
+            <div className="profile-row">
+              <img src={candidatePhoto} alt={candidateName} className="profile-photo" />
+              <div className="profile-info">
+                <div className="profile-name">{candidateName}</div>
+                <div className="profile-role">{candidateRole}</div>
+                <div className="profile-date"><b>Starting Date:</b> {joiningDate}</div>
+                <div className="profile-location"><b>Location:</b> {officeLocation}</div>
+                <Button className="email-hr-btn">Email HR</Button>
+              </div>
+            </div>
+          </Card>
+          <Card className="dashboard-events-card">
+            <h4>Upcoming Events</h4>
+            <ul className="events-list">
+              {events.map((event, idx) => (
+                <li key={idx} className="event-item">
+                  <span className="event-name">{event.name}</span>
+                  <span className="event-date">{event.date}</span>
+                </li>
+              ))}
+            </ul>
+            <Button className="view-calendar-btn">View Calendar</Button>
+          </Card>
+          {/* Recent Activity Feed */}
+          <Card className="dashboard-activity-card">
+            <h4>Recent Activity</h4>
+            <ul className="activity-list">
+              {recentActivity.length === 0 ? (
+                <li className="activity-empty">No recent activity.</li>
+              ) : (
+                recentActivity.map((act, idx) => (
+                  <li key={idx} className="activity-item">
+                    <span className="activity-action">{act.action}</span>
+                    <span className="activity-time">{new Date(act.timestamp).toLocaleString()}</span>
+                  </li>
+                ))
+              )}
+            </ul>
+          </Card>
+        </div>
       </div>
       <div className="dashboard-footer-row">
         <div className="dashboard-footer-left">
