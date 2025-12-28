@@ -1,3 +1,15 @@
+// Dashboard Enhancements Suggestions:
+// - Add a personalized greeting based on time of day ("Good Morning, Shashank!")
+// - Show a timeline or stepper for onboarding phases (e.g., Pre-Onboarding, Onboarding, Post-Onboarding)
+// - Integrate a notification bell for alerts (pending tasks, document status, HR messages)
+// - Display recent activity or status updates ("Offer letter signed", "Document approved")
+// - Add a quick links section for most-used actions (e.g., Download Offer Letter, Update Bank Details)
+// - Show a motivational quote or onboarding tip of the day
+// - Integrate a mini chat widget for direct HR/candidate communication
+// - Add a section for feedback or onboarding survey
+// - Display badges or milestones for completed steps ("Profile Complete", "All Documents Uploaded")
+// - Make the dashboard theme customizable (light/dark, accent color)
+
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import Card from '../UI/Card';
@@ -6,10 +18,10 @@ import './Dashboard.css';
 
 const Dashboard = () => {
   const { formData, userRole, location, documents } = useApp();
-  // Example data mapping (replace with real data as available)
-  const candidateName = formData.fullName || 'Sai Surya Vamsi Sapireddy';
+  // Updated default candidate info
+  const candidateName = formData.fullName || 'Shashank Tudum';
   const candidateRole = formData.role || 'Software Engineer';
-  const candidatePhoto = formData.photoUrl || process.env.PUBLIC_URL + '/images/ValueMomentum_logo.png';
+  const candidatePhoto = formData.photoUrl || process.env.PUBLIC_URL + '/images/shashank.jpg';
   const joiningDate = formData.joiningDate || 'December 30, 2025';
   const officeLocation = location === 'us' ? 'New York Office' : 'Hyderabad Office';
   const progress = Math.round(((documents?.length || 0) + (formData.personalDetailsCompleted ? 1 : 0) + (formData.offerLetterSigned ? 1 : 0) + (formData.handbookRead ? 1 : 0)) / 4 * 100);
