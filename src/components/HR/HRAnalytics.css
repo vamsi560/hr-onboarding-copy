@@ -292,10 +292,15 @@
   margin-bottom: 18px;
 }
 
-.analytics-filters .analytics-search {
+.analytics-search {
   flex: 2 1 220px;
   min-width: 180px;
   max-width: 320px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  border: 1px solid #e3e8ee;
+  background: #f7fafc;
+  font-size: 15px;
 }
 
 .analytics-filters .filter-select {

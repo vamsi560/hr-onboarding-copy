@@ -27,6 +27,7 @@ const Dashboard = () => {
   const [completedCount, setCompletedCount] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
   const [tooltip, setTooltip] = useState({ visible: false, text: '', x: 0, y: 0 });
+  const tooltipRef = React.useRef();
 
   useEffect(() => {
     const progressData = calculateProgress(formData, documents);
@@ -58,10 +59,9 @@ const Dashboard = () => {
     setTooltip({
       visible: true,
       text,
-      x: rect.left + rect.width / 2,
-      y: rect.top - 8
+      x: rect.left + rect.width / 2 + window.scrollX,
+      y: rect.top - 8 + window.scrollY
     });
-    setTimeout(() => setTooltip({ ...tooltip, visible: false }), 1800);
   };
 
   const hideTooltip = () => setTooltip({ ...tooltip, visible: false });
@@ -103,7 +103,7 @@ const Dashboard = () => {
           </ul>
           <button
             className="view-tasks-btn"
-            onClick={e => showTooltip('All Tasks:\n' + tasksToShow.join('\n'), e)}
+            onMouseEnter={e => showTooltip('All Tasks:\n' + tasksToShow.join('\n'), e)}
             onMouseLeave={hideTooltip}
           >
             View All Tasks
@@ -160,7 +160,7 @@ const Dashboard = () => {
               </div>
               <button
                 className="email-hr-btn"
-                onClick={e => showTooltip('Email sent to hr@valuemomentum.com', e)}
+                onMouseEnter={e => showTooltip('Email sent to hr@valuemomentum.com', e)}
                 onMouseLeave={hideTooltip}
               >
                 Email HR
@@ -182,7 +182,7 @@ const Dashboard = () => {
           </div>
           <button
             className="view-calendar-btn"
-            onClick={e => showTooltip('Upcoming Events:\n' + upcomingEvents.map(e => `${e.title} - ${e.date}`).join('\n'), e)}
+            onMouseEnter={e => showTooltip('Upcoming Events:\n' + upcomingEvents.map(e => `${e.title} - ${e.date}`).join('\n'), e)}
             onMouseLeave={hideTooltip}
           >
             View Calendar
