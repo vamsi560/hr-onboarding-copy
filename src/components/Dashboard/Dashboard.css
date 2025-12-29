@@ -27,13 +27,14 @@
 .dashboard-main-grid-v2 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto auto;
+  grid-template-rows: repeat(2, 1fr);
   grid-template-areas:
     "progress pending events"
     "welcome startdate profile";
   gap: 2em;
   margin-bottom: 2em;
   align-items: stretch;
+  justify-items: stretch;
 }
 
 .progress-card {
@@ -61,6 +62,13 @@
   margin-top: 2em;
 }
 
+.dashboard-card {
+  height: 100%;
+  min-height: 320px;
+  box-sizing: border-box;
+  display: block;
+}
+
 @media (max-width: 1200px) {
   .dashboard-main-grid-v2 {
     grid-template-columns: repeat(2, 1fr);
@@ -84,8 +92,8 @@
     grid-template-rows: auto auto auto;
     grid-template-areas:
       "progress pending"
-      "welcome startdate"
-      "profile events";
+      "events startdate"
+      "welcome profile";
     gap: 1.5em;
   }
 }
@@ -97,13 +105,9 @@
     grid-template-areas: none;
     gap: 1em;
   }
-  .progress-card,
-  .pending-tasks-card,
-  .welcome-card,
-  .start-date-card,
-  .profile-detail-card,
-  .events-card {
-    grid-column: auto;
+  .dashboard-card {
+    min-height: 0;
+    height: auto;
   }
 }
 
