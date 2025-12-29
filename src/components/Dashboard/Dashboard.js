@@ -152,7 +152,30 @@ const Dashboard = () => {
           </button>
         </Card>
 
-        {/* Second row: Profile (right), Start Date (middle), Welcome (left) */}
+        {/* Second row: Welcome (span 2 columns), Start Date, Profile */}
+        <Card className="dashboard-card welcome-card expanded-welcome-card">
+          <h2 className="section-title">Welcome to the Team!</h2>
+          <p className="dashboard-subtitle">We're excited to have you on board! Explore the tasks below to get started on your onboarding journey.</p>
+          <div className="welcome-video-section">
+            <div className="welcome-video-wrapper">
+              <iframe
+                className="welcome-video-iframe"
+                src="https://www.youtube.com/embed/j6Y4iwrf6ow"
+                title="Welcome Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+        </Card>
+        <Card className="dashboard-card start-date-card beside-welcome">
+          <h2 className="section-title">Your Start Date</h2>
+          <div className="start-date-details">
+            <div><span className="meta-label">Joining Date:</span> <span className="meta-value">{joiningDateText}</span></div>
+            <div><span className="meta-label">Location:</span> <span className="meta-value text-capitalize">{locationText}</span></div>
+          </div>
+        </Card>
         <Card className="dashboard-card profile-detail-card">
           <div className="profile-detail-main">
             <img
@@ -174,29 +197,6 @@ const Dashboard = () => {
               >
                 Email HR
               </button>
-            </div>
-          </div>
-        </Card>
-        <Card className="dashboard-card start-date-card beside-welcome">
-          <h2 className="section-title">Your Start Date</h2>
-          <div className="start-date-details">
-            <div><span className="meta-label">Joining Date:</span> <span className="meta-value">{joiningDateText}</span></div>
-            <div><span className="meta-label">Location:</span> <span className="meta-value text-capitalize">{locationText}</span></div>
-          </div>
-        </Card>
-        <Card className="dashboard-card welcome-card expanded-welcome-card">
-          <h2 className="section-title">Welcome to the Team!</h2>
-          <p className="dashboard-subtitle">We're excited to have you on board! Explore the tasks below to get started on your onboarding journey.</p>
-          <div className="welcome-video-section">
-            <div className="welcome-video-wrapper">
-              <iframe
-                className="welcome-video-iframe"
-                src="https://www.youtube.com/embed/j6Y4iwrf6ow"
-                title="Welcome Video"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              ></iframe>
             </div>
           </div>
         </Card>

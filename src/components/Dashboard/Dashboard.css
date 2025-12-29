@@ -63,7 +63,6 @@
 
 .events-card {
   grid-area: events;
-  margin-top: 2em;
 }
 
 .dashboard-card {
@@ -114,6 +113,9 @@
       "welcome profile";
     gap: 1.5em;
   }
+  .expanded-welcome-card {
+    grid-column: span 1;
+  }
 }
 
 @media (max-width: 800px) {
@@ -128,6 +130,9 @@
     min-width: 0;
     max-width: 98vw;
     padding: 1.2em 0.7em;
+  }
+  .expanded-welcome-card {
+    grid-column: span 1;
   }
 }
 
