@@ -9,6 +9,8 @@ const HRAnalytics = () => {
   const { candidates, logAction } = useApp();
   const [sortField, setSortField] = useState(null);
   const [sortDirection, setSortDirection] = useState('asc');
+  const [departmentFilter, setDepartmentFilter] = useState('');
+  const [hiringLeadFilter, setHiringLeadFilter] = useState('');
 
   // Extended candidate data with analytics information - All Indian names
   const analyticsData = [
@@ -158,13 +160,25 @@ const HRAnalytics = () => {
     }
   ];
 
-  // Calculate KPIs
+  const filteredData = analyticsData.filter(row => {
+    const matchesDept = !departmentFilter || row.department === departmentFilter;
+    const matchesLead = !hiringLeadFilter || row.hiringLead === hiringLeadFilter;
+    return matchesDept && matchesLead;
+  });
+
+  // Calculate KPIs (simple demo based on filtered data)
   const kpis = {
     offersToSend: 55,
     timeToAccept: '1 day',
     timeToOnboard: '12 days',
-    onboarded: analyticsData.length,
-    offerAcceptanceRatio: 65,
+    onboarded: filteredData.length,
+    offerAcceptanceRatio:
+      filteredData.length > 0
+        ? Math.round(
+            filteredData.reduce((sum, r) => sum + r.onboardingProgress, 0) /
+              filteredData.length
+          )
+        : 0,
     applicationsReceived: 11265,
     applicationsGrowth: 53
   };
@@ -178,7 +192,7 @@ const HRAnalytics = () => {
     }
   };
 
-  const sortedData = [...analyticsData].sort((a, b) => {
+  const sortedData = [...filteredData].sort((a, b) => {
     if (!sortField) return 0;
     
     let aVal = a[sortField];
@@ -309,6 +323,30 @@ const HRAnalytics = () => {
         </div>
       </div>
 
+      {/* Filters */}
+      <div className="analytics-filters">
+        <select
+          className="filter-select"
+          value={departmentFilter}
+          onChange={(e) => setDepartmentFilter(e.target.value)}
+        >
+          <option value="">All Departments</option>
+          {[...new Set(analyticsData.map(a => a.department))].map(dept => (
+            <option key={dept} value={dept}>{dept}</option>
+          ))}
+        </select>
+        <select
+          className="filter-select"
+          value={hiringLeadFilter}
+          onChange={(e) => setHiringLeadFilter(e.target.value)}
+        >
+          <option value="">All Hiring Leads</option>
+          {[...new Set(analyticsData.map(a => a.hiringLead))].map(lead => (
+            <option key={lead} value={lead}>{lead}</option>
+          ))}
+        </select>
+      </div>
+
       {/* KPI Cards */}
       <div className="kpi-grid">
         <Card className="kpi-card">
@@ -377,6 +415,30 @@ const HRAnalytics = () => {
                 style={{ height: `${height}%` }}
               ></div>
             ))}
+          </div>
+        </Card>
+
+        <Card className="kpi-card kpi-card-chart">
+          <div className="kpi-label">Onboarding by Department</div>
+          <div className="mini-bar-chart">
+            {[...new Set(filteredData.map(a => a.department))].map(dept => {
+              const deptRows = filteredData.filter(a => a.department === dept);
+              const avg =
+                deptRows.length > 0
+                  ? deptRows.reduce((sum, r) => sum + r.onboardingProgress, 0) /
+                    deptRows.length
+                  : 0;
+              return (
+                <div key={dept} className="bar-group">
+                  <div
+                    className="bar"
+                    style={{ height: `${Math.max(avg, 5)}%` }}
+                    title={`${dept}: ${Math.round(avg)}%`}
+                  ></div>
+                  <span className="bar-label">{dept.split(' ')[0]}</span>
+                </div>
+              );
+            })}
           </div>
         </Card>
       </div>

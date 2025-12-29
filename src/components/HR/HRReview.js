@@ -8,12 +8,18 @@ import RegisterCandidate from './RegisterCandidate';
 import './HRReview.css';
 
 const HRReview = () => {
-  const { candidates, setCandidates } = useApp();
+  const { candidates, setCandidates, logAction } = useApp();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [deptFilter, setDeptFilter] = useState('');
   const [selectedCandidateId, setSelectedCandidateId] = useState(null);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
+  const [statusModal, setStatusModal] = useState({
+    open: false,
+    candidateId: null,
+    status: '',
+    reason: ''
+  });
 
   const filteredCandidates = candidates.filter(c => {
     const matchesSearch = !searchTerm || c.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -44,6 +50,54 @@ const HRReview = () => {
 
   const handleRegisterSuccess = () => {
     setShowRegisterForm(false);
+  };
+
+  const openStatusModal = (candidate) => {
+    setStatusModal({
+      open: true,
+      candidateId: candidate.id,
+      status: candidate.status && !['ready', 'pending', 'reviewed'].includes(candidate.status)
+        ? candidate.status
+        : '',
+      reason: candidate.statusReason || ''
+    });
+  };
+
+  const closeStatusModal = () => {
+    setStatusModal({
+      open: false,
+      candidateId: null,
+      status: '',
+      reason: ''
+    });
+  };
+
+  const handleStatusSubmit = (e) => {
+    e.preventDefault();
+    if (!statusModal.status) return;
+
+    setCandidates(prev =>
+      prev.map(c =>
+        c.id === statusModal.candidateId
+          ? {
+              ...c,
+              status: statusModal.status,
+              statusReason: statusModal.reason,
+              statusUpdatedAt: new Date().toISOString()
+            }
+          : c
+      )
+    );
+
+    if (logAction) {
+      logAction('candidate_status_updated', {
+        candidateId: statusModal.candidateId,
+        status: statusModal.status,
+        reason: statusModal.reason
+      });
+    }
+
+    closeStatusModal();
   };
 
   if (selectedCandidateId) {
@@ -157,21 +211,81 @@ const HRReview = () => {
                   </div>
                 </div>
                 <div className="candidate-card-footer">
-                  <Button 
-                    variant="secondary"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleCandidateClick(candidate.id);
-                    }}
-                  >
-                    View Details →
-                  </Button>
+                  <div className="candidate-footer-actions">
+                    <Button 
+                      variant="secondary"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleCandidateClick(candidate.id);
+                      }}
+                    >
+                      View Details →
+                    </Button>
+                    <Button
+                      variant="secondary"
+                      className="status-update-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openStatusModal(candidate);
+                      }}
+                    >
+                      Update Status
+                    </Button>
+                  </div>
                 </div>
               </Card>
             ))}
           </div>
         </Card>
       </Card>
+
+      {statusModal.open && (
+        <div className="status-modal-backdrop" onClick={closeStatusModal}>
+          <div className="status-modal" onClick={(e) => e.stopPropagation()}>
+            <h4>Update Candidate Status</h4>
+            <form onSubmit={handleStatusSubmit}>
+              <div className="form-group">
+                <label>Status *</label>
+                <select
+                  className="input"
+                  value={statusModal.status}
+                  onChange={(e) =>
+                    setStatusModal(prev => ({ ...prev, status: e.target.value }))
+                  }
+                  required
+                >
+                  <option value="">Select Status</option>
+                  <option value="joined">Joined</option>
+                  <option value="offer_revoked">Offer Revoked</option>
+                  <option value="rejected">Rejected</option>
+                  <option value="absconded">Absconded</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label>Reason *</label>
+                <textarea
+                  className="input"
+                  rows="3"
+                  value={statusModal.reason}
+                  onChange={(e) =>
+                    setStatusModal(prev => ({ ...prev, reason: e.target.value }))
+                  }
+                  placeholder="Enter reason for this status change"
+                  required
+                />
+              </div>
+              <div className="form-actions modal-actions">
+                <Button type="button" variant="secondary" onClick={closeStatusModal}>
+                  Cancel
+                </Button>
+                <Button type="submit">
+                  Save
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

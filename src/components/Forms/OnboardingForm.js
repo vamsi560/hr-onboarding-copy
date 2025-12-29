@@ -403,7 +403,7 @@ const OnboardingForm = () => {
                 </select>
               </div>
               <div className="form-group">
-                <label>Joining Date</label>
+                <label>Date of Joining</label>
                 <Input
                   type="date"
                   value={formValues.joiningDate || ''}
@@ -806,19 +806,7 @@ const OnboardingForm = () => {
                   <label>Digital Signature *</label>
                   <div className="signature-box-container">
                     <div className="signature-box">
-                      {formValues.signature ? (
-                        <div className="signature-display">
-                          <div className="signature-text">{formValues.signature}</div>
-                          <Button
-                            type="button"
-                            variant="secondary"
-                            onClick={() => handleChange('signature', '')}
-                            style={{ fontSize: '12px', marginTop: '8px' }}
-                          >
-                            Clear Signature
-                          </Button>
-                        </div>
-                      ) : (
+                      <div className="signature-display">
                         <Input
                           type="text"
                           value={formValues.signature || ''}
@@ -826,7 +814,12 @@ const OnboardingForm = () => {
                           placeholder="Type your full name to sign"
                           required
                         />
-                      )}
+                        {formValues.signature && (
+                          <div className="signature-text" style={{ marginTop: '12px' }}>
+                            {formValues.signature}
+                          </div>
+                        )}
+                      </div>
                     </div>
                     <div className="small" style={{ marginTop: '8px', color: 'var(--muted)' }}>
                       By typing your full name, you are providing your digital signature and agreeing to all the consents above.

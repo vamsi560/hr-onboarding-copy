@@ -203,6 +203,66 @@
   border-top: 1px solid var(--border);
 }
 
+.candidate-footer-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.status-update-btn {
+  font-size: 12px;
+}
+
+.status-badge.status-joined {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-badge.status-offer_revoked {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.status-badge.status-rejected {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.status-badge.status-absconded {
+  background: #ffeaa7;
+  color: #856404;
+}
+
+.status-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.status-modal {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 420px;
+}
+
+.status-modal h4 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 @media (max-width: 600px) {
   .hr-filters {
     flex-direction: column;

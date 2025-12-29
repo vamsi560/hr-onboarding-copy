@@ -23,15 +23,18 @@ const Documents = () => {
       'Recent passport-size photo'
     ],
     education: [
-      'Highest degree certificate'
+      'Secondary Education (10th)',
+      'Higher Secondary / 12th',
+      'Graduation Degree',
+      'Post Graduation Degree (if applicable)'
     ],
     financial: [
       'Last three months pay slips',
-      'PF account statement (if available)'
+      'Bank account statement - 6 months'
     ],
     resumes: [
-      'Resume Type 1 (ValueMomentum format)',
-      'Resume Type 2 (ValueMomentum format)'
+      'ValueMomentum Format Resume',
+      'Personal Resume'
     ],
     other: [
       'NDA / Contract',
@@ -139,11 +142,14 @@ Date: ______________________________________________________
     { id: 'aadhar', name: 'Aadhaar / Passport', category: 'identity' },
     { id: 'visa', name: 'Visa Document', category: 'identity' },
     { id: 'photo', name: 'Passport Size Photo', category: 'identity' },
-    { id: 'degree', name: 'Highest Degree Certificate', category: 'education' },
+    { id: 'secondary', name: 'Secondary Education (10th)', category: 'education' },
+    { id: 'higherSecondary', name: 'Higher Secondary / 12th', category: 'education' },
+    { id: 'graduation', name: 'Graduation Degree', category: 'education' },
+    { id: 'postGraduation', name: 'Post Graduation Degree (if applicable)', category: 'education' },
     { id: 'payslip', name: 'Last 3 Months Pay Slips', category: 'financial' },
-    { id: 'pf', name: 'PF Account Statement', category: 'financial' },
-    { id: 'resume1', name: 'Resume Type 1 (ValueMomentum)', category: 'resumes' },
-    { id: 'resume2', name: 'Resume Type 2 (ValueMomentum)', category: 'resumes' },
+    { id: 'pf', name: 'Bank account statement - 6 months', category: 'financial' },
+    { id: 'resume1', name: 'ValueMomentum Format Resume', category: 'resumes' },
+    { id: 'resume2', name: 'Personal Resume', category: 'resumes' },
     { id: 'nda', name: 'NDA / Contract', category: 'other' },
     { id: 'criminal', name: 'Criminal Verification Form', category: 'other' }
   ];

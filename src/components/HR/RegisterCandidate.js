@@ -17,7 +17,8 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
     mobile: '',
     department: '',
     designation: '',
-    location: 'india'
+    location: 'india',
+    dateOfJoining: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -38,6 +39,7 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
         docs: 0,
         total: 12,
         dept: formData.department,
+        dateOfJoining: formData.dateOfJoining,
         selected: false,
         pending: []
       };
@@ -149,6 +151,18 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
               <option value="india">India</option>
               <option value="us">US</option>
             </select>
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group">
+            <label>Date of Joining *</label>
+            <Input
+              type="date"
+              value={formData.dateOfJoining}
+              onChange={(e) => handleChange('dateOfJoining', e.target.value)}
+              required
+            />
           </div>
           
           <div className="form-actions">

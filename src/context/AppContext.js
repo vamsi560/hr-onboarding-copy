@@ -39,11 +39,87 @@ export const AppProvider = ({ children }) => {
   });
   const [referenceChecks, setReferenceChecks] = useState(() => {
     const saved = localStorage.getItem('referenceChecks');
-    return saved ? JSON.parse(saved) : [];
+    if (saved) return JSON.parse(saved);
+    // Seed sample reference checks for demo
+    return [
+      {
+        id: 1,
+        candidateId: '1',
+        candidateName: 'Sai Surya Vamsi Sapireddy',
+        referenceName: 'Raghavendra Raju',
+        referenceEmail: 'raghavendra@valuemomentum.com',
+        referencePhone: '+91 90000 00001',
+        referenceCompany: 'ValueMomentum',
+        referencePosition: 'Engineering Manager',
+        relationship: 'manager',
+        requestDate: '2024-05-10',
+        responseDate: '2024-05-12',
+        status: 'completed',
+        rating: 5,
+        feedback: 'Excellent performer with strong Python skills and ownership.',
+        sentDate: '2024-05-10',
+        createdAt: '2024-05-10T10:00:00.000Z',
+        updatedAt: '2024-05-12T14:00:00.000Z'
+      },
+      {
+        id: 2,
+        candidateId: '2',
+        candidateName: 'Shashank Tudum',
+        referenceName: 'Supriya Rangdal',
+        referenceEmail: 'supriya@valuemomentum.com',
+        referencePhone: '+91 90000 00002',
+        referenceCompany: 'ValueMomentum',
+        referencePosition: 'HR Manager',
+        relationship: 'manager',
+        requestDate: '2024-05-15',
+        responseDate: null,
+        status: 'pending',
+        rating: null,
+        feedback: '',
+        sentDate: '2024-05-15',
+        createdAt: '2024-05-15T09:00:00.000Z',
+        updatedAt: '2024-05-15T09:00:00.000Z'
+      }
+    ];
   });
   const [documentExpiry, setDocumentExpiry] = useState(() => {
     const saved = localStorage.getItem('documentExpiry');
-    return saved ? JSON.parse(saved) : [];
+    if (saved) return JSON.parse(saved);
+    // Seed sample document expiry records for demo
+    return [
+      {
+        id: 1,
+        candidateId: '1',
+        candidateName: 'Sai Surya Vamsi Sapireddy',
+        documentType: 'passport',
+        documentName: 'Passport',
+        documentNumber: 'P1234567',
+        issueDate: '2020-01-01',
+        expiryDate: '2030-01-01',
+        daysUntilExpiry: 365 * 5,
+        status: 'valid',
+        notes: '',
+        createdAt: '2024-05-01T10:00:00.000Z',
+        updatedAt: '2024-05-01T10:00:00.000Z',
+        reminderSent: false
+      },
+      {
+        id: 2,
+        candidateId: '2',
+        candidateName: 'Shashank Tudum',
+        documentType: 'visa',
+        documentName: 'Work Visa',
+        documentNumber: 'V7654321',
+        issueDate: '2022-06-01',
+        expiryDate: '2024-07-01',
+        daysUntilExpiry: 20,
+        status: 'critical',
+        notes: 'Renewal in progress',
+        createdAt: '2024-05-20T09:00:00.000Z',
+        updatedAt: '2024-05-20T09:00:00.000Z',
+        reminderSent: false
+      }
+    ];
   });
 
   useEffect(() => {
