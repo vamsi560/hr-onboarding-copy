@@ -22,9 +22,8 @@ const upcomingEvents = [
 ];
 
 const helpfulResources = [
-  { icon: 'policy', label: 'HR Policies' },
-  { icon: 'computer', label: 'IT Setup Guide' },
-  { icon: 'map', label: 'Office Map' }
+  { icon: 'linkedin', label: 'Follow us on LinkedIn', url: 'https://www.linkedin.com/company/valuemomentum/' },
+  { icon: 'info', label: 'About Us', url: 'https://www.valuemomentum.com/about/' }
 ];
 const quickLinks = [
   { icon: 'portal', label: 'Employee Portal' },
@@ -170,12 +169,12 @@ const Dashboard = () => {
         {/* Right Column: Resources & Links */}
         <Card className="dashboard-card resources-links-card">
           <div className="resources-block-modern">
-            <div className="resources-title-modern">Helpful Resources</div>
+            <div className="resources-title-modern">Connect & Learn More</div>
             <div className="resources-list-modern">
               {helpfulResources.map((res, idx) => (
-                <div key={idx} className="resource-item-modern">
+                <a key={idx} className="resource-item-modern" href={res.url} target="_blank" rel="noopener noreferrer">
                   <Icon name={res.icon} /> {res.label}
-                </div>
+                </a>
               ))}
             </div>
           </div>
