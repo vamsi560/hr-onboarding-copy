@@ -26,6 +26,58 @@ const DocumentExpiry = () => {
     notes: ''
   });
 
+  // MOCK DATA for document expiry
+  const mockDocumentExpiry = [
+    {
+      id: 1,
+      candidateId: 101,
+      candidateName: 'Shashank Tudum',
+      documentType: 'passport',
+      documentName: 'Passport',
+      documentNumber: 'A1234567',
+      issueDate: '2020-01-01',
+      expiryDate: '2024-12-31',
+      daysUntilExpiry: -10,
+      status: 'expired',
+      notes: 'Expired, needs renewal.',
+      createdAt: '2020-01-01',
+      updatedAt: '2024-12-31',
+      reminderSent: false
+    },
+    {
+      id: 2,
+      candidateId: 101,
+      candidateName: 'Shashank Tudum',
+      documentType: 'visa',
+      documentName: 'Work Visa',
+      documentNumber: 'VISA9876',
+      issueDate: '2022-01-01',
+      expiryDate: '2025-01-15',
+      daysUntilExpiry: 17,
+      status: 'critical',
+      notes: 'Visa expiring soon.',
+      createdAt: '2022-01-01',
+      updatedAt: '2024-12-15',
+      reminderSent: false
+    },
+    {
+      id: 3,
+      candidateId: 102,
+      candidateName: 'Priya Sharma',
+      documentType: 'aadhar',
+      documentName: 'Aadhaar Card',
+      documentNumber: 'AAD123456789',
+      issueDate: '2018-05-10',
+      expiryDate: '2030-05-10',
+      daysUntilExpiry: 1600,
+      status: 'valid',
+      notes: '',
+      createdAt: '2018-05-10',
+      updatedAt: '2024-12-15',
+      reminderSent: false
+    }
+  ];
+
   useEffect(() => {
     // Auto-create expiry entries from uploaded documents if they don't exist
     if (documents && documents.length > 0 && documentExpiry) {
@@ -156,7 +208,9 @@ const DocumentExpiry = () => {
     }
   };
 
-  const filteredExpiry = (documentExpiry || []).filter(exp => {
+  const documentExpiryWithMock = (documentExpiry && documentExpiry.length > 0) ? documentExpiry : mockDocumentExpiry;
+
+  const filteredExpiry = (documentExpiryWithMock || []).filter(exp => {
     const candidate = candidates.find(c => c.id === parseInt(exp.candidateId));
     const matchesSearch = !searchTerm || 
       exp.documentName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -191,6 +245,14 @@ const DocumentExpiry = () => {
     attention: filteredExpiry.filter(exp => exp.status === 'attention').length,
     valid: filteredExpiry.filter(exp => exp.status === 'valid').length
   };
+
+  // Only show three main status filters: Expired, Not Valid, Valid
+  const statusOptions = [
+    { value: '', label: 'All Status' },
+    { value: 'expired', label: 'Expired' },
+    { value: 'critical', label: 'Not Valid' },
+    { value: 'valid', label: 'Valid' }
+  ];
 
   return (
     <div className="document-expiry">
@@ -260,12 +322,9 @@ const DocumentExpiry = () => {
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
           >
-            <option value="">All Status</option>
-            <option value="expired">Expired</option>
-            <option value="critical">Critical</option>
-            <option value="warning">Warning</option>
-            <option value="attention">Attention</option>
-            <option value="valid">Valid</option>
+            {statusOptions.map(opt => (
+              <option key={opt.value} value={opt.value}>{opt.label}</option>
+            ))}
           </select>
         </div>
 

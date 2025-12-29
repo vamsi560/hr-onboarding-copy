@@ -133,7 +133,51 @@ const ReferenceCheck = () => {
     }
   };
 
-  const filteredReferences = (referenceChecks || []).filter(ref => {
+  // MOCK DATA for reference checks
+  const mockReferences = [
+    {
+      id: 1,
+      candidateId: 101,
+      candidateName: 'Shashank Tudum',
+      referenceName: 'Ravi Kumar',
+      referenceEmail: 'ravi.kumar@abc.com',
+      referencePhone: '+91 9876543210',
+      referenceCompany: 'ABC Technologies',
+      referencePosition: 'Manager',
+      relationship: 'manager',
+      requestDate: '2024-12-01',
+      responseDate: '2024-12-05',
+      status: 'completed',
+      rating: 5,
+      feedback: 'Excellent team player and quick learner.',
+      sentDate: '2024-12-01',
+      createdAt: '2024-12-01',
+      updatedAt: '2024-12-05'
+    },
+    {
+      id: 2,
+      candidateId: 102,
+      candidateName: 'Priya Sharma',
+      referenceName: 'Anil Mehta',
+      referenceEmail: 'anil.mehta@xyz.com',
+      referencePhone: '+91 9123456780',
+      referenceCompany: 'XYZ Solutions',
+      referencePosition: 'Colleague',
+      relationship: 'colleague',
+      requestDate: '2024-12-10',
+      responseDate: null,
+      status: 'pending',
+      rating: null,
+      feedback: '',
+      sentDate: '2024-12-10',
+      createdAt: '2024-12-10',
+      updatedAt: '2024-12-10'
+    }
+  ];
+
+  const referenceChecksWithMock = (referenceChecks && referenceChecks.length > 0) ? referenceChecks : mockReferences;
+
+  const filteredReferences = (referenceChecksWithMock || []).filter(ref => {
     const candidate = candidates.find(c => c.id === parseInt(ref.candidateId));
     const matchesSearch = !searchTerm || 
       ref.referenceName.toLowerCase().includes(searchTerm.toLowerCase()) ||

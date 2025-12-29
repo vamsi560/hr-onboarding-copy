@@ -61,11 +61,10 @@ const Dashboard = () => {
         {/* Progress Card */}
         <Card className="dashboard-card progress-card">
           <h2 className="section-title">Your Progress</h2>
-          <div className="progress-donut-container">
-            <div className="progress-donut" style={{ '--progress': progress }}>
-              <div className="progress-donut-inner">
-                <span className="progress-donut-value">{progress}%</span>
-              </div>
+          <div className="progress-bar-visual-container">
+            <div className="progress-bar-visual">
+              <div className="progress-bar-fill" style={{ width: progress + '%' }} />
+              <span className="progress-bar-label">{progress}%</span>
             </div>
             <div className="progress-donut-caption-block">
               <span className="progress-donut-caption">{completedCount} of {totalCount} Tasks Completed</span>
