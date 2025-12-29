@@ -53,6 +53,13 @@
   color: #28a745;
 }
 
+/* In Progress (Orange) Styles */
+.summary-card.summary-inprogress {
+  background: linear-gradient(90deg, #ffe5b2 0%, #fff6e0 100%);
+  border-left: 6px solid #ff9800;
+  color: #b26a00;
+}
+
 .expiry-header {
   display: flex;
   justify-content: space-between;
@@ -156,6 +163,11 @@
 .expiry-card.expiry-valid {
   border-left-color: #28a745;
   background: #f0f9f4;
+}
+
+.expiry-card.expiry-inprogress {
+  border-left: 4px solid #ff9800;
+  background: #fffaf3;
 }
 
 .expiry-card:hover {
@@ -278,6 +290,13 @@
 .status-badge.status-unknown {
   background: #e9ecef;
   color: #495057;
+}
+
+.status-badge.status-inprogress {
+  background: #fff3e0;
+  color: #ff9800;
+  border: 1px solid #ff9800;
+  font-weight: 600;
 }
 
 .empty-state {

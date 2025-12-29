@@ -1008,6 +1008,67 @@
   min-width: 220px;
 }
 
+.start-date-links-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75em;
+  margin-top: 1.5em;
+}
+
+.start-date-card.below-welcome {
+  margin-bottom: 0;
+  box-shadow: none;
+  background: var(--card-bg, #f8fafd);
+  border: 1px solid #e0e6ed;
+  padding: 1em 1.5em;
+  width: 100%;
+}
+
+.start-date-links-inline {
+  display: flex;
+  gap: 1em;
+  margin-top: 0.5em;
+}
+
+.linkedin-btn, .aboutus-btn {
+  display: inline-flex;
+  align-items: center;
+  background: #f3f6fa;
+  border-radius: 6px;
+  padding: 0.5em 1em;
+  font-size: 1rem;
+  color: #0073b1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+
+.linkedin-btn:hover, .aboutus-btn:hover {
+  background: #e6f0fa;
+  color: #005580;
+}
+
+.linkedin-icon {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-right: 0.5em;
+}
+
+@media (max-width: 700px) {
+  .start-date-links-block {
+    gap: 0.5em;
+  }
+  .start-date-links-inline {
+    flex-direction: column;
+    gap: 0.5em;
+    width: 100%;
+  }
+  .start-date-card.below-welcome {
+    padding: 1em;
+  }
+}
+
 @media (max-width: 1100px) {
   .expanded-welcome-card, .below-welcome {
     grid-column: span 1;

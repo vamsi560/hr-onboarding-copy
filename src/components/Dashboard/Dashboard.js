@@ -152,36 +152,35 @@ const Dashboard = () => {
               ></iframe>
             </div>
           </div>
-        </Card>
-
-        {/* Your Start Date Card (now below Welcome) with LinkedIn/About Us beside it */}
-        <div className="start-date-row">
-          <Card className="dashboard-card start-date-card below-welcome">
-            <h2 className="section-title">Your Start Date</h2>
-            <div className="start-date-details">
-              <div><span className="meta-label">Joining Date:</span> <span className="meta-value">{joiningDateText}</span></div>
-              <div><span className="meta-label">Location:</span> <span className="meta-value text-capitalize">{locationText}</span></div>
+          {/* Start Date and Links below Welcome */}
+          <div className="start-date-links-block">
+            <Card className="dashboard-card start-date-card below-welcome">
+              <h2 className="section-title">Your Start Date</h2>
+              <div className="start-date-details">
+                <div><span className="meta-label">Joining Date:</span> <span className="meta-value">{joiningDateText}</span></div>
+                <div><span className="meta-label">Location:</span> <span className="meta-value text-capitalize">{locationText}</span></div>
+              </div>
+            </Card>
+            <div className="start-date-links-inline">
+              <a
+                className="linkedin-btn"
+                href="https://www.linkedin.com/company/valuemomentum"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="linkedin-icon">in</span> Follow us on LinkedIn
+              </a>
+              <a
+                className="aboutus-btn"
+                href="https://www.valuemomentum.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                About Us
+              </a>
             </div>
-          </Card>
-          <div className="start-date-links">
-            <a
-              className="linkedin-btn"
-              href="https://www.linkedin.com/company/valuemomentum"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="linkedin-icon">in</span> Follow us on LinkedIn
-            </a>
-            <a
-              className="aboutus-btn"
-              href="https://www.valuemomentum.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              About Us
-            </a>
           </div>
-        </div>
+        </Card>
 
         {/* Profile Card */}
         <Card className="dashboard-card profile-detail-card">
