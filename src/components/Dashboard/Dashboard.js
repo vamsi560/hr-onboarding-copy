@@ -5,7 +5,6 @@ import ProgressBar from '../UI/ProgressBar';
 import Breadcrumbs from '../UI/Breadcrumbs';
 import { calculateProgress } from '../../utils/progress';
 import './Dashboard.css';
-import Tooltip from '../UI/Tooltip';
 
 const upcomingEvents = [
   {
@@ -26,8 +25,6 @@ const Dashboard = () => {
   const [pendingTasks, setPendingTasks] = useState([]);
   const [completedCount, setCompletedCount] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
-  const [tooltip, setTooltip] = useState({ visible: false, text: '', x: 0, y: 0 });
-  const tooltipRef = React.useRef();
 
   useEffect(() => {
     const progressData = calculateProgress(formData, documents);
@@ -53,18 +50,6 @@ const Dashboard = () => {
     'Read Company Handbook',
   ];
   const tasksToShow = pendingTasks.length > 0 ? pendingTasks : mockPendingTasks;
-
-  const showTooltip = (text, e) => {
-    const rect = e.target.getBoundingClientRect();
-    setTooltip({
-      visible: true,
-      text,
-      x: rect.left + rect.width / 2 + window.scrollX,
-      y: rect.top - 8 + window.scrollY
-    });
-  };
-
-  const hideTooltip = () => setTooltip({ ...tooltip, visible: false });
 
   return (
     <div className="dashboard">
@@ -103,8 +88,7 @@ const Dashboard = () => {
           </ul>
           <button
             className="view-tasks-btn"
-            onMouseEnter={e => showTooltip('All Tasks:\n' + tasksToShow.join('\n'), e)}
-            onMouseLeave={hideTooltip}
+            title={['All Tasks:', ...tasksToShow].join('\n')}
           >
             View All Tasks
           </button>
@@ -160,8 +144,7 @@ const Dashboard = () => {
               </div>
               <button
                 className="email-hr-btn"
-                onMouseEnter={e => showTooltip('Email sent to hr@valuemomentum.com', e)}
-                onMouseLeave={hideTooltip}
+                title="Email sent to hr@valuemomentum.com"
               >
                 Email HR
               </button>
@@ -182,8 +165,7 @@ const Dashboard = () => {
           </div>
           <button
             className="view-calendar-btn"
-            onMouseEnter={e => showTooltip('Upcoming Events:\n' + upcomingEvents.map(e => `${e.title} - ${e.date}`).join('\n'), e)}
-            onMouseLeave={hideTooltip}
+            title={['Upcoming Events:', ...upcomingEvents.map(e => `${e.title} - ${e.date}`)].join('\n')}
           >
             View Calendar
           </button>
@@ -195,9 +177,6 @@ const Dashboard = () => {
         </div>
         <button className="footer-faq-btn" onClick={() => alert('FAQs & Help Center coming soon!')}>FAQs &amp; Help Center</button>
       </div>
-      {tooltip.visible && (
-        <Tooltip text={tooltip.text} x={tooltip.x} y={tooltip.y} />
-      )}
     </div>
   );
 };

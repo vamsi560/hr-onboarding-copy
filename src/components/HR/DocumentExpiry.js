@@ -452,86 +452,83 @@ const DocumentExpiry = () => {
               <p>No document expiry records found. Add a document to start tracking.</p>
             </div>
           ) : (
-            filteredExpiry.map(exp => {
-              const candidate = candidates.find(c => c.id === parseInt(exp.candidateId));
-              return (
-                <Card key={exp.id} className={`expiry-card expiry-${exp.status}`}>
-                  <div className="expiry-card-header">
-                    <div>
-                      <h4>{exp.documentName}</h4>
-                      <p className="small">Candidate: <strong>{candidate?.name || 'Unknown'}</strong></p>
-                    </div>
-                    {getStatusBadge(exp.status, exp.daysUntilExpiry)}
+            filteredExpiry.map(exp => (
+              <Card key={exp.id} className={`expiry-card expiry-${exp.status}`}>
+                <div className="expiry-card-header">
+                  <div>
+                    <h4>{exp.documentName}</h4>
+                    <p className="small">Candidate: <strong>{exp.candidateName || 'Unknown'}</strong></p>
                   </div>
+                  {getStatusBadge(exp.status, exp.daysUntilExpiry)}
+                </div>
 
-                  <div className="expiry-card-body">
-                    <div className="expiry-info-grid">
+                <div className="expiry-card-body">
+                  <div className="expiry-info-grid">
+                    <div className="info-item">
+                      <span className="info-label">Type:</span>
+                      <span className="text-capitalize">{exp.documentType}</span>
+                    </div>
+                    {exp.documentNumber && (
                       <div className="info-item">
-                        <span className="info-label">Type:</span>
-                        <span className="text-capitalize">{exp.documentType}</span>
+                        <span className="info-label">Number:</span>
+                        <span>{exp.documentNumber}</span>
                       </div>
-                      {exp.documentNumber && (
-                        <div className="info-item">
-                          <span className="info-label">Number:</span>
-                          <span>{exp.documentNumber}</span>
-                        </div>
-                      )}
-                      {exp.issueDate && (
-                        <div className="info-item">
-                          <span className="info-label">Issue Date:</span>
-                          <span>{new Date(exp.issueDate).toLocaleDateString()}</span>
-                        </div>
-                      )}
+                    )}
+                    {exp.issueDate && (
                       <div className="info-item">
-                        <span className="info-label">Expiry Date:</span>
-                        <span className={exp.status === 'expired' ? 'text-danger' : ''}>
-                          {new Date(exp.expiryDate).toLocaleDateString()}
+                        <span className="info-label">Issue Date:</span>
+                        <span>{new Date(exp.issueDate).toLocaleDateString()}</span>
+                      </div>
+                    )}
+                    <div className="info-item">
+                      <span className="info-label">Expiry Date:</span>
+                      <span className={exp.status === 'expired' ? 'text-danger' : ''}>
+                        {new Date(exp.expiryDate).toLocaleDateString()}
+                      </span>
+                    </div>
+                    {exp.daysUntilExpiry !== null && (
+                      <div className="info-item">
+                        <span className="info-label">Days Until Expiry:</span>
+                        <span className={exp.daysUntilExpiry < 0 ? 'text-danger' : exp.daysUntilExpiry <= 30 ? 'text-warning' : ''}>
+                          {exp.daysUntilExpiry < 0 ? `Expired ${Math.abs(exp.daysUntilExpiry)} days ago` : `${exp.daysUntilExpiry} days`}
                         </span>
                       </div>
-                      {exp.daysUntilExpiry !== null && (
-                        <div className="info-item">
-                          <span className="info-label">Days Until Expiry:</span>
-                          <span className={exp.daysUntilExpiry < 0 ? 'text-danger' : exp.daysUntilExpiry <= 30 ? 'text-warning' : ''}>
-                            {exp.daysUntilExpiry < 0 ? `Expired ${Math.abs(exp.daysUntilExpiry)} days ago` : `${exp.daysUntilExpiry} days`}
-                          </span>
-                        </div>
-                      )}
+                    )}
+                  </div>
+
+                  {exp.notes && (
+                    <div className="expiry-notes">
+                      <strong>Notes:</strong> {exp.notes}
                     </div>
+                  )}
+                </div>
 
-                    {exp.notes && (
-                      <div className="expiry-notes">
-                        <strong>Notes:</strong> {exp.notes}
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="expiry-card-actions">
-                    {(exp.status === 'critical' || exp.status === 'warning' || exp.status === 'attention') && (
-                      <Button
-                        variant="secondary"
-                        onClick={() => handleSendReminder(exp.id)}
-                        disabled={exp.reminderSent}
-                      >
-                        {exp.reminderSent ? '✓ Reminder Sent' : 'Send Reminder'}
-                      </Button>
-                    )}
+                <div className="expiry-card-actions">
+                  {(exp.status === 'critical' || exp.status === 'warning' || exp.status === 'attention') && (
                     <Button
                       variant="secondary"
-                      onClick={() => handleEdit(exp)}
+                      onClick={() => handleSendReminder(exp.id)}
+                      disabled={exp.reminderSent}
                     >
-                      Edit
+                      {exp.reminderSent ? '✓ Reminder Sent' : 'Send Reminder'}
                     </Button>
-                    <Button
-                      variant="secondary"
-                      onClick={() => handleDelete(exp.id)}
-                      style={{ color: 'var(--error)' }}
-                    >
-                      Delete
-                    </Button>
-                  </div>
-                </Card>
-              );
-            })
+                  )}
+                  <Button
+                    variant="secondary"
+                    onClick={() => handleEdit(exp)}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    onClick={() => handleDelete(exp.id)}
+                    style={{ color: 'var(--error)' }}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              </Card>
+            ))
           )}
         </div>
       </Card>

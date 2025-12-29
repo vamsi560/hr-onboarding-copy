@@ -79,7 +79,7 @@ const Login = ({ onLogin, onDemo }) => {
               className="logo-image"
             />
           </div>
-          <h1 className="login-title">Welcome Back</h1>
+          <h1 className="login-title">Welcome to ValueMomentum Onboarding Portal</h1>
           <p className="login-subtitle">
             Streamline your onboarding journey with our intelligent platform
           </p>
