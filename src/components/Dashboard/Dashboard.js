@@ -69,7 +69,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <div className="dashboard-hero-text dashboard-hero-bg">
-        <h1 className="dashboard-title">Welcome Aboard, {displayName}!</h1>
+        <h1 className="dashboard-title">Welcome, {displayName}!</h1>
         <p className="dashboard-subtitle">Get Started on Your Journey with Us</p>
       </div>
       <div className="dashboard-main-grid dashboard-main-grid-v2">
