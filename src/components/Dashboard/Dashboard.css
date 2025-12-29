@@ -269,8 +269,8 @@
 
 .resources-list-modern {
   display: flex;
-  gap: 18px;
-  margin-bottom: 10px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .resource-item-modern {
@@ -280,6 +280,31 @@
   gap: 4px;
   font-size: 14px;
   color: #174ea6;
+}
+
+.resource-btn-modern {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #174ea6;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(60,72,88,0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.resource-btn-modern:hover {
+  background: #005580;
+  box-shadow: 0 4px 16px rgba(60,72,88,0.16);
+}
+.resource-btn-modern .icon {
+  font-size: 20px;
 }
 
 .quicklinks-block-modern {

@@ -113,7 +113,7 @@ const Dashboard = () => {
     <div className="dashboard dashboard-modern">
       {/* Personalized Welcome Section */}
       <div className="dashboard-hero-text dashboard-hero-bg">
-        <h1 className="dashboard-title">Welcome Aboard, {displayName}!</h1>
+        <h1 className="dashboard-title">Welcome, {displayName}!</h1>
         <p className="dashboard-subtitle">We're excited to have you join us. Your onboarding journey is underway!</p>
         <div className="progress-bar-welcome">
           <div className="progress-bar-track">
@@ -123,9 +123,9 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="dashboard-modern-grid">
-        {/* Timeline/Progress Tracker */}
-        <Card className="dashboard-card timeline-card">
+      <div className="dashboard-main-grid dashboard-main-grid-v2">
+        {/* First row: Progress, Pending Tasks, Upcoming Events */}
+        <Card className="dashboard-card progress-card">
           <h2 className="section-title">Onboarding Steps</h2>
           <ul className="timeline-list">
             {onboardingSteps.map((step, idx) => (
@@ -136,19 +136,7 @@ const Dashboard = () => {
             ))}
           </ul>
         </Card>
-
-        {/* Left Column: Profile & Tasks */}
-        <Card className="dashboard-card profile-tasks-card">
-          <div className="profile-block">
-            <img src={formData.photoUrl || process.env.PUBLIC_URL + '/images/shashank.jpg'} alt={displayName} className="profile-avatar-modern" />
-            <div className="profile-info-modern">
-              <div className="profile-name-modern">{displayName}</div>
-              <div className="profile-role-modern">{formData.designation || 'Marketing Specialist'}</div>
-              <div className="profile-date-modern">
-                <Icon name="calendar" /> Starts {joiningDateText}
-              </div>
-            </div>
-          </div>
+        <Card className="dashboard-card pending-tasks-card">
           <div className="tasks-list-modern">
             <div className="tasks-title-modern">Onboarding Tasks to Complete</div>
             <ul>
@@ -165,9 +153,20 @@ const Dashboard = () => {
             <button className="view-tasks-btn-modern">View All Tasks</button>
           </div>
         </Card>
+        <Card className="dashboard-card events-card">
+          <h2 className="section-title">Upcoming Events</h2>
+          <ul className="events-list-modern">
+            {upcomingEvents.map((event, idx) => (
+              <li key={idx} className="event-item-modern">
+                <span className="event-name-modern">{event.title}</span>
+                <span className="event-date-modern">{event.date}</span>
+              </li>
+            ))}
+          </ul>
+        </Card>
 
-        {/* Center Column: Welcome & Events */}
-        <Card className="dashboard-card welcome-main-card">
+        {/* Second row: Welcome (span 2 columns), Start Date, Profile */}
+        <Card className="dashboard-card welcome-card expanded-welcome-card">
           <div className="welcome-title-modern">Welcome to the Team!</div>
           <div className="welcome-video-modern">
             <iframe
@@ -194,56 +193,62 @@ const Dashboard = () => {
             </ul>
           </div>
         </Card>
-
-        {/* Upcoming Events Calendar */}
-        <Card className="dashboard-card events-card">
-          <h2 className="section-title">Upcoming Events</h2>
-          <ul className="events-list-modern">
-            {upcomingEvents.map((event, idx) => (
-              <li key={idx} className="event-item-modern">
-                <span className="event-name-modern">{event.title}</span>
-                <span className="event-date-modern">{event.date}</span>
-              </li>
-            ))}
-          </ul>
-        </Card>
-
-        {/* Right Column: Resources & Links */}
-        <Card className="dashboard-card resources-links-card">
-          <div className="resources-block-modern">
-            <div className="resources-title-modern">Connect & Learn More</div>
-            <div className="resources-list-modern">
-              {helpfulResources.map((res, idx) => (
-                <a key={idx} className="resource-item-modern" href={res.url} target="_blank" rel="noopener noreferrer">
-                  <Icon name={res.icon} /> {res.label}
-                </a>
-              ))}
-            </div>
-          </div>
-          <div className="quicklinks-block-modern">
-            <div className="quicklinks-title-modern">Quick Links</div>
-            <div className="quicklinks-list-modern">
-              {quickLinks.map((link, idx) => (
-                <div key={idx} className="quicklink-item-modern">
-                  <Icon name={link.icon} /> {link.label}
-                </div>
-              ))}
-            </div>
+        <Card className="dashboard-card start-date-card beside-welcome">
+          <div className="profile-date-modern">
+            <Icon name="calendar" /> Starts {joiningDateText}
           </div>
         </Card>
-
-        {/* Company Social Links */}
-        <Card className="dashboard-card company-links-card">
-          <h2 className="section-title">Connect & Learn More</h2>
-          <div className="company-links-list">
-            {companyLinks.map((link, idx) => (
-              <a key={idx} className="company-link-item" href={link.url} target="_blank" rel="noopener noreferrer">
-                <Icon name={link.icon} /> {link.label}
-              </a>
-            ))}
+        <Card className="dashboard-card profile-detail-card">
+          <div className="profile-block">
+            <img src={formData.photoUrl || process.env.PUBLIC_URL + '/images/shashank.jpg'} alt={displayName} className="profile-avatar-modern" />
+            <div className="profile-info-modern">
+              <div className="profile-name-modern">{displayName}</div>
+              <div className="profile-role-modern">{formData.designation || 'Marketing Specialist'}</div>
+            </div>
           </div>
         </Card>
       </div>
+
+      {/* Right Column: Resources & Links */}
+      <Card className="dashboard-card resources-links-card">
+        <div className="resources-block-modern">
+          <div className="resources-title-modern">Connect & Learn More</div>
+          <div className="resources-list-modern">
+            {helpfulResources.map((res, idx) => (
+              <button
+                key={idx}
+                className="resource-btn-modern"
+                onClick={() => window.open(res.url, '_blank', 'noopener,noreferrer')}
+              >
+                <Icon name={res.icon} /> {res.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="quicklinks-block-modern">
+          <div className="quicklinks-title-modern">Quick Links</div>
+          <div className="quicklinks-list-modern">
+            {quickLinks.map((link, idx) => (
+              <div key={idx} className="quicklink-item-modern">
+                <Icon name={link.icon} /> {link.label}
+              </div>
+            ))}
+          </div>
+        </div>
+      </Card>
+
+      {/* Company Social Links */}
+      <Card className="dashboard-card company-links-card">
+        <h2 className="section-title">Connect & Learn More</h2>
+        <div className="company-links-list">
+          {companyLinks.map((link, idx) => (
+            <a key={idx} className="company-link-item" href={link.url} target="_blank" rel="noopener noreferrer">
+              <Icon name={link.icon} /> {link.label}
+            </a>
+          ))}
+        </div>
+      </Card>
+
       {/* Footer Bar */}
       <div className="dashboard-footer-modern">
         <div className="footer-help-modern">
