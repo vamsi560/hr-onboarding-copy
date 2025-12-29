@@ -164,16 +164,17 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
               required
             />
           </div>
-          
-          <div className="form-actions">
-            <Button type="button" variant="secondary" onClick={onBack}>
-              Cancel
-            </Button>
-            <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Sending...' : 'Submit & Send Email'}
-            </Button>
-          </div>
-        </form>
+        </div>
+        
+        <div className="form-actions">
+          <Button type="button" variant="secondary" onClick={onBack}>
+            Cancel
+          </Button>
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Sending...' : 'Submit & Send Email'}
+          </Button>
+        </div>
+      </form>
       </Card>
     </div>
   );
