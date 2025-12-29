@@ -136,6 +136,52 @@ const Dashboard = () => {
           </button>
         </Card>
 
+        {/* Profile Card (now below Progress and Pending Tasks) */}
+        <Card className="dashboard-card profile-detail-card">
+          <div className="profile-detail-main">
+            <img
+              src={formData.photoUrl || process.env.PUBLIC_URL + '/images/shashank.jpg'}
+              alt={displayName}
+              className="profile-detail-avatar"
+            />
+            <div className="profile-detail-info">
+              <div className="profile-detail-name">{displayName}</div>
+              <div className="profile-detail-role">{formData.designation || 'Your Role'}</div>
+              <div className="profile-detail-meta">
+                <div><span className="meta-label">Starting Date:</span> <span className="meta-value">{joiningDateText}</span></div>
+                <div><span className="meta-label">Location:</span> <span className="meta-value text-capitalize">{locationText}</span></div>
+              </div>
+              <button
+                className="email-hr-btn"
+                onClick={() => handleOpenModal('email')}
+                title="Contact HR via email"
+              >
+                Email HR
+              </button>
+            </div>
+          </div>
+        </Card>
+
+        {/* Upcoming Events Card (now below Progress and Pending Tasks) */}
+        <Card className="dashboard-card events-card">
+          <h2 className="section-title">Upcoming Events</h2>
+          <div className="upcoming-events-list-v2">
+            {upcomingEvents.map((event, idx) => (
+              <div key={event.title} className="event-item-v2">
+                <div className="event-title">{event.title}</div>
+                <div className="event-date small">{event.date}</div>
+              </div>
+            ))}
+          </div>
+          <button
+            className="view-calendar-btn"
+            onClick={() => handleOpenModal('calendar')}
+            title="View upcoming events"
+          >
+            View Calendar
+          </button>
+        </Card>
+
         {/* Expanded Welcome Card with Video */}
         <Card className="dashboard-card welcome-card expanded-welcome-card">
           <h2 className="section-title">Welcome to the Team!</h2>
@@ -180,52 +226,6 @@ const Dashboard = () => {
               </a>
             </div>
           </div>
-        </Card>
-
-        {/* Profile Card */}
-        <Card className="dashboard-card profile-detail-card">
-          <div className="profile-detail-main">
-            <img
-              src={formData.photoUrl || process.env.PUBLIC_URL + '/images/shashank.jpg'}
-              alt={displayName}
-              className="profile-detail-avatar"
-            />
-            <div className="profile-detail-info">
-              <div className="profile-detail-name">{displayName}</div>
-              <div className="profile-detail-role">{formData.designation || 'Your Role'}</div>
-              <div className="profile-detail-meta">
-                <div><span className="meta-label">Starting Date:</span> <span className="meta-value">{joiningDateText}</span></div>
-                <div><span className="meta-label">Location:</span> <span className="meta-value text-capitalize">{locationText}</span></div>
-              </div>
-              <button
-                className="email-hr-btn"
-                onClick={() => handleOpenModal('email')}
-                title="Contact HR via email"
-              >
-                Email HR
-              </button>
-            </div>
-          </div>
-        </Card>
-
-        {/* Upcoming Events Card */}
-        <Card className="dashboard-card events-card">
-          <h2 className="section-title">Upcoming Events</h2>
-          <div className="upcoming-events-list-v2">
-            {upcomingEvents.map((event, idx) => (
-              <div key={event.title} className="event-item-v2">
-                <div className="event-title">{event.title}</div>
-                <div className="event-date small">{event.date}</div>
-              </div>
-            ))}
-          </div>
-          <button
-            className="view-calendar-btn"
-            onClick={() => handleOpenModal('calendar')}
-            title="View upcoming events"
-          >
-            View Calendar
-          </button>
         </Card>
       </div>
       <div className="dashboard-footer-bar">
