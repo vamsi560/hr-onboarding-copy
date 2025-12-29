@@ -136,7 +136,52 @@ const Dashboard = () => {
           </button>
         </Card>
 
-        {/* Profile Card (now below Progress and Pending Tasks) */}
+        {/* Welcome + Start Date/Links Row */}
+        <div className="welcome-row">
+          <Card className="dashboard-card welcome-card expanded-welcome-card">
+            <h2 className="section-title">Welcome to the Team!</h2>
+            <p className="dashboard-subtitle">We're excited to have you on board! Explore the tasks below to get started on your onboarding journey.</p>
+            <div className="welcome-video-section">
+              <div className="welcome-video-wrapper">
+                <iframe
+                  className="welcome-video-iframe"
+                  src="https://www.youtube.com/embed/j6Y4iwrf6ow"
+                  title="Welcome Video"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+          </Card>
+          <div className="welcome-side-col">
+            <Card className="dashboard-card start-date-card beside-welcome">
+              <h2 className="section-title">Your Start Date</h2>
+              <div className="start-date-details">
+                <div><span className="meta-label">Joining Date:</span> <span className="meta-value">{joiningDateText}</span></div>
+                <div><span className="meta-label">Location:</span> <span className="meta-value text-capitalize">{locationText}</span></div>
+              </div>
+            </Card>
+            <a
+              className="linkedin-btn"
+              href="https://www.linkedin.com/company/valuemomentum"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="linkedin-icon">in</span> Follow us on LinkedIn
+            </a>
+            <a
+              className="aboutus-btn"
+              href="https://www.valuemomentum.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              About Us
+            </a>
+          </div>
+        </div>
+
+        {/* Profile Card */}
         <Card className="dashboard-card profile-detail-card">
           <div className="profile-detail-main">
             <img
@@ -162,7 +207,7 @@ const Dashboard = () => {
           </div>
         </Card>
 
-        {/* Upcoming Events Card (now below Progress and Pending Tasks) */}
+        {/* Upcoming Events Card */}
         <Card className="dashboard-card events-card">
           <h2 className="section-title">Upcoming Events</h2>
           <div className="upcoming-events-list-v2">
@@ -180,52 +225,6 @@ const Dashboard = () => {
           >
             View Calendar
           </button>
-        </Card>
-
-        {/* Expanded Welcome Card with Video */}
-        <Card className="dashboard-card welcome-card expanded-welcome-card">
-          <h2 className="section-title">Welcome to the Team!</h2>
-          <p className="dashboard-subtitle">We're excited to have you on board! Explore the tasks below to get started on your onboarding journey.</p>
-          <div className="welcome-video-section">
-            <div className="welcome-video-wrapper">
-              <iframe
-                className="welcome-video-iframe"
-                src="https://www.youtube.com/embed/j6Y4iwrf6ow"
-                title="Welcome Video"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              ></iframe>
-            </div>
-          </div>
-          {/* Start Date and Links below Welcome */}
-          <div className="start-date-links-block">
-            <Card className="dashboard-card start-date-card below-welcome">
-              <h2 className="section-title">Your Start Date</h2>
-              <div className="start-date-details">
-                <div><span className="meta-label">Joining Date:</span> <span className="meta-value">{joiningDateText}</span></div>
-                <div><span className="meta-label">Location:</span> <span className="meta-value text-capitalize">{locationText}</span></div>
-              </div>
-            </Card>
-            <div className="start-date-links-inline">
-              <a
-                className="linkedin-btn"
-                href="https://www.linkedin.com/company/valuemomentum"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="linkedin-icon">in</span> Follow us on LinkedIn
-              </a>
-              <a
-                className="aboutus-btn"
-                href="https://www.valuemomentum.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                About Us
-              </a>
-            </div>
-          </div>
         </Card>
       </div>
       <div className="dashboard-footer-bar">

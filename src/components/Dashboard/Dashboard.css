@@ -1042,6 +1042,7 @@
   text-decoration: none;
   font-weight: 500;
   transition: background 0.2s, color 0.2s;
+  margin-top: 0.25em;
 }
 
 .linkedin-btn:hover, .aboutus-btn:hover {
@@ -1053,6 +1054,64 @@
   font-weight: bold;
   font-size: 1.1em;
   margin-right: 0.5em;
+}
+
+.welcome-row {
+  display: flex;
+  gap: 2em;
+  margin-bottom: 2em;
+  align-items: stretch;
+}
+
+.welcome-card.expanded-welcome-card {
+  flex: 2 1 0;
+  min-width: 320px;
+}
+
+.welcome-side-col {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  min-width: 220px;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.start-date-card.beside-welcome {
+  margin-bottom: 0;
+  box-shadow: none;
+  background: var(--card-bg, #f8fafd);
+  border: 1px solid #e0e6ed;
+  padding: 1em 1.5em;
+}
+
+@media (max-width: 900px) {
+  .welcome-row {
+    flex-direction: column;
+    gap: 1em;
+  }
+  .welcome-side-col {
+    flex-direction: row;
+    gap: 1em;
+    min-width: 0;
+    align-items: flex-start;
+  }
+  .start-date-card.beside-welcome {
+    padding: 1em;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .welcome-row {
+    flex-direction: column;
+    gap: 0.5em;
+  }
+  .welcome-side-col {
+    flex-direction: column;
+    gap: 0.5em;
+  }
 }
 
 @media (max-width: 700px) {
