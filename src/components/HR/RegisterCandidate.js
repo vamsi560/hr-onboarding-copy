@@ -152,29 +152,28 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
               <option value="us">US</option>
             </select>
           </div>
-        </div>
-
-        <div className="form-row">
-          <div className="form-group">
-            <label>Date of Joining *</label>
-            <Input
-              type="date"
-              value={formData.dateOfJoining}
-              onChange={(e) => handleChange('dateOfJoining', e.target.value)}
-              required
-            />
+          
+          <div className="form-row">
+            <div className="form-group">
+              <label>Date of Joining *</label>
+              <Input
+                type="date"
+                value={formData.dateOfJoining}
+                onChange={(e) => handleChange('dateOfJoining', e.target.value)}
+                required
+              />
+            </div>
           </div>
-        </div>
-        
-        <div className="form-actions">
-          <Button type="button" variant="secondary" onClick={onBack}>
-            Cancel
-          </Button>
-          <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Sending...' : 'Submit & Send Email'}
-          </Button>
-        </div>
-      </form>
+          
+          <div className="form-actions">
+            <Button type="button" variant="secondary" onClick={onBack}>
+              Cancel
+            </Button>
+            <Button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Sending...' : 'Submit & Send Email'}
+            </Button>
+          </div>
+        </form>
       </Card>
     </div>
   );
