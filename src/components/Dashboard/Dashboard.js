@@ -34,16 +34,8 @@ const Dashboard = () => {
     setTotalCount(progressData.total);
   }, [formData, documents]);
 
-  const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return 'Good Morning';
-    if (hour < 18) return 'Good Afternoon';
-    return 'Good Evening';
-  };
-
-  const displayName = formData.firstName && formData.lastName
-    ? `${formData.firstName} ${formData.lastName}`
-    : 'Shashank Tudum';
+  // Always show Shashank Tudum as the candidate name
+  const displayName = 'Shashank Tudum';
 
   const joiningDateText = formData.joiningDate
     ? new Date(formData.joiningDate).toLocaleDateString()
@@ -51,13 +43,13 @@ const Dashboard = () => {
 
   const locationText = formData.location || 'Your assigned office';
 
-  const initials = formData.firstName || formData.lastName
-    ? `${(formData.firstName || formData.lastName)[0]}${
-        formData.lastName ? formData.lastName[0] : ''
-      }`.toUpperCase()
-    : 'VM';
-
-  const totalTasks = totalCount || pendingTasks.length;
+  const mockPendingTasks = [
+    'Complete Personal Details Form',
+    'Upload Documents',
+    'Sign Offer Letter',
+    'Read Company Handbook',
+  ];
+  const tasksToShow = pendingTasks.length > 0 ? pendingTasks : mockPendingTasks;
 
   return (
     <div className="dashboard">
@@ -69,9 +61,13 @@ const Dashboard = () => {
         {/* Progress Card */}
         <Card className="dashboard-card progress-card">
           <h2 className="section-title">Your Progress</h2>
-          <div className="progress-donut" style={{ '--progress': progress }}>
-            <div className="progress-donut-inner">
-              <span className="progress-donut-value">{progress}% Complete</span>
+          <div className="progress-donut-container">
+            <div className="progress-donut" style={{ '--progress': progress }}>
+              <div className="progress-donut-inner">
+                <span className="progress-donut-value">{progress}%</span>
+              </div>
+            </div>
+            <div className="progress-donut-caption-block">
               <span className="progress-donut-caption">{completedCount} of {totalCount} Tasks Completed</span>
             </div>
           </div>
@@ -81,32 +77,41 @@ const Dashboard = () => {
         <Card className="dashboard-card pending-tasks-card">
           <h2 className="section-title">Pending Tasks</h2>
           <ul className="pending-tasks-list">
-            {pendingTasks.slice(0, 4).map((task, idx) => (
+            {tasksToShow.slice(0, 4).map((task, idx) => (
               <li key={idx} className="pending-task-item">
-                <span className="pending-task-check">{task.completed ? '✔️' : '✔️'}</span>
+                <span className="pending-task-check">✔️</span>
                 <span className="pending-task-name">{task}</span>
-                {/* Example: show pending badge for the first pending task */}
-                {idx === 1 && pendingTasks.length > 1 && (
-                  <span className="pending-badge">{pendingTasks.length} Pending</span>
+                {idx === 1 && tasksToShow.length > 2 && (
+                  <span className="pending-badge">{tasksToShow.length} Pending</span>
                 )}
               </li>
             ))}
           </ul>
-          <button className="view-tasks-btn">View All Tasks</button>
+          <button className="view-tasks-btn" onClick={() => alert('All Tasks:\n' + tasksToShow.join('\n'))}>View All Tasks</button>
         </Card>
 
-        {/* Welcome Card (Follow us on LinkedIn) */}
+        {/* Welcome Card (Follow us on LinkedIn + About Us) */}
         <Card className="dashboard-card welcome-card">
           <h2 className="section-title">Welcome to the Team!</h2>
           <p className="dashboard-subtitle">We're excited to have you on board! Explore the tasks below to get started on your onboarding journey.</p>
-          <a
-            className="linkedin-btn"
-            href="https://www.linkedin.com/company/valuemomentum/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="linkedin-icon">in</span> Follow us on LinkedIn
-          </a>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+            <a
+              className="linkedin-btn"
+              href="https://www.linkedin.com/company/valuemomentum"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="linkedin-icon">in</span> Follow us on LinkedIn
+            </a>
+            <a
+              className="aboutus-btn"
+              href="https://www.valuemomentum.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              About Us
+            </a>
+          </div>
         </Card>
 
         {/* Start Date Card */}
@@ -133,7 +138,7 @@ const Dashboard = () => {
                 <div><span className="meta-label">Starting Date:</span> <span className="meta-value">{joiningDateText}</span></div>
                 <div><span className="meta-label">Location:</span> <span className="meta-value text-capitalize">{locationText}</span></div>
               </div>
-              <a href="mailto:hr@valuemomentum.com" className="email-hr-btn">Email HR</a>
+              <button className="email-hr-btn" onClick={() => alert('Email sent to hr@valuemomentum.com')}>Email HR</button>
             </div>
           </div>
         </Card>
@@ -142,21 +147,21 @@ const Dashboard = () => {
         <Card className="dashboard-card events-card">
           <h2 className="section-title">Upcoming Events</h2>
           <div className="upcoming-events-list-v2">
-            {upcomingEvents.map((event) => (
+            {upcomingEvents.map((event, idx) => (
               <div key={event.title} className="event-item-v2">
                 <div className="event-title">{event.title}</div>
                 <div className="event-date small">{event.date}</div>
               </div>
             ))}
           </div>
-          <button className="view-calendar-btn">View Calendar</button>
+          <button className="view-calendar-btn" onClick={() => alert('Upcoming Events:\n' + upcomingEvents.map(e => `${e.title} - ${e.date}`).join('\n'))}>View Calendar</button>
         </Card>
       </div>
       <div className="dashboard-footer-bar">
         <div className="footer-assist">
           <span className="footer-assist-icon">?</span> Need Assistance? <a href="#support" className="footer-link">Contact HR Support</a>
         </div>
-        <button className="footer-faq-btn">FAQs &amp; Help Center</button>
+        <button className="footer-faq-btn" onClick={() => alert('FAQs & Help Center coming soon!')}>FAQs &amp; Help Center</button>
       </div>
     </div>
   );

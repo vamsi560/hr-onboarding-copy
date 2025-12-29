@@ -766,41 +766,70 @@
   gap: 16px;
 }
 
+.progress-donut-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
 .progress-donut {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin: 8px auto 16px auto;
-  background: conic-gradient(
-    var(--brand) calc(3.6deg * var(--progress)),
-    #e2e8f0 0
-  );
+  position: relative;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .progress-donut-inner {
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  background: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90px;
+  height: 90px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  flex-direction: column;
+  z-index: 2;
 }
 
 .progress-donut-value {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
-  color: var(--brand);
+  color: #174ea6;
+}
+
+.progress-donut-caption-block {
+  margin-top: 8px;
+  text-align: center;
 }
 
 .progress-donut-caption {
-  font-size: 11px;
-  color: var(--muted);
+  font-size: 13px;
+  color: #64748b;
+}
+
+.aboutus-btn {
+  background: #fff;
+  color: #174ea6;
+  border: 1px solid #174ea6;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  margin-top: 12px;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+.aboutus-btn:hover {
+  background: #174ea6;
+  color: #fff;
 }
 
 .support-bar {
