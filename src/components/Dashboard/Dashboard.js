@@ -115,8 +115,8 @@ const Dashboard = () => {
         <h1 className="dashboard-title">Welcome, {displayName}!</h1>
         <p className="dashboard-subtitle">Get Started on Your Journey with Us</p>
       </div>
-      <div className="dashboard-image-grid">
-        {/* Progress Card */}
+      <div className="dashboard-main-grid dashboard-main-grid-v2">
+        {/* First row: Progress, Pending Tasks, Upcoming Events */}
         <Card className="dashboard-card progress-card">
           <h2 className="section-title">Your Progress</h2>
           <div className="progress-donut-container">
@@ -126,15 +126,6 @@ const Dashboard = () => {
             </div>
           </div>
         </Card>
-        {/* Welcome Card */}
-        <Card className="dashboard-card welcome-card">
-          <h2 className="section-title">Welcome to the Team!</h2>
-          <p className="dashboard-subtitle">We're excited to have you on board! Explore the tasks below to get started on your onboarding journey.</p>
-          <button className="welcome-video-btn" onClick={() => handleOpenModal('calendar')}>
-            <Icon name="play" /> Watch Welcome Video
-          </button>
-        </Card>
-        {/* Pending Tasks Card */}
         <Card className="dashboard-card pending-tasks-card">
           <h2 className="section-title">Pending Tasks</h2>
           <ul className="pending-tasks-list">
@@ -152,31 +143,36 @@ const Dashboard = () => {
             View All Tasks
           </button>
         </Card>
-        {/* Start Date Card */}
-        <Card className="dashboard-card start-date-card">
+        <Card className="dashboard-card events-card">
+          <h2 className="section-title">Upcoming Events</h2>
+          <div className="upcoming-events-list-image">
+            {upcomingEvents.map((event, idx) => (
+              <div key={event.title} className="event-item-image">
+                <div className="event-title">{event.title}</div>
+                <div className="event-date small">{event.date}</div>
+              </div>
+            ))}
+          </div>
+          <button className="view-calendar-btn" onClick={() => handleOpenModal('calendar')}>
+            View Calendar
+          </button>
+        </Card>
+
+        {/* Second row: Welcome (span 2 columns), Start Date, Profile */}
+        <Card className="dashboard-card welcome-card expanded-welcome-card">
+          <h2 className="section-title">Welcome to the Team!</h2>
+          <p className="dashboard-subtitle">We're excited to have you on board! Explore the tasks below to get started on your onboarding journey.</p>
+          <button className="welcome-video-btn" onClick={() => handleOpenModal('calendar')}>
+            <Icon name="play" /> Watch Welcome Video
+          </button>
+        </Card>
+        <Card className="dashboard-card start-date-card beside-welcome">
           <h2 className="section-title">Your Start Date</h2>
           <div className="start-date-details">
             <div><span className="meta-label">Joining Date:</span> <span className="meta-value">{joiningDateText}</span></div>
             <div><span className="meta-label">Location:</span> <span className="meta-value text-capitalize">{locationText}</span></div>
           </div>
         </Card>
-        {/* Helpful Resources Card (icons/buttons) */}
-        <Card className="dashboard-card resources-card">
-          <h2 className="section-title">Helpful Resources</h2>
-          <div className="resources-list-image">
-            {helpfulResources.map((res, idx) => (
-              <button
-                key={idx}
-                className="resource-btn-image"
-                onClick={() => window.open(res.url, '_blank', 'noopener,noreferrer')}
-              >
-                <Icon name={res.icon} />
-                <span className="resource-label-image">{res.label}</span>
-              </button>
-            ))}
-          </div>
-        </Card>
-        {/* Profile Card */}
         <Card className="dashboard-card profile-detail-card">
           <div className="profile-block">
             <img src={formData.photoUrl || process.env.PUBLIC_URL + '/images/shashank.jpg'} alt={displayName} className="profile-avatar-image" />
@@ -192,21 +188,6 @@ const Dashboard = () => {
               </button>
             </div>
           </div>
-        </Card>
-        {/* Upcoming Events Card */}
-        <Card className="dashboard-card events-card">
-          <h2 className="section-title">Upcoming Events</h2>
-          <div className="upcoming-events-list-image">
-            {upcomingEvents.map((event, idx) => (
-              <div key={event.title} className="event-item-image">
-                <div className="event-title">{event.title}</div>
-                <div className="event-date small">{event.date}</div>
-              </div>
-            ))}
-          </div>
-          <button className="view-calendar-btn" onClick={() => handleOpenModal('calendar')}>
-            View Calendar
-          </button>
         </Card>
       </div>
       {/* Footer Bar */}
