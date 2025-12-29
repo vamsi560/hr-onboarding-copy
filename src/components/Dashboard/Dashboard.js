@@ -5,36 +5,18 @@ import ProgressBar from '../UI/ProgressBar';
 import Breadcrumbs from '../UI/Breadcrumbs';
 import { calculateProgress } from '../../utils/progress';
 import './Dashboard.css';
-import Modal from '../UI/Modal';
-import Icon from '../UI/Icon';
-
-const onboardingSteps = [
-  { label: 'Complete Personal Details Form', key: 'form', completed: true },
-  { label: 'Upload Documents', key: 'documents', completed: false },
-  { label: 'Sign Offer Letter', key: 'offer', completed: false },
-  { label: 'Read Company Handbook', key: 'handbook', completed: false },
-  { label: 'Enroll in Benefits Program', key: 'benefits', completed: false },
-  { label: 'Setup Workstation & IT Account', key: 'it', completed: false }
-];
 
 const upcomingEvents = [
-  { title: 'Orientation Session', date: 'May 14, 10:00 AM' },
-  { title: 'Team Welcome Lunch', date: 'May 17, 12:30 PM' }
-];
-
-const companyLinks = [
-  { icon: 'linkedin', label: 'Follow us on LinkedIn', url: 'https://www.linkedin.com/company/valuemomentum/' },
-  { icon: 'info', label: 'About Us', url: 'https://www.valuemomentum.com/about/' }
-];
-
-const helpfulResources = [
-  { icon: 'linkedin', label: 'Follow us on LinkedIn', url: 'https://www.linkedin.com/company/valuemomentum/' },
-  { icon: 'info', label: 'About Us', url: 'https://www.valuemomentum.com/about/' }
-];
-const quickLinks = [
-  { icon: 'portal', label: 'Employee Portal' },
-  { icon: 'faq', label: 'FAQs & Help Center' },
-  { icon: 'support', label: 'Contact HR Support' }
+  {
+    title: 'Orientation Session',
+    date: 'May 14, 10:00 AM',
+    icon: '📅'
+  },
+  {
+    title: 'Team Welcome Lunch',
+    date: 'June 16, 12:30 PM',
+    icon: '🍽️'
+  }
 ];
 
 const Dashboard = () => {
@@ -43,9 +25,6 @@ const Dashboard = () => {
   const [pendingTasks, setPendingTasks] = useState([]);
   const [completedCount, setCompletedCount] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState(null);
-  const [modalTitle, setModalTitle] = useState('');
 
   useEffect(() => {
     const progressData = calculateProgress(formData, documents);
@@ -72,60 +51,28 @@ const Dashboard = () => {
   ];
   const tasksToShow = pendingTasks.length > 0 ? pendingTasks : mockPendingTasks;
 
-  const handleOpenModal = (type) => {
-    if (type === 'email') {
-      setModalTitle('Contact HR');
-      setModalContent(
-        <div>
-          <p>You can reach HR at <b>hr@valuemomentum.com</b>.</p>
-          <a href="mailto:hr@valuemomentum.com" className="modal-action-link">Send Email</a>
-        </div>
-      );
-    } else if (type === 'tasks') {
-      setModalTitle('All Pending Tasks');
-      setModalContent(
-        <ul className="modal-tasks-list">
-          {tasksToShow.map((task, idx) => (
-            <li key={idx}>{task}</li>
-          ))}
-        </ul>
-      );
-    } else if (type === 'calendar') {
-      setModalTitle('Upcoming Events');
-      setModalContent(
-        <ul className="modal-events-list">
-          {upcomingEvents.map((event, idx) => (
-            <li key={idx}><b>{event.title}</b> - {event.date}</li>
-          ))}
-        </ul>
-      );
-    }
-    setModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalOpen(false);
-    setModalContent(null);
-    setModalTitle('');
-  };
-
   return (
-    <div className="dashboard dashboard-modern">
+    <div className="dashboard">
       <div className="dashboard-hero-text dashboard-hero-bg">
         <h1 className="dashboard-title">Welcome, {displayName}!</h1>
         <p className="dashboard-subtitle">Get Started on Your Journey with Us</p>
       </div>
       <div className="dashboard-main-grid dashboard-main-grid-v2">
-        {/* First row: Progress, Pending Tasks, Upcoming Events */}
+        {/* Progress Card */}
         <Card className="dashboard-card progress-card">
           <h2 className="section-title">Your Progress</h2>
-          <div className="progress-donut-container">
-            <ProgressBar percent={progress} />
+          <div className="progress-bar-visual-container">
+            <div className="progress-bar-visual">
+              <div className="progress-bar-fill" style={{ width: progress + '%' }} />
+              <span className="progress-bar-label">{progress}%</span>
+            </div>
             <div className="progress-donut-caption-block">
               <span className="progress-donut-caption">{completedCount} of {totalCount} Tasks Completed</span>
             </div>
           </div>
         </Card>
+
+        {/* Pending Tasks Card */}
         <Card className="dashboard-card pending-tasks-card">
           <h2 className="section-title">Pending Tasks</h2>
           <ul className="pending-tasks-list">
@@ -139,67 +86,97 @@ const Dashboard = () => {
               </li>
             ))}
           </ul>
-          <button className="view-tasks-btn" onClick={() => handleOpenModal('tasks')}>
+          <button
+            className="view-tasks-btn"
+            title={['All Tasks:', ...tasksToShow].join('\n')}
+          >
             View All Tasks
           </button>
         </Card>
-        <Card className="dashboard-card events-card">
-          <h2 className="section-title">Upcoming Events</h2>
-          <div className="upcoming-events-list-image">
-            {upcomingEvents.map((event, idx) => (
-              <div key={event.title} className="event-item-image">
-                <div className="event-title">{event.title}</div>
-                <div className="event-date small">{event.date}</div>
-              </div>
-            ))}
-          </div>
-          <button className="view-calendar-btn" onClick={() => handleOpenModal('calendar')}>
-            View Calendar
-          </button>
-        </Card>
 
-        {/* Second row: Welcome (span 2 columns), Start Date, Profile */}
-        <Card className="dashboard-card welcome-card expanded-welcome-card">
+        {/* Welcome Card (Follow us on LinkedIn + About Us) */}
+        <Card className="dashboard-card welcome-card">
           <h2 className="section-title">Welcome to the Team!</h2>
           <p className="dashboard-subtitle">We're excited to have you on board! Explore the tasks below to get started on your onboarding journey.</p>
-          <button className="welcome-video-btn" onClick={() => handleOpenModal('calendar')}>
-            <Icon name="play" /> Watch Welcome Video
-          </button>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+            <a
+              className="linkedin-btn"
+              href="https://www.linkedin.com/company/valuemomentum"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="linkedin-icon">in</span> Follow us on LinkedIn
+            </a>
+            <a
+              className="aboutus-btn"
+              href="https://www.valuemomentum.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              About Us
+            </a>
+          </div>
         </Card>
-        <Card className="dashboard-card start-date-card beside-welcome">
+
+        {/* Start Date Card */}
+        <Card className="dashboard-card start-date-card">
           <h2 className="section-title">Your Start Date</h2>
           <div className="start-date-details">
             <div><span className="meta-label">Joining Date:</span> <span className="meta-value">{joiningDateText}</span></div>
             <div><span className="meta-label">Location:</span> <span className="meta-value text-capitalize">{locationText}</span></div>
           </div>
         </Card>
+
+        {/* Profile Card */}
         <Card className="dashboard-card profile-detail-card">
-          <div className="profile-block">
-            <img src={formData.photoUrl || process.env.PUBLIC_URL + '/images/shashank.jpg'} alt={displayName} className="profile-avatar-image" />
-            <div className="profile-info-image">
-              <div className="profile-name-image">{displayName}</div>
-              <div className="profile-role-image">{formData.designation || 'Marketing Specialist'}</div>
+          <div className="profile-detail-main">
+            <img
+              src={formData.photoUrl || process.env.PUBLIC_URL + '/images/shashank.jpg'}
+              alt={displayName}
+              className="profile-detail-avatar"
+            />
+            <div className="profile-detail-info">
+              <div className="profile-detail-name">{displayName}</div>
+              <div className="profile-detail-role">{formData.designation || 'Your Role'}</div>
               <div className="profile-detail-meta">
                 <div><span className="meta-label">Starting Date:</span> <span className="meta-value">{joiningDateText}</span></div>
                 <div><span className="meta-label">Location:</span> <span className="meta-value text-capitalize">{locationText}</span></div>
               </div>
-              <button className="email-hr-btn" onClick={() => handleOpenModal('email')}>
+              <button
+                className="email-hr-btn"
+                title="Email sent to hr@valuemomentum.com"
+              >
                 Email HR
               </button>
             </div>
           </div>
         </Card>
+
+        {/* Upcoming Events Card */}
+        <Card className="dashboard-card events-card">
+          <h2 className="section-title">Upcoming Events</h2>
+          <div className="upcoming-events-list-v2">
+            {upcomingEvents.map((event, idx) => (
+              <div key={event.title} className="event-item-v2">
+                <div className="event-title">{event.title}</div>
+                <div className="event-date small">{event.date}</div>
+              </div>
+            ))}
+          </div>
+          <button
+            className="view-calendar-btn"
+            title={['Upcoming Events:', ...upcomingEvents.map(e => `${e.title} - ${e.date}`)].join('\n')}
+          >
+            View Calendar
+          </button>
+        </Card>
       </div>
-      {/* Footer Bar */}
-      <div className="dashboard-footer-bar-image">
-        <div className="footer-assist-image">
-          <Icon name="chat" /> Need Assistance? <a href="#support" className="footer-link-image">Contact HR Support</a>
+      <div className="dashboard-footer-bar">
+        <div className="footer-assist">
+          <span className="footer-assist-icon">?</span> Need Assistance? <a href="#support" className="footer-link">Contact HR Support</a>
         </div>
-        <button className="footer-faq-btn-image" onClick={() => alert('FAQs & Help Center coming soon!')}>FAQs &amp; Help Center</button>
+        <button className="footer-faq-btn" onClick={() => alert('FAQs & Help Center coming soon!')}>FAQs &amp; Help Center</button>
       </div>
-      <Modal isOpen={modalOpen} onClose={handleCloseModal} title={modalTitle}>
-        {modalContent}
-      </Modal>
     </div>
   );
 };
