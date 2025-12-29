@@ -949,9 +949,86 @@
   text-shadow: 0 1px 4px rgba(0,0,0,0.12);
 }
 
+.expanded-welcome-card {
+  grid-column: span 2;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.welcome-video-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.welcome-video-wrapper {
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 16/9;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  position: relative;
+}
+
+.welcome-video-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.below-welcome {
+  grid-column: span 2;
+}
+
+.start-date-row {
+  display: flex;
+  gap: 24px;
+  margin-top: 0;
+  align-items: stretch;
+}
+
+.start-date-card.below-welcome {
+  flex: 2 1 0;
+}
+
+.start-date-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 220px;
+}
+
+@media (max-width: 1100px) {
+  .expanded-welcome-card, .below-welcome {
+    grid-column: span 1;
+  }
+  .welcome-video-wrapper {
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 900px) {
   .dashboard-main-grid {
     grid-template-columns: 1fr;
+  }
+  .start-date-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .start-date-links {
+    flex-direction: row;
+    gap: 12px;
+    min-width: 0;
   }
 }
 
@@ -979,5 +1056,37 @@
   .stat-mini {
     flex: 1;
   }
+}
+
+.modal-tasks-list {
+  list-style: disc inside;
+  margin: 0 0 0 1em;
+  padding: 0;
+  color: var(--text-primary, #222);
+  font-size: 1.05rem;
+}
+
+.modal-events-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-events-list li {
+  margin-bottom: 0.5em;
+  font-size: 1.05rem;
+}
+
+.modal-action-link {
+  display: inline-block;
+  margin-top: 0.75em;
+  color: #0073b1;
+  font-weight: 500;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.modal-action-link:hover {
+  color: #005580;
 }
 

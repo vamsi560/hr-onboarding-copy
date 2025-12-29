@@ -5,6 +5,7 @@ import ProgressBar from '../UI/ProgressBar';
 import Breadcrumbs from '../UI/Breadcrumbs';
 import { calculateProgress } from '../../utils/progress';
 import './Dashboard.css';
+import Modal from '../UI/Modal';
 
 const upcomingEvents = [
   {
@@ -25,6 +26,9 @@ const Dashboard = () => {
   const [pendingTasks, setPendingTasks] = useState([]);
   const [completedCount, setCompletedCount] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+  const [modalTitle, setModalTitle] = useState('');
 
   useEffect(() => {
     const progressData = calculateProgress(formData, documents);
@@ -50,6 +54,43 @@ const Dashboard = () => {
     'Read Company Handbook',
   ];
   const tasksToShow = pendingTasks.length > 0 ? pendingTasks : mockPendingTasks;
+
+  const handleOpenModal = (type) => {
+    if (type === 'email') {
+      setModalTitle('Contact HR');
+      setModalContent(
+        <div>
+          <p>You can reach HR at <b>hr@valuemomentum.com</b>.</p>
+          <a href="mailto:hr@valuemomentum.com" className="modal-action-link">Send Email</a>
+        </div>
+      );
+    } else if (type === 'tasks') {
+      setModalTitle('All Pending Tasks');
+      setModalContent(
+        <ul className="modal-tasks-list">
+          {tasksToShow.map((task, idx) => (
+            <li key={idx}>{task}</li>
+          ))}
+        </ul>
+      );
+    } else if (type === 'calendar') {
+      setModalTitle('Upcoming Events');
+      setModalContent(
+        <ul className="modal-events-list">
+          {upcomingEvents.map((event, idx) => (
+            <li key={idx}><b>{event.title}</b> - {event.date}</li>
+          ))}
+        </ul>
+      );
+    }
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    setModalContent(null);
+    setModalTitle('');
+  };
 
   return (
     <div className="dashboard">
@@ -88,17 +129,41 @@ const Dashboard = () => {
           </ul>
           <button
             className="view-tasks-btn"
-            title={['All Tasks:', ...tasksToShow].join('\n')}
+            onClick={() => handleOpenModal('tasks')}
+            title="View all pending tasks"
           >
             View All Tasks
           </button>
         </Card>
 
-        {/* Welcome Card (Follow us on LinkedIn + About Us) */}
-        <Card className="dashboard-card welcome-card">
+        {/* Expanded Welcome Card with Video */}
+        <Card className="dashboard-card welcome-card expanded-welcome-card">
           <h2 className="section-title">Welcome to the Team!</h2>
           <p className="dashboard-subtitle">We're excited to have you on board! Explore the tasks below to get started on your onboarding journey.</p>
-          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <div className="welcome-video-section">
+            <div className="welcome-video-wrapper">
+              <iframe
+                className="welcome-video-iframe"
+                src="https://www.youtube.com/embed/j6Y4iwrf6ow"
+                title="Welcome Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+        </Card>
+
+        {/* Your Start Date Card (now below Welcome) with LinkedIn/About Us beside it */}
+        <div className="start-date-row">
+          <Card className="dashboard-card start-date-card below-welcome">
+            <h2 className="section-title">Your Start Date</h2>
+            <div className="start-date-details">
+              <div><span className="meta-label">Joining Date:</span> <span className="meta-value">{joiningDateText}</span></div>
+              <div><span className="meta-label">Location:</span> <span className="meta-value text-capitalize">{locationText}</span></div>
+            </div>
+          </Card>
+          <div className="start-date-links">
             <a
               className="linkedin-btn"
               href="https://www.linkedin.com/company/valuemomentum"
@@ -116,16 +181,7 @@ const Dashboard = () => {
               About Us
             </a>
           </div>
-        </Card>
-
-        {/* Start Date Card */}
-        <Card className="dashboard-card start-date-card">
-          <h2 className="section-title">Your Start Date</h2>
-          <div className="start-date-details">
-            <div><span className="meta-label">Joining Date:</span> <span className="meta-value">{joiningDateText}</span></div>
-            <div><span className="meta-label">Location:</span> <span className="meta-value text-capitalize">{locationText}</span></div>
-          </div>
-        </Card>
+        </div>
 
         {/* Profile Card */}
         <Card className="dashboard-card profile-detail-card">
@@ -144,7 +200,8 @@ const Dashboard = () => {
               </div>
               <button
                 className="email-hr-btn"
-                title="Email sent to hr@valuemomentum.com"
+                onClick={() => handleOpenModal('email')}
+                title="Contact HR via email"
               >
                 Email HR
               </button>
@@ -165,7 +222,8 @@ const Dashboard = () => {
           </div>
           <button
             className="view-calendar-btn"
-            title={['Upcoming Events:', ...upcomingEvents.map(e => `${e.title} - ${e.date}`)].join('\n')}
+            onClick={() => handleOpenModal('calendar')}
+            title="View upcoming events"
           >
             View Calendar
           </button>
@@ -177,6 +235,9 @@ const Dashboard = () => {
         </div>
         <button className="footer-faq-btn" onClick={() => alert('FAQs & Help Center coming soon!')}>FAQs &amp; Help Center</button>
       </div>
+      <Modal isOpen={modalOpen} onClose={handleCloseModal} title={modalTitle}>
+        {modalContent}
+      </Modal>
     </div>
   );
 };

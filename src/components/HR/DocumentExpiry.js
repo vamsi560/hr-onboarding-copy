@@ -75,6 +75,38 @@ const DocumentExpiry = () => {
       createdAt: '2018-05-10',
       updatedAt: '2024-12-15',
       reminderSent: false
+    },
+    {
+      id: 4,
+      candidateId: 103,
+      candidateName: 'Rahul Verma',
+      documentType: 'license',
+      documentName: 'Driving License',
+      documentNumber: 'DL123456',
+      issueDate: '2023-01-01',
+      expiryDate: '2026-01-01',
+      daysUntilExpiry: 368, // >90 days, but let's mark as in progress for demo
+      status: 'inprogress',
+      notes: 'Renewal process started.',
+      createdAt: '2023-01-01',
+      updatedAt: '2024-12-15',
+      reminderSent: false
+    },
+    {
+      id: 5,
+      candidateId: 103,
+      candidateName: 'Rahul Verma',
+      documentType: 'certification',
+      documentName: 'AWS Certification',
+      documentNumber: 'AWS-1234',
+      issueDate: '2023-01-01',
+      expiryDate: '2026-01-01',
+      daysUntilExpiry: 368, // >90, but let's set status to 'in progress' for demo
+      status: 'inprogress',
+      notes: 'Certification renewal in progress.',
+      createdAt: '2023-01-01',
+      updatedAt: '2024-12-15',
+      reminderSent: false
     }
   ];
 
@@ -127,6 +159,7 @@ const DocumentExpiry = () => {
     if (days <= 30) return 'critical';
     if (days <= 60) return 'warning';
     if (days <= 90) return 'attention';
+    // Add logic for 'in progress' if needed, but for now, status is set in mock data
     return 'valid';
   };
 
@@ -240,6 +273,7 @@ const DocumentExpiry = () => {
       critical: { label: `Expires in ${daysUntilExpiry} days`, class: 'status-critical', icon: '🔴' },
       warning: { label: `Expires in ${daysUntilExpiry} days`, class: 'status-warning', icon: '🟠' },
       attention: { label: `Expires in ${daysUntilExpiry} days`, class: 'status-attention', icon: '🟡' },
+      inprogress: { label: 'In Progress', class: 'status-inprogress', icon: '🟧' },
       valid: { label: 'Valid', class: 'status-valid', icon: '✅' },
       unknown: { label: 'Unknown', class: 'status-unknown', icon: '❓' }
     };
@@ -257,14 +291,16 @@ const DocumentExpiry = () => {
     critical: filteredExpiry.filter(exp => exp.status === 'critical').length,
     warning: filteredExpiry.filter(exp => exp.status === 'warning').length,
     attention: filteredExpiry.filter(exp => exp.status === 'attention').length,
+    inprogress: filteredExpiry.filter(exp => exp.status === 'inprogress').length,
     valid: filteredExpiry.filter(exp => exp.status === 'valid').length
   };
 
-  // Only show three main status filters: Expired, Not Valid, Valid
+  // Only show main status filters: Expired, Not Valid, In Progress, Valid
   const statusOptions = [
     { value: '', label: 'All Status' },
     { value: 'expired', label: 'Expired' },
     { value: 'critical', label: 'Not Valid' },
+    { value: 'inprogress', label: 'In Progress' },
     { value: 'valid', label: 'Valid' }
   ];
 
@@ -281,6 +317,10 @@ const DocumentExpiry = () => {
         <Card className="summary-card summary-critical">
           <div className="summary-value">{summary.critical}</div>
           <div className="summary-label">Critical (≤30 days)</div>
+        </Card>
+        <Card className="summary-card summary-inprogress">
+          <div className="summary-value">{summary.inprogress}</div>
+          <div className="summary-label">In Progress</div>
         </Card>
         <Card className="summary-card summary-warning">
           <div className="summary-value">{summary.warning}</div>
