@@ -432,3 +432,102 @@
   margin-bottom: 24px;
 }
 
+.progress-bar-welcome {
+  margin: 18px auto 0 auto;
+  max-width: 320px;
+  text-align: center;
+}
+.progress-bar-track {
+  width: 100%;
+  height: 18px;
+  background: #eaf3fb;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+.progress-bar-fill {
+  background: linear-gradient(90deg, #174ea6 0%, #4285f4 100%);
+  height: 100%;
+  border-radius: 12px 0 0 12px;
+  transition: width 0.4s cubic-bezier(.4,0,.2,1);
+}
+.progress-bar-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #174ea6;
+}
+.timeline-card {
+  min-width: 0;
+}
+.timeline-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.timeline-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+.timeline-step.completed .timeline-icon {
+  color: #2e7d32;
+}
+.timeline-icon {
+  font-size: 18px;
+  color: #bdbdbd;
+}
+.timeline-label {
+  font-weight: 500;
+}
+.events-card {
+  min-width: 0;
+}
+.events-list-modern {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.event-item-modern {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  padding: 6px 0;
+  border-bottom: 1px solid #e3e8ee;
+}
+.event-name-modern {
+  font-weight: 500;
+}
+.event-date-modern {
+  color: #64748b;
+  font-size: 14px;
+}
+.company-links-card {
+  min-width: 0;
+}
+.company-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+.company-link-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: #174ea6;
+  background: #f7fafc;
+  border-radius: 8px;
+  padding: 8px 12px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.company-link-item:hover {
+  background: #eaf3fb;
+}
+
