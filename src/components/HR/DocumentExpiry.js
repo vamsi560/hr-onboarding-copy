@@ -194,9 +194,9 @@ const DocumentExpiry = () => {
 
   return (
     <div className="document-expiry">
-      <Breadcrumbs items={[{ label: 'Home' }, { label: 'Document Expiry Tracking' }]} />
+      <Breadcrumbs items={[{ label: 'Home' }, { label: 'Document Expiry' }]} />
       
-      {/* Summary Cards */}
+      {/* Summary & Legend */}
       <div className="expiry-summary-grid">
         <Card className="summary-card summary-expired">
           <div className="summary-value">{summary.expired}</div>
@@ -223,8 +223,10 @@ const DocumentExpiry = () => {
       <Card>
         <div className="expiry-header">
           <div>
-            <h3>Document Expiry Tracking</h3>
-            <p className="small">Track and manage document expiry dates</p>
+            <h3>Document Expiry Overview</h3>
+            <p className="small">
+              Track important expiry dates for passports, visas, certifications and other compliance documents.
+            </p>
           </div>
           <Button onClick={() => setShowAddForm(true)}>
             + Add Document Expiry

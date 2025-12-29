@@ -11,6 +11,8 @@ const HRAnalytics = () => {
   const [sortDirection, setSortDirection] = useState('asc');
   const [departmentFilter, setDepartmentFilter] = useState('');
   const [hiringLeadFilter, setHiringLeadFilter] = useState('');
+  const [dateRangeFilter, setDateRangeFilter] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
 
   // Extended candidate data with analytics information - All Indian names
   const analyticsData = [
@@ -163,7 +165,27 @@ const HRAnalytics = () => {
   const filteredData = analyticsData.filter(row => {
     const matchesDept = !departmentFilter || row.department === departmentFilter;
     const matchesLead = !hiringLeadFilter || row.hiringLead === hiringLeadFilter;
-    return matchesDept && matchesLead;
+
+    // Date range filter based on offerDate (MM/DD/YYYY)
+    const today = new Date();
+    const offer = new Date(row.offerDate);
+    let matchesDate = true;
+    if (!isNaN(offer.getTime())) {
+      const diffDays = (today - offer) / (1000 * 60 * 60 * 24);
+      if (dateRangeFilter === 'week') matchesDate = diffDays <= 7;
+      else if (dateRangeFilter === 'month') matchesDate = diffDays <= 30;
+      else if (dateRangeFilter === 'year') matchesDate = diffDays <= 365;
+    }
+
+    const lowerSearch = searchTerm.toLowerCase();
+    const matchesSearch =
+      !lowerSearch ||
+      row.name.toLowerCase().includes(lowerSearch) ||
+      row.position.toLowerCase().includes(lowerSearch) ||
+      row.department.toLowerCase().includes(lowerSearch) ||
+      row.hiringLead.toLowerCase().includes(lowerSearch);
+
+    return matchesDept && matchesLead && matchesDate && matchesSearch;
   });
 
   // Calculate KPIs (simple demo based on filtered data)
@@ -325,6 +347,13 @@ const HRAnalytics = () => {
 
       {/* Filters */}
       <div className="analytics-filters">
+        <input
+          type="text"
+          className="analytics-search"
+          placeholder="Search by name, position, department, hiring lead..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
         <select
           className="filter-select"
           value={departmentFilter}
@@ -344,6 +373,16 @@ const HRAnalytics = () => {
           {[...new Set(analyticsData.map(a => a.hiringLead))].map(lead => (
             <option key={lead} value={lead}>{lead}</option>
           ))}
+        </select>
+        <select
+          className="filter-select"
+          value={dateRangeFilter}
+          onChange={(e) => setDateRangeFilter(e.target.value)}
+        >
+          <option value="all">All Time</option>
+          <option value="week">Last 7 days</option>
+          <option value="month">Last 30 days</option>
+          <option value="year">Last 12 months</option>
         </select>
       </div>
 
@@ -418,29 +457,6 @@ const HRAnalytics = () => {
           </div>
         </Card>
 
-        <Card className="kpi-card kpi-card-chart">
-          <div className="kpi-label">Onboarding by Department</div>
-          <div className="mini-bar-chart">
-            {[...new Set(filteredData.map(a => a.department))].map(dept => {
-              const deptRows = filteredData.filter(a => a.department === dept);
-              const avg =
-                deptRows.length > 0
-                  ? deptRows.reduce((sum, r) => sum + r.onboardingProgress, 0) /
-                    deptRows.length
-                  : 0;
-              return (
-                <div key={dept} className="bar-group">
-                  <div
-                    className="bar"
-                    style={{ height: `${Math.max(avg, 5)}%` }}
-                    title={`${dept}: ${Math.round(avg)}%`}
-                  ></div>
-                  <span className="bar-label">{dept.split(' ')[0]}</span>
-                </div>
-              );
-            })}
-          </div>
-        </Card>
       </div>
 
       {/* Analytics Table */}

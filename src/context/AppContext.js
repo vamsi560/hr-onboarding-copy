@@ -79,6 +79,25 @@ export const AppProvider = ({ children }) => {
         sentDate: '2024-05-15',
         createdAt: '2024-05-15T09:00:00.000Z',
         updatedAt: '2024-05-15T09:00:00.000Z'
+      },
+      {
+        id: 3,
+        candidateId: '3',
+        candidateName: 'Pankaj Kumar',
+        referenceName: 'Kavya',
+        referenceEmail: 'kavya@valuemomentum.com',
+        referencePhone: '+91 90000 00003',
+        referenceCompany: 'ValueMomentum',
+        referencePosition: 'Sales Lead',
+        relationship: 'manager',
+        requestDate: '2024-05-18',
+        responseDate: '2024-05-20',
+        status: 'completed',
+        rating: 4,
+        feedback: 'Strong sales skills and good client handling.',
+        sentDate: '2024-05-18',
+        createdAt: '2024-05-18T09:00:00.000Z',
+        updatedAt: '2024-05-20T11:00:00.000Z'
       }
     ];
   });
