@@ -78,6 +78,18 @@ const DocumentExpiry = () => {
     }
   ];
 
+  // Find candidate name by ID utility
+  const getCandidateName = (id) => {
+    const candidateMap = {
+      101: 'Shashank Tudum',
+      102: 'Priya Sharma',
+      103: 'Rahul Verma',
+      104: 'Aditi Singh',
+      105: 'Vikram Patel'
+    };
+    return candidateMap[id] || 'Unknown';
+  };
+
   useEffect(() => {
     // Auto-create expiry entries from uploaded documents if they don't exist
     if (documents && documents.length > 0 && documentExpiry) {
@@ -208,10 +220,12 @@ const DocumentExpiry = () => {
     }
   };
 
-  const documentExpiryWithMock = (documentExpiry && documentExpiry.length > 0) ? documentExpiry : mockDocumentExpiry;
+  const documentExpiryWithMock = (documentExpiry && documentExpiry.length > 0)
+    ? documentExpiry
+    : mockDocumentExpiry.map(exp => ({ ...exp, candidateName: getCandidateName(exp.candidateId) }));
 
   const filteredExpiry = (documentExpiryWithMock || []).filter(exp => {
-    const candidate = candidates.find(c => c.id === parseInt(exp.candidateId));
+    const candidate = { name: exp.candidateName };
     const matchesSearch = !searchTerm || 
       exp.documentName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       (candidate?.name || '').toLowerCase().includes(searchTerm.toLowerCase());

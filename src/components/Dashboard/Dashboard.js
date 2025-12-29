@@ -5,6 +5,7 @@ import ProgressBar from '../UI/ProgressBar';
 import Breadcrumbs from '../UI/Breadcrumbs';
 import { calculateProgress } from '../../utils/progress';
 import './Dashboard.css';
+import Tooltip from '../UI/Tooltip';
 
 const upcomingEvents = [
   {
@@ -25,6 +26,7 @@ const Dashboard = () => {
   const [pendingTasks, setPendingTasks] = useState([]);
   const [completedCount, setCompletedCount] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
+  const [tooltip, setTooltip] = useState({ visible: false, text: '', x: 0, y: 0 });
 
   useEffect(() => {
     const progressData = calculateProgress(formData, documents);
@@ -50,6 +52,19 @@ const Dashboard = () => {
     'Read Company Handbook',
   ];
   const tasksToShow = pendingTasks.length > 0 ? pendingTasks : mockPendingTasks;
+
+  const showTooltip = (text, e) => {
+    const rect = e.target.getBoundingClientRect();
+    setTooltip({
+      visible: true,
+      text,
+      x: rect.left + rect.width / 2,
+      y: rect.top - 8
+    });
+    setTimeout(() => setTooltip({ ...tooltip, visible: false }), 1800);
+  };
+
+  const hideTooltip = () => setTooltip({ ...tooltip, visible: false });
 
   return (
     <div className="dashboard">
@@ -86,7 +101,13 @@ const Dashboard = () => {
               </li>
             ))}
           </ul>
-          <button className="view-tasks-btn" onClick={() => alert('All Tasks:\n' + tasksToShow.join('\n'))}>View All Tasks</button>
+          <button
+            className="view-tasks-btn"
+            onClick={e => showTooltip('All Tasks:\n' + tasksToShow.join('\n'), e)}
+            onMouseLeave={hideTooltip}
+          >
+            View All Tasks
+          </button>
         </Card>
 
         {/* Welcome Card (Follow us on LinkedIn + About Us) */}
@@ -137,7 +158,13 @@ const Dashboard = () => {
                 <div><span className="meta-label">Starting Date:</span> <span className="meta-value">{joiningDateText}</span></div>
                 <div><span className="meta-label">Location:</span> <span className="meta-value text-capitalize">{locationText}</span></div>
               </div>
-              <button className="email-hr-btn" onClick={() => alert('Email sent to hr@valuemomentum.com')}>Email HR</button>
+              <button
+                className="email-hr-btn"
+                onClick={e => showTooltip('Email sent to hr@valuemomentum.com', e)}
+                onMouseLeave={hideTooltip}
+              >
+                Email HR
+              </button>
             </div>
           </div>
         </Card>
@@ -153,7 +180,13 @@ const Dashboard = () => {
               </div>
             ))}
           </div>
-          <button className="view-calendar-btn" onClick={() => alert('Upcoming Events:\n' + upcomingEvents.map(e => `${e.title} - ${e.date}`).join('\n'))}>View Calendar</button>
+          <button
+            className="view-calendar-btn"
+            onClick={e => showTooltip('Upcoming Events:\n' + upcomingEvents.map(e => `${e.title} - ${e.date}`).join('\n'), e)}
+            onMouseLeave={hideTooltip}
+          >
+            View Calendar
+          </button>
         </Card>
       </div>
       <div className="dashboard-footer-bar">
@@ -162,6 +195,9 @@ const Dashboard = () => {
         </div>
         <button className="footer-faq-btn" onClick={() => alert('FAQs & Help Center coming soon!')}>FAQs &amp; Help Center</button>
       </div>
+      {tooltip.visible && (
+        <Tooltip text={tooltip.text} x={tooltip.x} y={tooltip.y} />
+      )}
     </div>
   );
 };

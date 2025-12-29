@@ -175,10 +175,26 @@ const ReferenceCheck = () => {
     }
   ];
 
-  const referenceChecksWithMock = (referenceChecks && referenceChecks.length > 0) ? referenceChecks : mockReferences;
+  // Find candidate name by ID utility
+  const getCandidateName = (id) => {
+    const candidateMap = {
+      101: 'Shashank Tudum',
+      102: 'Priya Sharma',
+      103: 'Rahul Verma',
+      104: 'Aditi Singh',
+      105: 'Vikram Patel'
+    };
+    return candidateMap[id] || 'Unknown';
+  };
 
+  // In referenceChecksWithMock, update candidateName
+  const referenceChecksWithMock = (referenceChecks && referenceChecks.length > 0)
+    ? referenceChecks
+    : mockReferences.map(ref => ({ ...ref, candidateName: getCandidateName(ref.candidateId) }));
+
+  // In filteredReferences, use candidateName
   const filteredReferences = (referenceChecksWithMock || []).filter(ref => {
-    const candidate = candidates.find(c => c.id === parseInt(ref.candidateId));
+    const candidate = { name: ref.candidateName };
     const matchesSearch = !searchTerm || 
       ref.referenceName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       (candidate?.name || '').toLowerCase().includes(searchTerm.toLowerCase());
@@ -375,7 +391,7 @@ const ReferenceCheck = () => {
             </div>
           ) : (
             filteredReferences.map(ref => {
-              const candidate = candidates.find(c => c.id === parseInt(ref.candidateId));
+              const candidate = { name: ref.candidateName };
               return (
                 <Card key={ref.id} className="reference-card">
                   <div className="reference-card-header">

@@ -283,3 +283,43 @@
   }
 }
 
+/* Filters */
+.analytics-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.analytics-filters .analytics-search {
+  flex: 2 1 220px;
+  min-width: 180px;
+  max-width: 320px;
+}
+
+.analytics-filters .filter-select {
+  flex: 1 1 140px;
+  min-width: 120px;
+  max-width: 180px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  border: 1px solid #e3e8ee;
+  background: #f7fafc;
+  font-size: 15px;
+}
+
+@media (max-width: 900px) {
+  .analytics-filters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .analytics-filters .analytics-search,
+  .analytics-filters .filter-select {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
