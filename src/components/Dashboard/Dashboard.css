@@ -27,18 +27,18 @@
 .dashboard-main-grid-v2 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
   grid-template-areas:
     "progress pending events"
     "welcome startdate profile";
-  gap: 2em;
+  gap: 2.5em 2em;
   margin-bottom: 2em;
-  align-items: stretch;
-  justify-items: stretch;
   width: 100%;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+  align-items: start;
+  justify-items: center;
 }
 
 .progress-card {
@@ -67,12 +67,24 @@
 }
 
 .dashboard-card {
-  height: 100%;
-  box-sizing: border-box;
+  min-height: 220px;
+  max-width: 370px;
+  width: 100%;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px 0 rgba(60,72,88,0.08);
+  padding: 2em 1.5em;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: stretch;
+  align-items: flex-start;
+  height: auto;
+  transition: box-shadow 0.2s;
+}
+
+.dashboard-card:hover {
+  box-shadow: 0 8px 32px 0 rgba(60,72,88,0.16);
 }
 
 @media (max-width: 1200px) {
@@ -113,15 +125,10 @@
     max-width: 98vw;
   }
   .dashboard-card {
-    height: auto;
+    min-width: 0;
+    max-width: 98vw;
+    padding: 1.2em 0.7em;
   }
-}
-
-.dashboard-card {
-  min-height: 220px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
 }
 
 .dashboard-hero-bg {
