@@ -26,9 +26,80 @@
 
 .dashboard-main-grid-v2 {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2em;
+  margin-bottom: 2em;
+  align-items: stretch;
+}
+
+.progress-card {
+  grid-column: 1;
+}
+
+.pending-tasks-card {
+  grid-column: 2;
+}
+
+.welcome-card {
+  grid-column: 3;
+}
+
+.start-date-card {
+  grid-column: 4;
+}
+
+.profile-detail-card {
+  grid-column: 5;
+}
+
+.start-date-card + .linkedin-btn,
+.start-date-card + .aboutus-btn {
+  display: block;
+  margin-top: 0.5em;
+}
+
+.events-card {
+  grid-column: 1 / span 2;
+  margin-top: 2em;
+}
+
+@media (max-width: 1200px) {
+  .dashboard-main-grid-v2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5em;
+  }
+  .progress-card,
+  .pending-tasks-card,
+  .welcome-card,
+  .start-date-card,
+  .profile-detail-card {
+    grid-column: auto;
+  }
+  .events-card {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 800px) {
+  .dashboard-main-grid-v2 {
+    grid-template-columns: 1fr;
+    gap: 1em;
+  }
+  .progress-card,
+  .pending-tasks-card,
+  .welcome-card,
+  .start-date-card,
+  .profile-detail-card,
+  .events-card {
+    grid-column: auto;
+  }
+}
+
+.dashboard-card {
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .dashboard-hero-bg {
