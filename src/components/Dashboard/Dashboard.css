@@ -29,8 +29,8 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto auto;
   grid-template-areas:
-    "progress pending welcome"
-    "startdate profile events";
+    "progress pending events"
+    "welcome startdate profile";
   gap: 2em;
   margin-bottom: 2em;
   align-items: stretch;
