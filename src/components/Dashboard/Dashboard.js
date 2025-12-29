@@ -138,7 +138,7 @@ const Dashboard = () => {
             <h2 className="section-title">Onboarding Progress</h2>
             <div
               className="progress-donut"
-              style={{ '--progress': progress } as React.CSSProperties}
+              style={{ '--progress': progress }}
             >
               <div className="progress-donut-inner">
                 <span className="progress-donut-value">{progress}%</span>
