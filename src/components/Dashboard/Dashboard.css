@@ -26,40 +26,38 @@
 
 .dashboard-main-grid-v2 {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "progress pending welcome"
+    "startdate profile events";
   gap: 2em;
   margin-bottom: 2em;
   align-items: stretch;
 }
 
 .progress-card {
-  grid-column: 1;
+  grid-area: progress;
 }
 
 .pending-tasks-card {
-  grid-column: 2;
+  grid-area: pending;
 }
 
 .welcome-card {
-  grid-column: 3;
+  grid-area: welcome;
 }
 
 .start-date-card {
-  grid-column: 4;
+  grid-area: startdate;
 }
 
 .profile-detail-card {
-  grid-column: 5;
-}
-
-.start-date-card + .linkedin-btn,
-.start-date-card + .aboutus-btn {
-  display: block;
-  margin-top: 0.5em;
+  grid-area: profile;
 }
 
 .events-card {
-  grid-column: 1 / span 2;
+  grid-area: events;
   margin-top: 2em;
 }
 
@@ -80,9 +78,23 @@
   }
 }
 
+@media (max-width: 1100px) {
+  .dashboard-main-grid-v2 {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "progress pending"
+      "welcome startdate"
+      "profile events";
+    gap: 1.5em;
+  }
+}
+
 @media (max-width: 800px) {
   .dashboard-main-grid-v2 {
     grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-template-areas: none;
     gap: 1em;
   }
   .progress-card,
