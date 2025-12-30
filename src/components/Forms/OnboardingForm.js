@@ -112,6 +112,47 @@ const OnboardingForm = () => {
     handleChange('certifications', [...currentCerts, { name: '', number: '', document: '' }]);
   };
 
+  const handleProfessionalDetailChange = (index, field, value) => {
+    const currentDetails = formValues.professionalDetails || [];
+    const updatedDetails = [...currentDetails];
+    updatedDetails[index] = { ...updatedDetails[index], [field]: value };
+    handleChange('professionalDetails', updatedDetails);
+  };
+
+  const addProfessionalDetail = () => {
+    const currentDetails = formValues.professionalDetails || [];
+    handleChange('professionalDetails', [...currentDetails, { 
+      company: '', 
+      position: '', 
+      startDate: '', 
+      endDate: '', 
+      responsibilities: '',
+      achievements: ''
+    }]);
+  };
+
+  const handleSkillChange = (skillName, rating) => {
+    const currentSkills = formValues.skillsWithRating || [];
+    const existingIndex = currentSkills.findIndex(s => s.name === skillName);
+    let updatedSkills;
+    
+    if (existingIndex >= 0) {
+      updatedSkills = [...currentSkills];
+      updatedSkills[existingIndex] = { name: skillName, rating };
+    } else {
+      updatedSkills = [...currentSkills, { name: skillName, rating }];
+    }
+    
+    handleChange('skillsWithRating', updatedSkills);
+  };
+
+  const addSkill = () => {
+    const skillName = prompt('Enter skill name:');
+    if (skillName && skillName.trim()) {
+      handleSkillChange(skillName.trim(), 0);
+    }
+  };
+
   useEffect(() => {
     return () => {
       if (saveTimeoutRef.current) {
@@ -605,14 +646,126 @@ const OnboardingForm = () => {
                 />
               </div>
               <div className="form-group">
-                <label>Skills</label>
-                <textarea
-                  className="input"
-                  rows="3"
-                  value={formValues.skills || ''}
-                  onChange={(e) => handleChange('skills', e.target.value)}
-                  placeholder="List primary skills and technologies"
-                />
+                <label>Professional Experience</label>
+                <p className="small" style={{ marginBottom: '12px', color: 'var(--muted)' }}>
+                  Add your previous professional experience
+                </p>
+                {(formValues.professionalDetails && formValues.professionalDetails.length > 0 ? formValues.professionalDetails : [{ company: '', position: '', startDate: '', endDate: '', responsibilities: '', achievements: '' }]).map((detail, index) => (
+                  <Card key={index} className="certification-item-card">
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label>Company Name *</label>
+                        <Input
+                          placeholder="Company Name"
+                          value={detail.company || ''}
+                          onChange={(e) => handleProfessionalDetailChange(index, 'company', e.target.value)}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Position *</label>
+                        <Input
+                          placeholder="Job Title"
+                          value={detail.position || ''}
+                          onChange={(e) => handleProfessionalDetailChange(index, 'position', e.target.value)}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label>Start Date *</label>
+                        <Input
+                          type="date"
+                          value={detail.startDate || ''}
+                          onChange={(e) => handleProfessionalDetailChange(index, 'startDate', e.target.value)}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>End Date</label>
+                        <Input
+                          type="date"
+                          value={detail.endDate || ''}
+                          onChange={(e) => handleProfessionalDetailChange(index, 'endDate', e.target.value)}
+                          placeholder="Leave blank if current"
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label>Key Responsibilities</label>
+                      <textarea
+                        className="input"
+                        rows="2"
+                        value={detail.responsibilities || ''}
+                        onChange={(e) => handleProfessionalDetailChange(index, 'responsibilities', e.target.value)}
+                        placeholder="Describe your key responsibilities..."
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Achievements</label>
+                      <textarea
+                        className="input"
+                        rows="2"
+                        value={detail.achievements || ''}
+                        onChange={(e) => handleProfessionalDetailChange(index, 'achievements', e.target.value)}
+                        placeholder="Key achievements in this role..."
+                      />
+                    </div>
+                  </Card>
+                ))}
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={addProfessionalDetail}
+                  style={{ marginTop: '8px', fontSize: '14px' }}
+                >
+                  + Add More Professional Experience
+                </Button>
+              </div>
+
+              <div className="form-group">
+                <label>Skills with Self-Rating</label>
+                <p className="small" style={{ marginBottom: '12px', color: 'var(--muted)' }}>
+                  Add your skills and rate your proficiency level (1-5, where 5 is expert)
+                </p>
+                <div className="skills-container">
+                  {(formValues.skillsWithRating && formValues.skillsWithRating.length > 0 ? formValues.skillsWithRating : []).map((skill, index) => (
+                    <div key={index} className="skill-rating-item">
+                      <div className="skill-name">{skill.name}</div>
+                      <div className="skill-rating">
+                        {[1, 2, 3, 4, 5].map(rating => (
+                          <button
+                            key={rating}
+                            type="button"
+                            className={`rating-star ${skill.rating >= rating ? 'active' : ''}`}
+                            onClick={() => handleSkillChange(skill.name, rating)}
+                            title={`Rate ${rating} out of 5`}
+                          >
+                            ★
+                          </button>
+                        ))}
+                        <span className="rating-value">{skill.rating > 0 ? `${skill.rating}/5` : 'Not rated'}</span>
+                      </div>
+                      <button
+                        type="button"
+                        className="remove-skill-btn"
+                        onClick={() => {
+                          const updated = formValues.skillsWithRating.filter((_, i) => i !== index);
+                          handleChange('skillsWithRating', updated);
+                        }}
+                        title="Remove skill"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={addSkill}
+                  style={{ marginTop: '12px', fontSize: '14px' }}
+                >
+                  + Add Skill
+                </Button>
               </div>
               <div className="form-group">
                 <label>Emergency Contact Name</label>

@@ -27,6 +27,11 @@ const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose }) => {
     { id: 'support', label: 'Support', icon: 'support' }
   ];
 
+  // Alumni users don't get sidebar navigation
+  if (userRole === 'alumni') {
+    return null;
+  }
+
   const menuItems = userRole === 'hr' ? hrMenuItems : candidateMenuItems;
 
   return (

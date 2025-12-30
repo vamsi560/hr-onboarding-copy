@@ -26,6 +26,10 @@ export const AppProvider = ({ children }) => {
     const saved = localStorage.getItem('offerAcceptanceStatus');
     return saved ? saved : null; // null = not responded, 'accepted' = accepted, 'rejected' = rejected
   });
+  const [userInfo, setUserInfo] = useState(() => {
+    const saved = localStorage.getItem('userInfo');
+    return saved ? JSON.parse(saved) : null;
+  });
   const [documents, setDocuments] = useState([]);
   const [candidates, setCandidates] = useState([
     { id: 1, name: 'Sai Surya Vamsi Sapireddy', status: 'ready', docs: 12, total: 12, dept: 'engineering', selected: false, pending: [] },
@@ -184,6 +188,12 @@ export const AppProvider = ({ children }) => {
     }
   }, [offerAcceptanceStatus]);
 
+  useEffect(() => {
+    if (userInfo) {
+      localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    }
+  }, [userInfo]);
+
   const toggleDarkMode = () => {
     setDarkMode(prev => !prev);
   };
@@ -228,6 +238,8 @@ export const AppProvider = ({ children }) => {
     setLocation,
     offerAcceptanceStatus,
     setOfferAcceptanceStatus,
+    userInfo,
+    setUserInfo,
     documents,
     setDocuments,
     addDocument,

@@ -3,6 +3,7 @@ import { useApp } from '../../context/AppContext';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Dashboard from '../Dashboard/Dashboard';
+import AlumniDashboard from '../Dashboard/AlumniDashboard';
 import OnboardingForm from '../Forms/OnboardingForm';
 import Documents from '../Documents/Documents';
 import Validation from '../Validation/Validation';
@@ -44,9 +45,32 @@ const OfferRejectedView = () => {
 };
 
 const MainLayout = ({ onLogout }) => {
-  const { userRole, offerAcceptanceStatus } = useApp();
-  const [activeView, setActiveView] = useState(userRole === 'hr' ? 'hr' : 'dashboard');
+  const { userRole, offerAcceptanceStatus, userInfo } = useApp();
+  const [activeView, setActiveView] = useState(() => {
+    if (userRole === 'hr') return 'hr';
+    if (userRole === 'alumni') return 'alumni';
+    return 'dashboard';
+  });
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+
+  // Show alumni dashboard - limited access
+  if (userRole === 'alumni') {
+    return (
+      <div className="main-layout">
+        <Header 
+          onMenuClick={() => {}} 
+          onLogout={onLogout}
+        />
+        <main className="main-content fade-in">
+          <div className="main-content-wrapper">
+            <AlumniDashboard />
+          </div>
+        </main>
+        <ToastContainer />
+        <LoadingOverlay />
+      </div>
+    );
+  }
 
   // Block portal access for candidates who rejected the offer
   if (userRole === 'candidate' && offerAcceptanceStatus === 'rejected') {
@@ -72,6 +96,7 @@ const MainLayout = ({ onLogout }) => {
 
   const views = {
     dashboard: Dashboard,
+    alumni: AlumniDashboard,
     form: OnboardingForm,
     documents: Documents,
     validation: Validation,

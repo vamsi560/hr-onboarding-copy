@@ -591,3 +591,95 @@ body.dark .file-uploaded-indicator {
   border-color: var(--success);
 }
 
+/* Skills Rating System */
+.skills-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.skill-rating-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.skill-name {
+  min-width: 150px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.skill-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.rating-star {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #ddd;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.rating-star:hover {
+  color: var(--warning);
+  transform: scale(1.1);
+}
+
+.rating-star.active {
+  color: var(--warning);
+}
+
+.rating-value {
+  margin-left: 8px;
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.remove-skill-btn {
+  background: var(--error);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.remove-skill-btn:hover {
+  background: #c82333;
+  transform: scale(1.1);
+}
+
+body.dark .skill-rating-item {
+  background: var(--dark-card);
+  border-color: var(--dark-border);
+}
+
+body.dark .rating-star {
+  color: #555;
+}
+
+body.dark .rating-star.active {
+  color: var(--warning);
+}
+

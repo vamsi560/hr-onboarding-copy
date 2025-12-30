@@ -21,12 +21,14 @@ const upcomingEvents = [
 ];
 
 const Dashboard = () => {
-  const { formData, documents, userRole } = useApp();
+  const { formData, documents, userRole, userInfo } = useApp();
   const [progress, setProgress] = useState(0);
   const [pendingTasks, setPendingTasks] = useState([]);
   const [completedCount, setCompletedCount] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+  const [showJoiningBonus, setShowJoiningBonus] = useState(false);
+  const [showRelocation, setShowRelocation] = useState(false);
 
   useEffect(() => {
     const progressData = calculateProgress(formData, documents);
@@ -36,8 +38,12 @@ const Dashboard = () => {
     setTotalCount(progressData.total);
   }, [formData, documents]);
 
-  // Always show Shashank Tudum as the candidate name
-  const displayName = formData.name || 'Shashank Tudum';
+  // Get display name from userInfo or formData
+  const displayName = userInfo?.name || formData.name || 'Shashank Tudum';
+  
+  // Check eligibility for joining bonus and relocation
+  const hasJoiningBonus = userInfo?.joiningBonus === true;
+  const hasRelocation = userInfo?.relocation === true;
 
   const joiningDateText = formData.joiningDate
     ? new Date(formData.joiningDate).toLocaleDateString()
@@ -161,6 +167,83 @@ const Dashboard = () => {
             </div>
           </div>
         </Card>
+
+        {/* Joining Bonus Card - Only for eligible candidates */}
+        {hasJoiningBonus && (
+          <Card className="dashboard-card joining-bonus-card" style={{ border: '2px solid var(--success)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
+              <h2 className="section-title" style={{ color: 'var(--success)', margin: 0 }}>Joining Bonus</h2>
+              <button 
+                className="info-btn"
+                onClick={() => setShowJoiningBonus(!showJoiningBonus)}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '18px', color: 'var(--success)' }}
+              >
+                {showJoiningBonus ? '▼' : '▶'}
+              </button>
+            </div>
+            <p className="dashboard-subtitle" style={{ marginBottom: '12px' }}>
+              Congratulations! You are eligible for a joining bonus.
+            </p>
+            {showJoiningBonus && (
+              <div className="bonus-details" style={{ marginTop: '16px', padding: '16px', background: 'var(--bg)', borderRadius: '8px' }}>
+                <h4 style={{ marginBottom: '12px', color: 'var(--text)' }}>Bonus Details:</h4>
+                <ul style={{ margin: 0, paddingLeft: '20px', lineHeight: '1.8' }}>
+                  <li><strong>Bonus Amount:</strong> ₹50,000 / $1,000 (one-time payment)</li>
+                  <li><strong>Payment Schedule:</strong> Bonus will be paid in your first salary after successful completion of 3 months</li>
+                  <li><strong>Eligibility Criteria:</strong> Must complete onboarding and join on the agreed start date</li>
+                </ul>
+                <div style={{ marginTop: '16px', padding: '12px', background: 'rgba(40, 167, 69, 0.1)', borderRadius: '6px', borderLeft: '4px solid var(--success)' }}>
+                  <h5 style={{ marginBottom: '8px', color: 'var(--success)' }}>Terms & Conditions:</h5>
+                  <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '13px', lineHeight: '1.6' }}>
+                    <li>Bonus is subject to successful completion of probation period (3 months)</li>
+                    <li>If you leave the company within 12 months, the bonus amount will be recovered</li>
+                    <li>Bonus is taxable as per applicable income tax laws</li>
+                    <li>All disputes will be subject to company policies and local jurisdiction</li>
+                  </ul>
+                </div>
+              </div>
+            )}
+          </Card>
+        )}
+
+        {/* Relocation Card - Only for eligible candidates */}
+        {hasRelocation && (
+          <Card className="dashboard-card relocation-card" style={{ border: '2px solid var(--info)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
+              <h2 className="section-title" style={{ color: 'var(--info)', margin: 0 }}>Relocation Assistance</h2>
+              <button 
+                className="info-btn"
+                onClick={() => setShowRelocation(!showRelocation)}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '18px', color: 'var(--info)' }}
+              >
+                {showRelocation ? '▼' : '▶'}
+              </button>
+            </div>
+            <p className="dashboard-subtitle" style={{ marginBottom: '12px' }}>
+              You are eligible for relocation assistance to help with your move.
+            </p>
+            {showRelocation && (
+              <div className="relocation-details" style={{ marginTop: '16px', padding: '16px', background: 'var(--bg)', borderRadius: '8px' }}>
+                <h4 style={{ marginBottom: '12px', color: 'var(--text)' }}>Relocation Benefits:</h4>
+                <ul style={{ margin: 0, paddingLeft: '20px', lineHeight: '1.8' }}>
+                  <li><strong>Moving Expenses:</strong> Up to ₹1,00,000 / $2,000 reimbursement for moving expenses</li>
+                  <li><strong>Temporary Accommodation:</strong> 30 days of company-provided temporary housing</li>
+                  <li><strong>Travel Allowance:</strong> Economy class airfare for you and immediate family</li>
+                  <li><strong>Shipping:</strong> Reimbursement for shipping personal belongings (up to specified limit)</li>
+                </ul>
+                <div style={{ marginTop: '16px', padding: '12px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '6px', borderLeft: '4px solid var(--info)' }}>
+                  <h5 style={{ marginBottom: '8px', color: 'var(--info)' }}>Important Information:</h5>
+                  <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '13px', lineHeight: '1.6' }}>
+                    <li>All expenses must be supported by valid receipts and invoices</li>
+                    <li>Reimbursement will be processed after submission of documents</li>
+                    <li>Relocation benefits must be utilized within 90 days of joining</li>
+                    <li>Contact HR for relocation coordinator contact details</li>
+                  </ul>
+                </div>
+              </div>
+            )}
+          </Card>
+        )}
 
         {/* Upcoming Events Card */}
         <Card className="dashboard-card events-card">

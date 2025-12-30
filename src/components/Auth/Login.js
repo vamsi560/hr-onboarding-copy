@@ -4,6 +4,7 @@ import Button from '../UI/Button';
 import Input from '../UI/Input';
 import { useToast } from '../../context/ToastContext';
 import { useApp } from '../../context/AppContext';
+import { authenticateUser, DEFAULT_CANDIDATE } from '../../utils/userConfig';
 import './Login.css';
 
 const Login = ({ onLogin, onDemo }) => {
@@ -14,7 +15,7 @@ const Login = ({ onLogin, onDemo }) => {
   const [loginType, setLoginType] = useState('candidate');
   const [location, setLocation] = useState('india');
   const { showToast } = useToast();
-  const { setUserRole, setLocation: setAppLocation, logAction } = useApp();
+  const { setUserRole, setLocation: setAppLocation, setUserInfo, logAction } = useApp();
 
   useEffect(() => {
     setIsAnimating(true);
@@ -47,17 +48,25 @@ const Login = ({ onLogin, onDemo }) => {
       return;
     }
     
-    // Persist selected role and location into app context
-    const role = loginType === 'hr' ? 'hr' : 'candidate';
-    setUserRole(role);
-    setAppLocation(location);
+    // Authenticate user
+    const authenticatedUser = authenticateUser(email, password);
+    
+    if (!authenticatedUser) {
+      showToast('Invalid email or password', 'error');
+      return;
+    }
+    
+    // Set user info and role
+    setUserInfo(authenticatedUser);
+    setUserRole(authenticatedUser.role);
+    setAppLocation(authenticatedUser.location);
 
     if (logAction) {
-      logAction('login', { email, role, location });
+      logAction('login', { email, role: authenticatedUser.role, location: authenticatedUser.location });
     }
 
     onLogin();
-    showToast('Login successful!', 'success');
+    showToast(`Welcome, ${authenticatedUser.name}!`, 'success');
   };
 
   return (
@@ -180,7 +189,14 @@ const Login = ({ onLogin, onDemo }) => {
               <Button 
                 type="button" 
                 variant="secondary" 
-                onClick={onDemo}
+                onClick={() => {
+                  // Demo mode with default candidate
+                  setUserInfo(DEFAULT_CANDIDATE);
+                  setUserRole(DEFAULT_CANDIDATE.role);
+                  setAppLocation(DEFAULT_CANDIDATE.location);
+                  onDemo();
+                  showToast('Demo mode activated', 'info');
+                }}
                 className="login-button-demo"
               >
                 Try Demo Mode
