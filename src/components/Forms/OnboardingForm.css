@@ -547,3 +547,47 @@
   }
 }
 
+/* Resume Upload Section */
+.resume-upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.file-uploaded-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--bg);
+  border: 1px solid var(--success);
+  border-radius: 6px;
+  color: var(--success);
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.file-uploaded-indicator .valid-icon {
+  color: var(--success);
+}
+
+/* Autofill Prompt */
+.autofill-prompt {
+  margin: 20px 0;
+}
+
+.autofill-prompt .card {
+  border: 2px solid var(--info);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(59, 130, 246, 0.02) 100%);
+}
+
+body.dark .autofill-prompt .card {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+  border-color: var(--info);
+}
+
+body.dark .file-uploaded-indicator {
+  background: var(--dark-card);
+  border-color: var(--success);
+}
+

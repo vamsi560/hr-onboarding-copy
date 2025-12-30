@@ -1,0 +1,127 @@
+.offer-acceptance-content {
+  padding: 8px;
+}
+
+.offer-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.offer-header h2 {
+  color: var(--brand);
+  margin-bottom: 8px;
+  font-size: 24px;
+}
+
+.offer-subtitle {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.offer-details {
+  margin-bottom: 24px;
+}
+
+.offer-section {
+  margin-bottom: 20px;
+}
+
+.offer-section h3 {
+  font-size: 16px;
+  color: var(--brand);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.offer-info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.offer-info-row:last-child {
+  border-bottom: none;
+}
+
+.offer-label {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.offer-value {
+  color: var(--muted);
+}
+
+.offer-description {
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.offer-benefits {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.offer-benefits li {
+  padding: 6px 0;
+  padding-left: 24px;
+  position: relative;
+  color: var(--text);
+}
+
+.offer-benefits li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--success);
+  font-weight: bold;
+}
+
+.offer-note {
+  background: var(--bg);
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 4px solid var(--info);
+  margin-top: 20px;
+}
+
+.offer-note p {
+  margin: 0;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.offer-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.offer-accept-btn {
+  min-width: 140px;
+}
+
+.offer-reject-btn {
+  min-width: 140px;
+}
+
+body.dark .offer-note {
+  background: var(--dark-card);
+  border-left-color: var(--info);
+}
+
+body.dark .offer-info-row {
+  border-bottom-color: var(--dark-border);
+}
+
+body.dark .offer-actions {
+  border-top-color: var(--dark-border);
+}
+

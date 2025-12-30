@@ -3,7 +3,7 @@ import { useApp } from '../../context/AppContext';
 import Card from '../UI/Card';
 import ProgressBar from '../UI/ProgressBar';
 import Breadcrumbs from '../UI/Breadcrumbs';
-import Modal from '../UI/Modal';
+import OfferAcceptance from '../Auth/OfferAcceptance';
 import { calculateProgress } from '../../utils/progress';
 import './Dashboard.css';
 
@@ -53,38 +53,9 @@ const Dashboard = () => {
   ];
   const tasksToShow = pendingTasks.length > 0 ? pendingTasks : mockPendingTasks;
 
-  // Show welcome modal for candidate login only
-  useEffect(() => {
-    if (userRole === 'candidate') {
-      setShowWelcomeModal(true);
-      const timer = setTimeout(() => setShowWelcomeModal(false), 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [userRole]);
-
   return (
     <div className="dashboard">
-      <Modal isOpen={showWelcomeModal} onClose={() => setShowWelcomeModal(false)} title={`Welcome, ${displayName}!`}>
-        <div style={{ whiteSpace: 'pre-line', fontSize: 15 }}>
-          {`Dear ${displayName},
-Warm greetings from ValueMomentum!
-We’re excited to have you onboard and are glad to welcome you to our Onboarding Portal.
-This portal is designed to help you get started even before Day 1. Here, you can:
-• Complete required documentation
-• Review important onboarding information
-• Track your pre-joining tasks and progress
-• Get familiar with our culture, values, and ways of working. Follow us on LinkedIn and explore the “About ValueMomentum” section to learn more about our Journey.
-
-Please take some time to go through the sections available in the portal and complete the assigned actions within the timelines mentioned. This will help ensure a smooth and hassle-free joining experience.
-
-If you have any questions or need assistance at any stage, feel free to reach out to the HR team using the chat support provided in the portal.
-
-We’re looking forward to welcoming you soon and wish you a great start to your journey with ValueMomentum!!
-
-Warm regards,
-Team HR, ValueMomentum`}
-        </div>
-      </Modal>
+      <OfferAcceptance />
       <div className="dashboard-hero-text dashboard-hero-bg">
         <h1 className="dashboard-title">Welcome, {displayName}!</h1>
         <p className="dashboard-subtitle">Get Started on Your Journey with Us</p>

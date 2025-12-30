@@ -258,7 +258,7 @@ const HRReview = () => {
                   <option value="joined">Joined</option>
                   <option value="offer_revoked">Offer Revoked</option>
                   <option value="rejected">Rejected</option>
-                  <option value="absconded">Absconded</option>
+                  <option value="absconded">No show</option>
                 </select>
               </div>
               <div className="form-group">

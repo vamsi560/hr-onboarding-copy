@@ -18,7 +18,8 @@ const Documents = () => {
 
   const documentCategories = {
     identity: [
-      'Identity: Aadhaar / Passport',
+      'Aadhaar Card',
+      'Passport',
       'Visa (if applicable)',
       'Recent passport-size photo'
     ],
@@ -30,7 +31,14 @@ const Documents = () => {
     ],
     financial: [
       'Last three months pay slips',
-      'Bank account statement - 6 months'
+      'Bank account statement - 6 months',
+      'Form 12b'
+    ],
+    experience: [
+      'Experience Letter from Previous Company 1',
+      'Experience Letter from Previous Company 2',
+      'Relieving Letter from Previous Company',
+      'Salary Certificate from Previous Company'
     ],
     resumes: [
       'ValueMomentum Format Resume',
@@ -139,7 +147,8 @@ Date: ______________________________________________________
 
 
   const documentTypes = [
-    { id: 'aadhar', name: 'Aadhaar / Passport', category: 'identity' },
+    { id: 'aadhar', name: 'Aadhaar Card', category: 'identity' },
+    { id: 'passport', name: 'Passport', category: 'identity' },
     { id: 'visa', name: 'Visa Document', category: 'identity' },
     { id: 'photo', name: 'Passport Size Photo', category: 'identity' },
     { id: 'secondary', name: 'Secondary Education (10th)', category: 'education' },
@@ -148,6 +157,11 @@ Date: ______________________________________________________
     { id: 'postGraduation', name: 'Post Graduation Degree (if applicable)', category: 'education' },
     { id: 'payslip', name: 'Last 3 Months Pay Slips', category: 'financial' },
     { id: 'pf', name: 'Bank account statement - 6 months', category: 'financial' },
+    { id: 'form12b', name: 'Form 12b', category: 'financial' },
+    { id: 'expLetter1', name: 'Experience Letter from Previous Company 1', category: 'experience' },
+    { id: 'expLetter2', name: 'Experience Letter from Previous Company 2', category: 'experience' },
+    { id: 'relievingLetter', name: 'Relieving Letter from Previous Company', category: 'experience' },
+    { id: 'salaryCert', name: 'Salary Certificate from Previous Company', category: 'experience' },
     { id: 'resume1', name: 'ValueMomentum Format Resume', category: 'resumes' },
     { id: 'resume2', name: 'Personal Resume', category: 'resumes' },
     { id: 'nda', name: 'NDA / Contract', category: 'other' },
@@ -333,6 +347,44 @@ Date: ______________________________________________________
             </div>
           </div>
 
+          {/* Experience Documents Category */}
+          <div className="document-category-section">
+            <h4 className="category-title">Experience Documents</h4>
+            <p className="category-description">Upload experience-related documents from your previous companies</p>
+            <div className="document-types-grid">
+              {documentTypes.filter(dt => dt.category === 'experience').map(docType => {
+                const uploadedDoc = getDocumentStatus(docType.id);
+                return (
+                  <Card 
+                    key={docType.id} 
+                    className={`document-type-card ${uploadedDoc ? 'uploaded' : ''}`}
+                    onClick={() => {
+                      if (!fileInputRefs.current[docType.id]) {
+                        fileInputRefs.current[docType.id] = document.createElement('input');
+                        fileInputRefs.current[docType.id].type = 'file';
+                        fileInputRefs.current[docType.id].accept = '.pdf,.doc,.docx,.jpg,.png';
+                        fileInputRefs.current[docType.id].onchange = (e) => handleDocumentUpload(docType.id, e);
+                      }
+                      fileInputRefs.current[docType.id].click();
+                    }}
+                  >
+                    <h5>{docType.name}</h5>
+                    {uploadedDoc ? (
+                      <div className="document-status">
+                        <span className="status-badge status-uploaded">Uploaded</span>
+                        <div className="small" style={{ marginTop: '4px' }}>{uploadedDoc.file}</div>
+                      </div>
+                    ) : (
+                      <div className="document-status">
+                        <span className="status-badge status-pending">Pending</span>
+                      </div>
+                    )}
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+
           {/* Resumes Category */}
           <div className="document-category-section">
             <h4 className="category-title">Resumes</h4>
@@ -463,6 +515,7 @@ Date: ______________________________________________________
             <option value="identity">Government ID</option>
             <option value="education">Education</option>
             <option value="financial">Financial</option>
+            <option value="experience">Experience Documents</option>
             <option value="resumes">Resumes</option>
             <option value="other">Other</option>
           </select>

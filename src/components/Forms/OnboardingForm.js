@@ -120,6 +120,25 @@ const OnboardingForm = () => {
     };
   }, []);
 
+  const handleAutofill = async (source) => {
+    showToast(`Autofilling data from ${source}...`, 'info');
+    // Simulate autofill - in real implementation, this would parse resume or fetch LinkedIn data
+    setTimeout(() => {
+      const autofilledData = {
+        firstName: formValues.firstName || 'John',
+        lastName: formValues.lastName || 'Doe',
+        email: formValues.email || 'john.doe@example.com',
+        mobile: formValues.mobile || '+1 555 555 5555',
+        address: formValues.address || '123 Main St, City, State',
+        designation: formValues.designation || 'Software Engineer',
+        skills: formValues.skills || 'JavaScript, React, Node.js'
+      };
+      setFormValues(prev => ({ ...prev, ...autofilledData }));
+      handleChange('autofilled', true);
+      showToast(`Data autofilled from ${source}. Please review and update as needed.`, 'success');
+    }, 1500);
+  };
+
   const validateStep = (step) => {
     const step1Fields = ['firstName', 'lastName', 'email', 'mobile'];
     if (step === 1) {
@@ -188,8 +207,8 @@ const OnboardingForm = () => {
         <div className="step-indicator">
           {[
             { num: 1, label: 'Personal' },
-            { num: 2, label: 'Professional' },
-            { num: 3, label: 'Additional' },
+            { num: 2, label: 'Educational' },
+            { num: 3, label: 'Professional' },
             { num: 4, label: 'Consent' }
           ].map((step, index) => (
             <React.Fragment key={step.num}>
@@ -209,6 +228,106 @@ const OnboardingForm = () => {
           {currentStep === 1 && (
             <div className="form-step">
               <h4>Personal Information</h4>
+              
+              {/* Resume Upload and LinkedIn Section */}
+              <div className="form-group">
+                <label>
+                  Upload Resume
+                  <Tooltip content="Upload your resume in PDF or Word format. We can autofill your information from the resume.">
+                    <Icon name="info" size={14} className="field-help-icon" />
+                  </Tooltip>
+                </label>
+                <div className="resume-upload-section">
+                  <input
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    className="input"
+                    onChange={(e) => {
+                      const file = e.target.files && e.target.files[0];
+                      if (file) {
+                        handleChange('resumeFile', file.name);
+                        showToast('Resume uploaded successfully', 'success');
+                      }
+                    }}
+                  />
+                  {formValues.resumeFile && (
+                    <div className="file-uploaded-indicator">
+                      <Icon name="check" size={16} className="field-status-icon valid-icon" />
+                      <span>{formValues.resumeFile}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label>
+                  LinkedIn Profile URL
+                  <Tooltip content="Enter your LinkedIn profile URL. We can autofill your professional information from LinkedIn.">
+                    <Icon name="info" size={14} className="field-help-icon" />
+                  </Tooltip>
+                </label>
+                <div className="input-wrapper">
+                  <Input
+                    type="url"
+                    value={formValues.linkedinUrl || ''}
+                    onChange={(e) => handleChange('linkedinUrl', e.target.value)}
+                    onBlur={() => handleBlur('linkedinUrl')}
+                    placeholder="https://www.linkedin.com/in/yourprofile"
+                    className={fieldErrors.linkedinUrl ? 'error' : touchedFields.linkedinUrl && formValues.linkedinUrl && !fieldErrors.linkedinUrl ? 'valid' : ''}
+                  />
+                  {touchedFields.linkedinUrl && formValues.linkedinUrl && !fieldErrors.linkedinUrl && (
+                    <Icon name="check" size={16} className="field-status-icon valid-icon" />
+                  )}
+                  {fieldErrors.linkedinUrl && (
+                    <Icon name="x" size={16} className="field-status-icon error-icon" />
+                  )}
+                </div>
+                {fieldErrors.linkedinUrl && (
+                  <div className="field-error-message">
+                    <Icon name="alert" size={14} />
+                    {fieldErrors.linkedinUrl}
+                  </div>
+                )}
+              </div>
+
+              {/* Autofill Option */}
+              {(formValues.resumeFile || formValues.linkedinUrl) && !formValues.autofilled && (
+                <div className="autofill-prompt">
+                  <Card style={{ padding: '16px', background: 'var(--bg)', border: '1px solid var(--border)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+                      <div>
+                        <strong>Autofill Form Data?</strong>
+                        <p className="small" style={{ marginTop: '4px', marginBottom: 0 }}>
+                          We can automatically fill your form using the uploaded resume or LinkedIn profile.
+                        </p>
+                      </div>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        {formValues.resumeFile && (
+                          <Button
+                            type="button"
+                            variant="secondary"
+                            onClick={() => handleAutofill('resume')}
+                            style={{ fontSize: '14px' }}
+                          >
+                            Autofill from Resume
+                          </Button>
+                        )}
+                        {formValues.linkedinUrl && (
+                          <Button
+                            type="button"
+                            variant="secondary"
+                            onClick={() => handleAutofill('LinkedIn')}
+                            style={{ fontSize: '14px' }}
+                          >
+                            Autofill from LinkedIn
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  </Card>
+                </div>
+              )}
+
               <div className="form-row">
                 <div className="form-group">
                   <label>
@@ -376,72 +495,19 @@ const OnboardingForm = () => {
             </div>
           )}
 
-          {/* Step 2: Professional Details */}
+          {/* Step 2: Educational Information */}
           {currentStep === 2 && (
             <div className="form-step">
-              <h4>Professional Details</h4>
-              <div className="form-group">
-                <label>Designation</label>
-                <Input
-                  value={formValues.designation || ''}
-                  onChange={(e) => handleChange('designation', e.target.value)}
-                  placeholder="Software Engineer"
-                />
-              </div>
-              <div className="form-group">
-                <label>Department</label>
-                <select
-                  className="input"
-                  value={formValues.department || ''}
-                  onChange={(e) => handleChange('department', e.target.value)}
-                >
-                  <option value="">Select Department</option>
-                  <option value="engineering">Engineering</option>
-                  <option value="sales">Sales</option>
-                  <option value="hr">HR</option>
-                  <option value="finance">Finance</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <label>Date of Joining</label>
-                <Input
-                  type="date"
-                  value={formValues.joiningDate || ''}
-                  onChange={(e) => handleChange('joiningDate', e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <label>
-                  LinkedIn URL
-                  <Tooltip content="Enter your LinkedIn profile URL (e.g., https://www.linkedin.com/in/yourprofile)">
-                    <Icon name="info" size={14} className="field-help-icon" />
-                  </Tooltip>
-                </label>
-                <div className="input-wrapper">
-                  <Input
-                    type="url"
-                    value={formValues.linkedinUrl || ''}
-                    onChange={(e) => handleChange('linkedinUrl', e.target.value)}
-                    onBlur={() => handleBlur('linkedinUrl')}
-                    placeholder="https://www.linkedin.com/in/yourprofile"
-                    className={fieldErrors.linkedinUrl ? 'error' : touchedFields.linkedinUrl && formValues.linkedinUrl && !fieldErrors.linkedinUrl ? 'valid' : ''}
-                  />
-                  {touchedFields.linkedinUrl && formValues.linkedinUrl && !fieldErrors.linkedinUrl && (
-                    <Icon name="check" size={16} className="field-status-icon valid-icon" />
-                  )}
-                  {fieldErrors.linkedinUrl && (
-                    <Icon name="x" size={16} className="field-status-icon error-icon" />
-                  )}
-                </div>
-                {fieldErrors.linkedinUrl && (
-                  <div className="field-error-message">
-                    <Icon name="alert" size={14} />
-                    {fieldErrors.linkedinUrl}
-                  </div>
-                )}
-              </div>
+              <h4>Educational Information</h4>
+              <p className="small" style={{ marginBottom: '20px', color: 'var(--muted)' }}>
+                Please provide your educational qualifications and certifications.
+              </p>
+              
               <div className="form-group">
                 <label>Certifications</label>
+                <p className="small" style={{ marginBottom: '12px', color: 'var(--muted)' }}>
+                  Add any professional certifications you hold
+                </p>
                 {(formValues.certifications && formValues.certifications.length > 0 ? formValues.certifications : [{ name: '', number: '', document: '' }]).map((cert, index) => (
                   <Card key={index} className="certification-item-card">
                     <div className="form-row">
@@ -485,6 +551,59 @@ const OnboardingForm = () => {
                   + Add More Certifications
                 </Button>
               </div>
+
+              <div className="form-group">
+                <label>Additional Educational Notes</label>
+                <textarea
+                  className="input"
+                  rows="3"
+                  value={formValues.educationalNotes || ''}
+                  onChange={(e) => handleChange('educationalNotes', e.target.value)}
+                  placeholder="Any additional educational information or achievements..."
+                />
+              </div>
+
+              <div className="form-actions">
+                <Button type="button" variant="secondary" onClick={prevStep}>Previous</Button>
+                <Button type="button" onClick={nextStep}>Next</Button>
+              </div>
+            </div>
+          )}
+
+          {/* Step 3: Professional Information */}
+          {currentStep === 3 && (
+            <div className="form-step">
+              <h4>Professional Information</h4>
+              <div className="form-group">
+                <label>Designation</label>
+                <Input
+                  value={formValues.designation || ''}
+                  onChange={(e) => handleChange('designation', e.target.value)}
+                  placeholder="Software Engineer"
+                />
+              </div>
+              <div className="form-group">
+                <label>Department</label>
+                <select
+                  className="input"
+                  value={formValues.department || ''}
+                  onChange={(e) => handleChange('department', e.target.value)}
+                >
+                  <option value="">Select Department</option>
+                  <option value="engineering">Engineering</option>
+                  <option value="sales">Sales</option>
+                  <option value="hr">HR</option>
+                  <option value="finance">Finance</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label>Date of Joining</label>
+                <Input
+                  type="date"
+                  value={formValues.joiningDate || ''}
+                  onChange={(e) => handleChange('joiningDate', e.target.value)}
+                />
+              </div>
               <div className="form-group">
                 <label>Skills</label>
                 <textarea
@@ -495,17 +614,6 @@ const OnboardingForm = () => {
                   placeholder="List primary skills and technologies"
                 />
               </div>
-              <div className="form-actions">
-                <Button type="button" variant="secondary" onClick={prevStep}>Previous</Button>
-                <Button type="button" onClick={nextStep}>Next</Button>
-              </div>
-            </div>
-          )}
-
-          {/* Step 3: Additional Information */}
-          {currentStep === 3 && (
-            <div className="form-step">
-              <h4>Additional Information</h4>
               <div className="form-group">
                 <label>Emergency Contact Name</label>
                 <Input
@@ -673,9 +781,29 @@ const OnboardingForm = () => {
                   </label>
                 </div>
                 {formValues.hasVisa === 'yes' && (
-                  <div className="small">
-                    Please upload your Visa document under the <strong>Government ID</strong> category in the Documents tab.
-                  </div>
+                  <>
+                    <div className="form-group" style={{ marginTop: '12px' }}>
+                      <label>Visa Type *</label>
+                      <select
+                        className="input"
+                        value={formValues.visaType || ''}
+                        onChange={(e) => handleChange('visaType', e.target.value)}
+                        required={formValues.hasVisa === 'yes'}
+                      >
+                        <option value="">Select Visa Type</option>
+                        <option value="H1B">H1B</option>
+                        <option value="L1">L1</option>
+                        <option value="F1">F1</option>
+                        <option value="B1/B2">B1/B2</option>
+                        <option value="Work Permit">Work Permit</option>
+                        <option value="Permanent Resident">Permanent Resident</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div className="small">
+                      Please upload your Visa document under the <strong>Government ID</strong> category in the Documents tab.
+                    </div>
+                  </>
                 )}
               </div>
 

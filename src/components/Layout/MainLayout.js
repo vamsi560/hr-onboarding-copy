@@ -19,12 +19,56 @@ import Support from '../Support/Support';
 import ChatWidget from '../Chat/ChatWidget';
 import ToastContainer from '../UI/ToastContainer';
 import LoadingOverlay from '../UI/LoadingOverlay';
+import OfferAcceptance from '../Auth/OfferAcceptance';
+import Card from '../UI/Card';
 import './MainLayout.css';
 
+const OfferRejectedView = () => {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh', padding: '20px' }}>
+      <Card style={{ maxWidth: '600px', textAlign: 'center' }}>
+        <h2 style={{ color: 'var(--error)', marginBottom: '16px' }}>Offer Rejected</h2>
+        <p style={{ color: 'var(--muted)', marginBottom: '24px', lineHeight: '1.6' }}>
+          Thank you for your interest in ValueMomentum. 
+          The onboarding portal is not available as the offer has been rejected.
+        </p>
+        <p style={{ color: 'var(--muted)', fontSize: '14px' }}>
+          If you have any questions, please contact HR at{' '}
+          <a href="mailto:hr@valuemomentum.com" style={{ color: 'var(--brand)' }}>
+            hr@valuemomentum.com
+          </a>
+        </p>
+      </Card>
+    </div>
+  );
+};
+
 const MainLayout = ({ onLogout }) => {
-  const { userRole } = useApp();
+  const { userRole, offerAcceptanceStatus } = useApp();
   const [activeView, setActiveView] = useState(userRole === 'hr' ? 'hr' : 'dashboard');
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+
+  // Block portal access for candidates who rejected the offer
+  if (userRole === 'candidate' && offerAcceptanceStatus === 'rejected') {
+    return (
+      <div className="main-layout">
+        <Header 
+          onMenuClick={() => {}} 
+          onLogout={onLogout}
+        />
+        <main className="main-content fade-in">
+          <div className="main-content-wrapper">
+            <OfferRejectedView />
+          </div>
+        </main>
+        <ToastContainer />
+        <LoadingOverlay />
+      </div>
+    );
+  }
+
+  // Show offer acceptance modal if candidate hasn't responded yet
+  const showOfferModal = userRole === 'candidate' && offerAcceptanceStatus === null;
 
   const views = {
     dashboard: Dashboard,
@@ -58,6 +102,7 @@ const MainLayout = ({ onLogout }) => {
 
   return (
     <div className="main-layout">
+      {showOfferModal && <OfferAcceptance />}
       <Sidebar
         activeView={activeView}
         onNavClick={handleNavClick}
@@ -73,7 +118,7 @@ const MainLayout = ({ onLogout }) => {
           <ActiveComponent />
         </div>
       </main>
-      <ChatWidget />
+      {!showOfferModal && <ChatWidget />}
       <ToastContainer />
       <LoadingOverlay />
     </div>
