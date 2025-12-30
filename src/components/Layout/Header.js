@@ -54,8 +54,8 @@ const Header = ({ onMenuClick, onLogout }) => {
     if (showUserMenu && avatarBtnRef.current) {
       const rect = avatarBtnRef.current.getBoundingClientRect();
       setUserMenuPosition({
-        top: rect.bottom + window.scrollY + 6, // 6px gap
-        left: rect.right - 180 + window.scrollX // align right edge, 180px is dropdown width
+        top: rect.bottom + 6, // 6px gap below button
+        left: rect.right - 180 // align right edge, 180px is dropdown width
       });
     }
   }, [showUserMenu]);
@@ -174,7 +174,7 @@ const Header = ({ onMenuClick, onLogout }) => {
           {showUserMenu && ReactDOM.createPortal(
             <div
               className="user-menu-dropdown user-menu-dropdown-small user-menu-dropdown-portal"
-              style={{ position: 'absolute', top: userMenuPosition.top, left: userMenuPosition.left, zIndex: 2000 }}
+              style={{ position: 'fixed', top: userMenuPosition.top, left: userMenuPosition.left, zIndex: 2000 }}
             >
               <div className="user-menu-header">
                 <div className="user-menu-avatar header-avatar-hr-small">
@@ -194,7 +194,7 @@ const Header = ({ onMenuClick, onLogout }) => {
                 <button className="user-menu-item"><Icon name="user" size={16} /><span>Profile</span></button>
                 <button className="user-menu-item"><Icon name="settings" size={16} /><span>Settings</span></button>
                 <div className="user-menu-divider"></div>
-                <button className="user-menu-item" onClick={onLogout}><Icon name="logout" size={16} /><span>Logout</span></button>
+                <button className="user-menu-item" type="button" onClick={() => { setShowUserMenu(false); if (onLogout) onLogout(); }}><Icon name="logout" size={16} /><span>Logout</span></button>
               </div>
             </div>,
             document.body
