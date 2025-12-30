@@ -36,9 +36,16 @@ const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose }) => {
           {/* User Profile Section */}
           <div className="sidebar-profile">
             <div className="profile-avatar">
-              <div className="avatar-circle">
-                {userRole === 'hr' ? 'RR' : 'ST'}
-              </div>
+              {userRole === 'hr' ? (
+                <div className="avatar-circle">RR</div>
+              ) : (
+                <img
+                  src={process.env.PUBLIC_URL + '/images/shashank.jpg'}
+                  alt="Shashank Tudum"
+                  className="sidebar-avatar-img"
+                  style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover', border: '2px solid #e0e0e0' }}
+                />
+              )}
             </div>
             <div className="profile-name">
               {userRole === 'hr' ? 'Raghavendra Raju' : 'Shashank Tudum'}

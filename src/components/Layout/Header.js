@@ -141,12 +141,19 @@ const Header = ({ onMenuClick, onLogout }) => {
           <button 
             className="header-user-btn"
             onClick={() => setShowUserMenu(!showUserMenu)}
+            aria-label="User menu"
+            title="User menu"
           >
-            <div className="user-avatar-small">
-              {userRole === 'hr' ? 'RR' : 'ST'}
-            </div>
-            <span className="user-name">{userRole === 'hr' ? 'Raghavendra Raju' : 'Shashank Tudum'}</span>
-            <Icon name="chevronDown" size={16} />
+            {userRole === 'hr' ? (
+              <div className="avatar-circle">RR</div>
+            ) : (
+              <img
+                src={process.env.PUBLIC_URL + '/images/shashank.jpg'}
+                alt="Shashank Tudum"
+                className="header-avatar-img"
+                style={{ width: 36, height: 36, borderRadius: '50%', objectFit: 'cover', border: '2px solid #e0e0e0' }}
+              />
+            )}
           </button>
           {showUserMenu && (
             <div className="user-menu-dropdown">
