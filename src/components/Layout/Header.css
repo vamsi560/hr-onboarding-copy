@@ -327,6 +327,21 @@
   flex-shrink: 0;
 }
 
+.avatar-circle.header-avatar-hr {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand2) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border: 2px solid #e0e0e0;
+  box-sizing: border-box;
+}
+
 .user-name {
   font-size: 14px;
   font-weight: 500;
@@ -469,6 +484,22 @@ body.dark .user-menu-item:hover {
 }
 
 @media (max-width: 600px) {
+  .app-header {
+    padding: 0 8px;
+    height: 54px;
+  }
+  .header-logo-image {
+    height: 22px;
+  }
+  .header-user-btn .avatar-circle.header-avatar-hr,
+  .header-avatar-img {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 12px !important;
+  }
+  .header-user-btn {
+    padding: 4px 6px;
+  }
   .header-search {
     display: none;
   }

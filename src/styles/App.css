@@ -25,3 +25,13 @@
   }
 }
 
+@media (max-width: 600px) {
+  .app-container {
+    padding: 4px 0;
+    gap: 8px;
+    max-width: 100vw;
+    min-width: 0;
+    margin: 0;
+  }
+}
+

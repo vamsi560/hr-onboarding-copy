@@ -29,6 +29,10 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   margin-bottom: 24px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 24px;
 }
 
 .dashboard-hero-bg {
@@ -953,6 +957,10 @@
   .dashboard-main-grid {
     grid-template-columns: 1fr;
   }
+  .dashboard-main-grid-v2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -978,6 +986,31 @@
 
   .stat-mini {
     flex: 1;
+  }
+
+  .dashboard-main-grid-v2 {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .dashboard-card {
+    padding: 12px 8px !important;
+    border-radius: 10px;
+  }
+  .profile-detail-avatar {
+    width: 48px;
+    height: 48px;
+  }
+  .welcome-video-iframe,
+  .welcome-video-wrapper {
+    min-height: 180px;
+    height: 180px;
+    border-radius: 10px;
+  }
+  .dashboard-title {
+    font-size: 22px;
+  }
+  .dashboard-subtitle {
+    font-size: 13px;
   }
 }
 

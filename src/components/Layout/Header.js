@@ -145,7 +145,7 @@ const Header = ({ onMenuClick, onLogout }) => {
             title="User menu"
           >
             {userRole === 'hr' ? (
-              <div className="avatar-circle">RR</div>
+              <div className="avatar-circle header-avatar-hr">RR</div>
             ) : (
               <img
                 src={process.env.PUBLIC_URL + '/images/shashank.jpg'}
