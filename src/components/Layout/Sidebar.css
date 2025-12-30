@@ -1,5 +1,6 @@
 .sidebar {
   width: 260px;
+  max-width: 100vw;
   background: #1e3a5f;
   min-height: 100vh;
   position: fixed;
@@ -8,6 +9,7 @@
   z-index: 100;
   transition: transform 0.3s ease;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  overflow-x: hidden;
 }
 
 .sidebar-content {
@@ -15,6 +17,8 @@
   flex-direction: column;
   height: 100vh;
   padding: 24px 0;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 /* User Profile Section */
