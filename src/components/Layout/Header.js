@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import { useApp } from '../../context/AppContext';
 import Icon from '../UI/Icon';
 import './Header.css';
@@ -155,7 +156,7 @@ const Header = ({ onMenuClick, onLogout }) => {
               />
             )}
           </button>
-          {showUserMenu && (
+          {showUserMenu && ReactDOM.createPortal(
             <div className="user-menu-dropdown user-menu-dropdown-small">
               <div className="user-menu-header">
                 <div className="user-menu-avatar header-avatar-hr-small">
@@ -177,7 +178,8 @@ const Header = ({ onMenuClick, onLogout }) => {
                 <div className="user-menu-divider"></div>
                 <button className="user-menu-item" onClick={onLogout}><Icon name="logout" size={16} /><span>Logout</span></button>
               </div>
-            </div>
+            </div>,
+            document.body
           )}
         </div>
       </div>
