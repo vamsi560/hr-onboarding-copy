@@ -21,7 +21,7 @@ const upcomingEvents = [
 ];
 
 const Dashboard = () => {
-  const { formData, documents, userType } = useApp();
+  const { formData, documents, userRole } = useApp();
   const [progress, setProgress] = useState(0);
   const [pendingTasks, setPendingTasks] = useState([]);
   const [completedCount, setCompletedCount] = useState(0);
@@ -55,12 +55,12 @@ const Dashboard = () => {
 
   // Show welcome modal for candidate login only
   useEffect(() => {
-    if (userType === 'candidate') {
+    if (userRole === 'candidate') {
       setShowWelcomeModal(true);
       const timer = setTimeout(() => setShowWelcomeModal(false), 5000);
       return () => clearTimeout(timer);
     }
-  }, [userType]);
+  }, [userRole]);
 
   return (
     <div className="dashboard">
@@ -128,8 +128,8 @@ Team HR, ValueMomentum`}
 
         {/* Welcome Card (Follow us on LinkedIn + About Us) */}
         <Card className="dashboard-card welcome-card">
-          <h2 className="section-title">Welcome to the Team!</h2>
-          <p className="dashboard-subtitle">We're excited to have you on board! Explore the tasks below to get started on your onboarding journey.</p>
+          <h2 className="section-title">Know about us!</h2>
+          <p className="dashboard-subtitle">We're excited to have you on board! Follow us on the below social media to know more about ValueMomentum.</p>
           <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
             <a
               className="linkedin-btn"
