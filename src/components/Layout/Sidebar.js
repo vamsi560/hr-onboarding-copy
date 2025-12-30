@@ -33,13 +33,17 @@ const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose }) => {
     <>
       {isMobileOpen && <div className="sidebar-overlay" onClick={onClose} />}
       <nav className={`sidebar ${isMobileOpen ? 'mobile-open' : ''} ${collapsed ? 'collapsed' : ''}`}>
+        <button
+          className="sidebar-collapse-btn sidebar-collapse-btn-absolute"
+          onClick={() => setCollapsed(!collapsed)}
+          title={collapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
+        >
+          <Icon name={collapsed ? 'chevron-right' : 'chevron-left'} size={20} />
+        </button>
         <div className="sidebar-content">
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 8 }}>
-            <button className="sidebar-collapse-btn" onClick={() => setCollapsed(!collapsed)} title={collapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}>
-              <Icon name={collapsed ? 'chevron-right' : 'chevron-left'} size={20} />
-            </button>
-          </div>
           {/* User Profile Section */}
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 8 }}>
+          </div>
           <div className="sidebar-profile">
             <div className="profile-avatar">
               {userRole === 'hr' ? (
