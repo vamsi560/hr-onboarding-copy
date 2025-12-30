@@ -166,15 +166,6 @@ Team HR, ValueMomentum`}
           </div>
         </Card>
 
-        {/* Start Date Card */}
-        <Card className="dashboard-card start-date-card">
-          <h2 className="section-title">Your Start Date</h2>
-          <div className="start-date-details">
-            <div><span className="meta-label">Joining Date:</span> <span className="meta-value">{joiningDateText}</span></div>
-            <div><span className="meta-label">Location:</span> <span className="meta-value text-capitalize">{locationText}</span></div>
-          </div>
-        </Card>
-
         {/* Profile Card */}
         <Card className="dashboard-card profile-detail-card">
           <div className="profile-detail-main">

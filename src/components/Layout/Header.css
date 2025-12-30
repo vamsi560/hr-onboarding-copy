@@ -401,6 +401,31 @@
   top: calc(100% + 6px) !important;
 }
 
+/* Overlay for profile dropdown portal */
+.user-menu-dropdown-portal {
+  position: fixed;
+  top: 70px; /* height of header */
+  right: 32px; /* align with avatar, adjust as needed */
+  width: 180px;
+  min-width: 140px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  border: 1px solid rgba(0,0,0,0.08);
+  z-index: 2000;
+  animation: slideDown 0.2s ease;
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .user-menu-dropdown-portal {
+    right: 8px;
+    left: 8px;
+    width: auto;
+    min-width: 0;
+  }
+}
+
 .user-menu-header {
   padding: 14px 14px 12px 14px;
   display: flex;

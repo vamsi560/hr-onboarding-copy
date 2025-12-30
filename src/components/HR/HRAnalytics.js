@@ -389,18 +389,8 @@ const HRAnalytics = () => {
       {/* KPI Cards */}
       <div className="kpi-grid">
         <Card className="kpi-card">
-          <div className="kpi-label">Offers to Send</div>
-          <div className="kpi-value">{kpis.offersToSend}</div>
-        </Card>
-
-        <Card className="kpi-card">
-          <div className="kpi-label">Time to Accept</div>
-          <div className="kpi-value">{kpis.timeToAccept}</div>
-        </Card>
-
-        <Card className="kpi-card">
-          <div className="kpi-label">Time to Onboard</div>
-          <div className="kpi-value">{kpis.timeToOnboard}</div>
+          <div className="kpi-label">Pending</div>
+          <div className="kpi-value">{filteredData.length}</div>
         </Card>
 
         <Card className="kpi-card">
@@ -419,44 +409,24 @@ const HRAnalytics = () => {
                   r="30"
                   fill="none"
                   stroke="#e9ecef"
-                  strokeWidth="8"
+                  strokeWidth="12"
                 />
                 <circle
                   cx="40"
                   cy="40"
                   r="30"
                   fill="none"
-                  stroke="var(--brand)"
-                  strokeWidth="8"
-                  strokeDasharray={`${kpis.offerAcceptanceRatio * 1.884} 188.4`}
-                  strokeDashoffset="47.1"
-                  transform="rotate(-90 40 40)"
+                  stroke="#007bff"
+                  strokeWidth="12"
+                  strokeDasharray={`${2 * Math.PI * 30}`}
+                  strokeDashoffset={`${2 * Math.PI * 30 * (1 - kpis.offerAcceptanceRatio / 100)}`}
+                  style={{ transition: 'stroke-dashoffset 0.5s' }}
                 />
+                <text x="40" y="46" textAnchor="middle" fontSize="18" fill="#007bff">{kpis.offerAcceptanceRatio}%</text>
               </svg>
-              <div className="donut-chart-value">{kpis.offerAcceptanceRatio}%</div>
             </div>
           </div>
         </Card>
-
-        <Card className="kpi-card kpi-card-chart">
-          <div className="kpi-label">Applications received</div>
-          <div className="kpi-value-large">{kpis.applicationsReceived.toLocaleString()}</div>
-          <div className="kpi-growth">
-            <span className="growth-indicator positive">
-              ↑ This month +{kpis.applicationsGrowth}%
-            </span>
-          </div>
-          <div className="mini-bar-chart">
-            {[20, 35, 28, 45, 38, 42, 53].map((height, index) => (
-              <div
-                key={index}
-                className="bar"
-                style={{ height: `${height}%` }}
-              ></div>
-            ))}
-          </div>
-        </Card>
-
       </div>
 
       {/* Analytics Table */}

@@ -158,7 +158,7 @@ const Header = ({ onMenuClick, onLogout }) => {
             )}
           </button>
           {showUserMenu && ReactDOM.createPortal(
-            <div className="user-menu-dropdown user-menu-dropdown-small">
+            <div className="user-menu-dropdown user-menu-dropdown-small user-menu-dropdown-portal">
               <div className="user-menu-header">
                 <div className="user-menu-avatar header-avatar-hr-small">
                   {userRole === 'hr' ? (
