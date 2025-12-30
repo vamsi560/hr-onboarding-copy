@@ -118,6 +118,22 @@ const Dashboard = () => {
           </div>
         </Card>
 
+        {/* Welcome to the Team Card with YouTube Video */}
+        <Card className="dashboard-card welcome-video-card">
+          <h2 className="section-title">Welcome to the Team!</h2>
+          <p className="dashboard-subtitle">We're excited to have you on board! Watch our welcome video to get started on your onboarding journey.</p>
+          <div className="welcome-video-wrapper">
+            <iframe
+              className="welcome-video-iframe"
+              src="https://www.youtube.com/embed/j6Y4iwrf6ow"
+              title="Welcome Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </Card>
+
         {/* Start Date Card */}
         <Card className="dashboard-card start-date-card">
           <h2 className="section-title">Your Start Date</h2>
