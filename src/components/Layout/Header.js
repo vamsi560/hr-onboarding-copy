@@ -100,8 +100,8 @@ const Header = ({ onMenuClick, onLogout }) => {
               <span className="notification-badge">{unreadCount}</span>
             )}
           </button>
-          {showNotifications && (
-            <div className="notifications-panel">
+          {showNotifications && ReactDOM.createPortal(
+            <div className="notifications-panel notifications-panel-portal">
               <div className="notifications-header">
                 <h4>Notifications</h4>
                 <button className="mark-all-read">Mark all as read</button>
@@ -126,7 +126,8 @@ const Header = ({ onMenuClick, onLogout }) => {
               <div className="notifications-footer">
                 <button>View all notifications</button>
               </div>
-            </div>
+            </div>,
+            document.body
           )}
         </div>
 
