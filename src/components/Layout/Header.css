@@ -367,12 +367,24 @@
   overflow: hidden;
 }
 
+.user-menu-dropdown.user-menu-dropdown-small {
+  width: 180px !important;
+  min-width: 140px !important;
+  padding: 8px 0 !important;
+  top: calc(100% + 6px) !important;
+}
+
 .user-menu-header {
   padding: 14px 14px 12px 14px;
   display: flex;
   align-items: center;
   gap: 8px;
   background: linear-gradient(135deg, rgba(30, 58, 95, 0.05) 0%, rgba(44, 82, 130, 0.05) 100%);
+}
+
+.user-menu-header {
+  gap: 6px !important;
+  padding: 8px 8px 6px 8px !important;
 }
 
 .user-menu-avatar {
@@ -396,9 +408,17 @@
   margin-bottom: 2px;
 }
 
+.user-menu-name {
+  font-size: 13px !important;
+}
+
 .user-menu-email {
   font-size: 11px;
   color: #64748b;
+}
+
+.user-menu-email {
+  font-size: 11px !important;
 }
 
 .user-menu-divider {
@@ -424,6 +444,12 @@
   color: #1a202c;
   cursor: pointer;
   transition: background 0.2s;
+}
+
+.user-menu-item {
+  font-size: 12px !important;
+  padding: 6px 10px !important;
+  gap: 8px !important;
 }
 
 .user-menu-item:hover {

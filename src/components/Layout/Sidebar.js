@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import Icon from '../UI/Icon';
 import './Sidebar.css';
 
 const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose }) => {
   const { userRole, location } = useApp();
+  const [collapsed, setCollapsed] = useState(false);
 
   const candidateMenuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
@@ -31,13 +32,21 @@ const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose }) => {
   return (
     <>
       {isMobileOpen && <div className="sidebar-overlay" onClick={onClose} />}
-      <nav className={`sidebar ${isMobileOpen ? 'mobile-open' : ''}`}>
+      <nav className={`sidebar ${isMobileOpen ? 'mobile-open' : ''} ${collapsed ? 'collapsed' : ''}`}>
         <div className="sidebar-content">
+          <button className="sidebar-collapse-btn" onClick={() => setCollapsed(!collapsed)} title={collapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}>
+            <Icon name={collapsed ? 'chevron-right' : 'chevron-left'} size={20} />
+          </button>
           {/* User Profile Section */}
           <div className="sidebar-profile">
             <div className="profile-avatar">
               {userRole === 'hr' ? (
-                <div className="avatar-circle">RR</div>
+                <img
+                  src={process.env.PUBLIC_URL + '/images/raghavendra.jpg'}
+                  alt="Raghavendra Raju"
+                  className="sidebar-avatar-img"
+                  style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover', border: '2px solid #e0e0e0' }}
+                />
               ) : (
                 <img
                   src={process.env.PUBLIC_URL + '/images/shashank.jpg'}
@@ -47,12 +56,16 @@ const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose }) => {
                 />
               )}
             </div>
-            <div className="profile-name">
-              {userRole === 'hr' ? 'Raghavendra Raju' : 'Shashank Tudum'}
-            </div>
-            <div className="profile-role">
-              {userRole === 'hr' ? 'HR' : 'New Employee'} • {location === 'us' ? 'US' : 'India'}
-            </div>
+            {!collapsed && (
+              <>
+                <div className="profile-name">
+                  {userRole === 'hr' ? 'Raghavendra Raju' : 'Shashank Tudum'}
+                </div>
+                <div className="profile-role">
+                  {userRole === 'hr' ? 'HR' : 'New Employee'} • {location === 'us' ? 'US' : 'India'}
+                </div>
+              </>
+            )}
           </div>
 
           {/* Navigation Menu */}
@@ -62,10 +75,11 @@ const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose }) => {
                 key={item.id}
                 className={activeView === item.id ? 'active' : ''}
                 onClick={() => onNavClick(item.id)}
+                title={collapsed ? item.label : undefined}
               >
                 <Icon name={item.icon} size={20} className="nav-icon" />
-                <span className="nav-label">{item.label}</span>
-                {item.badge && (
+                {!collapsed && <span className="nav-label">{item.label}</span>}
+                {item.badge && !collapsed && (
                   <span className="nav-badge">{item.badge}</span>
                 )}
                 {activeView === item.id && <span className="active-dot"></span>}
@@ -74,13 +88,15 @@ const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose }) => {
           </ul>
 
           {/* Logo at Bottom */}
-          <div className="sidebar-logo">
-            <img 
-              src={process.env.PUBLIC_URL + "/images/ValueMomentum_logo.png"} 
-              alt="ValueMomentum" 
-              className="logo-image"
-            />
-          </div>
+          {!collapsed && (
+            <div className="sidebar-logo">
+              <img 
+                src={process.env.PUBLIC_URL + "/images/ValueMomentum_logo.png"} 
+                alt="ValueMomentum" 
+                className="logo-image"
+              />
+            </div>
+          )}
         </div>
       </nav>
     </>

@@ -156,31 +156,26 @@ const Header = ({ onMenuClick, onLogout }) => {
             )}
           </button>
           {showUserMenu && (
-            <div className="user-menu-dropdown">
+            <div className="user-menu-dropdown user-menu-dropdown-small">
               <div className="user-menu-header">
-                <div className="user-menu-avatar">
-                  {userRole === 'hr' ? 'RR' : 'ST'}
+                <div className="user-menu-avatar header-avatar-hr-small">
+                  {userRole === 'hr' ? (
+                    <img src={process.env.PUBLIC_URL + '/images/raghavendra.jpg'} alt="Raghavendra Raju" style={{width: 28, height: 28, borderRadius: '50%', objectFit: 'cover'}} />
+                  ) : (
+                    <img src={process.env.PUBLIC_URL + '/images/shashank.jpg'} alt="Shashank Tudum" style={{width: 28, height: 28, borderRadius: '50%', objectFit: 'cover'}} />
+                  )}
                 </div>
                 <div>
-                  <div className="user-menu-name">{userRole === 'hr' ? 'Raghavendra Raju' : 'Shashank Tudum'}</div>
-                  <div className="user-menu-email">{userRole === 'hr' ? 'raghavendra@valuemomentum.com' : 'shashank@valuemomentum.com'}</div>
+                  <div className="user-menu-name" style={{fontSize: '13px'}}>{userRole === 'hr' ? 'Raghavendra Raju' : 'Shashank Tudum'}</div>
+                  <div className="user-menu-email" style={{fontSize: '11px'}}>{userRole === 'hr' ? 'raghavendra@valuemomentum.com' : 'shashank@valuemomentum.com'}</div>
                 </div>
               </div>
               <div className="user-menu-divider"></div>
               <div className="user-menu-items">
-                <button className="user-menu-item">
-                  <Icon name="user" size={18} />
-                  <span>Profile</span>
-                </button>
-                <button className="user-menu-item">
-                  <Icon name="settings" size={18} />
-                  <span>Settings</span>
-                </button>
+                <button className="user-menu-item"><Icon name="user" size={16} /><span>Profile</span></button>
+                <button className="user-menu-item"><Icon name="settings" size={16} /><span>Settings</span></button>
                 <div className="user-menu-divider"></div>
-                <button className="user-menu-item" onClick={onLogout}>
-                  <Icon name="logout" size={18} />
-                  <span>Logout</span>
-                </button>
+                <button className="user-menu-item" onClick={onLogout}><Icon name="logout" size={16} /><span>Logout</span></button>
               </div>
             </div>
           )}
