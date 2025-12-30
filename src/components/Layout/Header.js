@@ -11,6 +11,8 @@ const Header = ({ onMenuClick, onLogout }) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const userMenuRef = useRef(null);
   const notificationsRef = useRef(null);
+  const avatarBtnRef = useRef(null);
+  const [userMenuPosition, setUserMenuPosition] = useState({ top: 0, left: 0 });
 
   useEffect(() => {
     const updateDateTime = () => {
@@ -46,6 +48,17 @@ const Header = ({ onMenuClick, onLogout }) => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // Update dropdown position when menu is shown
+  useEffect(() => {
+    if (showUserMenu && avatarBtnRef.current) {
+      const rect = avatarBtnRef.current.getBoundingClientRect();
+      setUserMenuPosition({
+        top: rect.bottom + window.scrollY + 6, // 6px gap
+        left: rect.right - 180 + window.scrollX // align right edge, 180px is dropdown width
+      });
+    }
+  }, [showUserMenu]);
 
   // Mock notifications data
   const notifications = [
@@ -142,6 +155,7 @@ const Header = ({ onMenuClick, onLogout }) => {
         <div className="header-user-menu" ref={userMenuRef}>
           <button 
             className="header-user-btn"
+            ref={avatarBtnRef}
             onClick={() => setShowUserMenu(!showUserMenu)}
             aria-label="User menu"
             title="User menu"
@@ -158,7 +172,10 @@ const Header = ({ onMenuClick, onLogout }) => {
             )}
           </button>
           {showUserMenu && ReactDOM.createPortal(
-            <div className="user-menu-dropdown user-menu-dropdown-small user-menu-dropdown-portal">
+            <div
+              className="user-menu-dropdown user-menu-dropdown-small user-menu-dropdown-portal"
+              style={{ position: 'absolute', top: userMenuPosition.top, left: userMenuPosition.left, zIndex: 2000 }}
+            >
               <div className="user-menu-header">
                 <div className="user-menu-avatar header-avatar-hr-small">
                   {userRole === 'hr' ? (
