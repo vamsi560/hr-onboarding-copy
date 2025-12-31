@@ -38,8 +38,10 @@ const Dashboard = () => {
     setTotalCount(progressData.total);
   }, [formData, documents]);
 
-  // Get display name from userInfo or formData
-  const displayName = userInfo?.name || formData.name || 'Shashank Tudum';
+  // Get display name - for john.doe@gmail.com, always show Shashank Tudum
+  const displayName = userInfo?.email === 'john.doe@gmail.com' 
+    ? 'Shashank Tudum' 
+    : (userInfo?.name || formData.name || 'Shashank Tudum');
   
   // Check eligibility for joining bonus and relocation
   const hasJoiningBonus = userInfo?.joiningBonus === true;
@@ -61,7 +63,6 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <OfferAcceptance />
       <div className="dashboard-hero-text dashboard-hero-bg">
         <h1 className="dashboard-title">Welcome, {displayName}!</h1>
         <p className="dashboard-subtitle">Get Started on Your Journey with Us</p>

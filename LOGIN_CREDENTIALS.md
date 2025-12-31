@@ -7,8 +7,9 @@ This document contains all the login credentials for testing different user role
 ## 🔐 Login Credentials
 
 ### 1. Candidate with Joining Bonus Eligibility
-**Email:** `john.doe@valuemomentum.com`  
+**Email:** `john.doe@gmail.com`  
 **Password:** `password123`  
+**Name:** Shashank Tudum (displayed in welcome)  
 **Role:** Candidate  
 **Location:** India  
 **Eligibility:**
@@ -18,12 +19,14 @@ This document contains all the login credentials for testing different user role
 **Features:**
 - Will see "Joining Bonus" card on dashboard
 - Can click to view bonus details and terms & conditions
+- Welcome message shows "Shashank Tudum"
 
 ---
 
 ### 2. Candidate with Relocation Eligibility
-**Email:** `jane.smith@valuemomentum.com`  
+**Email:** `jane.smith@outlook.com`  
 **Password:** `password123`  
+**Name:** Priya Patel  
 **Role:** Candidate  
 **Location:** US  
 **Eligibility:**
@@ -37,8 +40,9 @@ This document contains all the login credentials for testing different user role
 ---
 
 ### 3. Candidate with Both Joining Bonus and Relocation
-**Email:** `mike.johnson@valuemomentum.com`  
+**Email:** `mike.johnson@gmail.com`  
 **Password:** `password123`  
+**Name:** Vikram Singh  
 **Role:** Candidate  
 **Location:** US  
 **Eligibility:**
@@ -52,8 +56,9 @@ This document contains all the login credentials for testing different user role
 ---
 
 ### 4. Candidate with No Special Benefits
-**Email:** `sarah.williams@valuemomentum.com`  
+**Email:** `sarah.williams@outlook.com`  
 **Password:** `password123`  
+**Name:** Anjali Gupta  
 **Role:** Candidate  
 **Location:** India  
 **Eligibility:**
@@ -67,8 +72,9 @@ This document contains all the login credentials for testing different user role
 ---
 
 ### 5. Alumni Portal (Former Employee)
-**Email:** `alumni@valuemomentum.com`  
+**Email:** `alumni@gmail.com`  
 **Password:** `password123`  
+**Name:** Suresh Iyer  
 **Role:** Alumni  
 **Location:** India  
 **Employment History:**
@@ -117,47 +123,48 @@ This document contains all the login credentials for testing different user role
 
 ## 📋 Quick Reference Table
 
-| Email | Password | Role | Joining Bonus | Relocation | Special Notes |
-|-------|----------|------|---------------|------------|---------------|
-| john.doe@valuemomentum.com | password123 | Candidate | ✅ Yes | ❌ No | - |
-| jane.smith@valuemomentum.com | password123 | Candidate | ❌ No | ✅ Yes | - |
-| mike.johnson@valuemomentum.com | password123 | Candidate | ✅ Yes | ✅ Yes | Both benefits |
-| sarah.williams@valuemomentum.com | password123 | Candidate | ❌ No | ❌ No | Standard candidate |
-| alumni@valuemomentum.com | password123 | Alumni | ❌ No | ❌ No | Limited access only |
-| hr@valuemomentum.com | password123 | HR | ❌ No | ❌ No | Full HR access |
+| Email | Password | Name | Role | Joining Bonus | Relocation | Special Notes |
+|-------|----------|------|------|---------------|------------|---------------|
+| john.doe@gmail.com | password123 | Shashank Tudum | Candidate | ✅ Yes | ❌ No | Welcome shows "Shashank Tudum" |
+| jane.smith@outlook.com | password123 | Priya Patel | Candidate | ❌ No | ✅ Yes | - |
+| mike.johnson@gmail.com | password123 | Vikram Singh | Candidate | ✅ Yes | ✅ Yes | Both benefits |
+| sarah.williams@outlook.com | password123 | Anjali Gupta | Candidate | ❌ No | ❌ No | Standard candidate |
+| alumni@gmail.com | password123 | Suresh Iyer | Alumni | ❌ No | ❌ No | Limited access only |
+| hr@valuemomentum.com | password123 | Raghavendra Raju | HR | ❌ No | ❌ No | Full HR access |
 
 ---
 
 ## 🎯 Testing Scenarios
 
 ### Scenario 1: Joining Bonus Display
-1. Login as `john.doe@valuemomentum.com`
-2. Accept the offer
+1. Login as `john.doe@gmail.com` (Shashank Tudum)
+2. Accept the offer (offer acceptance popup will appear)
 3. Navigate to Dashboard
-4. Verify "Joining Bonus" card is visible
-5. Click to expand and view details
+4. Verify welcome message shows "Shashank Tudum"
+5. Verify "Joining Bonus" card is visible
+6. Click to expand and view details
 
 ### Scenario 2: Relocation Display
-1. Login as `jane.smith@valuemomentum.com`
-2. Accept the offer
+1. Login as `jane.smith@outlook.com` (Priya Patel)
+2. Accept the offer (offer acceptance popup will appear)
 3. Navigate to Dashboard
 4. Verify "Relocation Assistance" card is visible
 5. Click to expand and view details
 
 ### Scenario 3: Both Benefits
-1. Login as `mike.johnson@valuemomentum.com`
-2. Accept the offer
+1. Login as `mike.johnson@gmail.com` (Vikram Singh)
+2. Accept the offer (offer acceptance popup will appear)
 3. Navigate to Dashboard
 4. Verify both cards are visible
 
 ### Scenario 4: No Benefits
-1. Login as `sarah.williams@valuemomentum.com`
-2. Accept the offer
+1. Login as `sarah.williams@outlook.com` (Anjali Gupta)
+2. Accept the offer (offer acceptance popup will appear)
 3. Navigate to Dashboard
 4. Verify no bonus/relocation cards are shown
 
 ### Scenario 5: Alumni Portal
-1. Login as `alumni@valuemomentum.com`
+1. Login as `alumni@gmail.com` (Suresh Iyer)
 2. Verify alumni dashboard is shown
 3. Check payslips section
 4. Check work documents section

@@ -12,6 +12,7 @@ const Login = ({ onLogin, onDemo }) => {
   const [password, setPassword] = useState('');
   const [passwordStrength, setPasswordStrength] = useState('');
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [loginType, setLoginType] = useState('candidate');
   const [location, setLocation] = useState('india');
   const { showToast } = useToast();
@@ -38,35 +39,61 @@ const Login = ({ onLogin, onDemo }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    if (!validateEmail(email)) {
+    if (isSubmitting) {
+      return; // Prevent double submission
+    }
+    
+    setIsSubmitting(true);
+    
+    // Trim and normalize email
+    const normalizedEmail = email.trim().toLowerCase();
+    
+    if (!validateEmail(normalizedEmail)) {
       showToast('Please enter a valid email', 'error');
+      setIsSubmitting(false);
       return;
     }
     
     if (password.length < 6) {
       showToast('Password must be at least 6 characters', 'error');
+      setIsSubmitting(false);
       return;
     }
     
     // Authenticate user
-    const authenticatedUser = authenticateUser(email, password);
+    const authenticatedUser = authenticateUser(normalizedEmail, password);
     
     if (!authenticatedUser) {
-      showToast('Invalid email or password', 'error');
+      showToast('Invalid email or password. Please check your credentials.', 'error');
+      setIsSubmitting(false);
       return;
     }
     
-    // Set user info and role
-    setUserInfo(authenticatedUser);
-    setUserRole(authenticatedUser.role);
-    setAppLocation(authenticatedUser.location);
+    try {
+      // Set user info and role
+      setUserInfo(authenticatedUser);
+      setUserRole(authenticatedUser.role);
+      setAppLocation(authenticatedUser.location);
 
-    if (logAction) {
-      logAction('login', { email, role: authenticatedUser.role, location: authenticatedUser.location });
+      if (logAction) {
+        logAction('login', { email: normalizedEmail, role: authenticatedUser.role, location: authenticatedUser.location });
+      }
+
+      // Call onLogin to trigger redirect
+      if (onLogin && typeof onLogin === 'function') {
+        onLogin();
+      } else {
+        showToast('Login error. Please refresh and try again.', 'error');
+        setIsSubmitting(false);
+        return;
+      }
+      
+      showToast(`Welcome, ${authenticatedUser.name}!`, 'success');
+    } catch (error) {
+      console.error('Login error:', error);
+      showToast('An error occurred during login. Please try again.', 'error');
+      setIsSubmitting(false);
     }
-
-    onLogin();
-    showToast(`Welcome, ${authenticatedUser.name}!`, 'success');
   };
 
   return (
@@ -183,8 +210,8 @@ const Login = ({ onLogin, onDemo }) => {
             </div>
             
             <div className="login-actions">
-              <Button type="submit" className="login-button-primary">
-                Sign In
+              <Button type="submit" className="login-button-primary" disabled={isSubmitting}>
+                {isSubmitting ? 'Signing In...' : 'Sign In'}
               </Button>
               <Button 
                 type="button" 

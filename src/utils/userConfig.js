@@ -1,9 +1,9 @@
 // User Configuration - Login Credentials and Eligibility
 export const USER_DATABASE = {
   // Candidate with Joining Bonus eligibility
-  'john.doe@valuemomentum.com': {
+  'john.doe@gmail.com': {
     password: 'password123',
-    name: 'John Doe',
+    name: 'Shashank Tudum',
     role: 'candidate',
     location: 'india',
     joiningBonus: true,
@@ -14,9 +14,9 @@ export const USER_DATABASE = {
   },
   
   // Candidate with Relocation eligibility
-  'jane.smith@valuemomentum.com': {
+  'jane.smith@outlook.com': {
     password: 'password123',
-    name: 'Jane Smith',
+    name: 'Priya Patel',
     role: 'candidate',
     location: 'us',
     joiningBonus: false,
@@ -27,9 +27,9 @@ export const USER_DATABASE = {
   },
   
   // Candidate with both Joining Bonus and Relocation
-  'mike.johnson@valuemomentum.com': {
+  'mike.johnson@gmail.com': {
     password: 'password123',
-    name: 'Mike Johnson',
+    name: 'Vikram Singh',
     role: 'candidate',
     location: 'us',
     joiningBonus: true,
@@ -40,9 +40,9 @@ export const USER_DATABASE = {
   },
   
   // Candidate with no special benefits
-  'sarah.williams@valuemomentum.com': {
+  'sarah.williams@outlook.com': {
     password: 'password123',
-    name: 'Sarah Williams',
+    name: 'Anjali Gupta',
     role: 'candidate',
     location: 'india',
     joiningBonus: false,
@@ -53,9 +53,9 @@ export const USER_DATABASE = {
   },
   
   // Alumni - Former employee
-  'alumni@valuemomentum.com': {
+  'alumni@gmail.com': {
     password: 'password123',
-    name: 'Robert Brown',
+    name: 'Suresh Iyer',
     role: 'alumni',
     location: 'india',
     joiningBonus: false,
@@ -97,10 +97,13 @@ export const DEFAULT_CANDIDATE = {
 };
 
 export const authenticateUser = (email, password) => {
-  const user = USER_DATABASE[email.toLowerCase()];
+  const normalizedEmail = email.toLowerCase().trim();
+  const user = USER_DATABASE[normalizedEmail];
+  
   if (user && user.password === password) {
-    return { ...user, email: email.toLowerCase() };
+    return { ...user, email: normalizedEmail };
   }
+  
   return null;
 };
 

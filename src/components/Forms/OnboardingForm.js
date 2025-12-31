@@ -544,6 +544,144 @@ const OnboardingForm = () => {
                 Please provide your educational qualifications and certifications.
               </p>
               
+              {/* Educational Qualifications */}
+              <div className="form-group">
+                <label>Educational Qualifications</label>
+                <p className="small" style={{ marginBottom: '12px', color: 'var(--muted)' }}>
+                  Add your educational qualifications
+                </p>
+                {(formValues.educationalQualifications && formValues.educationalQualifications.length > 0 ? formValues.educationalQualifications : [{ 
+                  degree: '', 
+                  institution: '', 
+                  board: '', 
+                  yearOfPassing: '', 
+                  percentage: '', 
+                  document: '' 
+                }]).map((edu, index) => (
+                  <Card key={index} className="certification-item-card">
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label>Degree/Qualification *</label>
+                        <select
+                          className="input"
+                          value={edu.degree || ''}
+                          onChange={(e) => {
+                            const currentEdu = formValues.educationalQualifications || [];
+                            const updatedEdu = [...currentEdu];
+                            updatedEdu[index] = { ...updatedEdu[index], degree: e.target.value };
+                            handleChange('educationalQualifications', updatedEdu);
+                          }}
+                          required
+                        >
+                          <option value="">Select Qualification</option>
+                          <option value="10th">10th / Secondary Education</option>
+                          <option value="12th">12th / Higher Secondary</option>
+                          <option value="diploma">Diploma</option>
+                          <option value="bachelor">Bachelor's Degree</option>
+                          <option value="master">Master's Degree</option>
+                          <option value="phd">PhD</option>
+                          <option value="other">Other</option>
+                        </select>
+                      </div>
+                      <div className="form-group">
+                        <label>Institution/University *</label>
+                        <Input
+                          placeholder="Institution Name"
+                          value={edu.institution || ''}
+                          onChange={(e) => {
+                            const currentEdu = formValues.educationalQualifications || [];
+                            const updatedEdu = [...currentEdu];
+                            updatedEdu[index] = { ...updatedEdu[index], institution: e.target.value };
+                            handleChange('educationalQualifications', updatedEdu);
+                          }}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label>Board/University</label>
+                        <Input
+                          placeholder="Board or University Name"
+                          value={edu.board || ''}
+                          onChange={(e) => {
+                            const currentEdu = formValues.educationalQualifications || [];
+                            const updatedEdu = [...currentEdu];
+                            updatedEdu[index] = { ...updatedEdu[index], board: e.target.value };
+                            handleChange('educationalQualifications', updatedEdu);
+                          }}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Year of Passing *</label>
+                        <Input
+                          type="number"
+                          placeholder="YYYY"
+                          min="1980"
+                          max={new Date().getFullYear()}
+                          value={edu.yearOfPassing || ''}
+                          onChange={(e) => {
+                            const currentEdu = formValues.educationalQualifications || [];
+                            const updatedEdu = [...currentEdu];
+                            updatedEdu[index] = { ...updatedEdu[index], yearOfPassing: e.target.value };
+                            handleChange('educationalQualifications', updatedEdu);
+                          }}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label>Percentage/CGPA</label>
+                        <Input
+                          placeholder="e.g., 85% or 8.5"
+                          value={edu.percentage || ''}
+                          onChange={(e) => {
+                            const currentEdu = formValues.educationalQualifications || [];
+                            const updatedEdu = [...currentEdu];
+                            updatedEdu[index] = { ...updatedEdu[index], percentage: e.target.value };
+                            handleChange('educationalQualifications', updatedEdu);
+                          }}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>Document Upload</label>
+                        <input
+                          type="file"
+                          accept=".pdf,.doc,.docx,.jpg,.png"
+                          className="input"
+                          onChange={(e) => {
+                            const file = e.target.files && e.target.files[0];
+                            const currentEdu = formValues.educationalQualifications || [];
+                            const updatedEdu = [...currentEdu];
+                            updatedEdu[index] = { ...updatedEdu[index], document: file ? file.name : '' };
+                            handleChange('educationalQualifications', updatedEdu);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => {
+                    const currentEdu = formValues.educationalQualifications || [];
+                    handleChange('educationalQualifications', [...currentEdu, { 
+                      degree: '', 
+                      institution: '', 
+                      board: '', 
+                      yearOfPassing: '', 
+                      percentage: '', 
+                      document: '' 
+                    }]);
+                  }}
+                  style={{ marginTop: '8px', fontSize: '14px' }}
+                >
+                  + Add More Educational Qualifications
+                </Button>
+              </div>
+
               <div className="form-group">
                 <label>Certifications</label>
                 <p className="small" style={{ marginBottom: '12px', color: 'var(--muted)' }}>
@@ -615,36 +753,6 @@ const OnboardingForm = () => {
           {currentStep === 3 && (
             <div className="form-step">
               <h4>Professional Information</h4>
-              <div className="form-group">
-                <label>Designation</label>
-                <Input
-                  value={formValues.designation || ''}
-                  onChange={(e) => handleChange('designation', e.target.value)}
-                  placeholder="Software Engineer"
-                />
-              </div>
-              <div className="form-group">
-                <label>Department</label>
-                <select
-                  className="input"
-                  value={formValues.department || ''}
-                  onChange={(e) => handleChange('department', e.target.value)}
-                >
-                  <option value="">Select Department</option>
-                  <option value="engineering">Engineering</option>
-                  <option value="sales">Sales</option>
-                  <option value="hr">HR</option>
-                  <option value="finance">Finance</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <label>Date of Joining</label>
-                <Input
-                  type="date"
-                  value={formValues.joiningDate || ''}
-                  onChange={(e) => handleChange('joiningDate', e.target.value)}
-                />
-              </div>
               <div className="form-group">
                 <label>Professional Experience</label>
                 <p className="small" style={{ marginBottom: '12px', color: 'var(--muted)' }}>

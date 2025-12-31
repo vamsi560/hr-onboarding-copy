@@ -94,6 +94,25 @@ const MainLayout = ({ onLogout }) => {
   // Show offer acceptance modal if candidate hasn't responded yet
   const showOfferModal = userRole === 'candidate' && offerAcceptanceStatus === null;
 
+  // Block access if offer hasn't been accepted yet
+  if (showOfferModal) {
+    return (
+      <div className="main-layout">
+        <Header 
+          onMenuClick={() => {}} 
+          onLogout={onLogout}
+        />
+        <main className="main-content fade-in">
+          <div className="main-content-wrapper">
+            <OfferAcceptance />
+          </div>
+        </main>
+        <ToastContainer />
+        <LoadingOverlay />
+      </div>
+    );
+  }
+
   const views = {
     dashboard: Dashboard,
     alumni: AlumniDashboard,
@@ -127,7 +146,6 @@ const MainLayout = ({ onLogout }) => {
 
   return (
     <div className="main-layout">
-      {showOfferModal && <OfferAcceptance />}
       <Sidebar
         activeView={activeView}
         onNavClick={handleNavClick}
@@ -143,7 +161,7 @@ const MainLayout = ({ onLogout }) => {
           <ActiveComponent />
         </div>
       </main>
-      {!showOfferModal && <ChatWidget />}
+      <ChatWidget />
       <ToastContainer />
       <LoadingOverlay />
     </div>
