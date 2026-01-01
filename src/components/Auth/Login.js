@@ -16,7 +16,7 @@ const Login = ({ onLogin, onDemo }) => {
   const [loginType, setLoginType] = useState('candidate');
   const [location, setLocation] = useState('india');
   const { showToast } = useToast();
-  const { setUserRole, setLocation: setAppLocation, setUserInfo, logAction } = useApp();
+  const { setUserRole, setLocation: setAppLocation, setUserInfo, logAction, resetOfferAcceptance } = useApp();
 
   useEffect(() => {
     setIsAnimating(true);
@@ -72,7 +72,7 @@ const Login = ({ onLogin, onDemo }) => {
     try {
       // Clear offer acceptance status for candidates to show popup
       if (authenticatedUser.role === 'candidate') {
-        localStorage.removeItem('offerAcceptanceStatus');
+        resetOfferAcceptance();
       }
       
       // Set user info and role
@@ -223,7 +223,7 @@ const Login = ({ onLogin, onDemo }) => {
                 variant="secondary" 
                 onClick={() => {
                   // Clear offer acceptance for demo mode
-                  localStorage.removeItem('offerAcceptanceStatus');
+                  resetOfferAcceptance();
                   // Demo mode with default candidate
                   setUserInfo(DEFAULT_CANDIDATE);
                   setUserRole(DEFAULT_CANDIDATE.role);

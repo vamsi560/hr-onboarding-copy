@@ -231,6 +231,11 @@ export const AppProvider = ({ children }) => {
     setChatHistory(prev => [...prev, newMessage]);
   };
 
+  const resetOfferAcceptance = () => {
+    setOfferAcceptanceStatus(null);
+    localStorage.removeItem('offerAcceptanceStatus');
+  };
+
   const value = {
     darkMode,
     toggleDarkMode,
@@ -252,6 +257,7 @@ export const AppProvider = ({ children }) => {
     setCandidates,
     chatHistory,
     addChatMessage,
+    resetOfferAcceptance,
     validationHistory,
     setValidationHistory,
     auditLog,

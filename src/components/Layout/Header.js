@@ -54,8 +54,8 @@ const Header = ({ onMenuClick, onLogout }) => {
     if (showUserMenu && avatarBtnRef.current) {
       const rect = avatarBtnRef.current.getBoundingClientRect();
       setUserMenuPosition({
-        top: rect.bottom + 6, // 6px gap below button
-        left: rect.right - 180 // align right edge, 180px is dropdown width
+        top: rect.bottom + 8,
+        left: Math.max(8, rect.right - 180) // Ensure it doesn't go off-screen
       });
     }
   }, [showUserMenu]);
@@ -173,28 +173,60 @@ const Header = ({ onMenuClick, onLogout }) => {
           </button>
           {showUserMenu && ReactDOM.createPortal(
             <div
-              className="user-menu-dropdown user-menu-dropdown-small user-menu-dropdown-portal"
-              style={{ position: 'fixed', top: userMenuPosition.top, left: userMenuPosition.left, zIndex: 2000 }}
+              className="user-menu-dropdown user-menu-dropdown-portal"
+              style={{ 
+                position: 'fixed', 
+                top: userMenuPosition.top, 
+                left: userMenuPosition.left, 
+                zIndex: 2000 
+              }}
             >
               <div className="user-menu-header">
-                <div className="user-menu-avatar header-avatar-hr-small">
+                <div className="user-menu-avatar">
                   {userRole === 'hr' ? (
-                    <img src={process.env.PUBLIC_URL + '/images/raghavendra.jpg'} alt="Raghavendra Raju" style={{width: 28, height: 28, borderRadius: '50%', objectFit: 'cover'}} />
+                    <img 
+                      src={process.env.PUBLIC_URL + '/images/raghavendra.jpg'} 
+                      alt="Raghavendra Raju" 
+                      style={{width: 32, height: 32, borderRadius: '50%', objectFit: 'cover'}} 
+                    />
                   ) : (
-                    <img src={process.env.PUBLIC_URL + '/images/shashank.jpg'} alt="Shashank Tudum" style={{width: 28, height: 28, borderRadius: '50%', objectFit: 'cover'}} />
+                    <img 
+                      src={process.env.PUBLIC_URL + '/images/shashank.jpg'} 
+                      alt="Shashank Tudum" 
+                      style={{width: 32, height: 32, borderRadius: '50%', objectFit: 'cover'}} 
+                    />
                   )}
                 </div>
                 <div>
-                  <div className="user-menu-name" style={{fontSize: '13px'}}>{userRole === 'hr' ? 'Raghavendra Raju' : 'Shashank Tudum'}</div>
-                  <div className="user-menu-email" style={{fontSize: '11px'}}>{userRole === 'hr' ? 'raghavendra@valuemomentum.com' : 'shashank@valuemomentum.com'}</div>
+                  <div className="user-menu-name">
+                    {userRole === 'hr' ? 'Raghavendra Raju' : 'Shashank Tudum'}
+                  </div>
+                  <div className="user-menu-email">
+                    {userRole === 'hr' ? 'raghavendra@valuemomentum.com' : 'shashank@valuemomentum.com'}
+                  </div>
                 </div>
               </div>
               <div className="user-menu-divider"></div>
               <div className="user-menu-items">
-                <button className="user-menu-item"><Icon name="user" size={16} /><span>Profile</span></button>
-                <button className="user-menu-item"><Icon name="settings" size={16} /><span>Settings</span></button>
+                <button className="user-menu-item">
+                  <Icon name="user" size={16} />
+                  <span>Profile</span>
+                </button>
+                <button className="user-menu-item">
+                  <Icon name="settings" size={16} />
+                  <span>Settings</span>
+                </button>
                 <div className="user-menu-divider"></div>
-                <button className="user-menu-item" type="button" onClick={() => { setShowUserMenu(false); if (onLogout) onLogout(); }}><Icon name="logout" size={16} /><span>Logout</span></button>
+                <button 
+                  className="user-menu-item logout-item" 
+                  onClick={() => { 
+                    setShowUserMenu(false); 
+                    if (onLogout) onLogout(); 
+                  }}
+                >
+                  <Icon name="logout" size={16} />
+                  <span>Logout</span>
+                </button>
               </div>
             </div>,
             document.body
