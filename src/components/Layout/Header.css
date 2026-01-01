@@ -506,6 +506,11 @@
 
 .user-menu-item:hover {
   background: #f8f9fa;
+  color: var(--brand);
+}
+
+.user-menu-item:hover .icon {
+  color: var(--brand);
 }
 
 .user-menu-item .icon {

@@ -24,7 +24,9 @@ export const AppProvider = ({ children }) => {
   });
   const [offerAcceptanceStatus, setOfferAcceptanceStatus] = useState(() => {
     const saved = localStorage.getItem('offerAcceptanceStatus');
-    return saved ? saved : null; // null = not responded, 'accepted' = accepted, 'rejected' = rejected
+    // For demo purposes, always start with null for new sessions
+    if (!saved || saved === 'null') return null;
+    return saved;
   });
   const [userInfo, setUserInfo] = useState(() => {
     const saved = localStorage.getItem('userInfo');
@@ -183,8 +185,10 @@ export const AppProvider = ({ children }) => {
   }, [documentExpiry]);
 
   useEffect(() => {
-    if (offerAcceptanceStatus !== null) {
+    if (offerAcceptanceStatus !== null && offerAcceptanceStatus !== 'null') {
       localStorage.setItem('offerAcceptanceStatus', offerAcceptanceStatus);
+    } else {
+      localStorage.removeItem('offerAcceptanceStatus');
     }
   }, [offerAcceptanceStatus]);
 
