@@ -1,1 +1,272 @@
-.smart-autofill-container {\n  margin: 20px 0;\n}\n\n.autofill-upload-section {\n  margin-bottom: 20px;\n}\n\n.upload-area {\n  position: relative;\n}\n\n.file-input {\n  position: absolute;\n  opacity: 0;\n  width: 100%;\n  height: 100%;\n  cursor: pointer;\n}\n\n.upload-label {\n  display: flex;\n  align-items: center;\n  gap: 16px;\n  padding: 20px;\n  border: 2px dashed var(--brand-light);\n  border-radius: 12px;\n  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);\n  cursor: pointer;\n  transition: all 0.3s ease;\n  min-height: 80px;\n}\n\n.upload-label:hover {\n  border-color: var(--brand);\n  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);\n  transform: translateY(-2px);\n  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);\n}\n\n.upload-icon {\n  font-size: 32px;\n  opacity: 0.8;\n}\n\n.upload-text {\n  flex: 1;\n}\n\n.upload-text strong {\n  display: block;\n  font-size: 16px;\n  color: var(--text);\n  margin-bottom: 4px;\n}\n\n.upload-text p {\n  margin: 0;\n  font-size: 13px;\n  color: var(--muted);\n  line-height: 1.4;\n}\n\n.processing-indicator {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  justify-content: center;\n  width: 100%;\n}\n\n.spinner {\n  width: 20px;\n  height: 20px;\n  border: 2px solid #e2e8f0;\n  border-top: 2px solid var(--brand);\n  border-radius: 50%;\n  animation: spin 1s linear infinite;\n}\n\n@keyframes spin {\n  0% { transform: rotate(0deg); }\n  100% { transform: rotate(360deg); }\n}\n\n.processing-indicator span {\n  font-size: 14px;\n  color: var(--brand);\n  font-weight: 500;\n}\n\n.extracted-data-preview {\n  background: white;\n  border: 1px solid var(--border);\n  border-radius: 12px;\n  padding: 24px;\n  margin-top: 20px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);\n  animation: slideIn 0.3s ease-out;\n}\n\n@keyframes slideIn {\n  from {\n    opacity: 0;\n    transform: translateY(20px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n.preview-header {\n  margin-bottom: 20px;\n  padding-bottom: 16px;\n  border-bottom: 1px solid var(--border);\n}\n\n.preview-header h4 {\n  margin: 0 0 8px 0;\n  color: var(--text);\n  font-size: 18px;\n  font-weight: 600;\n}\n\n.preview-header p {\n  margin: 0;\n  color: var(--muted);\n  font-size: 14px;\n}\n\n.data-sections {\n  display: grid;\n  gap: 20px;\n  margin-bottom: 24px;\n}\n\n.data-section {\n  background: var(--bg);\n  border-radius: 8px;\n  padding: 16px;\n}\n\n.data-section h5 {\n  margin: 0 0 12px 0;\n  color: var(--text);\n  font-size: 14px;\n  font-weight: 600;\n  text-transform: uppercase;\n  letter-spacing: 0.5px;\n}\n\n.data-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\n  gap: 12px;\n}\n\n.data-item {\n  display: flex;\n  justify-content: space-between;\n  align-items: flex-start;\n  padding: 8px 0;\n  border-bottom: 1px solid rgba(226, 232, 240, 0.5);\n}\n\n.data-item:last-child {\n  border-bottom: none;\n}\n\n.data-item .label {\n  font-weight: 500;\n  color: var(--muted);\n  font-size: 13px;\n  min-width: 80px;\n  flex-shrink: 0;\n}\n\n.data-item .value {\n  color: var(--text);\n  font-size: 13px;\n  text-align: right;\n  word-break: break-word;\n}\n\n.preview-actions {\n  display: flex;\n  gap: 12px;\n  justify-content: flex-end;\n  padding-top: 16px;\n  border-top: 1px solid var(--border);\n}\n\n/* Mobile responsiveness */\n@media (max-width: 768px) {\n  .upload-label {\n    flex-direction: column;\n    text-align: center;\n    padding: 24px 16px;\n  }\n  \n  .upload-icon {\n    font-size: 28px;\n  }\n  \n  .extracted-data-preview {\n    padding: 16px;\n  }\n  \n  .data-grid {\n    grid-template-columns: 1fr;\n  }\n  \n  .data-item {\n    flex-direction: column;\n    align-items: flex-start;\n    gap: 4px;\n  }\n  \n  .data-item .value {\n    text-align: left;\n  }\n  \n  .preview-actions {\n    flex-direction: column-reverse;\n  }\n  \n  .preview-actions button {\n    width: 100%;\n  }\n}\n\n@media (max-width: 480px) {\n  .upload-text strong {\n    font-size: 14px;\n  }\n  \n  .upload-text p {\n    font-size: 12px;\n  }\n  \n  .preview-header h4 {\n    font-size: 16px;\n  }\n}\n\n/* Dark mode support */\nbody.dark .upload-label {\n  background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-bg) 100%);\n  border-color: var(--dark-border);\n}\n\nbody.dark .upload-label:hover {\n  background: linear-gradient(135deg, #374151 0%, var(--dark-bg) 100%);\n}\n\nbody.dark .extracted-data-preview {\n  background: var(--dark-card);\n  border-color: var(--dark-border);\n}\n\nbody.dark .data-section {\n  background: var(--dark-bg);\n}\n\nbody.dark .preview-header {\n  border-color: var(--dark-border);\n}\n\nbody.dark .preview-actions {\n  border-color: var(--dark-border);\n}
+.smart-autofill-container {
+  margin: 20px 0;
+}
+
+.autofill-upload-section {
+  margin-bottom: 20px;
+}
+
+.upload-area {
+  position: relative;
+}
+
+.file-input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.upload-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border: 2px dashed var(--brand-light);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 80px;
+}
+
+.upload-label:hover {
+  border-color: var(--brand);
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+.upload-icon {
+  font-size: 32px;
+  opacity: 0.8;
+}
+
+.upload-text {
+  flex: 1;
+}
+
+.upload-text strong {
+  display: block;
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.upload-text p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.processing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  width: 100%;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e2e8f0;
+  border-top: 2px solid var(--brand);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.processing-indicator span {
+  font-size: 14px;
+  color: var(--brand);
+  font-weight: 500;
+}
+
+.extracted-data-preview {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.preview-header {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.preview-header h4 {
+  margin: 0 0 8px 0;
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.preview-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.data-sections {
+  display: grid;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.data-section {
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.data-section h5 {
+  margin: 0 0 12px 0;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 12px;
+}
+
+.data-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.data-item:last-child {
+  border-bottom: none;
+}
+
+.data-item .label {
+  font-weight: 500;
+  color: var(--muted);
+  font-size: 13px;
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.data-item .value {
+  color: var(--text);
+  font-size: 13px;
+  text-align: right;
+  word-break: break-word;
+}
+
+.preview-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .upload-label {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px 16px;
+  }
+  
+  .upload-icon {
+    font-size: 28px;
+  }
+  
+  .extracted-data-preview {
+    padding: 16px;
+  }
+  
+  .data-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .data-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .data-item .value {
+    text-align: left;
+  }
+  
+  .preview-actions {
+    flex-direction: column-reverse;
+  }
+  
+  .preview-actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .upload-text strong {
+    font-size: 14px;
+  }
+  
+  .upload-text p {
+    font-size: 12px;
+  }
+  
+  .preview-header h4 {
+    font-size: 16px;
+  }
+}
+
+/* Dark mode support */
+body.dark .upload-label {
+  background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-bg) 100%);
+  border-color: var(--dark-border);
+}
+
+body.dark .upload-label:hover {
+  background: linear-gradient(135deg, #374151 0%, var(--dark-bg) 100%);
+}
+
+body.dark .extracted-data-preview {
+  background: var(--dark-card);
+  border-color: var(--dark-border);
+}
+
+body.dark .data-section {
+  background: var(--dark-bg);
+}
+
+body.dark .preview-header {
+  border-color: var(--dark-border);
+}
+
+body.dark .preview-actions {
+  border-color: var(--dark-border);
+}
