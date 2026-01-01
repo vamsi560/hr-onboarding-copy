@@ -111,14 +111,111 @@ const SmartAutoFill = ({ onDataExtracted, acceptedTypes = '.pdf,.doc,.docx,.jpg,
   };
 
   return (
-    <div className=\"smart-autofill-container\">
-      <div className=\"autofill-upload-section\">
-        <div className=\"upload-area\">
+    <div className="smart-autofill-container">
+      <div className="autofill-upload-section">
+        <div className="upload-area">
           <input
-            type=\"file\"
+            type="file"
             accept={acceptedTypes}
             onChange={handleFileUpload}
             disabled={isProcessing}
-            className=\"file-input\"
-            id=\"smart-upload\"\n          />
-          <label htmlFor=\"smart-upload\" className=\"upload-label\">\n            {isProcessing ? (\n              <div className=\"processing-indicator\">\n                <div className=\"spinner\"></div>\n                <span>Processing document...</span>\n              </div>\n            ) : (\n              <>\n                <div className=\"upload-icon\">📄</div>\n                <div className=\"upload-text\">\n                  <strong>Smart Auto-Fill</strong>\n                  <p>Upload a document to automatically extract and fill form data</p>\n                </div>\n              </>\n            )}\n          </label>\n        </div>\n      </div>\n\n      {extractedData && (\n        <div className=\"extracted-data-preview\">\n          <div className=\"preview-header\">\n            <h4>📋 Extracted Data Preview</h4>\n            <p>Review the information extracted from your document:</p>\n          </div>\n          \n          <div className=\"data-sections\">\n            <div className=\"data-section\">\n              <h5>Personal Information</h5>\n              <div className=\"data-grid\">\n                <div className=\"data-item\">\n                  <span className=\"label\">Name:</span>\n                  <span className=\"value\">{extractedData.firstName} {extractedData.lastName}</span>\n                </div>\n                <div className=\"data-item\">\n                  <span className=\"label\">Email:</span>\n                  <span className=\"value\">{extractedData.email}</span>\n                </div>\n                <div className=\"data-item\">\n                  <span className=\"label\">Phone:</span>\n                  <span className=\"value\">{extractedData.mobile}</span>\n                </div>\n                <div className=\"data-item\">\n                  <span className=\"label\">Address:</span>\n                  <span className=\"value\">{extractedData.address}</span>\n                </div>\n              </div>\n            </div>\n\n            <div className=\"data-section\">\n              <h5>Professional Information</h5>\n              <div className=\"data-grid\">\n                <div className=\"data-item\">\n                  <span className=\"label\">Position:</span>\n                  <span className=\"value\">{extractedData.designation}</span>\n                </div>\n                <div className=\"data-item\">\n                  <span className=\"label\">Skills:</span>\n                  <span className=\"value\">{extractedData.skills}</span>\n                </div>\n              </div>\n            </div>\n\n            {extractedData.educationalQualifications?.length > 0 && (\n              <div className=\"data-section\">\n                <h5>Education</h5>\n                {extractedData.educationalQualifications.map((edu, index) => (\n                  <div key={index} className=\"data-grid\">\n                    <div className=\"data-item\">\n                      <span className=\"label\">Degree:</span>\n                      <span className=\"value\">{edu.degree}</span>\n                    </div>\n                    <div className=\"data-item\">\n                      <span className=\"label\">Institution:</span>\n                      <span className=\"value\">{edu.institution}</span>\n                    </div>\n                  </div>\n                ))}\n              </div>\n            )}\n          </div>\n\n          <div className=\"preview-actions\">\n            <Button variant=\"secondary\" onClick={discardExtractedData}>\n              Discard\n            </Button>\n            <Button onClick={applyExtractedData}>\n              Apply to Form\n            </Button>\n          </div>\n        </div>\n      )}\n    </div>\n  );\n};\n\nexport default SmartAutoFill;
+            className="file-input"
+            id="smart-upload"
+          />
+          <label htmlFor="smart-upload" className="upload-label">
+            {isProcessing ? (
+              <div className="processing-indicator">
+                <div className="spinner"></div>
+                <span>Processing document...</span>
+              </div>
+            ) : (
+              <>
+                <div className="upload-icon">📄</div>
+                <div className="upload-text">
+                  <strong>Smart Auto-Fill</strong>
+                  <p>Upload a document to automatically extract and fill form data</p>
+                </div>
+              </>
+            )}
+          </label>
+        </div>
+      </div>
+
+      {extractedData && (
+        <div className="extracted-data-preview">
+          <div className="preview-header">
+            <h4>📋 Extracted Data Preview</h4>
+            <p>Review the information extracted from your document:</p>
+          </div>
+          
+          <div className="data-sections">
+            <div className="data-section">
+              <h5>Personal Information</h5>
+              <div className="data-grid">
+                <div className="data-item">
+                  <span className="label">Name:</span>
+                  <span className="value">{extractedData.firstName} {extractedData.lastName}</span>
+                </div>
+                <div className="data-item">
+                  <span className="label">Email:</span>
+                  <span className="value">{extractedData.email}</span>
+                </div>
+                <div className="data-item">
+                  <span className="label">Phone:</span>
+                  <span className="value">{extractedData.mobile}</span>
+                </div>
+                <div className="data-item">
+                  <span className="label">Address:</span>
+                  <span className="value">{extractedData.address}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="data-section">
+              <h5>Professional Information</h5>
+              <div className="data-grid">
+                <div className="data-item">
+                  <span className="label">Position:</span>
+                  <span className="value">{extractedData.designation}</span>
+                </div>
+                <div className="data-item">
+                  <span className="label">Skills:</span>
+                  <span className="value">{extractedData.skills}</span>
+                </div>
+              </div>
+            </div>
+
+            {extractedData.educationalQualifications?.length > 0 && (
+              <div className="data-section">
+                <h5>Education</h5>
+                {extractedData.educationalQualifications.map((edu, index) => (
+                  <div key={index} className="data-grid">
+                    <div className="data-item">
+                      <span className="label">Degree:</span>
+                      <span className="value">{edu.degree}</span>
+                    </div>
+                    <div className="data-item">
+                      <span className="label">Institution:</span>
+                      <span className="value">{edu.institution}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="preview-actions">
+            <Button variant="secondary" onClick={discardExtractedData}>
+              Discard
+            </Button>
+            <Button onClick={applyExtractedData}>
+              Apply to Form
+            </Button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default SmartAutoFill;
