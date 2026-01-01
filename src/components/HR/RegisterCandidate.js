@@ -7,9 +7,13 @@ import Input from '../UI/Input';
 import Breadcrumbs from '../UI/Breadcrumbs';
 import './RegisterCandidate.css';
 
-// Mock position data
+// Mock position data with Indian names and contact details
 const POSITION_DATA = {
   'POS-3456': {
+    firstName: 'Arjun',
+    lastName: 'Sharma',
+    email: 'arjun.sharma@gmail.com',
+    mobile: '+91 9876543210',
     department: 'engineering',
     designation: 'Senior Software Engineer',
     location: 'india',
@@ -17,6 +21,10 @@ const POSITION_DATA = {
     relocation: false
   },
   'POS-7891': {
+    firstName: 'Priya',
+    lastName: 'Patel',
+    email: 'priya.patel@outlook.com',
+    mobile: '+1 555-123-4567',
     department: 'sales',
     designation: 'Sales Manager',
     location: 'us',
@@ -24,6 +32,10 @@ const POSITION_DATA = {
     relocation: true
   },
   'POS-2345': {
+    firstName: 'Rahul',
+    lastName: 'Gupta',
+    email: 'rahul.gupta@gmail.com',
+    mobile: '+91 8765432109',
     department: 'engineering',
     designation: 'Frontend Developer',
     location: 'india',
@@ -31,6 +43,10 @@ const POSITION_DATA = {
     relocation: false
   },
   'POS-5678': {
+    firstName: 'Kavya',
+    lastName: 'Reddy',
+    email: 'kavya.reddy@outlook.com',
+    mobile: '+1 555-987-6543',
     department: 'hr',
     designation: 'HR Business Partner',
     location: 'us',
@@ -38,6 +54,10 @@ const POSITION_DATA = {
     relocation: true
   },
   'POS-9012': {
+    firstName: 'Vikram',
+    lastName: 'Singh',
+    email: 'vikram.singh@gmail.com',
+    mobile: '+91 7654321098',
     department: 'finance',
     designation: 'Financial Analyst',
     location: 'india',
@@ -75,13 +95,17 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
       setFormData(prev => ({
         ...prev,
         positionId,
+        firstName: positionData.firstName,
+        lastName: positionData.lastName,
+        email: positionData.email,
+        mobile: positionData.mobile,
         department: positionData.department,
         designation: positionData.designation,
         location: positionData.location,
         joiningBonus: positionData.joiningBonus,
         relocation: positionData.relocation
       }));
-      showToast('Position details auto-filled successfully!', 'success');
+      showToast('Position details and candidate information auto-filled successfully!', 'success');
     } else {
       setFormData(prev => ({ ...prev, positionId }));
     }
@@ -142,13 +166,13 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
               required
             >
               <option value="">Select Position ID</option>
-              <option value="POS-3456">POS-3456 - Senior Software Engineer (India)</option>
-              <option value="POS-7891">POS-7891 - Sales Manager (US)</option>
-              <option value="POS-2345">POS-2345 - Frontend Developer (India)</option>
-              <option value="POS-5678">POS-5678 - HR Business Partner (US)</option>
-              <option value="POS-9012">POS-9012 - Financial Analyst (India)</option>
+              <option value="POS-3456">POS-3456 - Arjun Sharma - Senior Software Engineer (India)</option>
+              <option value="POS-7891">POS-7891 - Priya Patel - Sales Manager (US)</option>
+              <option value="POS-2345">POS-2345 - Rahul Gupta - Frontend Developer (India)</option>
+              <option value="POS-5678">POS-5678 - Kavya Reddy - HR Business Partner (US)</option>
+              <option value="POS-9012">POS-9012 - Vikram Singh - Financial Analyst (India)</option>
             </select>
-            <small className="form-hint">Select a position to auto-fill job details</small>
+            <small className="form-hint">Select a position to auto-fill candidate and job details</small>
           </div>
           
           <div className="form-row">

@@ -19,18 +19,10 @@ function App() {
 
   const handleLogout = () => {
     // Clear all session data
-    localStorage.removeItem('session');
-    localStorage.removeItem('demoData');
-    localStorage.removeItem('userInfo');
-    localStorage.removeItem('offerAcceptanceStatus');
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('location');
+    localStorage.clear();
     
     // Reset authentication state
     setIsAuthenticated(false);
-    
-    // Force page reload to clear all state
-    window.location.reload();
   };
 
   const handleLogin = () => {

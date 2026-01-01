@@ -12,11 +12,12 @@
 }
 
 .btn-primary {
-  background: var(--brand);
+  background: #1e3a5f;
+  color: #ffffff;
 }
 
 .btn-primary:hover {
-  opacity: 0.95;
+  background: #2c5282;
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(30, 58, 95, 0.35);
 }
@@ -28,14 +29,14 @@
 
 .btn-secondary {
   background: transparent;
-  border: 1px solid #e2e8f0;
-  color: var(--muted);
+  border: 1px solid #1e3a5f;
+  color: #1e3a5f;
 }
 
 .btn-secondary:hover {
-  background: #f8f9fa;
-  border-color: var(--brand);
-  color: var(--brand);
+  background: #1e3a5f;
+  border-color: #1e3a5f;
+  color: #ffffff;
   transform: translateY(-1px);
 }
 
