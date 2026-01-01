@@ -70,6 +70,11 @@ const Login = ({ onLogin, onDemo }) => {
     }
     
     try {
+      // Clear offer acceptance status for candidates to show popup
+      if (authenticatedUser.role === 'candidate') {
+        localStorage.removeItem('offerAcceptanceStatus');
+      }
+      
       // Set user info and role
       setUserInfo(authenticatedUser);
       setUserRole(authenticatedUser.role);
@@ -217,6 +222,8 @@ const Login = ({ onLogin, onDemo }) => {
                 type="button" 
                 variant="secondary" 
                 onClick={() => {
+                  // Clear offer acceptance for demo mode
+                  localStorage.removeItem('offerAcceptanceStatus');
                   // Demo mode with default candidate
                   setUserInfo(DEFAULT_CANDIDATE);
                   setUserRole(DEFAULT_CANDIDATE.role);

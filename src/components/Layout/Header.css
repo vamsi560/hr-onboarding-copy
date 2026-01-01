@@ -403,18 +403,16 @@
 
 /* Overlay for profile dropdown portal */
 .user-menu-dropdown-portal {
-  position: fixed;
-  top: 70px; /* height of header */
-  right: 32px; /* align with avatar, adjust as needed */
-  width: 180px;
-  min-width: 140px;
-  background: #fff;
+  position: fixed !important;
+  background: #fff !important;
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important;
   border: 1px solid rgba(0,0,0,0.08);
-  z-index: 2000;
+  z-index: 2000 !important;
   animation: slideDown 0.2s ease;
   overflow: hidden;
+  width: 180px;
+  min-width: 140px;
 }
 
 @media (max-width: 600px) {
@@ -505,12 +503,16 @@
 }
 
 .user-menu-item:hover {
-  background: #f8f9fa;
-  color: var(--brand);
+  background: #f1f5f9 !important;
+  color: var(--brand) !important;
 }
 
 .user-menu-item:hover .icon {
-  color: var(--brand);
+  color: var(--brand) !important;
+}
+
+.user-menu-item:hover span {
+  color: var(--brand) !important;
 }
 
 .user-menu-item .icon {
