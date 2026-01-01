@@ -386,9 +386,10 @@ const OnboardingForm = () => {
                 <div className="form-group">
                   <label>
                     First Name *
-                    <Tooltip content="Enter your legal first name as it appears on official documents">
-                      <Icon name="info" size={14} className="field-help-icon" />
-                    </Tooltip>
+                    <ContextualHelp 
+                      content="Enter your legal first name as it appears on official documents"
+                      type="tip"
+                    />
                   </label>
                   <div className="input-wrapper">
                     <Input
@@ -416,9 +417,10 @@ const OnboardingForm = () => {
                 <div className="form-group">
                   <label>
                     Last Name *
-                    <Tooltip content="Enter your legal last name (surname) as it appears on official documents">
-                      <Icon name="info" size={14} className="field-help-icon" />
-                    </Tooltip>
+                    <ContextualHelp 
+                      content="Enter your legal last name (surname) as it appears on official documents"
+                      type="tip"
+                    />
                   </label>
                   <div className="input-wrapper">
                     <Input
@@ -448,9 +450,10 @@ const OnboardingForm = () => {
                 <div className="form-group">
                   <label>
                     Email *
-                    <Tooltip content="Enter your professional email address. This will be used for all communications.">
-                      <Icon name="info" size={14} className="field-help-icon" />
-                    </Tooltip>
+                    <ContextualHelp 
+                      content="Enter your professional email address. This will be used for all communications."
+                      type="tip"
+                    />
                   </label>
                   <div className="input-wrapper">
                     <Input
@@ -479,9 +482,10 @@ const OnboardingForm = () => {
                 <div className="form-group">
                   <label>
                     Mobile *
-                    <Tooltip content="Enter your mobile number with country code (e.g., +1 555 555 5555)">
-                      <Icon name="info" size={14} className="field-help-icon" />
-                    </Tooltip>
+                    <ContextualHelp 
+                      content="Enter your mobile number with country code (e.g., +1 555 555 5555)"
+                      type="tip"
+                    />
                   </label>
                   <div className="input-wrapper">
                     <Input
@@ -511,9 +515,10 @@ const OnboardingForm = () => {
               <div className="form-group">
                 <label>
                   Address
-                  <Tooltip content="Enter your complete address including street, city, state, and postal code">
-                    <Icon name="info" size={14} className="field-help-icon" />
-                  </Tooltip>
+                  <ContextualHelp 
+                    content="Enter your complete address including street, city, state, and postal code"
+                    type="tip"
+                  />
                 </label>
                 <textarea
                   className="input"
@@ -1221,7 +1226,6 @@ const OnboardingForm = () => {
                 <div className="small" style={{ marginTop: '8px', color: 'var(--muted)' }}>
                   By providing your digital signature, you are agreeing to all the consents above.
                 </div>
-              </div>
                 <div className="form-row">
                   <div className="form-group">
                     <label>Date</label>
