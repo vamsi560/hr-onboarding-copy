@@ -52,6 +52,7 @@ const MainLayout = ({ onLogout }) => {
     return 'dashboard';
   });
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   // Show alumni dashboard - limited access
   if (userRole === 'alumni') {
@@ -151,12 +152,13 @@ const MainLayout = ({ onLogout }) => {
         onNavClick={handleNavClick}
         isMobileOpen={isMobileNavOpen}
         onClose={() => setIsMobileNavOpen(false)}
+        onCollapseChange={setIsSidebarCollapsed}
       />
       <Header 
         onMenuClick={() => setIsMobileNavOpen(!isMobileNavOpen)} 
         onLogout={onLogout}
       />
-      <main className="main-content fade-in">
+      <main className={`main-content fade-in ${isSidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
         <div className="main-content-wrapper">
           <ActiveComponent />
         </div>

@@ -6,7 +6,9 @@ import Button from '../UI/Button';
 import Input from '../UI/Input';
 import Breadcrumbs from '../UI/Breadcrumbs';
 import Icon from '../UI/Icon';
-import Tooltip from '../UI/Tooltip';
+import ContextualHelp from '../UI/ContextualHelp';
+import DigitalSignature from '../UI/DigitalSignature';
+import SmartAutoFill from '../UI/SmartAutoFill';
 import './OnboardingForm.css';
 
 const OnboardingForm = () => {
@@ -270,13 +272,23 @@ const OnboardingForm = () => {
             <div className="form-step">
               <h4>Personal Information</h4>
               
+              {/* Smart Auto-Fill Section */}
+              <SmartAutoFill
+                onDataExtracted={(data) => {
+                  setFormValues(prev => ({ ...prev, ...data }));
+                  handleChange('autofilled', true);
+                }}
+                acceptedTypes=".pdf,.doc,.docx,.jpg,.png"
+              />
+              
               {/* Resume Upload and LinkedIn Section */}
               <div className="form-group">
                 <label>
                   Upload Resume
-                  <Tooltip content="Upload your resume in PDF or Word format. We can autofill your information from the resume.">
-                    <Icon name="info" size={14} className="field-help-icon" />
-                  </Tooltip>
+                  <ContextualHelp 
+                    content="Upload your resume in PDF or Word format. We can autofill your information from the resume."
+                    type="tip"
+                  />
                 </label>
                 <div className="resume-upload-section">
                   <input
@@ -303,9 +315,10 @@ const OnboardingForm = () => {
               <div className="form-group">
                 <label>
                   LinkedIn Profile URL
-                  <Tooltip content="Enter your LinkedIn profile URL. We can autofill your professional information from LinkedIn.">
-                    <Icon name="info" size={14} className="field-help-icon" />
-                  </Tooltip>
+                  <ContextualHelp 
+                    content="Enter your LinkedIn profile URL. We can autofill your professional information from LinkedIn."
+                    type="tip"
+                  />
                 </label>
                 <div className="input-wrapper">
                   <Input
@@ -1191,30 +1204,24 @@ const OnboardingForm = () => {
               </div>
 
               <div className="signature-section">
-                <div className="form-group">
-                  <label>Digital Signature *</label>
-                  <div className="signature-box-container">
-                    <div className="signature-box">
-                      <div className="signature-display">
-                        <Input
-                          type="text"
-                          value={formValues.signature || ''}
-                          onChange={(e) => handleChange('signature', e.target.value)}
-                          placeholder="Type your full name to sign"
-                          required
-                        />
-                        {formValues.signature && (
-                          <div className="signature-text" style={{ marginTop: '12px' }}>
-                            {formValues.signature}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <div className="small" style={{ marginTop: '8px', color: 'var(--muted)' }}>
-                      By typing your full name, you are providing your digital signature and agreeing to all the consents above.
-                    </div>
-                  </div>
+                <DigitalSignature
+                  label="Digital Signature"
+                  required={true}
+                  onSave={(signature, type) => {
+                    handleChange('signature', signature);
+                    handleChange('signatureType', type);
+                    showToast('Signature saved successfully', 'success');
+                  }}
+                  onClear={() => {
+                    handleChange('signature', '');
+                    handleChange('signatureType', '');
+                  }}
+                  value={formValues.signature}
+                />
+                <div className="small" style={{ marginTop: '8px', color: 'var(--muted)' }}>
+                  By providing your digital signature, you are agreeing to all the consents above.
                 </div>
+              </div>
                 <div className="form-row">
                   <div className="form-group">
                     <label>Date</label>

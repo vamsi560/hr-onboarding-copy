@@ -3,9 +3,17 @@ import { useApp } from '../../context/AppContext';
 import Icon from '../UI/Icon';
 import './Sidebar.css';
 
-const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose }) => {
+const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose, onCollapseChange }) => {
   const { userRole, location } = useApp();
   const [collapsed, setCollapsed] = useState(false);
+
+  const handleCollapseToggle = () => {
+    const newCollapsed = !collapsed;
+    setCollapsed(newCollapsed);
+    if (onCollapseChange) {
+      onCollapseChange(newCollapsed);
+    }
+  };
 
   const candidateMenuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
@@ -40,7 +48,7 @@ const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose }) => {
       <nav className={`sidebar ${isMobileOpen ? 'mobile-open' : ''} ${collapsed ? 'collapsed' : ''}`}>
         <button
           className="sidebar-collapse-btn sidebar-collapse-btn-absolute"
-          onClick={() => setCollapsed(!collapsed)}
+          onClick={handleCollapseToggle}
           title={collapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
         >
           <Icon name={collapsed ? 'chevron-right' : 'chevron-left'} size={20} />
@@ -87,6 +95,7 @@ const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose }) => {
                 className={activeView === item.id ? 'active' : ''}
                 onClick={() => onNavClick(item.id)}
                 title={collapsed ? item.label : undefined}
+                data-nav={item.id}
               >
                 <Icon name={item.icon} size={20} className="nav-icon" />
                 {!collapsed && <span className="nav-label">{item.label}</span>}

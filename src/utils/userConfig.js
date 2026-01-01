@@ -8,6 +8,7 @@ export const USER_DATABASE = {
     location: 'india',
     joiningBonus: true,
     relocation: false,
+    relocationCity: '',
     alumni: false,
     designation: 'Senior Software Engineer',
     department: 'Engineering'
@@ -21,6 +22,7 @@ export const USER_DATABASE = {
     location: 'us',
     joiningBonus: false,
     relocation: true,
+    relocationCity: 'hyderabad',
     alumni: false,
     designation: 'Product Manager',
     department: 'Product'
@@ -34,6 +36,7 @@ export const USER_DATABASE = {
     location: 'us',
     joiningBonus: true,
     relocation: true,
+    relocationCity: 'pune',
     alumni: false,
     designation: 'Tech Lead',
     department: 'Engineering'
@@ -47,6 +50,7 @@ export const USER_DATABASE = {
     location: 'india',
     joiningBonus: false,
     relocation: false,
+    relocationCity: '',
     alumni: false,
     designation: 'Software Engineer',
     department: 'Engineering'
@@ -60,6 +64,7 @@ export const USER_DATABASE = {
     location: 'india',
     joiningBonus: false,
     relocation: false,
+    relocationCity: '',
     alumni: true,
     designation: 'Former Senior Developer',
     department: 'Engineering',
@@ -76,6 +81,7 @@ export const USER_DATABASE = {
     location: 'india',
     joiningBonus: false,
     relocation: false,
+    relocationCity: '',
     alumni: false,
     designation: 'HR Manager',
     department: 'HR'
@@ -91,6 +97,7 @@ export const DEFAULT_CANDIDATE = {
   location: 'india',
   joiningBonus: false,
   relocation: false,
+  relocationCity: '',
   alumni: false,
   designation: 'Software Engineer',
   department: 'Sales'

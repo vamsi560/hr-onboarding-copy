@@ -18,7 +18,10 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
     department: '',
     designation: '',
     location: 'india',
-    dateOfJoining: ''
+    dateOfJoining: '',
+    joiningBonus: false,
+    relocation: false,
+    relocationCity: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -40,6 +43,9 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
         total: 12,
         dept: formData.department,
         dateOfJoining: formData.dateOfJoining,
+        joiningBonus: formData.joiningBonus,
+        relocation: formData.relocation,
+        relocationCity: formData.relocationCity,
         selected: false,
         pending: []
       };
@@ -164,6 +170,76 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
               />
             </div>
           </div>
+          
+          <div className="form-row">
+            <div className="form-group">
+              <label>Joining Bonus Applicable</label>
+              <div className="radio-group">
+                <label className="radio-option">
+                  <input
+                    type="radio"
+                    name="joiningBonus"
+                    value="yes"
+                    checked={formData.joiningBonus === true}
+                    onChange={(e) => handleChange('joiningBonus', true)}
+                  />
+                  <span>Yes</span>
+                </label>
+                <label className="radio-option">
+                  <input
+                    type="radio"
+                    name="joiningBonus"
+                    value="no"
+                    checked={formData.joiningBonus === false}
+                    onChange={(e) => handleChange('joiningBonus', false)}
+                  />
+                  <span>No</span>
+                </label>
+              </div>
+            </div>
+            <div className="form-group">
+              <label>Relocation Assistance</label>
+              <div className="radio-group">
+                <label className="radio-option">
+                  <input
+                    type="radio"
+                    name="relocation"
+                    value="yes"
+                    checked={formData.relocation === true}
+                    onChange={(e) => handleChange('relocation', true)}
+                  />
+                  <span>Yes</span>
+                </label>
+                <label className="radio-option">
+                  <input
+                    type="radio"
+                    name="relocation"
+                    value="no"
+                    checked={formData.relocation === false}
+                    onChange={(e) => handleChange('relocation', false)}
+                  />
+                  <span>No</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          {formData.relocation && (
+            <div className="form-group">
+              <label>Relocation City *</label>
+              <select
+                className="input"
+                value={formData.relocationCity}
+                onChange={(e) => handleChange('relocationCity', e.target.value)}
+                required={formData.relocation}
+              >
+                <option value="">Select City</option>
+                <option value="hyderabad">Hyderabad</option>
+                <option value="pune">Pune</option>
+                <option value="coimbatore">Coimbatore</option>
+              </select>
+            </div>
+          )}
           
           <div className="form-actions">
             <Button type="button" variant="secondary" onClick={onBack}>

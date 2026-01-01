@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import Card from '../UI/Card';
-import ProgressBar from '../UI/ProgressBar';
+import EnhancedProgressBar from '../UI/EnhancedProgressBar';
+import OnboardingWizard from '../UI/OnboardingWizard';
 import Breadcrumbs from '../UI/Breadcrumbs';
 import OfferAcceptance from '../Auth/OfferAcceptance';
 import { calculateProgress } from '../../utils/progress';
@@ -72,10 +73,13 @@ const Dashboard = () => {
         <Card className="dashboard-card progress-card">
           <h2 className="section-title">Your Progress</h2>
           <div className="progress-bar-visual-container">
-            <div className="progress-bar-visual">
-              <div className="progress-bar-fill" style={{ width: progress + '%' }} />
-              <span className="progress-bar-label">{progress}%</span>
-            </div>
+            <EnhancedProgressBar 
+              progress={progress}
+              showMilestones={true}
+              animated={true}
+              size="medium"
+              milestones={[25, 50, 75, 100]}
+            />
             <div className="progress-donut-caption-block">
               <span className="progress-donut-caption">{completedCount} of {totalCount} Tasks Completed</span>
             </div>
@@ -271,6 +275,8 @@ const Dashboard = () => {
         </div>
         <button className="footer-faq-btn" onClick={() => alert('FAQs & Help Center coming soon!')}>FAQs &amp; Help Center</button>
       </div>
+      
+      <OnboardingWizard />
     </div>
   );
 };
