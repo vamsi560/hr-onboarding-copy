@@ -7,10 +7,50 @@ import Input from '../UI/Input';
 import Breadcrumbs from '../UI/Breadcrumbs';
 import './RegisterCandidate.css';
 
+// Mock position data
+const POSITION_DATA = {
+  'POS-3456': {
+    department: 'engineering',
+    designation: 'Senior Software Engineer',
+    location: 'india',
+    joiningBonus: true,
+    relocation: false
+  },
+  'POS-7891': {
+    department: 'sales',
+    designation: 'Sales Manager',
+    location: 'us',
+    joiningBonus: true,
+    relocation: true
+  },
+  'POS-2345': {
+    department: 'engineering',
+    designation: 'Frontend Developer',
+    location: 'india',
+    joiningBonus: false,
+    relocation: false
+  },
+  'POS-5678': {
+    department: 'hr',
+    designation: 'HR Business Partner',
+    location: 'us',
+    joiningBonus: false,
+    relocation: true
+  },
+  'POS-9012': {
+    department: 'finance',
+    designation: 'Financial Analyst',
+    location: 'india',
+    joiningBonus: true,
+    relocation: false
+  }
+};
+
 const RegisterCandidate = ({ onBack, onSuccess }) => {
   const { setCandidates } = useApp();
   const { showToast } = useToast();
   const [formData, setFormData] = useState({
+    positionId: '',
     firstName: '',
     lastName: '',
     email: '',
@@ -29,11 +69,28 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const handlePositionChange = (positionId) => {
+    const positionData = POSITION_DATA[positionId];
+    if (positionData) {
+      setFormData(prev => ({
+        ...prev,
+        positionId,
+        department: positionData.department,
+        designation: positionData.designation,
+        location: positionData.location,
+        joiningBonus: positionData.joiningBonus,
+        relocation: positionData.relocation
+      }));
+      showToast('Position details auto-filled successfully!', 'success');
+    } else {
+      setFormData(prev => ({ ...prev, positionId }));
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
     setTimeout(() => {
       const newCandidate = {
         id: Date.now(),
@@ -42,6 +99,7 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
         docs: 0,
         total: 12,
         dept: formData.department,
+        positionId: formData.positionId,
         dateOfJoining: formData.dateOfJoining,
         joiningBonus: formData.joiningBonus,
         relocation: formData.relocation,
@@ -75,6 +133,24 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
         <p className="small">Enter candidate details to send onboarding invitation email.</p>
         
         <form onSubmit={handleSubmit}>
+          <div className="form-group position-id-group">
+            <label>Position ID *</label>
+            <select
+              className="input position-select"
+              value={formData.positionId}
+              onChange={(e) => handlePositionChange(e.target.value)}
+              required
+            >
+              <option value="">Select Position ID</option>
+              <option value="POS-3456">POS-3456 - Senior Software Engineer (India)</option>
+              <option value="POS-7891">POS-7891 - Sales Manager (US)</option>
+              <option value="POS-2345">POS-2345 - Frontend Developer (India)</option>
+              <option value="POS-5678">POS-5678 - HR Business Partner (US)</option>
+              <option value="POS-9012">POS-9012 - Financial Analyst (India)</option>
+            </select>
+            <small className="form-hint">Select a position to auto-fill job details</small>
+          </div>
+          
           <div className="form-row">
             <div className="form-group">
               <label>First Name *</label>

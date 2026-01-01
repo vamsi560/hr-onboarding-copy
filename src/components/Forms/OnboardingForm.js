@@ -8,7 +8,6 @@ import Breadcrumbs from '../UI/Breadcrumbs';
 import Icon from '../UI/Icon';
 import ContextualHelp from '../UI/ContextualHelp';
 import DigitalSignature from '../UI/DigitalSignature';
-import SmartAutoFill from '../UI/SmartAutoFill';
 import './OnboardingForm.css';
 
 const OnboardingForm = () => {
@@ -19,6 +18,7 @@ const OnboardingForm = () => {
   const [saveStatus, setSaveStatus] = useState('saved'); // 'saving', 'saved', 'error'
   const [fieldErrors, setFieldErrors] = useState({});
   const [touchedFields, setTouchedFields] = useState({});
+  const [showLinkedInConsent, setShowLinkedInConsent] = useState(false);
   const saveTimeoutRef = useRef(null);
 
   useEffect(() => {
@@ -60,6 +60,11 @@ const OnboardingForm = () => {
   const handleChange = (field, value) => {
     const newValues = { ...formValues, [field]: value };
     setFormValues(newValues);
+    
+    // Show LinkedIn consent popup when valid LinkedIn URL is entered
+    if (field === 'linkedinUrl' && value && /^https?:\/\/(www\.)?linkedin\.com\/in\/.+/.test(value) && !formValues.linkedinAutofilled) {
+      setShowLinkedInConsent(true);
+    }
     
     // Real-time validation
     if (touchedFields[field]) {
@@ -162,6 +167,34 @@ const OnboardingForm = () => {
       }
     };
   }, []);
+
+  const handleAutofill = async (source) => {
+    showToast(`Autofilling data from ${source}...`, 'info');
+    // Simulate autofill - in real implementation, this would parse resume or LinkedIn
+    setTimeout(() => {
+      const autofilledData = {
+        firstName: formValues.firstName || (source === 'LinkedIn' ? 'Jane' : 'John'),
+        lastName: formValues.lastName || (source === 'LinkedIn' ? 'Smith' : 'Doe'),
+        email: formValues.email || (source === 'LinkedIn' ? 'jane.smith@example.com' : 'john.doe@example.com'),
+        mobile: formValues.mobile || '+91 9876543210',
+        address: formValues.address || '123 Main Street, Hyderabad, Telangana, India',
+        designation: formValues.designation || (source === 'LinkedIn' ? 'Senior Software Engineer' : 'Software Engineer')
+      };
+      setFormValues(prev => ({ ...prev, ...autofilledData }));
+      handleChange('autofilled', true);
+      if (source === 'LinkedIn') {
+        handleChange('linkedinAutofilled', true);
+      }
+      showToast(`Data autofilled from ${source}. Please review and update as needed.`, 'success');
+    }, 1500);
+  };
+
+  const handleLinkedInConsent = (consent) => {
+    setShowLinkedInConsent(false);
+    if (consent) {
+      handleAutofill('LinkedIn');
+    }
+  };
 
   const handleAutofill = async (source) => {
     showToast(`Autofilling data from ${source}...`, 'info');
@@ -272,16 +305,7 @@ const OnboardingForm = () => {
             <div className="form-step">
               <h4>Personal Information</h4>
               
-              {/* Smart Auto-Fill Section */}
-              <SmartAutoFill
-                onDataExtracted={(data) => {
-                  setFormValues(prev => ({ ...prev, ...data }));
-                  handleChange('autofilled', true);
-                }}
-                acceptedTypes=".pdf,.doc,.docx,.jpg,.png"
-              />
-              
-              {/* Resume Upload and LinkedIn Section */}
+              {/* Resume Upload Section */}
               <div className="form-group">
                 <label>
                   Upload Resume
@@ -300,6 +324,8 @@ const OnboardingForm = () => {
                       if (file) {
                         handleChange('resumeFile', file.name);
                         showToast('Resume uploaded successfully', 'success');
+                        // Auto-trigger autofill after resume upload
+                        setTimeout(() => handleAutofill('resume'), 500);
                       }
                     }}
                   />
@@ -316,7 +342,7 @@ const OnboardingForm = () => {
                 <label>
                   LinkedIn Profile URL
                   <ContextualHelp 
-                    content="Enter your LinkedIn profile URL. We can autofill your professional information from LinkedIn."
+                    content="Enter your LinkedIn profile URL for professional reference."
                     type="tip"
                   />
                 </label>
@@ -343,44 +369,6 @@ const OnboardingForm = () => {
                   </div>
                 )}
               </div>
-
-              {/* Autofill Option */}
-              {(formValues.resumeFile || formValues.linkedinUrl) && !formValues.autofilled && (
-                <div className="autofill-prompt">
-                  <Card style={{ padding: '16px', background: 'var(--bg)', border: '1px solid var(--border)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-                      <div>
-                        <strong>Autofill Form Data?</strong>
-                        <p className="small" style={{ marginTop: '4px', marginBottom: 0 }}>
-                          We can automatically fill your form using the uploaded resume or LinkedIn profile.
-                        </p>
-                      </div>
-                      <div style={{ display: 'flex', gap: '8px' }}>
-                        {formValues.resumeFile && (
-                          <Button
-                            type="button"
-                            variant="secondary"
-                            onClick={() => handleAutofill('resume')}
-                            style={{ fontSize: '14px' }}
-                          >
-                            Autofill from Resume
-                          </Button>
-                        )}
-                        {formValues.linkedinUrl && (
-                          <Button
-                            type="button"
-                            variant="secondary"
-                            onClick={() => handleAutofill('LinkedIn')}
-                            style={{ fontSize: '14px' }}
-                          >
-                            Autofill from LinkedIn
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </Card>
-                </div>
-              )}
 
               <div className="form-row">
                 <div className="form-group">
@@ -1247,6 +1235,47 @@ const OnboardingForm = () => {
           )}
         </form>
       </Card>
+      
+      {/* LinkedIn Consent Popup */}
+      {showLinkedInConsent && (
+        <div className="consent-popup-overlay">
+          <div className="consent-popup">
+            <div className="consent-popup-header">
+              <h3>LinkedIn Profile Autofill</h3>
+              <button 
+                className="consent-close-btn"
+                onClick={() => setShowLinkedInConsent(false)}
+              >
+                ×
+              </button>
+            </div>
+            <div className="consent-popup-content">
+              <div className="consent-icon">🔗</div>
+              <p>
+                We can automatically fill your form using information from your LinkedIn profile. 
+                This will help speed up the onboarding process.
+              </p>
+              <div className="consent-note">
+                <strong>Note:</strong> We will only use publicly available information from your LinkedIn profile. 
+                You can review and modify any auto-filled data before submitting.
+              </div>
+            </div>
+            <div className="consent-popup-actions">
+              <Button 
+                variant="secondary" 
+                onClick={() => handleLinkedInConsent(false)}
+              >
+                No, I'll fill manually
+              </Button>
+              <Button 
+                onClick={() => handleLinkedInConsent(true)}
+              >
+                Yes, autofill from LinkedIn
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

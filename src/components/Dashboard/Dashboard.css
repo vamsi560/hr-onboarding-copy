@@ -969,56 +969,86 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
+  .dashboard-hero-bg {
+    padding: 24px 16px 12px 16px;
+  }
+  .dashboard-main-grid-v2 {
+    padding: 0 16px;
+  }
 }
 
 @media (max-width: 600px) {
   .dashboard-title {
-    font-size: 28px;
+    font-size: 24px;
   }
-
-  .progress-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+  .dashboard-subtitle {
+    font-size: 14px;
   }
-
-  .progress-percentage {
-    align-self: flex-start;
+  .dashboard-hero-bg {
+    padding: 20px 12px 8px 12px;
   }
-
-  .section-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .stat-mini {
-    flex: 1;
-  }
-
   .dashboard-main-grid-v2 {
     grid-template-columns: 1fr;
     gap: 12px;
+    padding: 0 12px;
   }
   .dashboard-card {
-    padding: 12px 8px !important;
+    padding: 16px !important;
     border-radius: 10px;
   }
+  .profile-detail-main {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
   .profile-detail-avatar {
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
   }
   .welcome-video-iframe,
   .welcome-video-wrapper {
-    min-height: 180px;
-    height: 180px;
+    min-height: 200px;
+    height: 200px;
     border-radius: 10px;
   }
-  .dashboard-title {
-    font-size: 22px;
+  .progress-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
-  .dashboard-subtitle {
-    font-size: 13px;
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .dashboard-footer-bar {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    padding: 16px;
+  }
+  .linkedin-btn, .aboutus-btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-title {
+    font-size: 20px;
+  }
+  .dashboard-main-grid-v2 {
+    padding: 0 8px;
+  }
+  .dashboard-card {
+    padding: 12px !important;
+  }
+  .profile-detail-name {
+    font-size: 16px;
+  }
+  .section-title {
+    font-size: 18px;
   }
 }
 

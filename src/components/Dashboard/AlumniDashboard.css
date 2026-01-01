@@ -76,6 +76,79 @@
   margin-bottom: 24px;
 }
 
+/* Achievements Styles */
+.achievements-card {
+  grid-column: 1 / -1;
+}
+
+.achievements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.achievement-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.achievement-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.achievement-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+  flex-shrink: 0;
+}
+
+.achievement-content {
+  flex: 1;
+}
+
+.achievement-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.achievement-category {
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.achievement-description {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.achievement-date {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
 .alumni-section-card {
   padding: 24px;
 }
@@ -160,6 +233,34 @@ body.dark .document-item {
   .alumni-profile {
     flex-direction: column;
     text-align: center;
+  }
+  
+  .achievement-item {
+    padding: 12px;
+  }
+  
+  .achievement-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .alumni-dashboard {
+    padding: 12px;
+  }
+  
+  .alumni-title {
+    font-size: 24px;
+  }
+  
+  .alumni-content-grid {
+    gap: 16px;
+  }
+  
+  .alumni-section-card {
+    padding: 16px;
   }
 }
 

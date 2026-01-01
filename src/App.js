@@ -4,6 +4,7 @@ import { ToastProvider } from './context/ToastContext';
 import { LoadingProvider } from './context/LoadingContext';
 import Login from './components/Auth/Login';
 import MainLayout from './components/Layout/MainLayout';
+import SessionTimeout from './components/Auth/SessionTimeout';
 import './styles/App.css';
 
 function App() {
@@ -17,8 +18,19 @@ function App() {
   }, []);
 
   const handleLogout = () => {
+    // Clear all session data
     localStorage.removeItem('session');
+    localStorage.removeItem('demoData');
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('offerAcceptanceStatus');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('location');
+    
+    // Reset authentication state
     setIsAuthenticated(false);
+    
+    // Force page reload to clear all state
+    window.location.reload();
   };
 
   const handleLogin = () => {
@@ -48,7 +60,10 @@ function App() {
             {!isAuthenticated ? (
               <Login onLogin={handleLogin} onDemo={handleDemo} />
             ) : (
-              <MainLayout onLogout={handleLogout} />
+              <>
+                <MainLayout onLogout={handleLogout} />
+                <SessionTimeout onLogout={handleLogout} />
+              </>
             )}
           </div>
         </LoadingProvider>

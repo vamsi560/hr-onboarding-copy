@@ -2,6 +2,27 @@
   position: relative;
 }
 
+.position-id-group {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 8px;
+  border: 2px solid var(--primary);
+}
+
+.position-select {
+  font-weight: 500;
+  color: var(--primary);
+}
+
+.form-hint {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  font-style: italic;
+}
+
 .back-button-container {
   margin-bottom: 16px;
 }
