@@ -196,25 +196,6 @@ const OnboardingForm = () => {
     }
   };
 
-  const handleAutofill = async (source) => {
-    showToast(`Autofilling data from ${source}...`, 'info');
-    // Simulate autofill - in real implementation, this would parse resume or fetch LinkedIn data
-    setTimeout(() => {
-      const autofilledData = {
-        firstName: formValues.firstName || 'John',
-        lastName: formValues.lastName || 'Doe',
-        email: formValues.email || 'john.doe@example.com',
-        mobile: formValues.mobile || '+1 555 555 5555',
-        address: formValues.address || '123 Main St, City, State',
-        designation: formValues.designation || 'Software Engineer',
-        skills: formValues.skills || 'JavaScript, React, Node.js'
-      };
-      setFormValues(prev => ({ ...prev, ...autofilledData }));
-      handleChange('autofilled', true);
-      showToast(`Data autofilled from ${source}. Please review and update as needed.`, 'success');
-    }, 1500);
-  };
-
   const validateStep = (step) => {
     const step1Fields = ['firstName', 'lastName', 'email', 'mobile'];
     if (step === 1) {
