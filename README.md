@@ -1,10 +1,11 @@
 # ValueMomentum HR Onboarding System
 
-A professional React-based HR onboarding application for ValueMomentum.
+A professional React-based HR onboarding application for ValueMomentum with enhanced routing and user experience.
 
 ## Features
 
 - **User Authentication** - Secure login with session management
+- **URL-based Routing** - Clean navigation with React Router
 - **Multi-step Onboarding Form** - Comprehensive form with validation and auto-save
 - **Document Management** - Upload, preview, and manage documents with drag & drop
 - **AI Validation** - View AI-powered document validation results
