@@ -37,7 +37,8 @@ const Header = ({ onMenuClick, onLogout }) => {
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target) && 
+          !avatarBtnRef.current?.contains(event.target)) {
         setShowUserMenu(false);
       }
       if (notificationsRef.current && !notificationsRef.current.contains(event.target)) {
@@ -45,9 +46,12 @@ const Header = ({ onMenuClick, onLogout }) => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    if (showUserMenu || showNotifications) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [showUserMenu, showNotifications]);
 
   // Update dropdown position when menu is shown
   useEffect(() => {
@@ -173,6 +177,7 @@ const Header = ({ onMenuClick, onLogout }) => {
           </button>
           {showUserMenu && ReactDOM.createPortal(
             <div
+              ref={userMenuRef}
               className="user-menu-dropdown user-menu-dropdown-portal"
               style={{ 
                 position: 'fixed', 
@@ -180,6 +185,7 @@ const Header = ({ onMenuClick, onLogout }) => {
                 left: userMenuPosition.left, 
                 zIndex: 2000 
               }}
+              onClick={(e) => e.stopPropagation()}
             >
               <div className="user-menu-header">
                 <div className="user-menu-avatar">

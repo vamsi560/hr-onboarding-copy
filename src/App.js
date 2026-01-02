@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import { ToastProvider } from './context/ToastContext';
 import { LoadingProvider } from './context/LoadingContext';
@@ -23,6 +24,9 @@ function App() {
     
     // Reset authentication state
     setIsAuthenticated(false);
+    
+    // Force redirect to login page
+    window.location.href = '/login';
   };
 
   const handleLogin = () => {
@@ -45,22 +49,36 @@ function App() {
   }
 
   return (
-    <AppProvider>
-      <ToastProvider>
-        <LoadingProvider>
-          <div className="app">
-            {!isAuthenticated ? (
-              <Login onLogin={handleLogin} onDemo={handleDemo} />
-            ) : (
-              <>
-                <MainLayout onLogout={handleLogout} />
-                <SessionTimeout onLogout={handleLogout} />
-              </>
-            )}
-          </div>
-        </LoadingProvider>
-      </ToastProvider>
-    </AppProvider>
+    <Router>
+      <AppProvider>
+        <ToastProvider>
+          <LoadingProvider>
+            <div className="app">
+              <Routes>
+                <Route path="/login" element={
+                  !isAuthenticated ? (
+                    <Login onLogin={handleLogin} onDemo={handleDemo} />
+                  ) : (
+                    <Navigate to="/dashboard" replace />
+                  )
+                } />
+                <Route path="/*" element={
+                  isAuthenticated ? (
+                    <>
+                      <MainLayout onLogout={handleLogout} />
+                      <SessionTimeout onLogout={handleLogout} />
+                    </>
+                  ) : (
+                    <Navigate to="/login" replace />
+                  )
+                } />
+                <Route path="/" element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} replace />} />
+              </Routes>
+            </div>
+          </LoadingProvider>
+        </ToastProvider>
+      </AppProvider>
+    </Router>
   );
 }
 
