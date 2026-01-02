@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import Icon from '../UI/Icon';
 import './Sidebar.css';
 
-const Sidebar = ({ activeView, onNavClick, isMobileOpen, onClose, onCollapseChange }) => {
+const Sidebar = ({ onNavClick, isMobileOpen, onClose, onCollapseChange }) => {
   const { userRole, location } = useApp();
+  const routerLocation = useLocation();
   const [collapsed, setCollapsed] = useState(false);
+
+  // Get active view from URL
+  const activeView = routerLocation.pathname.substring(1) || 'dashboard';
 
   const handleCollapseToggle = () => {
     const newCollapsed = !collapsed;

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
+import { ROUTES, HR_ONLY_ROUTES } from '../../routes';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Dashboard from '../Dashboard/Dashboard';
@@ -46,25 +48,41 @@ const OfferRejectedView = () => {
 
 const MainLayout = ({ onLogout }) => {
   const { userRole, offerAcceptanceStatus, userInfo } = useApp();
-  const [activeView, setActiveView] = useState(() => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
+  // Get current view from URL
+  const getCurrentView = () => {
+    const path = location.pathname.substring(1); // Remove leading slash
+    if (path) return path;
+    // Default routes based on user role
     if (userRole === 'hr') return 'hr';
     if (userRole === 'alumni') return 'alumni';
     return 'dashboard';
-  });
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  };
+
+  const [activeView, setActiveView] = useState(getCurrentView());
+
+  useEffect(() => {
+    setActiveView(getCurrentView());
+  }, [location.pathname, userRole]);
 
   // Show alumni dashboard - limited access
   if (userRole === 'alumni') {
     return (
-      <div className="main-layout">
+      <div className="main-layout main-layout-no-sidebar">
         <Header 
           onMenuClick={() => {}} 
           onLogout={onLogout}
         />
-        <main className="main-content fade-in">
+        <main className="main-content main-content-full-width fade-in">
           <div className="main-content-wrapper">
-            <AlumniDashboard />
+            <Routes>
+              <Route path="/alumni" element={<AlumniDashboard />} />
+              <Route path="/*" element={<Navigate to="/alumni" replace />} />
+            </Routes>
           </div>
         </main>
         <ToastContainer />
@@ -83,7 +101,9 @@ const MainLayout = ({ onLogout }) => {
         />
         <main className="main-content fade-in">
           <div className="main-content-wrapper">
-            <OfferRejectedView />
+            <Routes>
+              <Route path="/*" element={<OfferRejectedView />} />
+            </Routes>
           </div>
         </main>
         <ToastContainer />
@@ -105,7 +125,9 @@ const MainLayout = ({ onLogout }) => {
         />
         <main className="main-content fade-in">
           <div className="main-content-wrapper">
-            <OfferAcceptance />
+            <Routes>
+              <Route path="/*" element={<OfferAcceptance />} />
+            </Routes>
           </div>
         </main>
         <ToastContainer />
@@ -128,18 +150,17 @@ const MainLayout = ({ onLogout }) => {
     expiry: DocumentExpiry,
     analytics: HRAnalytics,
     chat: HRChat,
-    auditlog: AuditLog
+    auditlog: AuditLog,
+    register: RegisterCandidate
   };
-
-  const ActiveComponent = views[activeView] || Dashboard;
 
   const handleNavClick = (view) => {
     // Only allow HR-specific views for HR users
-    const hrOnlyViews = ['chat', 'auditlog', 'references', 'expiry', 'exceptions', 'workflows', 'analytics', 'hr'];
-    if (hrOnlyViews.includes(view) && userRole !== 'hr') {
+    const route = `/${view}`;
+    if (HR_ONLY_ROUTES.includes(route) && userRole !== 'hr') {
       return;
     }
-    setActiveView(view);
+    navigate(route);
     if (window.innerWidth <= 900) {
       setIsMobileNavOpen(false);
     }
@@ -160,7 +181,27 @@ const MainLayout = ({ onLogout }) => {
       />
       <main className={`main-content fade-in ${isSidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
         <div className="main-content-wrapper">
-          <ActiveComponent />
+          <Routes>
+            <Route path="/dashboard" element={userRole === 'hr' ? <Navigate to="/hr" replace /> : <Dashboard />} />
+            <Route path="/form" element={<OnboardingForm />} />
+            <Route path="/documents" element={<Documents />} />
+            <Route path="/validation" element={<Validation />} />
+            <Route path="/support" element={<Support />} />
+            {userRole === 'hr' && (
+              <>
+                <Route path="/hr" element={<HRReview />} />
+                <Route path="/exceptions" element={<HRExceptions />} />
+                <Route path="/workflows" element={<HRWorkflows />} />
+                <Route path="/references" element={<ReferenceCheck />} />
+                <Route path="/expiry" element={<DocumentExpiry />} />
+                <Route path="/analytics" element={<HRAnalytics />} />
+                <Route path="/chat" element={<HRChat />} />
+                <Route path="/auditlog" element={<AuditLog />} />
+                <Route path="/register" element={<RegisterCandidate />} />
+              </>
+            )}
+            <Route path="/*" element={<Navigate to={userRole === 'hr' ? "/hr" : "/dashboard"} replace />} />
+          </Routes>
         </div>
       </main>
       <ChatWidget />
