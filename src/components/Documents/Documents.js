@@ -5,15 +5,17 @@ import Card from '../UI/Card';
 import Button from '../UI/Button';
 import Breadcrumbs from '../UI/Breadcrumbs';
 import Icon from '../UI/Icon';
+import { validateDocument } from '../../utils/documentValidation';
 import './Documents.css';
 
 const Documents = () => {
-  const { documents, addDocument, logAction } = useApp();
+  const { documents, addDocument, logAction, formData, validationHistory, setValidationHistory } = useApp();
   const { showToast } = useToast();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
   const [uploadingDoc, setUploadingDoc] = useState(null);
+  const [validatingDoc, setValidatingDoc] = useState(null);
   const fileInputRefs = useRef({});
 
   const documentCategories = {
@@ -168,7 +170,7 @@ Date: ______________________________________________________
     { id: 'criminal', name: 'Criminal Verification Form', category: 'other' }
   ];
 
-  const handleDocumentUpload = (docType, e) => {
+  const handleDocumentUpload = async (docType, e) => {
     const file = e.target.files[0];
     if (file) {
       const validTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword', 'image/jpeg', 'image/png', 'text/plain'];
@@ -195,6 +197,47 @@ Date: ______________________________________________________
       
       addDocument(newDoc);
       showToast(`${docTypeInfo.name} uploaded successfully`, 'success');
+      
+      // Trigger AI validation
+      setValidatingDoc(docType);
+      showToast('Starting AI validation...', 'info');
+      
+      try {
+        const validationResult = await validateDocument(file, docType, formData);
+        
+        // Add to validation history
+        setValidationHistory(prev => [validationResult, ...prev]);
+        
+        // Update document status based on validation
+        const updatedStatus = validationResult.status === 'valid' ? 'validated' : 
+                             validationResult.status === 'warning' ? 'warning' : 
+                             validationResult.status === 'invalid' ? 'invalid' : 'uploaded';
+        
+        // Update document with validation status
+        setTimeout(() => {
+          const docToUpdate = documents.find(d => d.docType === docType) || newDoc;
+          if (docToUpdate.id) {
+            // Document exists, update it
+            // Note: We'll need to add updateDocument to handle this properly
+          }
+        }, 100);
+        
+        // Show validation result toast
+        if (validationResult.status === 'valid') {
+          showToast(`✅ ${docTypeInfo.name} validated successfully (${validationResult.overallConfidence}% confidence)`, 'success');
+        } else if (validationResult.status === 'warning') {
+          showToast(`⚠️ ${docTypeInfo.name} has warnings. Please review validation results.`, 'warning');
+        } else {
+          showToast(`❌ ${docTypeInfo.name} validation failed. Please check the issues.`, 'error');
+        }
+        
+      } catch (error) {
+        console.error('Validation error:', error);
+        showToast('Validation failed. Please try again.', 'error');
+      } finally {
+        setValidatingDoc(null);
+      }
+      
       if (logAction) {
         logAction('document_uploaded', { 
           documentType: docTypeInfo.name, 
