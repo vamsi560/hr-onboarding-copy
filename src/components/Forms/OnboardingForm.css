@@ -699,7 +699,7 @@ body.dark .rating-star.active {
 }
 
 .consent-popup {
-  background: var(--card-bg);
+  background: #ffffff;
   border-radius: 12px;
   max-width: 480px;
   width: 90%;

@@ -18,6 +18,8 @@ const OnboardingForm = () => {
   const [saveStatus, setSaveStatus] = useState('saved'); // 'saving', 'saved', 'error'
   const [fieldErrors, setFieldErrors] = useState({});
   const [touchedFields, setTouchedFields] = useState({});
+  const [showSkillInput, setShowSkillInput] = useState(false);
+  const [newSkillName, setNewSkillName] = useState('');
   const [showLinkedInConsent, setShowLinkedInConsent] = useState(false);
   const saveTimeoutRef = useRef(null);
 
@@ -154,9 +156,14 @@ const OnboardingForm = () => {
   };
 
   const addSkill = () => {
-    const skillName = prompt('Enter skill name:');
-    if (skillName && skillName.trim()) {
-      handleSkillChange(skillName.trim(), 0);
+    setShowSkillInput(true);
+  };
+
+  const handleAddSkill = () => {
+    if (newSkillName && newSkillName.trim()) {
+      handleSkillChange(newSkillName.trim(), 0);
+      setNewSkillName('');
+      setShowSkillInput(false);
     }
   };
 
@@ -1252,6 +1259,59 @@ const OnboardingForm = () => {
                 onClick={() => handleLinkedInConsent(true)}
               >
                 Yes, autofill from LinkedIn
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Add Skill Popup */}
+      {showSkillInput && (
+        <div className="consent-popup-overlay">
+          <div className="consent-popup">
+            <div className="consent-popup-header">
+              <h3>Add New Skill</h3>
+              <button 
+                className="consent-close-btn"
+                onClick={() => {
+                  setShowSkillInput(false);
+                  setNewSkillName('');
+                }}
+              >
+                ×
+              </button>
+            </div>
+            <div className="consent-popup-content">
+              <div className="form-group">
+                <label>Skill Name</label>
+                <Input
+                  value={newSkillName}
+                  onChange={(e) => setNewSkillName(e.target.value)}
+                  placeholder="Enter skill name (e.g., JavaScript, Python, etc.)"
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      handleAddSkill();
+                    }
+                  }}
+                  autoFocus
+                />
+              </div>
+            </div>
+            <div className="consent-popup-actions">
+              <Button 
+                variant="secondary" 
+                onClick={() => {
+                  setShowSkillInput(false);
+                  setNewSkillName('');
+                }}
+              >
+                Cancel
+              </Button>
+              <Button 
+                onClick={handleAddSkill}
+                disabled={!newSkillName.trim()}
+              >
+                Add Skill
               </Button>
             </div>
           </div>
