@@ -39,7 +39,8 @@
 
 html, body, #root {
   max-width: 100vw;
-  overflow-x: hidden;
+  max-height: 100vh;
+  overflow: hidden;
 }
 
 body {
@@ -51,8 +52,10 @@ body {
   background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
   background-attachment: fixed;
   color: var(--text);
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
   line-height: 1.6;
+  overflow: hidden;
 }
 
 body.dark {
@@ -65,7 +68,8 @@ code {
 }
 
 #root {
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
 }
 
 /* Utility Classes */
