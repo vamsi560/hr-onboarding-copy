@@ -86,7 +86,8 @@ const Header = ({ onMenuClick, onLogout, sidebarCollapsed }) => {
         </button>
         <div className="header-logo">
           <img 
-            src={process.env.PUBLIC_URL + "/images/ValueMomentum_logo.png"} 
+            src={process.env.PUBLIC_URL + "/images/ValueMomentum_logo_black.png"} 
+            
             alt="ValueMomentum" 
             className="header-logo-image"
           />
