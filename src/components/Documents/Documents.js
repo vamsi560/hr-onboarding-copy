@@ -544,31 +544,31 @@ Date: ______________________________________________________
                 {
                   id: 'code_of_conduct',
                   name: 'Code of Conduct',
-                  file: '/documents/Code of Conduct_Global_V1.0_New (1).pdf',
+                  file: process.env.PUBLIC_URL + '/documents/Code of Conduct_Global_V1.0_New (1).pdf',
                   uploadAccept: '.pdf',
                 },
                 {
                   id: 'onboarding_doc',
                   name: 'Full Time Employee Consolidated Onboarding Document',
-                  file: '/documents/Full Time Employee_Consolidated Onboarding document (1).pdf',
+                  file: process.env.PUBLIC_URL + '/documents/Full Time Employee_Consolidated Onboarding document (1).pdf',
                   uploadAccept: '.pdf',
                 },
                 {
                   id: 'nominee_ff',
                   name: 'Nominee Declaration form (F&F)',
-                  file: '/documents/Nominee Declaration form_F&F.pdf',
+                  file: process.env.PUBLIC_URL + '/documents/Nominee Declaration form_F&F.pdf',
                   uploadAccept: '.pdf',
                 },
                 {
                   id: 'nominee_insurance',
                   name: 'Nominee Declaration form (Insurance)',
-                  file: '/documents/Nominee Declaration form_Insurance.pdf',
+                  file: process.env.PUBLIC_URL + '/documents/Nominee Declaration form_Insurance.pdf',
                   uploadAccept: '.pdf',
                 },
                 {
                   id: 'pf_nominee',
                   name: 'PF Nominee Declaration',
-                  file: '/documents/PF nominee declaration.pdf',
+                  file: process.env.PUBLIC_URL + '/documents/PF nominee declaration.pdf',
                   uploadAccept: '.pdf',
                 },
               ].map(docType => {
@@ -584,7 +584,12 @@ Date: ______________________________________________________
                         variant="secondary"
                         onClick={e => {
                           e.stopPropagation();
-                          window.open(docType.file, '_blank');
+                          const link = document.createElement('a');
+                          link.href = docType.file;
+                          link.download = docType.name + '.pdf';
+                          document.body.appendChild(link);
+                          link.click();
+                          document.body.removeChild(link);
                         }}
                         style={{ fontSize: '12px' }}
                       >
