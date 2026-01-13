@@ -167,7 +167,12 @@ Date: ______________________________________________________
     { id: 'resume1', name: 'ValueMomentum Format Resume', category: 'resumes' },
     { id: 'resume2', name: 'Personal Resume', category: 'resumes' },
     { id: 'nda', name: 'NDA / Contract', category: 'other' },
-    { id: 'criminal', name: 'Criminal Verification Form', category: 'other' }
+    { id: 'criminal', name: 'Criminal Verification Form', category: 'other' },
+    { id: 'code_of_conduct', name: 'Code of Conduct', category: 'company' },
+    { id: 'onboarding_doc', name: 'Full Time Employee Consolidated Onboarding Document', category: 'company' },
+    { id: 'nominee_ff', name: 'Nominee Declaration form (F&F)', category: 'company' },
+    { id: 'nominee_insurance', name: 'Nominee Declaration form (Insurance)', category: 'company' },
+    { id: 'pf_nominee', name: 'PF Nominee Declaration', category: 'company' },
   ];
 
   const handleDocumentUpload = async (docType, e) => {
@@ -523,6 +528,95 @@ Date: ______________________________________________________
                         Download Form
                       </Button>
                     )}
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Company Forms/Policies Category */}
+          <div className="document-category-section">
+            <h4 className="category-title">Company Forms/Policies</h4>
+            <p className="category-description">Download, fill, and upload required company forms and policies</p>
+            <div className="document-types-grid">
+              {/* List of company forms/policies with download and upload */}
+              {[
+                {
+                  id: 'code_of_conduct',
+                  name: 'Code of Conduct',
+                  file: '/documents/Code of Conduct_Global_V1.0_New (1).pdf',
+                  uploadAccept: '.pdf',
+                },
+                {
+                  id: 'onboarding_doc',
+                  name: 'Full Time Employee Consolidated Onboarding Document',
+                  file: '/documents/Full Time Employee_Consolidated Onboarding document (1).pdf',
+                  uploadAccept: '.pdf',
+                },
+                {
+                  id: 'nominee_ff',
+                  name: 'Nominee Declaration form (F&F)',
+                  file: '/documents/Nominee Declaration form_F&F.pdf',
+                  uploadAccept: '.pdf',
+                },
+                {
+                  id: 'nominee_insurance',
+                  name: 'Nominee Declaration form (Insurance)',
+                  file: '/documents/Nominee Declaration form_Insurance.pdf',
+                  uploadAccept: '.pdf',
+                },
+                {
+                  id: 'pf_nominee',
+                  name: 'PF Nominee Declaration',
+                  file: '/documents/PF nominee declaration.pdf',
+                  uploadAccept: '.pdf',
+                },
+              ].map(docType => {
+                const uploadedDoc = getDocumentStatus(docType.id);
+                return (
+                  <Card
+                    key={docType.id}
+                    className={`document-type-card ${uploadedDoc ? 'uploaded' : ''}`}
+                  >
+                    <h5>{docType.name}</h5>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <Button
+                        variant="secondary"
+                        onClick={e => {
+                          e.stopPropagation();
+                          window.open(docType.file, '_blank');
+                        }}
+                        style={{ fontSize: '12px' }}
+                      >
+                        Download
+                      </Button>
+                      <Button
+                        variant="primary"
+                        style={{ fontSize: '12px' }}
+                        onClick={() => {
+                          if (!fileInputRefs.current[docType.id]) {
+                            fileInputRefs.current[docType.id] = document.createElement('input');
+                            fileInputRefs.current[docType.id].type = 'file';
+                            fileInputRefs.current[docType.id].accept = docType.uploadAccept;
+                            fileInputRefs.current[docType.id].onchange = (e) => handleDocumentUpload(docType.id, e);
+                          }
+                          fileInputRefs.current[docType.id].click();
+                        }}
+                      >
+                        {uploadedDoc ? 'Re-upload' : 'Upload'}
+                      </Button>
+                      {uploadedDoc && (
+                        <div className="document-status">
+                          <span className="status-badge status-uploaded">Uploaded</span>
+                          <div className="small" style={{ marginTop: '4px' }}>{uploadedDoc.file}</div>
+                        </div>
+                      )}
+                      {!uploadedDoc && (
+                        <div className="document-status">
+                          <span className="status-badge status-pending">Pending</span>
+                        </div>
+                      )}
+                    </div>
                   </Card>
                 );
               })}
