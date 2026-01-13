@@ -20,6 +20,11 @@ const HRReview = () => {
     status: '',
     reason: ''
   });
+  const [joiningDateModal, setJoiningDateModal] = useState({
+    open: false,
+    selectedIds: [],
+    joiningDate: ''
+  });
 
   const filteredCandidates = candidates.filter(c => {
     const matchesSearch = !searchTerm || c.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -100,6 +105,33 @@ const HRReview = () => {
     closeStatusModal();
   };
 
+  const handleJoiningDateSubmit = (e) => {
+    e.preventDefault();
+    if (!joiningDateModal.joiningDate) return;
+
+    // Convert YYYY-MM-DD to MM/DD/YYYY format
+    const formatDate = (dateStr) => {
+      const date = new Date(dateStr);
+      return (date.getMonth() + 1).toString().padStart(2, '0') + '/' + 
+             date.getDate().toString().padStart(2, '0') + '/' + 
+             date.getFullYear();
+    };
+
+    setCandidates(prev =>
+      prev.map(c =>
+        joiningDateModal.selectedIds.includes(c.id)
+          ? { ...c, joiningDate: formatDate(joiningDateModal.joiningDate) }
+          : c
+      )
+    );
+
+    setJoiningDateModal({ open: false, selectedIds: [], joiningDate: '' });
+  };
+
+  const closeJoiningDateModal = () => {
+    setJoiningDateModal({ open: false, selectedIds: [], joiningDate: '' });
+  };
+
   if (selectedCandidateId) {
     return (
       <HRCandidateWorkflow
@@ -167,75 +199,67 @@ const HRReview = () => {
               <span>{selectedCount} selected</span>
               <Button>Approve Selected</Button>
               <Button variant="secondary">Reject Selected</Button>
+              <Button variant="secondary" onClick={() => setJoiningDateModal({ open: true, selectedIds: candidates.filter(c => c.selected).map(c => c.id) })}>Edit Joining Date</Button>
               <Button variant="secondary" onClick={() => toggleSelectAll(false)}>Clear</Button>
             </div>
           )}
 
-          <div className="candidates-cards-grid">
-            {filteredCandidates.map(candidate => (
-              <Card 
-                key={candidate.id} 
-                className={`candidate-card ${candidate.selected ? 'selected' : ''}`}
-                onClick={() => handleCandidateClick(candidate.id)}
-              >
-                <div className="candidate-card-header">
-                  <input
-                    type="checkbox"
-                    checked={candidate.selected}
-                    onChange={(e) => {
-                      e.stopPropagation();
-                      toggleCandidate(candidate.id);
-                    }}
-                    onClick={(e) => e.stopPropagation()}
-                  />
-                  <div className="candidate-avatar">
-                    {candidate.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()}
-                  </div>
-                </div>
-                <div className="candidate-card-body">
-                  <h4 className="candidate-name">{candidate.name}</h4>
-                  <div className="candidate-info">
-                    <span className="candidate-dept">{candidate.dept}</span>
-                    <span className={`status-badge status-${candidate.status === 'ready' ? 'approved' : 'pending'}`}>
-                      {candidate.status}
-                    </span>
-                  </div>
-                  <div className="candidate-docs">
-                    <span className="docs-progress">{candidate.docs}/{candidate.total} Documents</span>
-                    <div className="docs-progress-bar">
-                      <div 
-                        className="docs-progress-fill" 
-                        style={{ width: `${(candidate.docs / candidate.total) * 100}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-                <div className="candidate-card-footer">
-                  <div className="candidate-footer-actions">
-                    <Button 
-                      variant="secondary"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleCandidateClick(candidate.id);
-                      }}
-                    >
-                      View Details →
-                    </Button>
-                    <Button
-                      variant="secondary"
-                      className="status-update-btn"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        openStatusModal(candidate);
-                      }}
-                    >
-                      Update Status
-                    </Button>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
+          <Card className="analytics-table-card">
+            <table className="analytics-table">
+              <thead>
+                <tr>
+                  <th>
+                    <input
+                      type="checkbox"
+                      checked={filteredCandidates.length > 0 && filteredCandidates.every(c => c.selected)}
+                      onChange={(e) => toggleSelectAll(e.target.checked)}
+                    />
+                  </th>
+                  <th>Name</th>
+                  <th>Position</th>
+                  <th>Department</th>
+                  <th>Hiring Lead</th>
+                  <th>Offer Date</th>
+                  <th>Accept Date</th>
+                  <th>Joining Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredCandidates.map(candidate => (
+                  <tr key={candidate.id}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={candidate.selected}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          toggleCandidate(candidate.id);
+                        }}
+                      />
+                    </td>
+                    <td>
+                      <a 
+                        href="#" 
+                        className="candidate-name-link"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleCandidateClick(candidate.id);
+                        }}
+                      >
+                        {candidate.name}
+                      </a>
+                    </td>
+                    <td>{candidate.position || 'Software Developer'}</td>
+                    <td>{candidate.dept}</td>
+                    <td>{candidate.hiringLead || 'Raghavendra Raju'}</td>
+                    <td>{candidate.offerDate || '12/15/2024'}</td>
+                    <td>{candidate.acceptDate || '12/17/2024'}</td>
+                    <td>{candidate.joiningDate || '01/02/2025'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Card>
         </Card>
       </Card>
 
@@ -280,6 +304,37 @@ const HRReview = () => {
                 </Button>
                 <Button type="submit">
                   Save
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {joiningDateModal.open && (
+        <div className="status-modal-backdrop" onClick={closeJoiningDateModal}>
+          <div className="status-modal" onClick={(e) => e.stopPropagation()}>
+            <h4>Edit Joining Date</h4>
+            <p>Update joining date for {joiningDateModal.selectedIds.length} selected candidate(s)</p>
+            <form onSubmit={handleJoiningDateSubmit}>
+              <div className="form-group">
+                <label>Joining Date *</label>
+                <input
+                  type="date"
+                  className="input"
+                  value={joiningDateModal.joiningDate}
+                  onChange={(e) =>
+                    setJoiningDateModal(prev => ({ ...prev, joiningDate: e.target.value }))
+                  }
+                  required
+                />
+              </div>
+              <div className="form-actions modal-actions">
+                <Button type="button" variant="secondary" onClick={closeJoiningDateModal}>
+                  Cancel
+                </Button>
+                <Button type="submit">
+                  Update
                 </Button>
               </div>
             </form>

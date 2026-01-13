@@ -4,7 +4,7 @@ import { useApp } from '../../context/AppContext';
 import Icon from '../UI/Icon';
 import './Header.css';
 
-const Header = ({ onMenuClick, onLogout }) => {
+const Header = ({ onMenuClick, onLogout, sidebarCollapsed }) => {
   const { darkMode, toggleDarkMode, userRole } = useApp();
   const [currentDateTime, setCurrentDateTime] = useState('');
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -74,7 +74,7 @@ const Header = ({ onMenuClick, onLogout }) => {
   const unreadCount = notifications.filter(n => !n.read).length;
 
   return (
-    <header className="app-header">
+    <header className={`app-header ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
       <div className="header-left">
         <button
           className="mobile-menu-btn"
@@ -86,7 +86,8 @@ const Header = ({ onMenuClick, onLogout }) => {
         </button>
         <div className="header-logo">
           <img 
-            src={process.env.PUBLIC_URL + "/images/ValueMomentum_logo.png"} 
+            src={process.env.PUBLIC_URL + "/images/ValueMomentum_logo_black.png"} 
+            
             alt="ValueMomentum" 
             className="header-logo-image"
           />
@@ -215,11 +216,11 @@ const Header = ({ onMenuClick, onLogout }) => {
               <div className="user-menu-divider"></div>
               <div className="user-menu-items">
                 <button className="user-menu-item">
-                  <Icon name="user" size={16} />
+                  <Icon name="user" size={14} />
                   <span>Profile</span>
                 </button>
                 <button className="user-menu-item">
-                  <Icon name="settings" size={16} />
+                  <Icon name="settings" size={14} />
                   <span>Settings</span>
                 </button>
                 <div className="user-menu-divider"></div>
@@ -230,7 +231,7 @@ const Header = ({ onMenuClick, onLogout }) => {
                     if (onLogout) onLogout(); 
                   }}
                 >
-                  <Icon name="logout" size={16} />
+                  <Icon name="logout" size={14} />
                   <span>Logout</span>
                 </button>
               </div>

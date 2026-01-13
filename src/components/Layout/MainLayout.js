@@ -178,9 +178,10 @@ const MainLayout = ({ onLogout }) => {
       <Header 
         onMenuClick={() => setIsMobileNavOpen(!isMobileNavOpen)} 
         onLogout={onLogout}
+        sidebarCollapsed={isSidebarCollapsed}
       />
       <main className={`main-content fade-in ${isSidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
-        <div className="main-content-wrapper">
+        <div className={`main-content-wrapper ${isSidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
           <Routes>
             <Route path="/dashboard" element={userRole === 'hr' ? <Navigate to="/hr" replace /> : <Dashboard />} />
             <Route path="/form" element={<OnboardingForm />} />
