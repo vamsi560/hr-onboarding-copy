@@ -120,11 +120,7 @@ const MainLayout = ({ onLogout }) => {
   }
 
   const handleNavClick = (view) => {
-    // Only allow HR-specific views for HR users
     const route = `/${view}`;
-    if (userRole !== 'hr') {
-      return;
-    }
     navigate(route);
     if (window.innerWidth <= 900) {
       setIsMobileNavOpen(false);
