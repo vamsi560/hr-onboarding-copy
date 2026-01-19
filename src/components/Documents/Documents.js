@@ -584,12 +584,7 @@ Date: ______________________________________________________
                         variant="secondary"
                         onClick={e => {
                           e.stopPropagation();
-                          const link = document.createElement('a');
-                          link.href = docType.file;
-                          link.download = docType.name + '.pdf';
-                          document.body.appendChild(link);
-                          link.click();
-                          document.body.removeChild(link);
+                          window.open(docType.file, '_blank');
                         }}
                         style={{ fontSize: '12px' }}
                       >
