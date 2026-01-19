@@ -9,48 +9,12 @@ import { validateDocument } from '../../utils/documentValidation';
 import './Documents.css';
 
 const Documents = () => {
-  const { documents, addDocument, logAction, formData, validationHistory, setValidationHistory } = useApp();
+  const { documents, addDocument, logAction, formData, setValidationHistory } = useApp();
   const { showToast } = useToast();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
-  const [uploadingDoc, setUploadingDoc] = useState(null);
-  const [validatingDoc, setValidatingDoc] = useState(null);
   const fileInputRefs = useRef({});
-
-  const documentCategories = {
-    identity: [
-      'Aadhaar Card',
-      'Passport',
-      'Visa (if applicable)',
-      'Recent passport-size photo'
-    ],
-    education: [
-      'Secondary Education (10th)',
-      'Higher Secondary / 12th',
-      'Graduation Degree',
-      'Post Graduation Degree (if applicable)'
-    ],
-    financial: [
-      'Last three months pay slips',
-      'Bank account statement - 6 months',
-      'Form 12b'
-    ],
-    experience: [
-      'Experience Letter from Previous Company 1',
-      'Experience Letter from Previous Company 2',
-      'Relieving Letter from Previous Company',
-      'Salary Certificate from Previous Company'
-    ],
-    resumes: [
-      'ValueMomentum Format Resume',
-      'Personal Resume'
-    ],
-    other: [
-      'NDA / Contract',
-      'Any other supporting documents'
-    ]
-  };
 
   const downloadResumeSample = () => {
     // Download the actual VAM format resume sample document
@@ -204,7 +168,6 @@ Date: ______________________________________________________
       showToast(`${docTypeInfo.name} uploaded successfully`, 'success');
       
       // Trigger AI validation
-      setValidatingDoc(docType);
       showToast('Starting AI validation...', 'info');
       
       try {
@@ -239,8 +202,6 @@ Date: ______________________________________________________
       } catch (error) {
         console.error('Validation error:', error);
         showToast('Validation failed. Please try again.', 'error');
-      } finally {
-        setValidatingDoc(null);
       }
       
       if (logAction) {
@@ -252,7 +213,6 @@ Date: ______________________________________________________
         });
       }
       e.target.value = '';
-      setUploadingDoc(null);
     }
   };
 
