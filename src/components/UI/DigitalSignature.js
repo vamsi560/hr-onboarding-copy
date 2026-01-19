@@ -95,13 +95,13 @@ const DigitalSignature = ({
     // Draw the typed signature
     ctx.fillText(typedSignature, canvas.width / 2, canvas.height / 2);
     setHasSignature(true);
-  }, [typedSignature, signatureType]);
+  }, [typedSignature]);
 
   useEffect(() => {
     if (signatureType === 'type' && typedSignature) {
       generateTypedSignature();
     }
-  }, [typedSignature, signatureType]);
+  }, [typedSignature, generateTypedSignature]);
 
   return (
     <div className="digital-signature-container">
