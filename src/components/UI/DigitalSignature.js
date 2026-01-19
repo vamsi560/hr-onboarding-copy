@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import Button from '../UI/Button';
 import './DigitalSignature.css';
 
@@ -77,7 +77,7 @@ const DigitalSignature = ({
     }
   };
 
-  const generateTypedSignature = () => {
+  const generateTypedSignature = useCallback(() => {
     if (!typedSignature.trim()) return;
     
     const canvas = canvasRef.current;
@@ -95,13 +95,13 @@ const DigitalSignature = ({
     // Draw the typed signature
     ctx.fillText(typedSignature, canvas.width / 2, canvas.height / 2);
     setHasSignature(true);
-  };
+  }, [typedSignature, signatureType]);
 
   useEffect(() => {
     if (signatureType === 'type' && typedSignature) {
       generateTypedSignature();
     }
-  }, [typedSignature, signatureType, generateTypedSignature]);
+  }, [typedSignature, signatureType]);
 
   return (
     <div className="digital-signature-container">

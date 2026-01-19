@@ -3,8 +3,6 @@ import { useApp } from '../../context/AppContext';
 import Card from '../UI/Card';
 import EnhancedProgressBar from '../UI/EnhancedProgressBar';
 import OnboardingWizard from '../UI/OnboardingWizard';
-import Breadcrumbs from '../UI/Breadcrumbs';
-import OfferAcceptance from '../Auth/OfferAcceptance';
 import { calculateProgress } from '../../utils/progress';
 import './Dashboard.css';
 
@@ -22,12 +20,11 @@ const upcomingEvents = [
 ];
 
 const Dashboard = () => {
-  const { formData, documents, userRole, userInfo } = useApp();
+  const { formData, documents, userInfo } = useApp();
   const [progress, setProgress] = useState(0);
   const [pendingTasks, setPendingTasks] = useState([]);
   const [completedCount, setCompletedCount] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
-  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   const [showJoiningBonus, setShowJoiningBonus] = useState(false);
   const [showRelocation, setShowRelocation] = useState(false);
 

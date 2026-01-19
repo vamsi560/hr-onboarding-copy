@@ -57,17 +57,6 @@ const HRReview = () => {
     setShowRegisterForm(false);
   };
 
-  const openStatusModal = (candidate) => {
-    setStatusModal({
-      open: true,
-      candidateId: candidate.id,
-      status: candidate.status && !['ready', 'pending', 'reviewed'].includes(candidate.status)
-        ? candidate.status
-        : '',
-      reason: candidate.statusReason || ''
-    });
-  };
-
   const closeStatusModal = () => {
     setStatusModal({
       open: false,
@@ -238,8 +227,8 @@ const HRReview = () => {
                       />
                     </td>
                     <td>
-                      <a 
-                        href="#" 
+                      <button 
+                        type="button" 
                         className="candidate-name-link"
                         onClick={(e) => {
                           e.preventDefault();
@@ -247,7 +236,7 @@ const HRReview = () => {
                         }}
                       >
                         {candidate.name}
-                      </a>
+                      </button>
                     </td>
                     <td>{candidate.position || 'Software Developer'}</td>
                     <td>{candidate.dept}</td>

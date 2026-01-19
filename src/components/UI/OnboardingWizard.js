@@ -114,7 +114,7 @@ const OnboardingWizard = ({ onComplete, onSkip }) => {
         highlightElement(steps[currentStep].highlight);
       }, 500);
     }
-  }, [currentStep, isVisible]);
+  }, [isVisible, steps, currentStep]);
 
   if (!isVisible) return null;
 

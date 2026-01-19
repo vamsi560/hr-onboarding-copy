@@ -5,7 +5,7 @@ import Icon from '../UI/Icon';
 import './Header.css';
 
 const Header = ({ onMenuClick, onLogout, sidebarCollapsed }) => {
-  const { darkMode, toggleDarkMode, userRole } = useApp();
+  const { toggleDarkMode, userRole } = useApp();
   const [currentDateTime, setCurrentDateTime] = useState('');
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);

@@ -48,7 +48,7 @@ const SessionTimeout = ({ onLogout }) => {
         document.removeEventListener(event, handleActivity, true);
       });
     };
-  }, [showWarning, onLogout]);
+  }, [showWarning, onLogout, SESSION_TIMEOUT, WARNING_TIME]);
 
   useEffect(() => {
     if (showWarning && timeLeft > 0) {

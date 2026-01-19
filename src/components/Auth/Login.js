@@ -254,7 +254,9 @@ const Login = ({ onLogin, onDemo }) => {
                 <input type="checkbox" />
                 <span>Remember me</span>
               </label>
-              <a href="#" className="forgot-password">Forgot password?</a>
+              <button type="button" className="forgot-password" onClick={() => {}}>
+                Forgot password?
+              </button>
             </div>
             
             <div className="login-actions">

@@ -6,7 +6,7 @@ import Breadcrumbs from '../UI/Breadcrumbs';
 import './HRAnalytics.css';
 
 const HRAnalytics = () => {
-  const { candidates, logAction } = useApp();
+  const { logAction } = useApp();
   const [sortField, setSortField] = useState(null);
   const [sortDirection, setSortDirection] = useState('asc');
   const [departmentFilter, setDepartmentFilter] = useState('');
@@ -228,7 +228,7 @@ const HRAnalytics = () => {
     if (sortDirection === 'asc') {
       return aVal > bVal ? 1 : -1;
     } else {
-      return aVal < bVal ? 1 : -1;
+      return aVal < bVal ? -1 : 1;
     }
   });
 
@@ -460,8 +460,8 @@ const HRAnalytics = () => {
             {sortedData.map((candidate) => (
               <tr key={candidate.id}>
                 <td>
-                  <a 
-                    href="#" 
+                  <button 
+                    type="button" 
                     className="candidate-name-link"
                     onClick={(e) => {
                       e.preventDefault();
@@ -469,7 +469,7 @@ const HRAnalytics = () => {
                     }}
                   >
                     {candidate.name}
-                  </a>
+                  </button>
                 </td>
                 <td>{candidate.position}</td>
                 <td>{candidate.department}</td>

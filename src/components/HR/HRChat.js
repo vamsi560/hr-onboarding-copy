@@ -1,13 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 import { useToast } from '../../context/ToastContext';
-import Card from '../UI/Card';
 import Button from '../UI/Button';
 import Breadcrumbs from '../UI/Breadcrumbs';
 import './HRChat.css';
 
 const HRChat = () => {
-  const { candidates } = useApp();
   const { showToast } = useToast();
   const [selectedChat, setSelectedChat] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -187,10 +185,6 @@ const HRChat = () => {
     showToast('Select a candidate from the list to start a chat', 'info');
   };
 
-  const formatTime = (timeStr) => {
-    return timeStr;
-  };
-
   return (
     <div className="hr-chat">
       <div className="back-button-container">
@@ -310,7 +304,7 @@ const HRChat = () => {
                       <div className="message-file">
                         <div>
                           {message.link ? (
-                            <a href="#" className="file-link">{message.fileName}</a>
+                            <button type="button" className="file-link">{message.fileName}</button>
                           ) : (
                             <span className="file-name">{message.fileName}</span>
                           )}

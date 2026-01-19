@@ -37,7 +37,7 @@ const OnboardingForm = () => {
         }
         break;
       case 'mobile':
-        if (value && !/^[\d\s\+\-\(\)]+$/.test(value)) {
+        if (value && !/^[\d\s+\-()]+$/.test(value)) {
           errors[field] = 'Please enter a valid phone number';
         }
         break;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
-import { ROUTES, HR_ONLY_ROUTES } from '../../routes';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Dashboard from '../Dashboard/Dashboard';
@@ -47,27 +46,11 @@ const OfferRejectedView = () => {
 };
 
 const MainLayout = ({ onLogout }) => {
-  const { userRole, offerAcceptanceStatus, userInfo } = useApp();
+  const { userRole, offerAcceptanceStatus } = useApp();
   const navigate = useNavigate();
   const location = useLocation();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-
-  // Get current view from URL
-  const getCurrentView = () => {
-    const path = location.pathname.substring(1); // Remove leading slash
-    if (path) return path;
-    // Default routes based on user role
-    if (userRole === 'hr') return 'hr';
-    if (userRole === 'alumni') return 'alumni';
-    return 'dashboard';
-  };
-
-  const [activeView, setActiveView] = useState(getCurrentView());
-
-  useEffect(() => {
-    setActiveView(getCurrentView());
-  }, [location.pathname, userRole]);
 
   // Show alumni dashboard - limited access
   if (userRole === 'alumni') {
@@ -136,28 +119,10 @@ const MainLayout = ({ onLogout }) => {
     );
   }
 
-  const views = {
-    dashboard: Dashboard,
-    alumni: AlumniDashboard,
-    form: OnboardingForm,
-    documents: Documents,
-    validation: Validation,
-    hr: HRReview,
-    support: Support,
-    exceptions: HRExceptions,
-    workflows: HRWorkflows,
-    references: ReferenceCheck,
-    expiry: DocumentExpiry,
-    analytics: HRAnalytics,
-    chat: HRChat,
-    auditlog: AuditLog,
-    register: RegisterCandidate
-  };
-
   const handleNavClick = (view) => {
     // Only allow HR-specific views for HR users
     const route = `/${view}`;
-    if (HR_ONLY_ROUTES.includes(route) && userRole !== 'hr') {
+    if (userRole !== 'hr') {
       return;
     }
     navigate(route);
@@ -169,7 +134,7 @@ const MainLayout = ({ onLogout }) => {
   return (
     <div className="main-layout">
       <Sidebar
-        activeView={activeView}
+        activeView={location.pathname.substring(1)}
         onNavClick={handleNavClick}
         isMobileOpen={isMobileNavOpen}
         onClose={() => setIsMobileNavOpen(false)}

@@ -10,7 +10,6 @@ import './ReferenceCheck.css';
 const ReferenceCheck = () => {
   const { candidates, referenceChecks, setReferenceChecks, logAction } = useApp();
   const { showToast } = useToast();
-  const [selectedCandidateId, setSelectedCandidateId] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [showAddForm, setShowAddForm] = useState(false);

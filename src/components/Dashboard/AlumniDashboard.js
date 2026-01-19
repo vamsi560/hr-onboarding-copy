@@ -10,12 +10,8 @@ import './AlumniDashboard.css';
 const AlumniDashboard = () => {
   const { userInfo } = useApp();
   const [currentPage, setCurrentPage] = useState('home');
-  const [selectedDocument, setSelectedDocument] = useState(null);
 
   const displayName = userInfo?.name || 'Suresh Iyer';
-  const yearsWorked = userInfo?.yearsWorked || 5.5;
-  const joinedDate = userInfo?.joinedDate || '2018-01-15';
-  const leftDate = userInfo?.leftDate || '2023-06-30';
   const designation = userInfo?.designation || 'Senior Software Engineer';
 
   // Navigation items
