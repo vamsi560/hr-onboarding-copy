@@ -22,7 +22,7 @@ const upcomingEvents = [
 ];
 
 const Dashboard = () => {
-  const { formData, documents, userRole, userInfo } = useApp();
+  const { formData, documents, userRole } = useApp();
   const [progress, setProgress] = useState(0);
   const [pendingTasks, setPendingTasks] = useState([]);
   const [completedCount, setCompletedCount] = useState(0);

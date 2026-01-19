@@ -136,7 +136,6 @@ export const validateQuality = async (file) => {
  */
 export const extractDocumentData = async (file, documentType) => {
   // Mock extraction - In production, this would use OCR service
-  const rules = DOCUMENT_RULES[documentType] || {};
   
   // Simulate OCR processing delay
   await new Promise(resolve => setTimeout(resolve, 1000));

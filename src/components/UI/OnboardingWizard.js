@@ -76,7 +76,7 @@ const OnboardingWizard = ({ onComplete, onSkip }) => {
     if (!hasSeenWizard) {
       setTimeout(() => setIsVisible(true), 1000);
     }
-  }, [userRole, userInfo]);
+  }, [userRole, userInfo, steps]);
 
   const handleNext = () => {
     if (currentStep < steps.length - 1) {

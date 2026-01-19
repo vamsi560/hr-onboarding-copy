@@ -101,7 +101,7 @@ const DigitalSignature = ({
     if (signatureType === 'type' && typedSignature) {
       generateTypedSignature();
     }
-  }, [typedSignature, signatureType]);
+  }, [typedSignature, signatureType, generateTypedSignature]);
 
   return (
     <div className="digital-signature-container">

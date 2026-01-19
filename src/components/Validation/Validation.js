@@ -7,7 +7,7 @@ import Icon from '../UI/Icon';
 import './Validation.css';
 
 const Validation = () => {
-  const { validationHistory, setValidationHistory } = useApp();
+  const { validationHistory } = useApp();
   const [expandedItems, setExpandedItems] = useState({});
   const [filterStatus, setFilterStatus] = useState('all');
 
