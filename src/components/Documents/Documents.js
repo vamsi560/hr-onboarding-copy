@@ -177,9 +177,10 @@ Date: ______________________________________________________
         setValidationHistory(prev => [validationResult, ...prev]);
         
         // Update document status based on validation
-        const updatedStatus = validationResult.status === 'valid' ? 'validated' : 
-                             validationResult.status === 'warning' ? 'warning' : 
-                             validationResult.status === 'invalid' ? 'invalid' : 'uploaded';
+        // Remove unused variable 'updatedStatus' to fix build warning
+        // const updatedStatus = validationResult.status === 'valid' ? 'validated' : 
+        //                      validationResult.status === 'warning' ? 'warning' : 
+        //                      validationResult.status === 'invalid' ? 'invalid' : 'uploaded';
         
         // Update document with validation status
         setTimeout(() => {
