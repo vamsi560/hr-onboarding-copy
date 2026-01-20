@@ -17,6 +17,7 @@ const Documents = () => {
   const fileInputRefs = useRef({});
 
   const downloadResumeSample = () => {
+    console.log('Downloading resume sample template...');
     // Download the actual VAM format resume sample document
     const link = document.createElement('a');
     link.href = `${process.env.PUBLIC_URL || ''}/VAM_format_resume_sample.docx`;
@@ -26,6 +27,8 @@ const Documents = () => {
     link.click();
     document.body.removeChild(link);
     
+    console.log('Resume sample template download initiated');
+    
     if (logAction) {
       logAction('resume_sample_downloaded', { fileName: 'VAM_format_resume_sample.docx' });
     }
@@ -34,6 +37,7 @@ const Documents = () => {
   };
 
   const downloadCriminalVerificationForm = () => {
+    console.log('Downloading criminal verification form...');
     // Create a simple form template as PDF-like content
     const formContent = `
 CRIMINAL VERIFICATION FORM
@@ -107,6 +111,8 @@ Date: ______________________________________________________
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+    
+    console.log('Criminal verification form download completed');
     
     showToast('Criminal Verification form downloaded. Please fill and upload.', 'success');
   };
@@ -545,7 +551,40 @@ Date: ______________________________________________________
                         variant="secondary"
                         onClick={e => {
                           e.stopPropagation();
-                          window.open(docType.file, '_blank');
+                          // Specific console logs for each document type
+                          if (docType.id === 'code_of_conduct') {
+                            console.log('Downloading Code of Conduct document...');
+                          } else if (docType.id === 'nominee_ff') {
+                            console.log('Downloading Nominee Declaration form (F&F)...');
+                          } else if (docType.id === 'nominee_insurance') {
+                            console.log('Downloading Nominee Declaration form (Insurance)...');
+                          } else if (docType.id === 'pf_nominee') {
+                            console.log('Downloading PF Nominee Declaration...');
+                          } else {
+                            console.log(`Downloading company document: ${docType.name}`);
+                          }
+                          
+                          // Create download link instead of window.open
+                          const link = document.createElement('a');
+                          link.href = docType.file;
+                          link.download = docType.name + '.pdf';
+                          link.target = '_blank';
+                          document.body.appendChild(link);
+                          link.click();
+                          document.body.removeChild(link);
+                          
+                          // Specific completion logs
+                          if (docType.id === 'code_of_conduct') {
+                            console.log('Code of Conduct document download initiated');
+                          } else if (docType.id === 'nominee_ff') {
+                            console.log('Nominee Declaration form (F&F) download initiated');
+                          } else if (docType.id === 'nominee_insurance') {
+                            console.log('Nominee Declaration form (Insurance) download initiated');
+                          } else if (docType.id === 'pf_nominee') {
+                            console.log('PF Nominee Declaration download initiated');
+                          } else {
+                            console.log(`Company document download initiated: ${docType.name}`);
+                          }
                         }}
                         style={{ fontSize: '12px' }}
                       >
