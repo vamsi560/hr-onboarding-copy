@@ -45,6 +45,10 @@ const HRReview = () => {
     setCandidates(prev => prev.map(c => ({ ...c, selected: checked })));
   };
 
+  const handleCandidateClick = (candidateId) => {
+    setSelectedCandidateId(candidateId);
+  };
+
   const handleBackToWorkflows = () => {
     setSelectedCandidateId(null);
   };
@@ -223,9 +227,12 @@ const HRReview = () => {
                       />
                     </td>
                     <td>
-                      
+                      <span 
+                        className="candidate-name-link"
+                        onClick={() => handleCandidateClick(candidate.id)}
+                      >
                         {candidate.name}
-                      
+                      </span>
                     </td>
                     <td>{candidate.position || 'Software Developer'}</td>
                     <td>{candidate.dept}</td>
