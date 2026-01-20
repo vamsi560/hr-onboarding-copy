@@ -227,16 +227,9 @@ const HRReview = () => {
                       />
                     </td>
                     <td>
-                      <button 
-                        type="button" 
-                        className="candidate-name-link"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleCandidateClick(candidate.id);
-                        }}
-                      >
+                      
                         {candidate.name}
-                      </button>
+                      
                     </td>
                     <td>{candidate.position || 'Software Developer'}</td>
                     <td>{candidate.dept}</td>

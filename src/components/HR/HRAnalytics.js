@@ -459,18 +459,7 @@ const HRAnalytics = () => {
           <tbody>
             {sortedData.map((candidate) => (
               <tr key={candidate.id}>
-                <td>
-                  <button 
-                    type="button" 
-                    className="candidate-name-link"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      // Could navigate to candidate detail page
-                    }}
-                  >
-                    {candidate.name}
-                  </button>
-                </td>
+                <td>{candidate.name}</td>
                 <td>{candidate.position}</td>
                 <td>{candidate.department}</td>
                 <td>{candidate.hiringLead}</td>
