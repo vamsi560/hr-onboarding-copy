@@ -45,10 +45,6 @@ const HRReview = () => {
     setCandidates(prev => prev.map(c => ({ ...c, selected: checked })));
   };
 
-  const handleCandidateClick = (candidateId) => {
-    setSelectedCandidateId(candidateId);
-  };
-
   const handleBackToWorkflows = () => {
     setSelectedCandidateId(null);
   };
