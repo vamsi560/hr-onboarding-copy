@@ -123,7 +123,7 @@ const Login = ({ onLogin, onDemo }) => {
           </div>
           <h1 className="login-title">Welcome to ValueMomentum Onboarding Portal</h1>
           <p className="login-subtitle">
-            Streamline your onboarding journey with our intelligent platform
+            Streamline your onboarding journey with our intelligent AI-powered platform
           </p>
         </div>
 
@@ -254,9 +254,9 @@ const Login = ({ onLogin, onDemo }) => {
                 <input type="checkbox" />
                 <span>Remember me</span>
               </label>
-              <button type="button" className="forgot-password" onClick={() => {}}>
+              <label  className="forgot-password" onClick={() => {}}>
                 Forgot password?
-              </button>
+                </label>
             </div>
             
             <div className="login-actions">
