@@ -323,6 +323,32 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
               </div>
             </div>
           </div>
+
+          {/* Joining Bonus Amount and Breakdown */}
+          {formData.joiningBonus === true && (
+            <div className="form-group">
+              <label>Joining Bonus Amount (INR)</label>
+              <Input
+                type="number"
+                min="0"
+                value={formData.joiningBonusAmount || ''}
+                onChange={(e) => handleChange('joiningBonusAmount', e.target.value)}
+                placeholder="Enter joining bonus amount"
+                required
+              />
+              {formData.joiningBonusAmount && Number(formData.joiningBonusAmount) > 0 && (
+                <div className="joining-bonus-breakdown">
+                  <strong>Breakdown:</strong>
+                  <ul>
+                    <li>50% on joining: INR {Math.round(Number(formData.joiningBonusAmount) * 0.5)}</li>
+                    <li>25% after 6 months: INR {Math.round(Number(formData.joiningBonusAmount) * 0.25)}</li>
+                    <li>25% after 12 months: INR {Math.round(Number(formData.joiningBonusAmount) * 0.25)}</li>
+                  </ul>
+                  <small className="form-hint">* Subject to continued employment at each milestone.</small>
+                </div>
+              )}
+            </div>
+          )}
           
           {formData.relocation && (
             <div className="form-group">

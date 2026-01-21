@@ -1136,7 +1136,7 @@ const OnboardingForm = () => {
                       required
                     />
                     <span className="consent-text">
-                      <strong>Information Consent:</strong> I hereby confirm that all the information provided in this onboarding form is accurate, complete, and true to the best of my knowledge. I understand that providing false or misleading information may result in termination of my employment or other legal consequences.
+                      <strong>Information Accuracy:</strong> I confirm that all information provided is true, complete, and accurate to the best of my knowledge. I understand that any misrepresentation or omission may result in withdrawal of the offer or termination of employment.
                     </span>
                   </label>
                 </div>
@@ -1150,7 +1150,7 @@ const OnboardingForm = () => {
                       required
                     />
                     <span className="consent-text">
-                      <strong>Document Consent:</strong> I consent to the collection, storage, and processing of all documents uploaded during the onboarding process. I understand that these documents will be used for verification purposes and will be stored securely in accordance with company policies and applicable data protection laws.
+                      <strong>Document Submission:</strong> I consent to the collection, storage, and verification of all documents submitted as part of the onboarding process. I acknowledge that these documents will be used solely for employment and compliance purposes, and will be handled in accordance with applicable laws and company policy.
                     </span>
                   </label>
                 </div>
@@ -1164,7 +1164,7 @@ const OnboardingForm = () => {
                       required
                     />
                     <span className="consent-text">
-                      <strong>Background Check Consent:</strong> I consent to ValueMomentum conducting background checks, including but not limited to employment verification, education verification, criminal record checks, and reference checks. I authorize all previous employers, educational institutions, and other relevant parties to release information about me.
+                      <strong>Background Verification:</strong> I authorize ValueMomentum and its representatives to conduct background checks, including verification of employment history, education, and references, as well as criminal record checks if required. I release all parties from liability for any information provided in good faith.
                     </span>
                   </label>
                 </div>
@@ -1178,7 +1178,7 @@ const OnboardingForm = () => {
                       required
                     />
                     <span className="consent-text">
-                      <strong>Data Processing Consent:</strong> I consent to ValueMomentum processing my personal data for employment-related purposes, including payroll, benefits administration, performance management, and compliance with legal obligations. I understand that my data will be handled in accordance with applicable privacy laws and company policies.
+                      <strong>Data Privacy:</strong> I consent to the processing of my personal data by ValueMomentum for employment-related purposes, including payroll, benefits, and compliance. I understand my data will be protected and processed in accordance with applicable data protection laws and company policy.
                     </span>
                   </label>
                 </div>
