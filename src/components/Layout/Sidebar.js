@@ -5,7 +5,7 @@ import Icon from '../UI/Icon';
 import './Sidebar.css';
 
 const Sidebar = ({ onNavClick, isMobileOpen, onClose, onCollapseChange }) => {
-  const { userRole, location } = useApp();
+  const { userRole, location, organization } = useApp();
   const routerLocation = useLocation();
   const [collapsed, setCollapsed] = useState(false);
 
@@ -40,12 +40,18 @@ const Sidebar = ({ onNavClick, isMobileOpen, onClose, onCollapseChange }) => {
     { id: 'support', label: 'Support', icon: 'support' }
   ];
 
+  const tagMenuItems = [
+    { id: 'tag', label: 'Candidates', icon: 'dashboard' },
+    { id: 'register', label: 'Register New Candidate', icon: 'form' },
+    { id: 'support', label: 'Support', icon: 'support' }
+  ];
+
   // Alumni users don't get sidebar navigation
   if (userRole === 'alumni') {
     return null;
   }
 
-  const menuItems = userRole === 'hr' ? hrMenuItems : candidateMenuItems;
+  const menuItems = userRole === 'hr' ? hrMenuItems : userRole === 'tag' ? tagMenuItems : candidateMenuItems;
 
   return (
     <>
@@ -116,9 +122,15 @@ const Sidebar = ({ onNavClick, isMobileOpen, onClose, onCollapseChange }) => {
           {!collapsed && (
             <div className="sidebar-logo">
               <img 
-                src={process.env.PUBLIC_URL + "/images/ValueMomentum_logo.png"} 
-                alt="ValueMomentum" 
+                src={process.env.PUBLIC_URL + (organization === 'owlsure' ? "/images/OwlSure_logo.png" : "/images/ValueMomentum_logo.png")} 
+                alt={organization === 'owlsure' ? "OwlSure" : "ValueMomentum"} 
                 className="logo-image"
+                onError={(e) => {
+                  // Fallback to ValueMomentum logo if OwlSure logo doesn't exist
+                  if (organization === 'owlsure') {
+                    e.target.src = process.env.PUBLIC_URL + "/images/ValueMomentum_logo.png";
+                  }
+                }}
               />
             </div>
           )}

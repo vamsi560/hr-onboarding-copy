@@ -6,9 +6,13 @@ import Button from '../UI/Button';
 import './OfferAcceptance.css';
 
 const OfferAcceptance = () => {
-  const { offerAcceptanceStatus, setOfferAcceptanceStatus, userRole, logAction } = useApp();
+  const { offerAcceptanceStatus, setOfferAcceptanceStatus, userRole, logAction, organization } = useApp();
   const { showToast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
+  
+  const getOrganizationName = () => {
+    return organization === 'owlsure' ? 'OwlSure' : 'ValueMomentum';
+  };
 
   // Show modal only for candidates who haven't responded yet
   const showModal = userRole === 'candidate' && offerAcceptanceStatus === null;
@@ -21,7 +25,7 @@ const OfferAcceptance = () => {
       if (logAction) {
         logAction('offer_accepted', { timestamp: new Date().toISOString() });
       }
-      showToast('Offer accepted! Welcome to ValueMomentum!', 'success');
+      showToast(`Offer accepted! Welcome to ${getOrganizationName()}!`, 'success');
       setIsProcessing(false);
     }, 500);
   };
@@ -42,7 +46,7 @@ const OfferAcceptance = () => {
   if (!showModal) return null;
 
   return (
-    <Modal isOpen={showModal} onClose={() => {}} title="Job Offer - ValueMomentum">
+    <Modal isOpen={showModal} onClose={() => {}} title={`Job Offer - ${getOrganizationName()}`}>
       <div className="offer-acceptance-content">
         <div className="offer-header">
           <h2>Congratulations!</h2>

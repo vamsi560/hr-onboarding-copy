@@ -4,13 +4,19 @@ import Button from '../UI/Button';
 import './OnboardingWizard.css';
 
 const OnboardingWizard = ({ onComplete, onSkip }) => {
-  const { userRole, userInfo } = useApp();
+  const { userRole, userInfo, organization } = useApp();
   const [currentStep, setCurrentStep] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  
+  const getOrganizationName = () => {
+    return organization === 'owlsure' ? 'OwlSure' : 'ValueMomentum';
+  };
+  
+  const orgName = getOrganizationName();
 
   const candidateSteps = [
     {
-      title: "Welcome to ValueMomentum! 🎉",
+      title: `Welcome to ${orgName}! 🎉`,
       content: "We're excited to have you join our team. This wizard will guide you through the onboarding process.",
       action: "Let's get started!",
       highlight: ".dashboard-title"

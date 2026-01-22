@@ -1,6 +1,8 @@
-# Login Credentials - ValueMomentum HR Onboarding Portal
+# Login Credentials - HR Onboarding Portal
 
 This document contains all the login credentials for testing different user roles and scenarios in the HR Onboarding Portal.
+
+**Note:** The portal now supports multiple organizations (ValueMomentum and OwlSure). Select the organization from the login dropdown.
 
 ---
 
@@ -94,6 +96,7 @@ This document contains all the login credentials for testing different user role
 ### 6. HR Manager
 **Email:** `hr@valuemomentum.com`  
 **Password:** `password123`  
+**Name:** Raghavendra Raju  
 **Role:** HR  
 **Location:** India  
 
@@ -105,10 +108,32 @@ This document contains all the login credentials for testing different user role
 - Document expiry tracking
 - Analytics
 - Audit logs
+- **Note:** Register New Candidate button has been removed (moved to TAG)
 
 ---
 
-### 7. Demo Mode (Default Candidate)
+### 7. TAG Team (Recruitment)
+**Email:** `tag@valuemomentum.com`  
+**Password:** `password123`  
+**Name:** TAG Team  
+**Role:** TAG  
+**Location:** India  
+
+**Features:**
+- TAG Dashboard showing all registered candidates
+- Register New Candidate functionality (moved from HR)
+- Candidate list with search and filters
+- View candidate status and documents
+- Support access
+
+**Menu Items:**
+- Candidates (default page)
+- Register New Candidate
+- Support
+
+---
+
+### 8. Demo Mode (Default Candidate)
 **Email:** Any email (not validated in demo mode)  
 **Password:** Any password (not validated in demo mode)  
 **Click:** "Try Demo Mode" button  
@@ -130,7 +155,8 @@ This document contains all the login credentials for testing different user role
 | mike.johnson@gmail.com | password123 | Vikram Singh | Candidate | ✅ Yes | ✅ Yes | Both benefits |
 | sarah.williams@outlook.com | password123 | Anjali Gupta | Candidate | ❌ No | ❌ No | Standard candidate |
 | alumni@gmail.com | password123 | Suresh Iyer | Alumni | ❌ No | ❌ No | Limited access only |
-| hr@valuemomentum.com | password123 | Raghavendra Raju | HR | ❌ No | ❌ No | Full HR access |
+| hr@valuemomentum.com | password123 | Raghavendra Raju | HR | ❌ No | ❌ No | Full HR access (no Register button) |
+| tag@valuemomentum.com | password123 | TAG Team | TAG | ❌ No | ❌ No | Recruitment team - Register candidates |
 
 ---
 
@@ -170,6 +196,30 @@ This document contains all the login credentials for testing different user role
 4. Check work documents section
 5. Verify sidebar is hidden
 6. Verify other features are disabled
+
+### Scenario 6: TAG Team
+1. Login as `tag@valuemomentum.com` (TAG Team)
+2. Select "TAG" from Login As dropdown
+3. Verify TAG Dashboard is shown with candidates list
+4. Check "Register New Candidate" in sidebar
+5. Register a new candidate
+6. Verify candidate appears in the list
+
+### Scenario 7: Organization Selection (ValueMomentum/OwlSure)
+1. On login page, select organization from dropdown:
+   - ValueMomentum (default)
+   - OwlSure
+2. When OwlSure is selected:
+   - Logo changes (if OwlSure logo exists, otherwise falls back to ValueMomentum)
+   - All "ValueMomentum" text changes to "OwlSure" throughout the app
+3. Login with any credentials
+4. Verify organization name appears correctly in:
+   - Login page title
+   - Dashboard welcome messages
+   - Offer acceptance modal
+   - Document templates
+   - Consent forms
+   - Email addresses
 
 ---
 

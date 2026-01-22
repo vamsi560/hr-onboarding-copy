@@ -4,7 +4,6 @@ import Card from '../UI/Card';
 import Button from '../UI/Button';
 import Breadcrumbs from '../UI/Breadcrumbs';
 import HRCandidateWorkflow from './HRCandidateWorkflow';
-import RegisterCandidate from './RegisterCandidate';
 import './HRReview.css';
 
 const HRReview = () => {
@@ -13,7 +12,6 @@ const HRReview = () => {
   const [statusFilter, setStatusFilter] = useState('');
   const [deptFilter, setDeptFilter] = useState('');
   const [selectedCandidateId, setSelectedCandidateId] = useState(null);
-  const [showRegisterForm, setShowRegisterForm] = useState(false);
   const [statusModal, setStatusModal] = useState({
     open: false,
     candidateId: null,
@@ -51,10 +49,6 @@ const HRReview = () => {
 
   const handleBackToWorkflows = () => {
     setSelectedCandidateId(null);
-  };
-
-  const handleRegisterSuccess = () => {
-    setShowRegisterForm(false);
   };
 
   const closeStatusModal = () => {
@@ -130,15 +124,6 @@ const HRReview = () => {
     );
   }
 
-  if (showRegisterForm) {
-    return (
-      <RegisterCandidate
-        onBack={() => setShowRegisterForm(false)}
-        onSuccess={handleRegisterSuccess}
-      />
-    );
-  }
-
   return (
     <div className="hr-review">
       <Breadcrumbs items={[{ label: 'Home' }, { label: 'HR Review' }]} />
@@ -148,9 +133,6 @@ const HRReview = () => {
             <h3>HR Review Dashboard</h3>
             <p className="small">View onboarding status for all employees.</p>
           </div>
-          <Button onClick={() => setShowRegisterForm(true)}>
-            Register New Candidate
-          </Button>
         </div>
         <Card style={{ marginTop: '12px' }}>
           <div className="hr-filters">

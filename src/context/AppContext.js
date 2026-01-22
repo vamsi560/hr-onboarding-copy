@@ -22,6 +22,9 @@ export const AppProvider = ({ children }) => {
   const [location, setLocation] = useState(() => {
     return localStorage.getItem('location') || 'india';
   });
+  const [organization, setOrganization] = useState(() => {
+    return localStorage.getItem('organization') || 'valuemomentum';
+  });
   const [offerAcceptanceStatus, setOfferAcceptanceStatus] = useState(() => {
     const saved = localStorage.getItem('offerAcceptanceStatus');
     // For demo purposes, always start with null for new sessions
@@ -165,6 +168,10 @@ export const AppProvider = ({ children }) => {
   }, [location]);
 
   useEffect(() => {
+    localStorage.setItem('organization', organization);
+  }, [organization]);
+
+  useEffect(() => {
     localStorage.setItem('formData', JSON.stringify(formData));
   }, [formData]);
 
@@ -245,6 +252,8 @@ export const AppProvider = ({ children }) => {
     setUserRole,
     location,
     setLocation,
+    organization,
+    setOrganization,
     offerAcceptanceStatus,
     setOfferAcceptanceStatus,
     userInfo,

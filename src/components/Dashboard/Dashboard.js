@@ -20,7 +20,11 @@ const upcomingEvents = [
 ];
 
 const Dashboard = () => {
-  const { formData, documents, userInfo } = useApp();
+  const { formData, documents, userInfo, organization } = useApp();
+  
+  const getOrganizationName = () => {
+    return organization === 'owlsure' ? 'OwlSure' : 'ValueMomentum';
+  };
   const [progress, setProgress] = useState(0);
   const [pendingTasks, setPendingTasks] = useState([]);
   const [completedCount, setCompletedCount] = useState(0);
@@ -108,7 +112,7 @@ const Dashboard = () => {
         {/* Welcome Card (Follow us on LinkedIn + About Us) */}
         <Card className="dashboard-card welcome-card">
           <h2 className="section-title">Know about us!</h2>
-          <p className="dashboard-subtitle">We're excited to have you on board! Follow us on the below social media to know more about ValueMomentum.</p>
+          <p className="dashboard-subtitle">We're excited to have you on board! Follow us on the below social media to know more about {getOrganizationName()}.</p>
           <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
             <a
               className="linkedin-btn"

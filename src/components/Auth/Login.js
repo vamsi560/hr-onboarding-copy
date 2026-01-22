@@ -15,8 +15,9 @@ const Login = ({ onLogin, onDemo }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loginType, setLoginType] = useState('candidate');
   const [location, setLocation] = useState('india');
+  const [organization, setOrganization] = useState('valuemomentum');
   const { showToast } = useToast();
-  const { setUserRole, setLocation: setAppLocation, setUserInfo, logAction, resetOfferAcceptance } = useApp();
+  const { setUserRole, setLocation: setAppLocation, setUserInfo, logAction, resetOfferAcceptance, setOrganization: setAppOrganization } = useApp();
 
   useEffect(() => {
     setIsAnimating(true);
@@ -79,6 +80,7 @@ const Login = ({ onLogin, onDemo }) => {
       setUserInfo(authenticatedUser);
       setUserRole(authenticatedUser.role);
       setAppLocation(authenticatedUser.location);
+      setAppOrganization(organization);
 
       if (logAction) {
         logAction('login', { email: normalizedEmail, role: authenticatedUser.role, location: authenticatedUser.location });
@@ -116,14 +118,20 @@ const Login = ({ onLogin, onDemo }) => {
         <div className="login-header">
           <div className="login-logo">
             <img 
-              src={process.env.PUBLIC_URL + "/images/ValueMomentum_logo.png"} 
-              alt="ValueMomentum Logo" 
+              src={process.env.PUBLIC_URL + (organization === 'owlsure' ? "/images/OwlSure_logo.png" : "/images/ValueMomentum_logo.png")} 
+              alt={organization === 'owlsure' ? "OwlSure Logo" : "ValueMomentum Logo"} 
               className="logo-image"
+              onError={(e) => {
+                // Fallback to ValueMomentum logo if OwlSure logo doesn't exist
+                if (organization === 'owlsure') {
+                  e.target.src = process.env.PUBLIC_URL + "/images/ValueMomentum_logo.png";
+                }
+              }}
             />
           </div>
-          <h1 className="login-title">Welcome to ValueMomentum Onboarding Portal</h1>
+          <h1 className="login-title">Welcome to {organization === 'owlsure' ? 'OwlSure' : 'ValueMomentum'} Onboarding Portal</h1>
           <p className="login-subtitle">
-            Streamline your onboarding journey with our intelligent AI-powered platform
+            Let's insure the future together
           </p>
         </div>
 
@@ -190,6 +198,7 @@ const Login = ({ onLogin, onDemo }) => {
                   >
                     <option value="candidate">Candidate</option>
                     <option value="hr">HR</option>
+                    <option value="tag">TAG</option>
                   </select>
                   <span className="select-arrow">▼</span>
                 </div>
@@ -208,6 +217,21 @@ const Login = ({ onLogin, onDemo }) => {
                   </select>
                   <span className="select-arrow">▼</span>
                 </div>
+              </div>
+            </div>
+            <div className="form-group">
+              <label htmlFor="organization">Organization</label>
+              <div className="custom-select-wrapper">
+                <select
+                  id="organization"
+                  className="custom-select"
+                  value={organization}
+                  onChange={(e) => setOrganization(e.target.value)}
+                >
+                  <option value="valuemomentum">ValueMomentum</option>
+                  <option value="owlsure">OwlSure</option>
+                </select>
+                <span className="select-arrow">▼</span>
               </div>
             </div>
             <div className="form-group">
@@ -285,7 +309,7 @@ const Login = ({ onLogin, onDemo }) => {
 
           <div className="login-footer">
             <p className="login-help-text">
-              Need assistance? Contact <a href="mailto:hr@valuemomentum.com">hr@valuemomentum.com</a>
+              Need assistance? Contact <a href={`mailto:hr@${organization === 'owlsure' ? 'owlsure' : 'valuemomentum'}.com`}>hr@{organization === 'owlsure' ? 'owlsure' : 'valuemomentum'}.com</a>
             </p>
           </div>
         </Card>

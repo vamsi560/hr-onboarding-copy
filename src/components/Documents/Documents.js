@@ -9,8 +9,12 @@ import { validateDocument } from '../../utils/documentValidation';
 import './Documents.css';
 
 const Documents = () => {
-  const { documents, addDocument, logAction, formData, setValidationHistory } = useApp();
+  const { documents, addDocument, logAction, formData, setValidationHistory, organization } = useApp();
   const { showToast } = useToast();
+  
+  const getOrganizationName = () => {
+    return organization === 'owlsure' ? 'OwlSure' : 'ValueMomentum';
+  };
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
@@ -33,7 +37,7 @@ const Documents = () => {
       logAction('resume_sample_downloaded', { fileName: 'VAM_format_resume_sample.docx' });
     }
     
-    showToast('ValueMomentum resume template downloaded. Please fill and upload.', 'success');
+    showToast(`${getOrganizationName()} resume template downloaded. Please fill and upload.`, 'success');
   };
 
   const downloadCriminalVerificationForm = () => {
@@ -41,7 +45,7 @@ const Documents = () => {
     // Create a simple form template as PDF-like content
     const formContent = `
 CRIMINAL VERIFICATION FORM
-ValueMomentum Software Services Private Limited
+${getOrganizationName()} Software Services Private Limited
 
 ================================================================================
 PERSONAL INFORMATION

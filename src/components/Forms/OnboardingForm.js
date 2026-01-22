@@ -11,8 +11,12 @@ import DigitalSignature from '../UI/DigitalSignature';
 import './OnboardingForm.css';
 
 const OnboardingForm = () => {
-  const { formData, updateFormData, logAction } = useApp();
+  const { formData, updateFormData, logAction, organization } = useApp();
   const { showToast } = useToast();
+  
+  const getOrganizationName = () => {
+    return organization === 'owlsure' ? 'OwlSure' : 'ValueMomentum';
+  };
   const [currentStep, setCurrentStep] = useState(1);
   const [formValues, setFormValues] = useState(formData);
   const [saveStatus, setSaveStatus] = useState('saved'); // 'saving', 'saved', 'error'
@@ -1164,7 +1168,7 @@ const OnboardingForm = () => {
                       required
                     />
                     <span className="consent-text">
-                      <strong>Background Verification:</strong> I authorize ValueMomentum and its representatives to conduct background checks, including verification of employment history, education, and references, as well as criminal record checks if required. I release all parties from liability for any information provided in good faith.
+                      <strong>Background Verification:</strong> I authorize {getOrganizationName()} and its representatives to conduct background checks, including verification of employment history, education, and references, as well as criminal record checks if required. I release all parties from liability for any information provided in good faith.
                     </span>
                   </label>
                 </div>
@@ -1178,7 +1182,7 @@ const OnboardingForm = () => {
                       required
                     />
                     <span className="consent-text">
-                      <strong>Data Privacy:</strong> I consent to the processing of my personal data by ValueMomentum for employment-related purposes, including payroll, benefits, and compliance. I understand my data will be protected and processed in accordance with applicable data protection laws and company policy.
+                      <strong>Data Privacy:</strong> I consent to the processing of my personal data by {getOrganizationName()} for employment-related purposes, including payroll, benefits, and compliance. I understand my data will be protected and processed in accordance with applicable data protection laws and company policy.
                     </span>
                   </label>
                 </div>

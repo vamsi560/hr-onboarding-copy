@@ -17,6 +17,8 @@ import AuditLog from '../HR/AuditLog';
 import RegisterCandidate from '../HR/RegisterCandidate';
 import ReferenceCheck from '../HR/ReferenceCheck';
 import DocumentExpiry from '../HR/DocumentExpiry';
+import TAGDashboard from '../TAG/TAGDashboard';
+import RegisterCandidate from '../HR/RegisterCandidate';
 import Support from '../Support/Support';
 import ChatWidget from '../Chat/ChatWidget';
 import ToastContainer from '../UI/ToastContainer';
@@ -31,13 +33,13 @@ const OfferRejectedView = () => {
       <Card style={{ maxWidth: '600px', textAlign: 'center' }}>
         <h2 style={{ color: 'var(--error)', marginBottom: '16px' }}>Offer Rejected</h2>
         <p style={{ color: 'var(--muted)', marginBottom: '24px', lineHeight: '1.6' }}>
-          Thank you for your interest in ValueMomentum. 
+          Thank you for your interest in {organization === 'owlsure' ? 'OwlSure' : 'ValueMomentum'}. 
           The onboarding portal is not available as the offer has been rejected.
         </p>
         <p style={{ color: 'var(--muted)', fontSize: '14px' }}>
           If you have any questions, please contact HR at{' '}
-          <a href="mailto:hr@valuemomentum.com" style={{ color: 'var(--brand)' }}>
-            hr@valuemomentum.com
+          <a href={`mailto:hr@${organization === 'owlsure' ? 'owlsure' : 'valuemomentum'}.com`} style={{ color: 'var(--brand)' }}>
+            hr@{organization === 'owlsure' ? 'owlsure' : 'valuemomentum'}.com
           </a>
         </p>
       </Card>
@@ -46,7 +48,7 @@ const OfferRejectedView = () => {
 };
 
 const MainLayout = ({ onLogout }) => {
-  const { userRole, offerAcceptanceStatus } = useApp();
+  const { userRole, offerAcceptanceStatus, organization } = useApp();
   const navigate = useNavigate();
   const location = useLocation();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -159,10 +161,15 @@ const MainLayout = ({ onLogout }) => {
                 <Route path="/analytics" element={<HRAnalytics />} />
                 <Route path="/chat" element={<HRChat />} />
                 <Route path="/auditlog" element={<AuditLog />} />
+              </>
+            )}
+            {userRole === 'tag' && (
+              <>
+                <Route path="/tag" element={<TAGDashboard />} />
                 <Route path="/register" element={<RegisterCandidate />} />
               </>
             )}
-            <Route path="/*" element={<Navigate to={userRole === 'hr' ? "/hr" : "/dashboard"} replace />} />
+            <Route path="/*" element={<Navigate to={userRole === 'hr' ? "/hr" : userRole === 'tag' ? "/tag" : "/dashboard"} replace />} />
           </Routes>
         </div>
       </main>

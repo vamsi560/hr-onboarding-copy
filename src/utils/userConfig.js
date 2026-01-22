@@ -85,6 +85,20 @@ export const USER_DATABASE = {
     alumni: false,
     designation: 'HR Manager',
     department: 'HR'
+  },
+  
+  // TAG Team Login (Recruitment)
+  'tag@valuemomentum.com': {
+    password: 'password123',
+    name: 'TAG Team',
+    role: 'tag',
+    location: 'india',
+    joiningBonus: false,
+    relocation: false,
+    relocationCity: '',
+    alumni: false,
+    designation: 'Recruitment Team',
+    department: 'TAG'
   }
 };
 

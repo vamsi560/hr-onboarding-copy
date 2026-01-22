@@ -5,7 +5,7 @@ import Icon from '../UI/Icon';
 import './Header.css';
 
 const Header = ({ onMenuClick, onLogout, sidebarCollapsed }) => {
-  const { toggleDarkMode, userRole } = useApp();
+  const { toggleDarkMode, userRole, organization } = useApp();
   const [currentDateTime, setCurrentDateTime] = useState('');
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -86,10 +86,15 @@ const Header = ({ onMenuClick, onLogout, sidebarCollapsed }) => {
         </button>
         <div className="header-logo">
           <img 
-            src={process.env.PUBLIC_URL + "/images/ValueMomentum_logo_black.png"} 
-            
-            alt="ValueMomentum" 
+            src={process.env.PUBLIC_URL + (organization === 'owlsure' ? "/images/OwlSure_logo_black.png" : "/images/ValueMomentum_logo_black.png")} 
+            alt={organization === 'owlsure' ? "OwlSure" : "ValueMomentum"} 
             className="header-logo-image"
+            onError={(e) => {
+              // Fallback to ValueMomentum logo if OwlSure logo doesn't exist
+              if (organization === 'owlsure') {
+                e.target.src = process.env.PUBLIC_URL + "/images/ValueMomentum_logo_black.png";
+              }
+            }}
           />
         </div>
         <div className="header-search">
