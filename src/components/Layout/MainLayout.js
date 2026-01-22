@@ -48,7 +48,7 @@ const OfferRejectedView = () => {
 };
 
 const MainLayout = ({ onLogout }) => {
-  const { userRole, offerAcceptanceStatus, organization } = useApp();
+  const { userRole, offerAcceptanceStatus } = useApp();
   const navigate = useNavigate();
   const location = useLocation();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);

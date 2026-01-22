@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import Card from '../UI/Card';
-import Button from '../UI/Button';
 import Breadcrumbs from '../UI/Breadcrumbs';
 import RegisterCandidate from '../HR/RegisterCandidate';
 import './TAGDashboard.css';
 
 const TAGDashboard = () => {
-  const { candidates, setCandidates, logAction, organization } = useApp();
+  const { candidates, organization } = useApp();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [deptFilter, setDeptFilter] = useState('');

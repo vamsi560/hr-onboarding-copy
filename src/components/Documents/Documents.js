@@ -4,7 +4,6 @@ import { useToast } from '../../context/ToastContext';
 import Card from '../UI/Card';
 import Button from '../UI/Button';
 import Breadcrumbs from '../UI/Breadcrumbs';
-import Icon from '../UI/Icon';
 import { validateDocument } from '../../utils/documentValidation';
 import './Documents.css';
 
