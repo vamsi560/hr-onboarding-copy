@@ -38,11 +38,11 @@ const TAGDashboard = () => {
 
   return (
     <div className="tag-dashboard">
-      <Breadcrumbs items={[{ label: 'Home' }, { label: 'TAG Dashboard' }]} />
+      <Breadcrumbs items={[{ label: 'Home' }, { label: 'Candidates' }]} />
       <Card>
         <div className="tag-header-row">
           <div>
-            <h3>TAG Dashboard - Candidates</h3>
+            <h3>Candidates</h3>
             <p className="small">View and manage registered candidates for {getOrganizationName()}.</p>
           </div>
         </div>

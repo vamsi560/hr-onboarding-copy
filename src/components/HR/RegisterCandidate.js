@@ -81,12 +81,36 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
     dateOfJoining: '',
     joiningBonus: false,
     relocation: false,
-    relocationCity: ''
+    relocationCity: '',
+    resume: null,
+    pan: null,
+    aadhaar: null
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleFileChange = (field, e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Validate file type
+      const validTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword', 'image/jpeg', 'image/png'];
+      if (!validTypes.includes(file.type)) {
+        showToast('Please upload a valid file format (PDF, DOC, DOCX, JPG, PNG)', 'error');
+        return;
+      }
+      
+      // Validate file size (max 10MB)
+      if (file.size > 10 * 1024 * 1024) {
+        showToast('File size should be less than 10MB', 'error');
+        return;
+      }
+      
+      setFormData(prev => ({ ...prev, [field]: file }));
+      showToast(`${field === 'resume' ? 'Resume' : field === 'pan' ? 'PAN Card' : 'Aadhaar Card'} uploaded successfully`, 'success');
+    }
   };
 
   const handlePositionChange = (positionId) => {
@@ -116,11 +140,14 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
     setIsSubmitting(true);
     
     setTimeout(() => {
+      // Count uploaded documents
+      const uploadedDocsCount = [formData.resume, formData.pan, formData.aadhaar].filter(Boolean).length;
+      
       const newCandidate = {
         id: Date.now(),
         name: `${formData.firstName} ${formData.lastName}`,
         status: 'pending',
-        docs: 0,
+        docs: uploadedDocsCount,
         total: 12,
         dept: formData.department,
         positionId: formData.positionId,
@@ -129,12 +156,21 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
         relocation: formData.relocation,
         relocationCity: formData.relocationCity,
         selected: false,
-        pending: []
+        pending: [],
+        uploadedDocuments: {
+          resume: formData.resume ? formData.resume.name : null,
+          pan: formData.pan ? formData.pan.name : null,
+          aadhaar: formData.aadhaar ? formData.aadhaar.name : null
+        }
       };
       
       setCandidates(prev => [...prev, newCandidate]);
       setIsSubmitting(false);
-      showToast('Email has been sent to the candidate successfully!', 'success');
+      
+      const docMessage = uploadedDocsCount > 0 
+        ? ` with ${uploadedDocsCount} document${uploadedDocsCount > 1 ? 's' : ''} uploaded`
+        : '';
+      showToast(`Email has been sent to the candidate successfully!${docMessage}`, 'success');
       
       if (onSuccess) {
         setTimeout(() => {
@@ -383,6 +419,75 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
               </select>
             </div>
           )}
+
+          {/* Optional Document Uploads */}
+          <div className="form-section-divider" style={{ marginTop: '32px', marginBottom: '24px', borderTop: '1px solid #e0e0e0', paddingTop: '24px' }}>
+            <h4 style={{ marginBottom: '16px', color: 'var(--text-primary)' }}>Optional Documents</h4>
+            <p className="small" style={{ marginBottom: '20px', color: 'var(--text-secondary)' }}>
+              You can upload candidate documents here. These are optional and can be uploaded later.
+            </p>
+            
+            <div className="form-row">
+              <div className="form-group">
+                <label>Resume</label>
+                <div className="file-upload-wrapper">
+                  <input
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    onChange={(e) => handleFileChange('resume', e)}
+                    className="file-input"
+                    id="resume-upload"
+                  />
+                  <label htmlFor="resume-upload" className="file-upload-label">
+                    {formData.resume ? (
+                      <span style={{ color: 'var(--success)' }}>✓ {formData.resume.name}</span>
+                    ) : (
+                      <span>Choose Resume File (PDF, DOC, DOCX)</span>
+                    )}
+                  </label>
+                </div>
+              </div>
+              <div className="form-group">
+                <label>PAN Card</label>
+                <div className="file-upload-wrapper">
+                  <input
+                    type="file"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) => handleFileChange('pan', e)}
+                    className="file-input"
+                    id="pan-upload"
+                  />
+                  <label htmlFor="pan-upload" className="file-upload-label">
+                    {formData.pan ? (
+                      <span style={{ color: 'var(--success)' }}>✓ {formData.pan.name}</span>
+                    ) : (
+                      <span>Choose PAN Card (PDF, JPG, PNG)</span>
+                    )}
+                  </label>
+                </div>
+              </div>
+            </div>
+            
+            <div className="form-group">
+              <label>Aadhaar Card</label>
+              <div className="file-upload-wrapper">
+                <input
+                  type="file"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  onChange={(e) => handleFileChange('aadhaar', e)}
+                  className="file-input"
+                  id="aadhaar-upload"
+                />
+                <label htmlFor="aadhaar-upload" className="file-upload-label">
+                  {formData.aadhaar ? (
+                    <span style={{ color: 'var(--success)' }}>✓ {formData.aadhaar.name}</span>
+                  ) : (
+                    <span>Choose Aadhaar Card (PDF, JPG, PNG)</span>
+                  )}
+                </label>
+              </div>
+            </div>
+          </div>
           
           <div className="form-actions">
             <Button type="button" variant="secondary" onClick={onBack}>
