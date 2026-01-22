@@ -18,7 +18,6 @@ import RegisterCandidate from '../HR/RegisterCandidate';
 import ReferenceCheck from '../HR/ReferenceCheck';
 import DocumentExpiry from '../HR/DocumentExpiry';
 import TAGDashboard from '../TAG/TAGDashboard';
-import RegisterCandidate from '../HR/RegisterCandidate';
 import Support from '../Support/Support';
 import ChatWidget from '../Chat/ChatWidget';
 import ToastContainer from '../UI/ToastContainer';
@@ -28,6 +27,7 @@ import Card from '../UI/Card';
 import './MainLayout.css';
 
 const OfferRejectedView = () => {
+  const { organization } = useApp();
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh', padding: '20px' }}>
       <Card style={{ maxWidth: '600px', textAlign: 'center' }}>

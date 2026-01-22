@@ -20,26 +20,6 @@ const Documents = () => {
   const [categoryFilter, setCategoryFilter] = useState('');
   const fileInputRefs = useRef({});
 
-  const downloadResumeSample = () => {
-    console.log('Downloading resume sample template...');
-    // Download the actual VAM format resume sample document
-    const link = document.createElement('a');
-    link.href = `${process.env.PUBLIC_URL || ''}/VAM_format_resume_sample.docx`;
-    link.download = 'VAM_format_resume_sample.docx';
-    link.style.display = 'none';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    console.log('Resume sample template download initiated');
-    
-    if (logAction) {
-      logAction('resume_sample_downloaded', { fileName: 'VAM_format_resume_sample.docx' });
-    }
-    
-    showToast(`${getOrganizationName()} resume template downloaded. Please fill and upload.`, 'success');
-  };
-
   const downloadCriminalVerificationForm = () => {
     console.log('Downloading criminal verification form...');
     // Create a simple form template as PDF-like content
@@ -126,6 +106,7 @@ Date: ______________________________________________________
     { id: 'aadhar', name: 'Aadhaar Card', category: 'identity' },
     { id: 'passport', name: 'Passport', category: 'identity' },
     { id: 'visa', name: 'Visa Document', category: 'identity' },
+    { id: 'pan', name: 'PAN Card', category: 'identity' },
     { id: 'photo', name: 'Passport Size Photo', category: 'identity' },
     { id: 'secondary', name: 'Secondary Education (10th)', category: 'education' },
     { id: 'higherSecondary', name: 'Higher Secondary / 12th', category: 'education' },
@@ -138,8 +119,6 @@ Date: ______________________________________________________
     { id: 'expLetter2', name: 'Experience Letter from Previous Company 2', category: 'experience' },
     { id: 'relievingLetter', name: 'Relieving Letter from Previous Company', category: 'experience' },
     { id: 'salaryCert', name: 'Salary Certificate from Previous Company', category: 'experience' },
-    { id: 'resume1', name: 'ValueMomentum Format Resume', category: 'resumes' },
-    { id: 'resume2', name: 'Personal Resume', category: 'resumes' },
     { id: 'nda', name: 'NDA / Contract', category: 'other' },
     { id: 'criminal', name: 'Criminal Verification Form', category: 'other' },
     { id: 'code_of_conduct', name: 'Code of Conduct', category: 'company' },
@@ -404,57 +383,6 @@ Date: ______________________________________________________
             </div>
           </div>
 
-          {/* Resumes Category */}
-          <div className="document-category-section">
-            <h4 className="category-title">Resumes</h4>
-            <p className="category-description">Upload resumes in ValueMomentum format</p>
-            <div style={{ marginBottom: '16px' }}>
-              <Button
-                variant="secondary"
-                onClick={downloadResumeSample}
-                style={{ fontSize: '14px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-              >
-                <Icon name="download" size={16} />
-                Download ValueMomentum Resume Sample Template
-              </Button>
-              <div className="small" style={{ marginTop: '8px', color: 'var(--muted)' }}>
-                Download the resume template, fill it out, and upload it in the format below.
-              </div>
-            </div>
-            <div className="document-types-grid">
-              {documentTypes.filter(dt => dt.category === 'resumes').map(docType => {
-                const uploadedDoc = getDocumentStatus(docType.id);
-                return (
-                  <Card 
-                    key={docType.id} 
-                    className={`document-type-card ${uploadedDoc ? 'uploaded' : ''}`}
-                    onClick={() => {
-                      if (!fileInputRefs.current[docType.id]) {
-                        fileInputRefs.current[docType.id] = document.createElement('input');
-                        fileInputRefs.current[docType.id].type = 'file';
-                        fileInputRefs.current[docType.id].accept = '.pdf,.doc,.docx';
-                        fileInputRefs.current[docType.id].onchange = (e) => handleDocumentUpload(docType.id, e);
-                      }
-                      fileInputRefs.current[docType.id].click();
-                    }}
-                  >
-                    <h5>{docType.name}</h5>
-                    {uploadedDoc ? (
-                      <div className="document-status">
-                        <span className="status-badge status-uploaded">Uploaded</span>
-                        <div className="small" style={{ marginTop: '4px' }}>{uploadedDoc.file}</div>
-                      </div>
-                    ) : (
-                      <div className="document-status">
-                        <span className="status-badge status-pending">Pending</span>
-                      </div>
-                    )}
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-
           {/* Other Category */}
           <div className="document-category-section">
             <h4 className="category-title">Other Documents</h4>
@@ -657,7 +585,6 @@ Date: ______________________________________________________
             <option value="education">Education</option>
             <option value="financial">Financial</option>
             <option value="experience">Experience Documents</option>
-            <option value="resumes">Resumes</option>
             <option value="other">Other</option>
           </select>
         </div>
