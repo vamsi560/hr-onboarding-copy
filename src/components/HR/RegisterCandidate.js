@@ -324,29 +324,46 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
             </div>
           </div>
 
-          {/* Joining Bonus Amount and Breakdown */}
+          {/* Joining Bonus Amount and Details (updated as per HR requirements) */}
           {formData.joiningBonus === true && (
             <div className="form-group">
-              <label>Joining Bonus Amount (INR)</label>
-              <Input
-                type="number"
-                min="0"
-                value={formData.joiningBonusAmount || ''}
-                onChange={(e) => handleChange('joiningBonusAmount', e.target.value)}
-                placeholder="Enter joining bonus amount"
-                required
-              />
-              {formData.joiningBonusAmount && Number(formData.joiningBonusAmount) > 0 && (
-                <div className="joining-bonus-breakdown">
-                  <strong>Breakdown:</strong>
-                  <ul>
-                    <li>50% on joining: INR {Math.round(Number(formData.joiningBonusAmount) * 0.5)}</li>
-                    <li>25% after 6 months: INR {Math.round(Number(formData.joiningBonusAmount) * 0.25)}</li>
-                    <li>25% after 12 months: INR {Math.round(Number(formData.joiningBonusAmount) * 0.25)}</li>
-                  </ul>
-                  <small className="form-hint">* Subject to continued employment at each milestone.</small>
+              <label>Joining Bonus Details</label>
+              <div className="joining-bonus-details-box" style={{ border: '1px solid #e0e0e0', borderRadius: 6, padding: 16, background: '#fafbfc', marginTop: 8 }}>
+                <div style={{ marginBottom: 12 }}>
+                  <strong>Bonus Amount:</strong> ₹
+                  <Input
+                    type="number"
+                    min="0"
+                    value={formData.joiningBonusAmount || ''}
+                    onChange={(e) => handleChange('joiningBonusAmount', e.target.value)}
+                    placeholder="Enter joining bonus amount"
+                    style={{ width: 140, display: 'inline-block', marginLeft: 8 }}
+                    required
+                  />
                 </div>
-              )}
+                <div style={{ marginBottom: 8 }}>
+                  <strong>Payment Schedule:</strong> This bonus will be paid <Input
+                    type="text"
+                    value={formData.joiningBonusSchedule || ''}
+                    onChange={(e) => handleChange('joiningBonusSchedule', e.target.value)}
+                    placeholder="e.g. after 30 days of employment"
+                    style={{ width: 220, display: 'inline-block', marginLeft: 8 }}
+                    required
+                  />
+                </div>
+                <div>
+                  <strong>Conditions:</strong> Should you leave the company within
+                  <Input
+                    type="text"
+                    value={formData.joiningBonusCondition || ''}
+                    onChange={(e) => handleChange('joiningBonusCondition', e.target.value)}
+                    placeholder="e.g. 1 year of joining"
+                    style={{ width: 140, display: 'inline-block', marginLeft: 8, marginRight: 8 }}
+                    required
+                  />
+                  this bonus will be subject to repayment.
+                </div>
+              </div>
             </div>
           )}
           
