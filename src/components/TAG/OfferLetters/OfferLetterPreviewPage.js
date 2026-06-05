@@ -87,7 +87,7 @@ Talent Acquisition Team`);
   }, [id, loadOfferLetter]);
 
   const handlePrint = () => {
-    window.print();
+    globalThis.print();
   };
 
   const handleDownloadDocx = async () => {
@@ -133,7 +133,7 @@ Talent Acquisition Team`);
         pdf_path: candidateData.pdf_path || `/generated_offer_letters/vm_offer_letter_${candidateData.candidate_name.replace(/\s+/g, '_')}_mock.pdf`,
         candidate_name: candidateData.candidate_name,
         subject: emailSubject,
-        body: emailBody.replace(/\n/g, '<br>'),
+        body: emailBody.replaceAll(/\n/g, '<br>'),
         cc_email: ccEmail || undefined,
         designation: candidateData.designation,
         joining_date: candidateData.joining_date,

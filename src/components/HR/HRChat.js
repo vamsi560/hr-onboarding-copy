@@ -187,7 +187,7 @@ const HRChat = () => {
   return (
     <div className="hr-chat">
       <div className="back-button-container">
-        <button className="back-button" onClick={() => window.location.hash = '#hr'}>
+        <button className="back-button" onClick={() => globalThis.location.hash = '#hr'}>
           ← Back
         </button>
       </div>

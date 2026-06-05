@@ -172,7 +172,7 @@ const DocumentExpiry = () => {
     const newExpiry = {
       id: editingDoc ? editingDoc.id : Date.now(),
       candidateId: formData.candidateId,
-      candidateName: candidates.find(c => c.id === parseInt(formData.candidateId))?.name || 'Unknown',
+      candidateName: candidates.find(c => c.id === Number.parseInt(formData.candidateId))?.name || 'Unknown',
       documentType: formData.documentType,
       documentName: formData.documentName,
       documentNumber: formData.documentNumber,
@@ -234,7 +234,7 @@ const DocumentExpiry = () => {
   };
 
   const handleDelete = (id) => {
-    if (window.confirm('Are you sure you want to delete this expiry tracking?')) {
+    if (globalThis.confirm('Are you sure you want to delete this expiry tracking?')) {
       setDocumentExpiry(prev => prev.filter(exp => exp.id !== id));
       showToast('Document expiry tracking removed', 'success');
       if (logAction) {

@@ -619,7 +619,7 @@ export const api = {
     } catch (err) {
       if (err.isOffline) {
         const expiries = getLocal('document_expiry', []);
-        const expiry = expiries.find(e => e.id === parseInt(expiryId));
+        const expiry = expiries.find(e => e.id === Number.parseInt(expiryId));
         if (expiry) {
           Object.assign(expiry, updates);
           expiry.updatedAt = new Date().toISOString();

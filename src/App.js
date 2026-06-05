@@ -26,7 +26,7 @@ function App() {
     setIsAuthenticated(false);
     
     // Force redirect to login page
-    window.location.href = '/login';
+    globalThis.location.href = '/login';
   };
 
   const handleLogin = () => {

@@ -38,7 +38,7 @@ const ReferenceCheck = () => {
     const newReference = {
       id: editingRef ? editingRef.id : Date.now(),
       candidateId: formData.candidateId,
-      candidateName: candidates.find(c => c.id === parseInt(formData.candidateId))?.name || 'Unknown',
+      candidateName: candidates.find(c => c.id === Number.parseInt(formData.candidateId))?.name || 'Unknown',
       referenceName: formData.referenceName,
       referenceEmail: formData.referenceEmail,
       referencePhone: formData.referencePhone,
@@ -484,7 +484,7 @@ const ReferenceCheck = () => {
                               const rating = prompt('Enter rating (1-5):');
                               const feedback = prompt('Enter feedback:');
                               if (rating && feedback) {
-                                handleUpdateResponse(ref.id, parseInt(rating), feedback);
+                                handleUpdateResponse(ref.id, Number.parseInt(rating), feedback);
                               }
                             }}
                           >
@@ -528,7 +528,7 @@ const ResponseForm = ({ refId, onUpdate }) => {
           id="ratingSelect"
           className="input"
           value={rating}
-          onChange={(e) => setRating(parseInt(e.target.value))}
+          onChange={(e) => setRating(Number.parseInt(e.target.value))}
           required
         >
           {[1, 2, 3, 4, 5].map(r => (

@@ -1,3 +1,9 @@
+JOHN_DOE_EMAIL = "john.doe@gmail.com"
+SHASHANK_NAME = "Shashank Tudum"
+SOFTWARE_ENGINEER = "Software Engineer"
+VAMSI_NAME = "Sai Surya Vamsi Sapireddy"
+DEFAULT_DATE = "2024-05-20T09:00:00.000Z"
+
 # Seed Data for HR Onboarding System
 # Mirroring user databases, candidates, reference checks, document expiry, and audit logs from the React frontend.
 
@@ -11,9 +17,9 @@ REFERENCE_TOKEN_2 = os.getenv("REFERENCE_TOKEN_2", "-".join(("ref", "token", "2"
 REFERENCE_TOKEN_3 = os.getenv("REFERENCE_TOKEN_3", "-".join(("ref", "token", "3")))
 
 USER_DATABASE = {
-    "john.doe@gmail.com": {
+    JOHN_DOE_EMAIL: {
         "password": DEMO_USER_PASSWORD,
-        "name": "Shashank Tudum",
+        "name": SHASHANK_NAME,
         "role": "candidate",
         "location": "india",
         "joiningBonus": True,
@@ -56,7 +62,7 @@ USER_DATABASE = {
         "relocation": False,
         "relocationCity": "",
         "alumni": False,
-        "designation": "Software Engineer",
+        "designation": SOFTWARE_ENGINEER,
         "department": "Engineering"
     },
     "alumni@gmail.com": {
@@ -103,21 +109,21 @@ USER_DATABASE = {
 DEFAULT_CANDIDATE = {
     "email": "shashank@valuemomentum.com",
     "password": DEFAULT_CANDIDATE_PASSWORD,
-    "name": "Shashank Tudum",
+    "name": SHASHANK_NAME,
     "role": "candidate",
     "location": "india",
     "joiningBonus": False,
     "relocation": False,
     "relocationCity": "",
     "alumni": False,
-    "designation": "Software Engineer",
+    "designation": SOFTWARE_ENGINEER,
     "department": "Sales"
 }
 
 CANDIDATES = [
     {
         "id": 1,
-        "name": "Sai Surya Vamsi Sapireddy",
+        "name": VAMSI_NAME,
         "email": "sai.sapireddy@valuemomentum.com",
         "status": "ready",
         "docs": 12,
@@ -128,8 +134,8 @@ CANDIDATES = [
     },
     {
         "id": 2,
-        "name": "Shashank Tudum",
-        "email": "john.doe@gmail.com",
+        "name": SHASHANK_NAME,
+        "email": JOHN_DOE_EMAIL,
         "status": "pending",
         "docs": 9,
         "total": 12,
@@ -154,7 +160,7 @@ REFERENCE_CHECKS = [
     {
         "id": 1,
         "candidateId": "1",
-        "candidateName": "Sai Surya Vamsi Sapireddy",
+        "candidateName": VAMSI_NAME,
         "referenceName": "Raghavendra Raju",
         "referenceEmail": "raghavendra@valuemomentum.com",
         "referencePhone": "+91 90000 00001",
@@ -174,7 +180,7 @@ REFERENCE_CHECKS = [
     {
         "id": 2,
         "candidateId": "2",
-        "candidateName": "Shashank Tudum",
+        "candidateName": SHASHANK_NAME,
         "referenceName": "Supriya Rangdal",
         "referenceEmail": "supriya@valuemomentum.com",
         "referencePhone": "+91 90000 00002",
@@ -217,7 +223,7 @@ DOCUMENT_EXPIRY = [
     {
         "id": 1,
         "candidateId": "1",
-        "candidateName": "Sai Surya Vamsi Sapireddy",
+        "candidateName": VAMSI_NAME,
         "documentType": "passport",
         "documentName": "Passport",
         "documentNumber": "P1234567",
@@ -233,7 +239,7 @@ DOCUMENT_EXPIRY = [
     {
         "id": 2,
         "candidateId": "2",
-        "candidateName": "Shashank Tudum",
+        "candidateName": SHASHANK_NAME,
         "documentType": "visa",
         "documentName": "Work Visa",
         "documentNumber": "V7654321",
@@ -242,8 +248,8 @@ DOCUMENT_EXPIRY = [
         "daysUntilExpiry": 20,
         "status": "critical",
         "notes": "Renewal in progress",
-        "createdAt": "2024-05-20T09:00:00.000Z",
-        "updatedAt": "2024-05-20T09:00:00.000Z",
+        "createdAt": DEFAULT_DATE,
+        "updatedAt": DEFAULT_DATE,
         "reminderSent": False
     }
 ]
@@ -251,7 +257,7 @@ DOCUMENT_EXPIRY = [
 AUDIT_LOGS = [
     {
         "id": 1717135000000,
-        "timestamp": "2024-05-20T09:00:00.000Z",
+        "timestamp": DEFAULT_DATE,
         "userRole": "hr",
         "action": "login",
         "details": {"email": "hr@valuemomentum.com"},
@@ -263,7 +269,7 @@ AUDIT_LOGS = [
 DOCUMENTS = [
     {
         "id": "doc_1",
-        "candidateEmail": "john.doe@gmail.com",
+        "candidateEmail": JOHN_DOE_EMAIL,
         "documentType": "aadhar",
         "documentName": "Aadhaar Card.pdf",
         "uploadedAt": "2024-05-14T10:00:00.000Z",
@@ -278,7 +284,7 @@ DOCUMENTS = [
             "completeness": {"status": "pass", "confidence": 100, "message": "All required fields present"}
         },
         "extractedData": {
-            "name": "Shashank Tudum",
+            "name": SHASHANK_NAME,
             "dateOfBirth": "1990-05-15",
             "aadhaarNumber": "1234 5678 9012",
             "address": "123 Main Street, Hyderabad, Telangana, India"
@@ -287,13 +293,13 @@ DOCUMENTS = [
 ]
 
 FORMS = {
-    "john.doe@gmail.com": {
+    JOHN_DOE_EMAIL: {
         "personalInfo": {
-            "fullName": "Shashank Tudum",
+            "fullName": SHASHANK_NAME,
             "dob": "1990-05-15",
             "gender": "male",
             "phone": "+91 9876543210",
-            "email": "john.doe@gmail.com"
+            "email": JOHN_DOE_EMAIL
         },
         "education": [
             {
@@ -306,7 +312,7 @@ FORMS = {
         "employment": [
             {
                 "company": "Cognizant",
-                "designation": "Software Engineer",
+                "designation": SOFTWARE_ENGINEER,
                 "fromDate": "2012-06-01",
                 "toDate": "2015-08-30",
                 "reasonForLeaving": "Career growth"
@@ -316,7 +322,7 @@ FORMS = {
 }
 
 CHAT_HISTORY = {
-    "john.doe@gmail.com": [
+    JOHN_DOE_EMAIL: [
         {"message": "Hello! Welcome to the ValueMomentum onboarding portal.", "type": "bot", "timestamp": 1717135000000},
         {"message": "How can I help you complete your documentation?", "type": "bot", "timestamp": 1717135010000}
     ]

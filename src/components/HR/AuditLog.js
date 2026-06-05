@@ -42,7 +42,7 @@ const AuditLog = () => {
       'logout': 'User Logout',
       'status_changed': 'Status Changed'
     };
-    return labels[action] || action.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    return labels[action] || action.replaceAll(/_/g, ' ').replaceAll(/\b\w/g, l => l.toUpperCase());
   };
 
   return (
