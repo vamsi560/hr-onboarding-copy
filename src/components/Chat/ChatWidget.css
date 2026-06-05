@@ -1,0 +1,124 @@
+.chat-widget {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 320px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.12);
+  overflow: hidden;
+  z-index: 999;
+  animation: slideUp 0.3s;
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.chat-header {
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  color: #fff;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-body {
+  padding: 12px;
+  height: 260px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.chat-message {
+  margin-bottom: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.chat-message.user {
+  flex-direction: row-reverse;
+}
+
+.chat-message-bubble {
+  padding: 10px 14px;
+  border-radius: 12px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.chat-message.user .chat-message-bubble {
+  background: #e2e8f0;
+  text-align: right;
+}
+
+.chat-message.bot .chat-message-bubble {
+  background: #f3f4f6;
+}
+
+.chat-typing {
+  padding: 8px 12px;
+  color: var(--muted);
+  font-size: 12px;
+  font-style: italic;
+}
+
+.chat-input {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #f1f5f9;
+  gap: 8px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e6eef8;
+  font-size: 14px;
+}
+
+.chat-fab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  background: linear-gradient(90deg, var(--brand), var(--brand2));
+  color: #fff;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 22px rgba(11, 24, 39, 0.15);
+  cursor: pointer;
+  z-index: 998;
+  transition: transform 0.2s;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.chat-fab:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+  .chat-widget {
+    width: 100%;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px 12px 0 0;
+  }
+}
+

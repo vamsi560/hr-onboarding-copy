@@ -1,0 +1,1016 @@
+[
+  {
+    "key": "AZ6T3Y_r3jH_hDrgzOoQ",
+    "rule": "python:S3923",
+    "severity": "MAJOR",
+    "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 30,
+    "hash": "9b791fd260254a8bdd9c1e93ec32d4a9",
+    "textRange": {
+      "startLine": 30,
+      "endLine": 30,
+      "startOffset": 4,
+      "endOffset": 6
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 31,
+              "endLine": 31,
+              "startOffset": 8,
+              "endOffset": 30
+            },
+            "msg": "Duplicated statements."
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 33,
+              "endLine": 33,
+              "startOffset": 8,
+              "endOffset": 30
+            },
+            "msg": "Duplicated statements."
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 35,
+              "endLine": 35,
+              "startOffset": 8,
+              "endOffset": 30
+            },
+            "msg": "Duplicated statements."
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 37,
+              "endLine": 37,
+              "startOffset": 8,
+              "endOffset": 30
+            },
+            "msg": "Duplicated statements."
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 39,
+              "endLine": 39,
+              "startOffset": 8,
+              "endOffset": 30
+            },
+            "msg": "Duplicated statements."
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 41,
+              "endLine": 41,
+              "startOffset": 8,
+              "endOffset": 30
+            },
+            "msg": "Duplicated statements."
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Remove this if statement or edit its code blocks so that they're not all the same.",
+    "effort": "15min",
+    "debt": "15min",
+    "tags": [
+      "convention",
+      "suspicious"
+    ],
+    "creationDate": "2026-06-04T18:12:04+0000",
+    "updateDate": "2026-06-04T18:12:04+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "CLEAR",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "ecf1d261-3ba3-4357-969f-d22d00d55a4e",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_gsDXdYKG8MaNzI",
+    "rule": "python:S1226",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 430,
+    "hash": "5429ddac00f7c29b6e1be9978434bf92",
+    "textRange": {
+      "startLine": 430,
+      "endLine": 430,
+      "startOffset": 4,
+      "endOffset": 37
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 441,
+              "endLine": 441,
+              "startOffset": 4,
+              "endOffset": 74
+            },
+            "msg": "'salary_breakdown' is reassigned here."
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Introduce a new variable or use its initial value before reassigning 'salary_breakdown'.",
+    "effort": "5min",
+    "debt": "5min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "suspicious"
+    ],
+    "creationDate": "2026-06-04T15:47:53+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "CLEAR",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "ecf1d261-3ba3-4357-969f-d22d00d55a4e",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_c0DXdYKG8MaNuE",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/TAG/OfferLetters/OfferLettersDashboard.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 418,
+    "hash": "6e942292520a585bebd04e1b7cf6e521",
+    "textRange": {
+      "startLine": 418,
+      "endLine": 418,
+      "startOffset": 22,
+      "endOffset": 129
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2026-06-04T15:47:53+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "7b0b903f-09fb-4708-8b78-af3bf32a4b4d",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_ZCDXdYKG8MaNsz",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/HR/HRReview.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 212,
+    "hash": "8a6c065819987cf2b44de8c2f5493486",
+    "textRange": {
+      "startLine": 212,
+      "endLine": 215,
+      "startOffset": 22,
+      "endOffset": 23
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2026-01-20T10:43:06+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "40723e05-4393-43d4-b5c7-a0c74c91303a",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_b4DXdYKG8MaNtt",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/Auth/Login.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 281,
+    "hash": "f11684eee171a0772c4bd0910999d66f",
+    "textRange": {
+      "startLine": 281,
+      "endLine": 281,
+      "startOffset": 14,
+      "endOffset": 69
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2026-01-20T08:42:25+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "7b0b903f-09fb-4708-8b78-af3bf32a4b4d",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_ZCDXdYKG8MaNs7",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/HR/HRReview.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 282,
+    "hash": "37a2c4549185328928c2a7909855a1a1",
+    "textRange": {
+      "startLine": 282,
+      "endLine": 282,
+      "startOffset": 8,
+      "endOffset": 79
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2026-01-08T08:29:55+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "40723e05-4393-43d4-b5c7-a0c74c91303a",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_ZCDXdYKG8MaNs9",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/HR/HRReview.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 283,
+    "hash": "461c78bf8a9e1b02413c5bceb72a0f2e",
+    "textRange": {
+      "startLine": 283,
+      "endLine": 283,
+      "startOffset": 10,
+      "endOffset": 77
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2026-01-08T08:29:55+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "40723e05-4393-43d4-b5c7-a0c74c91303a",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_evDXdYKG8MaNxD",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/Validation/Validation.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 155,
+    "hash": "396ca8ab619f62750fc5a8137c5713af",
+    "textRange": {
+      "startLine": 155,
+      "endLine": 155,
+      "startOffset": 18,
+      "endOffset": 97
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2026-01-02T12:30:55+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "40723e05-4393-43d4-b5c7-a0c74c91303a",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_eHDXdYKG8MaNv0",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/Layout/Header.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 185,
+    "hash": "d90c26198ff23a5c54f81269ceed5c01",
+    "textRange": {
+      "startLine": 185,
+      "endLine": 195,
+      "startOffset": 12,
+      "endOffset": 13
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2026-01-02T08:57:43+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "40723e05-4393-43d4-b5c7-a0c74c91303a",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_dkDXdYKG8MaNvk",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/Layout/Sidebar.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 155,
+    "hash": "b0651008da5abf68c9d90e615f642cd4",
+    "textRange": {
+      "startLine": 155,
+      "endLine": 161,
+      "startOffset": 14,
+      "endOffset": 15
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2026-01-01T09:22:00+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "ecf1d261-3ba3-4357-969f-d22d00d55a4e",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_WlDXdYKG8MaNrh",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/UI/ContextualHelp.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 58,
+    "hash": "d90c26198ff23a5c54f81269ceed5c01",
+    "textRange": {
+      "startLine": 58,
+      "endLine": 64,
+      "startOffset": 6,
+      "endOffset": 7
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2026-01-01T09:22:00+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "40723e05-4393-43d4-b5c7-a0c74c91303a",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_WlDXdYKG8MaNrj",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/UI/ContextualHelp.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 70,
+    "hash": "f142ac8cc37359051ff539a6665ceed3",
+    "textRange": {
+      "startLine": 70,
+      "endLine": 70,
+      "startOffset": 10,
+      "endOffset": 78
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2026-01-01T09:22:00+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "40723e05-4393-43d4-b5c7-a0c74c91303a",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_ZCDXdYKG8MaNs1",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/HR/HRReview.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 234,
+    "hash": "f1bbe69a2741eba011e6e849a2bd68ae",
+    "textRange": {
+      "startLine": 234,
+      "endLine": 234,
+      "startOffset": 8,
+      "endOffset": 74
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2025-12-29T09:15:08+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "40723e05-4393-43d4-b5c7-a0c74c91303a",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_ZCDXdYKG8MaNs3",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/HR/HRReview.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 235,
+    "hash": "461c78bf8a9e1b02413c5bceb72a0f2e",
+    "textRange": {
+      "startLine": 235,
+      "endLine": 235,
+      "startOffset": 10,
+      "endOffset": 77
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2025-12-29T09:15:08+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "40723e05-4393-43d4-b5c7-a0c74c91303a",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_W7DXdYKG8MaNrp",
+    "rule": "css:S4656",
+    "severity": "MAJOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/UI/Tooltip.css",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 16,
+    "hash": "8b2da0b497dd62e8de2509923984b43a",
+    "textRange": {
+      "startLine": 16,
+      "endLine": 16,
+      "startOffset": 2,
+      "endOffset": 13
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Duplicate property \"white-space\"",
+    "effort": "1min",
+    "debt": "1min",
+    "assignee": "vamsi560@github",
+    "tags": [],
+    "creationDate": "2025-12-25T08:56:28+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "LOGICAL",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "40723e05-4393-43d4-b5c7-a0c74c91303a",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_YzDXdYKG8MaNsu",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/HR/HRChat.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 232,
+    "hash": "d90c26198ff23a5c54f81269ceed5c01",
+    "textRange": {
+      "startLine": 232,
+      "endLine": 236,
+      "startOffset": 14,
+      "endOffset": 15
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2025-12-22T16:03:31+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "40723e05-4393-43d4-b5c7-a0c74c91303a",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_YTDXdYKG8MaNsm",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/HR/HRCandidateWorkflow.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 180,
+    "hash": "d90c26198ff23a5c54f81269ceed5c01",
+    "textRange": {
+      "startLine": 180,
+      "endLine": 183,
+      "startOffset": 14,
+      "endOffset": 15
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2025-12-22T15:32:48+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "40723e05-4393-43d4-b5c7-a0c74c91303a",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_emDXdYKG8MaNw9",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/Chat/ChatWidget.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 38,
+    "hash": "f72a16d9eb1f83584dca53e339e4aac1",
+    "textRange": {
+      "startLine": 38,
+      "endLine": 38,
+      "startOffset": 6,
+      "endOffset": 82
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2025-11-23T12:50:13+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "40723e05-4393-43d4-b5c7-a0c74c91303a",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_emDXdYKG8MaNw_",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/Chat/ChatWidget.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 48,
+    "hash": "e0b89c54ed4f653f355b4b789d75910d",
+    "textRange": {
+      "startLine": 48,
+      "endLine": 48,
+      "startOffset": 8,
+      "endOffset": 142
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2025-11-23T12:50:13+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "40723e05-4393-43d4-b5c7-a0c74c91303a",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_dkDXdYKG8MaNvf",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/Layout/Sidebar.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 132,
+    "hash": "cd92a20848bd4a9aeba6049f9af898a1",
+    "textRange": {
+      "startLine": 132,
+      "endLine": 132,
+      "startOffset": 23,
+      "endOffset": 76
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2025-11-23T12:50:13+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "ecf1d261-3ba3-4357-969f-d22d00d55a4e",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_YCDXdYKG8MaNsW",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/UI/Modal.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 19,
+    "hash": "8fd133b116d13a5951eae512badf59b9",
+    "textRange": {
+      "startLine": 19,
+      "endLine": 19,
+      "startOffset": 4,
+      "endOffset": 53
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2025-11-23T12:50:13+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "40723e05-4393-43d4-b5c7-a0c74c91303a",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_YCDXdYKG8MaNsY",
+    "rule": "javascript:S1082",
+    "severity": "MINOR",
+    "component": "vamsi560_hr-onboarding-copy:src/components/UI/Modal.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 20,
+    "hash": "769e790fbac3686bb32a0157c4e2941c",
+    "textRange": {
+      "startLine": 20,
+      "endLine": 20,
+      "startOffset": 6,
+      "endOffset": 74
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Visible, non-interactive elements with click handlers must have at least one keyboard listener.",
+    "effort": "5min",
+    "debt": "5min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "accessibility",
+      "react"
+    ],
+    "creationDate": "2025-11-23T12:50:13+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "BUG",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "RELIABILITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "40723e05-4393-43d4-b5c7-a0c74c91303a",
+    "lastChangeSource": "ANALYSIS"
+  }
+]

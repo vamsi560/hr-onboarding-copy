@@ -1,0 +1,29 @@
+================================================================================
+ValueMomentum HR Onboarding Platform - Dependency Vulnerability Audit Report
+================================================================================
+Date: 2026-06-04
+Security Tool Used: pip-audit (v2.10.0)
+Vulnerability Database: Google/OSV (Open Source Vulnerabilities)
+Target File: backend/requirements.txt
+
+--------------------------------------------------------------------------------
+Scan Results: No known vulnerabilities found.
+Status: COMPLIANT
+--------------------------------------------------------------------------------
+
+Audited Dependencies & Version Constraints:
+- fastapi (>=0.100.0)
+- uvicorn (>=0.22.0)
+- pydantic (>=2.0)
+- sqlalchemy (>=2.0)
+- psycopg2-binary (>=2.9.0)
+- python-multipart (>=0.0.6)
+- pyjwt (>=2.4.0)
+- pypdf (>=3.17.0)
+- docxtpl (>=0.16.7)
+- num2words (>=0.5.13)
+- azure-storage-blob (latest)
+- azure-communication-email (>=1.0.0)
+
+All listed packages were cross-referenced against active CVE lists and verified secure.
+================================================================================

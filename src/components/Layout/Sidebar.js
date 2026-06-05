@@ -1,0 +1,195 @@
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useApp } from '../../context/AppContext';
+import Icon from '../UI/Icon';
+import './Sidebar.css';
+
+const UserProfile = ({ userRole, userInfo, location, collapsed }) => {
+  const getAvatar = () => {
+    if (userRole === 'hr') {
+      return (
+        <img
+          src={process.env.PUBLIC_URL + '/images/raghavendra.jpg'}
+          alt="Raghavendra Raju"
+          className="sidebar-avatar-img"
+          style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover', border: '2px solid #e0e0e0' }}
+        />
+      );
+    }
+    if (userRole === 'tag') {
+      return (
+        <div 
+          className="profile-letter-avatar" 
+          style={{ 
+            width: 48, 
+            height: 48, 
+            borderRadius: '50%', 
+            background: 'linear-gradient(135deg, var(--brand) 0%, #6366f1 100%)', 
+            color: '#fff', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            fontWeight: '700', 
+            fontSize: '18px',
+            boxShadow: '0 2px 6px rgba(13, 148, 136, 0.15)'
+          }}
+        >
+          TG
+        </div>
+      );
+    }
+    return (
+      <img
+        src={process.env.PUBLIC_URL + '/images/shashank.jpg'}
+        alt="Shashank Tudum"
+        className="sidebar-avatar-img"
+        style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover', border: '2px solid #e0e0e0' }}
+      />
+    );
+  };
+
+  const getProfileName = () => {
+    if (userInfo?.name) return userInfo.name;
+    if (userRole === 'hr') return 'Raghavendra Raju';
+    if (userRole === 'tag') return 'TAG Team';
+    return 'Shashank Tudum';
+  };
+
+  const getProfileRole = () => {
+    const roleText = userRole === 'hr' ? 'HR' : userRole === 'tag' ? 'TAG Recruiter' : 'New Employee';
+    const locText = location === 'us' ? 'US' : 'India';
+    return `${roleText} • ${locText}`;
+  };
+
+  return (
+    <div className="sidebar-profile">
+      <div className="profile-avatar">
+        {getAvatar()}
+      </div>
+      {!collapsed && (
+        <>
+          <div className="profile-name">{getProfileName()}</div>
+          <div className="profile-role">{getProfileRole()}</div>
+        </>
+      )}
+    </div>
+  );
+};
+
+const Sidebar = ({ onNavClick, isMobileOpen, onClose, onCollapseChange }) => {
+  const { userRole, location, organization, userInfo } = useApp();
+  const routerLocation = useLocation();
+  const [collapsed, setCollapsed] = useState(false);
+
+  // Get active view from URL
+  const activeView = routerLocation.pathname.substring(1) || 'dashboard';
+
+  const handleCollapseToggle = () => {
+    const newCollapsed = !collapsed;
+    setCollapsed(newCollapsed);
+    if (onCollapseChange) {
+      onCollapseChange(newCollapsed);
+    }
+  };
+
+  const candidateMenuItems = [
+    { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
+    { id: 'form', label: 'Onboarding Form', icon: 'form' },
+    { id: 'documents', label: 'Documents', icon: 'documents' },
+    { id: 'validation', label: 'AI Validation', icon: 'validation' },
+    { id: 'support', label: 'Support', icon: 'support' }
+  ];
+
+  const hrMenuItems = [
+    { id: 'hr', label: 'HR Dashboard', icon: 'hr' },
+    { id: 'exceptions', label: 'Exceptions', icon: 'exceptions', badge: 3 },
+    { id: 'workflows', label: 'Workflows', icon: 'workflows' },
+    { id: 'references', label: 'Reference Checks', icon: 'references' },
+    { id: 'expiry', label: 'Document Expiry', icon: 'expiry', badge: 2 },
+    { id: 'analytics', label: 'Analytics', icon: 'analytics' },
+    { id: 'chat', label: 'Chat', icon: 'chat' },
+    { id: 'auditlog', label: 'Audit Log', icon: 'auditlog' },
+    { id: 'support', label: 'Support', icon: 'support' }
+  ];
+
+  const tagMenuItems = [
+    { id: 'tag', label: 'Candidates', icon: 'dashboard' },
+    { id: 'register', label: 'Register New Candidate', icon: 'form' },
+    { id: 'offer-letters', label: 'Offer Letters', icon: 'documents' },
+    { id: 'support', label: 'Support', icon: 'support' }
+  ];
+
+
+  // Alumni users don't get sidebar navigation
+  if (userRole === 'alumni') {
+    return null;
+  }
+
+  const menuItems = userRole === 'hr' ? hrMenuItems : userRole === 'tag' ? tagMenuItems : candidateMenuItems;
+
+  return (
+    <>
+      {isMobileOpen && <div className="sidebar-overlay" onClick={onClose} />}
+      <nav className={`sidebar ${isMobileOpen ? 'mobile-open' : ''} ${collapsed ? 'collapsed' : ''}`}>
+        <button
+          className="sidebar-collapse-btn sidebar-collapse-btn-absolute"
+          onClick={handleCollapseToggle}
+          title={collapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
+        >
+          <Icon name={collapsed ? 'chevron-right' : 'chevron-left'} size={20} />
+        </button>
+        <div className="sidebar-content">
+          {/* User Profile Section */}
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 8 }}>
+          </div>
+          <UserProfile
+            userRole={userRole}
+            userInfo={userInfo}
+            location={location}
+            collapsed={collapsed}
+          />
+
+          {/* Navigation Menu */}
+          <ul className="sidebar-list">
+            {menuItems.map(item => (
+              <li
+                key={item.id}
+                className={activeView === item.id ? 'active' : ''}
+                onClick={() => onNavClick(item.id)}
+                title={collapsed ? item.label : undefined}
+                data-nav={item.id}
+              >
+                <Icon name={item.icon} size={20} className="nav-icon" />
+                {!collapsed && <span className="nav-label">{item.label}</span>}
+                {item.badge && !collapsed && (
+                  <span className="nav-badge">{item.badge}</span>
+                )}
+                {activeView === item.id && <span className="active-dot"></span>}
+              </li>
+            ))}
+          </ul>
+
+          {/* Logo at Bottom */}
+          {!collapsed && (
+            <div className="sidebar-logo">
+              <img 
+                src={process.env.PUBLIC_URL + (organization === 'owlsure' ? "/images/OwlSure_logo.png" : "/images/ValueMomentum_logo.png")} 
+                alt={organization === 'owlsure' ? "OwlSure" : "ValueMomentum"} 
+                className="logo-image"
+                onError={(e) => {
+                  // Fallback to ValueMomentum logo if OwlSure logo doesn't exist
+                  if (organization === 'owlsure') {
+                    e.target.src = process.env.PUBLIC_URL + "/images/ValueMomentum_logo.png";
+                  }
+                }}
+              />
+            </div>
+          )}
+        </div>
+      </nav>
+    </>
+  );
+};
+
+export default Sidebar;
+

@@ -1,0 +1,290 @@
+Run started:2026-06-04 15:59:23.932934+00:00
+
+Test results:
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'bearer'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: backend/app/routers\auth.py:39:8
+38	        "access_token": access_token,
+39	        "token_type": "bearer"
+40	    }
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'password123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: backend/app/seed_data.py:6:8
+5	    "john.doe@gmail.com": {
+6	        "password": "password123",
+7	        "name": "Shashank Tudum",
+8	        "role": "candidate",
+9	        "location": "india",
+10	        "joiningBonus": True,
+11	        "relocation": False,
+12	        "relocationCity": "",
+13	        "alumni": False,
+14	        "designation": "Senior Software Engineer",
+15	        "department": "Engineering"
+16	    },
+17	    "jane.smith@outlook.com": {
+18	        "password": "password123",
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'password123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: backend/app/seed_data.py:18:8
+17	    "jane.smith@outlook.com": {
+18	        "password": "password123",
+19	        "name": "Priya Patel",
+20	        "role": "candidate",
+21	        "location": "us",
+22	        "joiningBonus": False,
+23	        "relocation": True,
+24	        "relocationCity": "hyderabad",
+25	        "alumni": False,
+26	        "designation": "Product Manager",
+27	        "department": "Product"
+28	    },
+29	    "mike.johnson@gmail.com": {
+30	        "password": "password123",
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'password123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: backend/app/seed_data.py:30:8
+29	    "mike.johnson@gmail.com": {
+30	        "password": "password123",
+31	        "name": "Vikram Singh",
+32	        "role": "candidate",
+33	        "location": "us",
+34	        "joiningBonus": True,
+35	        "relocation": True,
+36	        "relocationCity": "pune",
+37	        "alumni": False,
+38	        "designation": "Tech Lead",
+39	        "department": "Engineering"
+40	    },
+41	    "sarah.williams@outlook.com": {
+42	        "password": "password123",
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'password123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: backend/app/seed_data.py:42:8
+41	    "sarah.williams@outlook.com": {
+42	        "password": "password123",
+43	        "name": "Anjali Gupta",
+44	        "role": "candidate",
+45	        "location": "india",
+46	        "joiningBonus": False,
+47	        "relocation": False,
+48	        "relocationCity": "",
+49	        "alumni": False,
+50	        "designation": "Software Engineer",
+51	        "department": "Engineering"
+52	    },
+53	    "alumni@gmail.com": {
+54	        "password": "password123",
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'password123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: backend/app/seed_data.py:54:8
+53	    "alumni@gmail.com": {
+54	        "password": "password123",
+55	        "name": "Suresh Iyer",
+56	        "role": "alumni",
+57	        "location": "india",
+58	        "joiningBonus": False,
+59	        "relocation": False,
+60	        "relocationCity": "",
+61	        "alumni": True,
+62	        "designation": "Former Senior Developer",
+63	        "department": "Engineering",
+64	        "joinedDate": "2018-01-15",
+65	        "leftDate": "2023-06-30",
+66	        "yearsWorked": 5.5
+67	    },
+68	    "hr@valuemomentum.com": {
+69	        "password": "password123",
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'password123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: backend/app/seed_data.py:69:8
+68	    "hr@valuemomentum.com": {
+69	        "password": "password123",
+70	        "name": "Raghavendra Raju",
+71	        "role": "hr",
+72	        "location": "india",
+73	        "joiningBonus": False,
+74	        "relocation": False,
+75	        "relocationCity": "",
+76	        "alumni": False,
+77	        "designation": "HR Manager",
+78	        "department": "HR"
+79	    },
+80	    "tag@valuemomentum.com": {
+81	        "password": "password123",
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'password123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: backend/app/seed_data.py:81:8
+80	    "tag@valuemomentum.com": {
+81	        "password": "password123",
+82	        "name": "TAG Team",
+83	        "role": "tag",
+84	        "location": "india",
+85	        "joiningBonus": False,
+86	        "relocation": False,
+87	        "relocationCity": "",
+88	        "alumni": False,
+89	        "designation": "Recruitment Team",
+90	        "department": "TAG"
+91	    }
+92	}
+93	
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'demo123'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: backend/app/seed_data.py:96:4
+95	    "email": "shashank@valuemomentum.com",
+96	    "password": "demo123",
+97	    "name": "Shashank Tudum",
+98	    "role": "candidate",
+99	    "location": "india",
+100	    "joiningBonus": False,
+101	    "relocation": False,
+102	    "relocationCity": "",
+103	    "alumni": False,
+104	    "designation": "Software Engineer",
+105	    "department": "Sales"
+106	}
+107	
+108	CANDIDATES = [
+109	    {
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'ref-token-1'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: backend/app/seed_data.py:161:8
+160	        "sentDate": "2024-05-10",
+161	        "token": "ref-token-1",
+162	        "createdAt": "2024-05-10T10:00:00.000Z",
+163	        "updatedAt": "2024-05-12T14:00:00.000Z"
+164	    },
+165	    {
+166	        "id": 2,
+167	        "candidateId": "2",
+168	        "candidateName": "Shashank Tudum",
+169	        "referenceName": "Supriya Rangdal",
+170	        "referenceEmail": "supriya@valuemomentum.com",
+171	        "referencePhone": "+91 90000 00002",
+172	        "referenceCompany": "ValueMomentum",
+173	        "referencePosition": "HR Manager",
+174	        "relationship": "manager",
+175	        "requestDate": "2024-05-15",
+176	        "responseDate": None,
+177	        "status": "pending",
+178	        "rating": None,
+179	        "feedback": "",
+180	        "sentDate": "2024-05-15",
+181	        "token": "ref-token-2",
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'ref-token-2'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: backend/app/seed_data.py:181:8
+180	        "sentDate": "2024-05-15",
+181	        "token": "ref-token-2",
+182	        "createdAt": "2024-05-15T09:00:00.000Z",
+183	        "updatedAt": "2024-05-15T09:00:00.000Z"
+184	    },
+185	    {
+186	        "id": 3,
+187	        "candidateId": "3",
+188	        "candidateName": "Pankaj Kumar",
+189	        "referenceName": "Kavya",
+190	        "referenceEmail": "kavya@valuemomentum.com",
+191	        "referencePhone": "+91 90000 00003",
+192	        "referenceCompany": "ValueMomentum",
+193	        "referencePosition": "Sales Lead",
+194	        "relationship": "manager",
+195	        "requestDate": "2024-05-18",
+196	        "responseDate": "2024-05-20",
+197	        "status": "completed",
+198	        "rating": 4,
+199	        "feedback": "Strong sales skills and good client handling.",
+200	        "sentDate": "2024-05-18",
+201	        "token": "ref-token-3",
+
+--------------------------------------------------
+>> Issue: [B105:hardcoded_password_string] Possible hardcoded password: 'ref-token-3'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html
+   Location: backend/app/seed_data.py:201:8
+200	        "sentDate": "2024-05-18",
+201	        "token": "ref-token-3",
+202	        "createdAt": "2024-05-18T09:00:00.000Z",
+203	        "updatedAt": "2024-05-20T11:00:00.000Z"
+204	    }
+205	]
+206	
+207	DOCUMENT_EXPIRY = [
+208	    {
+209	        "id": 1,
+210	        "candidateId": "1",
+211	        "candidateName": "Sai Surya Vamsi Sapireddy",
+212	        "documentType": "passport",
+213	        "documentName": "Passport",
+214	        "documentNumber": "P1234567",
+215	        "issueDate": "2020-01-01",
+216	        "expiryDate": "2030-01-01",
+217	        "daysUntilExpiry": 1825,
+218	        "status": "valid",
+219	        "notes": "",
+220	        "createdAt": "2024-05-01T10:00:00.000Z",
+221	        "updatedAt": "2024-05-01T10:00:00.000Z",
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 3416
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 5
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 12
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 12
+		High: 0
+Files skipped (0):

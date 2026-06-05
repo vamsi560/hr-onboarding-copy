@@ -1,0 +1,93 @@
+.tag-dashboard {
+  padding: 20px;
+}
+
+.tag-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.tag-header-row h3 {
+  margin: 0 0 8px 0;
+  color: var(--text-primary);
+}
+
+.tag-header-row .small {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.tag-filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.tag-filters .search-box {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.tag-filters .filter-select {
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-width: 150px;
+}
+
+.candidate-name-link {
+  color: var(--brand);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.candidate-name-link:hover {
+  text-decoration: underline;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status-ready {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-reviewed {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+@media (max-width: 768px) {
+  .tag-filters {
+    flex-direction: column;
+  }
+  
+  .tag-filters .search-box,
+  .tag-filters .filter-select {
+    width: 100%;
+  }
+}

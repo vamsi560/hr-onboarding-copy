@@ -1,0 +1,2896 @@
+[
+  {
+    "key": "AZ6T3ZA_3jH_hDrgzOoe",
+    "rule": "python:S3776",
+    "severity": "CRITICAL",
+    "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 906,
+    "hash": "5b7b2ba6dd55fb4c1987cf1a3b545ab2",
+    "textRange": {
+      "startLine": 906,
+      "endLine": 906,
+      "startOffset": 8,
+      "endOffset": 46
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 908,
+              "endLine": 908,
+              "startOffset": 8,
+              "endOffset": 10
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 915,
+              "endLine": 915,
+              "startOffset": 16,
+              "endOffset": 19
+            },
+            "msg": "+2 (incl 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 917,
+              "endLine": 917,
+              "startOffset": 20,
+              "endOffset": 22
+            },
+            "msg": "+3 (incl 2 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 917,
+              "endLine": 917,
+              "startOffset": 36,
+              "endOffset": 39
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 926,
+              "endLine": 926,
+              "startOffset": 76,
+              "endOffset": 78
+            },
+            "msg": "+3 (incl 2 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 927,
+              "endLine": 927,
+              "startOffset": 72,
+              "endOffset": 74
+            },
+            "msg": "+3 (incl 2 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 931,
+              "endLine": 931,
+              "startOffset": 74,
+              "endOffset": 76
+            },
+            "msg": "+3 (incl 2 for nesting)"
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Refactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+    "effort": "6min",
+    "debt": "6min",
+    "tags": [
+      "brain-overload"
+    ],
+    "creationDate": "2026-06-04T18:12:04+0000",
+    "updateDate": "2026-06-04T18:12:04+0000",
+    "type": "CODE_SMELL",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "FOCUSED",
+    "cleanCodeAttributeCategory": "ADAPTABLE",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "HIGH"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "ecf1d261-3ba3-4357-969f-d22d00d55a4e",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6T3Y_r3jH_hDrgzOoW",
+    "rule": "python:S3776",
+    "severity": "CRITICAL",
+    "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 150,
+    "hash": "f69d2e404c243c59a8fd697cf65a4676",
+    "textRange": {
+      "startLine": 150,
+      "endLine": 150,
+      "startOffset": 4,
+      "endOffset": 25
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 176,
+              "endLine": 176,
+              "startOffset": 4,
+              "endOffset": 7
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 182,
+              "endLine": 182,
+              "startOffset": 8,
+              "endOffset": 10
+            },
+            "msg": "+2 (incl 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 182,
+              "endLine": 182,
+              "startOffset": 20,
+              "endOffset": 23
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 185,
+              "endLine": 185,
+              "startOffset": 67,
+              "endOffset": 69
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 187,
+              "endLine": 187,
+              "startOffset": 24,
+              "endOffset": 26
+            },
+            "msg": "+2 (incl 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 188,
+              "endLine": 188,
+              "startOffset": 8,
+              "endOffset": 10
+            },
+            "msg": "+2 (incl 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 193,
+              "endLine": 193,
+              "startOffset": 34,
+              "endOffset": 36
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 194,
+              "endLine": 194,
+              "startOffset": 37,
+              "endOffset": 39
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 197,
+              "endLine": 197,
+              "startOffset": 32,
+              "endOffset": 34
+            },
+            "msg": "+2 (incl 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 200,
+              "endLine": 200,
+              "startOffset": 8,
+              "endOffset": 10
+            },
+            "msg": "+2 (incl 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 210,
+              "endLine": 210,
+              "startOffset": 4,
+              "endOffset": 6
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 211,
+              "endLine": 211,
+              "startOffset": 8,
+              "endOffset": 10
+            },
+            "msg": "+2 (incl 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 213,
+              "endLine": 213,
+              "startOffset": 8,
+              "endOffset": 12
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 215,
+              "endLine": 215,
+              "startOffset": 8,
+              "endOffset": 12
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 218,
+              "endLine": 218,
+              "startOffset": 57,
+              "endOffset": 59
+            },
+            "msg": "+1"
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Refactor this function to reduce its Cognitive Complexity from 21 to the 15 allowed.",
+    "effort": "11min",
+    "debt": "11min",
+    "tags": [
+      "brain-overload"
+    ],
+    "creationDate": "2026-06-04T18:12:04+0000",
+    "updateDate": "2026-06-04T18:12:04+0000",
+    "type": "CODE_SMELL",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "FOCUSED",
+    "cleanCodeAttributeCategory": "ADAPTABLE",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "HIGH"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "ecf1d261-3ba3-4357-969f-d22d00d55a4e",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6T3ZAk3jH_hDrgzOoY",
+    "rule": "python:S3776",
+    "severity": "CRITICAL",
+    "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 76,
+    "hash": "d7198425b4da005822d13c2e0db56e47",
+    "textRange": {
+      "startLine": 76,
+      "endLine": 76,
+      "startOffset": 4,
+      "endOffset": 36
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 80,
+              "endLine": 80,
+              "startOffset": 4,
+              "endOffset": 10
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 83,
+              "endLine": 83,
+              "startOffset": 4,
+              "endOffset": 7
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 88,
+              "endLine": 88,
+              "startOffset": 8,
+              "endOffset": 13
+            },
+            "msg": "+2 (incl 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 91,
+              "endLine": 91,
+              "startOffset": 12,
+              "endOffset": 14
+            },
+            "msg": "+3 (incl 2 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 93,
+              "endLine": 93,
+              "startOffset": 16,
+              "endOffset": 18
+            },
+            "msg": "+4 (incl 3 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 96,
+              "endLine": 96,
+              "startOffset": 16,
+              "endOffset": 20
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 96,
+              "endLine": 96,
+              "startOffset": 44,
+              "endOffset": 47
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 98,
+              "endLine": 98,
+              "startOffset": 16,
+              "endOffset": 20
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 101,
+              "endLine": 101,
+              "startOffset": 20,
+              "endOffset": 23
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 106,
+              "endLine": 106,
+              "startOffset": 20,
+              "endOffset": 23
+            },
+            "msg": "+5 (incl 4 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 108,
+              "endLine": 108,
+              "startOffset": 24,
+              "endOffset": 26
+            },
+            "msg": "+6 (incl 5 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 110,
+              "endLine": 110,
+              "startOffset": 62,
+              "endOffset": 64
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 112,
+              "endLine": 112,
+              "startOffset": 49,
+              "endOffset": 51
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 114,
+              "endLine": 114,
+              "startOffset": 20,
+              "endOffset": 22
+            },
+            "msg": "+5 (incl 4 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 114,
+              "endLine": 114,
+              "startOffset": 44,
+              "endOffset": 47
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 116,
+              "endLine": 116,
+              "startOffset": 24,
+              "endOffset": 26
+            },
+            "msg": "+6 (incl 5 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 118,
+              "endLine": 118,
+              "startOffset": 28,
+              "endOffset": 31
+            },
+            "msg": "+7 (incl 6 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 120,
+              "endLine": 120,
+              "startOffset": 28,
+              "endOffset": 31
+            },
+            "msg": "+7 (incl 6 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 133,
+              "endLine": 133,
+              "startOffset": 8,
+              "endOffset": 11
+            },
+            "msg": "+2 (incl 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 134,
+              "endLine": 134,
+              "startOffset": 38,
+              "endOffset": 40
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/services/offer_letter_service.py",
+            "textRange": {
+              "startLine": 136,
+              "endLine": 136,
+              "startOffset": 12,
+              "endOffset": 14
+            },
+            "msg": "+3 (incl 2 for nesting)"
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Refactor this function to reduce its Cognitive Complexity from 60 to the 15 allowed.",
+    "effort": "50min",
+    "debt": "50min",
+    "tags": [
+      "brain-overload"
+    ],
+    "creationDate": "2026-06-04T18:12:04+0000",
+    "updateDate": "2026-06-04T18:12:04+0000",
+    "type": "CODE_SMELL",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "FOCUSED",
+    "cleanCodeAttributeCategory": "ADAPTABLE",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "HIGH"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "ecf1d261-3ba3-4357-969f-d22d00d55a4e",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6T3Y8h3jH_hDrgzOl3",
+    "rule": "javascript:S3776",
+    "severity": "CRITICAL",
+    "component": "vamsi560_hr-onboarding-copy:src/components/Forms/OnboardingForm.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 24,
+    "hash": "b64a4703e9db030a1b1493ab9bf202f9",
+    "textRange": {
+      "startLine": 24,
+      "endLine": 24,
+      "startOffset": 3,
+      "endOffset": 5
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Forms/OnboardingForm.js",
+            "textRange": {
+              "startLine": 77,
+              "endLine": 77,
+              "startOffset": 47,
+              "endOffset": 48
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Forms/OnboardingForm.js",
+            "textRange": {
+              "startLine": 77,
+              "endLine": 77,
+              "startOffset": 139,
+              "endOffset": 140
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Forms/OnboardingForm.js",
+            "textRange": {
+              "startLine": 77,
+              "endLine": 77,
+              "startOffset": 85,
+              "endOffset": 87
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Forms/OnboardingForm.js",
+            "textRange": {
+              "startLine": 109,
+              "endLine": 109,
+              "startOffset": 47,
+              "endOffset": 48
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Forms/OnboardingForm.js",
+            "textRange": {
+              "startLine": 109,
+              "endLine": 109,
+              "startOffset": 107,
+              "endOffset": 108
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Forms/OnboardingForm.js",
+            "textRange": {
+              "startLine": 109,
+              "endLine": 109,
+              "startOffset": 83,
+              "endOffset": 85
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Forms/OnboardingForm.js",
+            "textRange": {
+              "startLine": 140,
+              "endLine": 140,
+              "startOffset": 46,
+              "endOffset": 47
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Forms/OnboardingForm.js",
+            "textRange": {
+              "startLine": 140,
+              "endLine": 140,
+              "startOffset": 104,
+              "endOffset": 105
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Forms/OnboardingForm.js",
+            "textRange": {
+              "startLine": 140,
+              "endLine": 140,
+              "startOffset": 81,
+              "endOffset": 83
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Forms/OnboardingForm.js",
+            "textRange": {
+              "startLine": 174,
+              "endLine": 174,
+              "startOffset": 43,
+              "endOffset": 44
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Forms/OnboardingForm.js",
+            "textRange": {
+              "startLine": 174,
+              "endLine": 174,
+              "startOffset": 117,
+              "endOffset": 118
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Forms/OnboardingForm.js",
+            "textRange": {
+              "startLine": 174,
+              "endLine": 174,
+              "startOffset": 75,
+              "endOffset": 77
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Forms/OnboardingForm.js",
+            "textRange": {
+              "startLine": 206,
+              "endLine": 206,
+              "startOffset": 44,
+              "endOffset": 45
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Forms/OnboardingForm.js",
+            "textRange": {
+              "startLine": 206,
+              "endLine": 206,
+              "startOffset": 121,
+              "endOffset": 122
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Forms/OnboardingForm.js",
+            "textRange": {
+              "startLine": 206,
+              "endLine": 206,
+              "startOffset": 77,
+              "endOffset": 79
+            },
+            "msg": "+1"
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Refactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.",
+    "effort": "10min",
+    "debt": "10min",
+    "tags": [
+      "brain-overload"
+    ],
+    "creationDate": "2026-06-04T18:12:04+0000",
+    "updateDate": "2026-06-04T18:12:04+0000",
+    "type": "CODE_SMELL",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "FOCUSED",
+    "cleanCodeAttributeCategory": "ADAPTABLE",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "HIGH"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "ecf1d261-3ba3-4357-969f-d22d00d55a4e",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_hHDXdYKG8MaNzi",
+    "rule": "python:S3776",
+    "severity": "CRITICAL",
+    "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 620,
+    "hash": "edb62cc35ae508ae88d32f754b5cc93b",
+    "textRange": {
+      "startLine": 620,
+      "endLine": 620,
+      "startOffset": 8,
+      "endOffset": 39
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 621,
+              "endLine": 621,
+              "startOffset": 8,
+              "endOffset": 10
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 623,
+              "endLine": 623,
+              "startOffset": 12,
+              "endOffset": 14
+            },
+            "msg": "+2 (incl 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 626,
+              "endLine": 626,
+              "startOffset": 20,
+              "endOffset": 22
+            },
+            "msg": "+3 (incl 2 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 627,
+              "endLine": 627,
+              "startOffset": 24,
+              "endOffset": 26
+            },
+            "msg": "+4 (incl 3 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 629,
+              "endLine": 629,
+              "startOffset": 24,
+              "endOffset": 26
+            },
+            "msg": "+4 (incl 3 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 631,
+              "endLine": 631,
+              "startOffset": 24,
+              "endOffset": 26
+            },
+            "msg": "+4 (incl 3 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 633,
+              "endLine": 633,
+              "startOffset": 24,
+              "endOffset": 26
+            },
+            "msg": "+4 (incl 3 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 642,
+              "endLine": 642,
+              "startOffset": 8,
+              "endOffset": 11
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 643,
+              "endLine": 643,
+              "startOffset": 12,
+              "endOffset": 14
+            },
+            "msg": "+2 (incl 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 644,
+              "endLine": 644,
+              "startOffset": 16,
+              "endOffset": 18
+            },
+            "msg": "+3 (incl 2 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 646,
+              "endLine": 646,
+              "startOffset": 16,
+              "endOffset": 18
+            },
+            "msg": "+3 (incl 2 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 648,
+              "endLine": 648,
+              "startOffset": 16,
+              "endOffset": 18
+            },
+            "msg": "+3 (incl 2 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 650,
+              "endLine": 650,
+              "startOffset": 16,
+              "endOffset": 18
+            },
+            "msg": "+3 (incl 2 for nesting)"
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Refactor this function to reduce its Cognitive Complexity from 37 to the 15 allowed.",
+    "effort": "27min",
+    "debt": "27min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "brain-overload"
+    ],
+    "creationDate": "2026-06-04T15:47:53+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "CODE_SMELL",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "FOCUSED",
+    "cleanCodeAttributeCategory": "ADAPTABLE",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "HIGH"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "ecf1d261-3ba3-4357-969f-d22d00d55a4e",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_hHDXdYKG8MaNzl",
+    "rule": "python:S3776",
+    "severity": "CRITICAL",
+    "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 656,
+    "hash": "0ff11b839d175fbf30dc3c1602a81e46",
+    "textRange": {
+      "startLine": 656,
+      "endLine": 656,
+      "startOffset": 8,
+      "endOffset": 30
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 657,
+              "endLine": 657,
+              "startOffset": 8,
+              "endOffset": 10
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 659,
+              "endLine": 659,
+              "startOffset": 12,
+              "endOffset": 14
+            },
+            "msg": "+2 (incl 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 662,
+              "endLine": 662,
+              "startOffset": 20,
+              "endOffset": 22
+            },
+            "msg": "+3 (incl 2 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 663,
+              "endLine": 663,
+              "startOffset": 24,
+              "endOffset": 26
+            },
+            "msg": "+4 (incl 3 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 665,
+              "endLine": 665,
+              "startOffset": 24,
+              "endOffset": 26
+            },
+            "msg": "+4 (incl 3 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 667,
+              "endLine": 667,
+              "startOffset": 24,
+              "endOffset": 26
+            },
+            "msg": "+4 (incl 3 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 669,
+              "endLine": 669,
+              "startOffset": 24,
+              "endOffset": 26
+            },
+            "msg": "+4 (incl 3 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 678,
+              "endLine": 678,
+              "startOffset": 8,
+              "endOffset": 11
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 679,
+              "endLine": 679,
+              "startOffset": 12,
+              "endOffset": 14
+            },
+            "msg": "+2 (incl 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 680,
+              "endLine": 680,
+              "startOffset": 16,
+              "endOffset": 18
+            },
+            "msg": "+3 (incl 2 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 682,
+              "endLine": 682,
+              "startOffset": 16,
+              "endOffset": 18
+            },
+            "msg": "+3 (incl 2 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 684,
+              "endLine": 684,
+              "startOffset": 16,
+              "endOffset": 18
+            },
+            "msg": "+3 (incl 2 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/database.py",
+            "textRange": {
+              "startLine": 686,
+              "endLine": 686,
+              "startOffset": 16,
+              "endOffset": 18
+            },
+            "msg": "+3 (incl 2 for nesting)"
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Refactor this function to reduce its Cognitive Complexity from 37 to the 15 allowed.",
+    "effort": "27min",
+    "debt": "27min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "brain-overload"
+    ],
+    "creationDate": "2026-06-04T15:47:53+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "CODE_SMELL",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "FOCUSED",
+    "cleanCodeAttributeCategory": "ADAPTABLE",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "HIGH"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "ecf1d261-3ba3-4357-969f-d22d00d55a4e",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_gADXdYKG8MaNyN",
+    "rule": "python:S3776",
+    "severity": "CRITICAL",
+    "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 251,
+    "hash": "38e3faa7c20eeaa7f2c3c8cd02e80a83",
+    "textRange": {
+      "startLine": 251,
+      "endLine": 251,
+      "startOffset": 10,
+      "endOffset": 25
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 257,
+              "endLine": 257,
+              "startOffset": 4,
+              "endOffset": 6
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 257,
+              "endLine": 257,
+              "startOffset": 43,
+              "endOffset": 46
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 273,
+              "endLine": 273,
+              "startOffset": 46,
+              "endOffset": 48
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 277,
+              "endLine": 277,
+              "startOffset": 4,
+              "endOffset": 6
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 308,
+              "endLine": 308,
+              "startOffset": 42,
+              "endOffset": 44
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 327,
+              "endLine": 327,
+              "startOffset": 49,
+              "endOffset": 51
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 337,
+              "endLine": 337,
+              "startOffset": 103,
+              "endOffset": 105
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 347,
+              "endLine": 347,
+              "startOffset": 47,
+              "endOffset": 49
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 367,
+              "endLine": 367,
+              "startOffset": 4,
+              "endOffset": 6
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 367,
+              "endLine": 367,
+              "startOffset": 18,
+              "endOffset": 20
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 369,
+              "endLine": 369,
+              "startOffset": 4,
+              "endOffset": 8
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 369,
+              "endLine": 369,
+              "startOffset": 22,
+              "endOffset": 24
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 373,
+              "endLine": 373,
+              "startOffset": 4,
+              "endOffset": 6
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 375,
+              "endLine": 375,
+              "startOffset": 4,
+              "endOffset": 6
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 377,
+              "endLine": 377,
+              "startOffset": 4,
+              "endOffset": 6
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/routers/documents.py",
+            "textRange": {
+              "startLine": 377,
+              "endLine": 377,
+              "startOffset": 32,
+              "endOffset": 35
+            },
+            "msg": "+1"
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Refactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+    "effort": "6min",
+    "debt": "6min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "brain-overload"
+    ],
+    "creationDate": "2026-06-04T15:47:53+0000",
+    "updateDate": "2026-06-04T18:12:04+0000",
+    "type": "CODE_SMELL",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "FOCUSED",
+    "cleanCodeAttributeCategory": "ADAPTABLE",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "HIGH"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "ecf1d261-3ba3-4357-969f-d22d00d55a4e",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_g0DXdYKG8MaNzK",
+    "rule": "plsql:S1192",
+    "severity": "CRITICAL",
+    "component": "vamsi560_hr-onboarding-copy:backend/app/schema.sql",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 31,
+    "hash": "5a14f87a04a55d2e4066bd7455ffe7da",
+    "textRange": {
+      "startLine": 31,
+      "endLine": 31,
+      "startOffset": 31,
+      "endOffset": 40
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/schema.sql",
+            "textRange": {
+              "startLine": 31,
+              "endLine": 31,
+              "startOffset": 68,
+              "endOffset": 77
+            },
+            "msg": "Duplication."
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/schema.sql",
+            "textRange": {
+              "startLine": 59,
+              "endLine": 59,
+              "startOffset": 31,
+              "endOffset": 40
+            },
+            "msg": "Duplication."
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/schema.sql",
+            "textRange": {
+              "startLine": 59,
+              "endLine": 59,
+              "startOffset": 90,
+              "endOffset": 99
+            },
+            "msg": "Duplication."
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/schema.sql",
+            "textRange": {
+              "startLine": 81,
+              "endLine": 81,
+              "startOffset": 31,
+              "endOffset": 40
+            },
+            "msg": "Duplication."
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/schema.sql",
+            "textRange": {
+              "startLine": 81,
+              "endLine": 81,
+              "startOffset": 72,
+              "endOffset": 81
+            },
+            "msg": "Duplication."
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Define a constant instead of duplicating this literal 6 times.",
+    "effort": "4min",
+    "debt": "4min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "design"
+    ],
+    "creationDate": "2026-06-04T15:47:53+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "CODE_SMELL",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "DISTINCT",
+    "cleanCodeAttributeCategory": "ADAPTABLE",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "HIGH"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "40723e05-4393-43d4-b5c7-a0c74c91303a",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_hRDXdYKG8MaNz-",
+    "rule": "python:S1192",
+    "severity": "CRITICAL",
+    "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 14,
+    "hash": "51a105f9515315aa2fb72350cca90ad2",
+    "textRange": {
+      "startLine": 14,
+      "endLine": 14,
+      "startOffset": 4,
+      "endOffset": 24
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+            "textRange": {
+              "startLine": 132,
+              "endLine": 132,
+              "startOffset": 17,
+              "endOffset": 37
+            },
+            "msg": "Duplication"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+            "textRange": {
+              "startLine": 266,
+              "endLine": 266,
+              "startOffset": 26,
+              "endOffset": 46
+            },
+            "msg": "Duplication"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+            "textRange": {
+              "startLine": 290,
+              "endLine": 290,
+              "startOffset": 4,
+              "endOffset": 24
+            },
+            "msg": "Duplication"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+            "textRange": {
+              "startLine": 296,
+              "endLine": 296,
+              "startOffset": 21,
+              "endOffset": 41
+            },
+            "msg": "Duplication"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+            "textRange": {
+              "startLine": 319,
+              "endLine": 319,
+              "startOffset": 4,
+              "endOffset": 24
+            },
+            "msg": "Duplication"
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Define a constant instead of duplicating this literal \"john.doe@gmail.com\" 6 times.",
+    "effort": "12min",
+    "debt": "12min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "design"
+    ],
+    "creationDate": "2026-06-04T15:47:53+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "CODE_SMELL",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "DISTINCT",
+    "cleanCodeAttributeCategory": "ADAPTABLE",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "HIGH"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "7b0b903f-09fb-4708-8b78-af3bf32a4b4d",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_hRDXdYKG8MaNz8",
+    "rule": "python:S1192",
+    "severity": "CRITICAL",
+    "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 16,
+    "hash": "3b9701a8be78ab4552403f0a72c43c79",
+    "textRange": {
+      "startLine": 16,
+      "endLine": 16,
+      "startOffset": 16,
+      "endOffset": 32
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+            "textRange": {
+              "startLine": 106,
+              "endLine": 106,
+              "startOffset": 12,
+              "endOffset": 28
+            },
+            "msg": "Duplication"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+            "textRange": {
+              "startLine": 131,
+              "endLine": 131,
+              "startOffset": 16,
+              "endOffset": 32
+            },
+            "msg": "Duplication"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+            "textRange": {
+              "startLine": 177,
+              "endLine": 177,
+              "startOffset": 25,
+              "endOffset": 41
+            },
+            "msg": "Duplication"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+            "textRange": {
+              "startLine": 236,
+              "endLine": 236,
+              "startOffset": 25,
+              "endOffset": 41
+            },
+            "msg": "Duplication"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+            "textRange": {
+              "startLine": 281,
+              "endLine": 281,
+              "startOffset": 20,
+              "endOffset": 36
+            },
+            "msg": "Duplication"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+            "textRange": {
+              "startLine": 292,
+              "endLine": 292,
+              "startOffset": 24,
+              "endOffset": 40
+            },
+            "msg": "Duplication"
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Define a constant instead of duplicating this literal \"Shashank Tudum\" 7 times.",
+    "effort": "14min",
+    "debt": "14min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "design"
+    ],
+    "creationDate": "2026-06-04T15:47:53+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "CODE_SMELL",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "DISTINCT",
+    "cleanCodeAttributeCategory": "ADAPTABLE",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "HIGH"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "7b0b903f-09fb-4708-8b78-af3bf32a4b4d",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_hRDXdYKG8MaNz_",
+    "rule": "python:S1192",
+    "severity": "CRITICAL",
+    "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 59,
+    "hash": "1f2ce7d0d47e719470e55c96c4387004",
+    "textRange": {
+      "startLine": 59,
+      "endLine": 59,
+      "startOffset": 23,
+      "endOffset": 42
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+            "textRange": {
+              "startLine": 113,
+              "endLine": 113,
+              "startOffset": 19,
+              "endOffset": 38
+            },
+            "msg": "Duplication"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+            "textRange": {
+              "startLine": 309,
+              "endLine": 309,
+              "startOffset": 31,
+              "endOffset": 50
+            },
+            "msg": "Duplication"
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Define a constant instead of duplicating this literal \"Software Engineer\" 3 times.",
+    "effort": "6min",
+    "debt": "6min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "design"
+    ],
+    "creationDate": "2026-06-04T15:47:53+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "CODE_SMELL",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "DISTINCT",
+    "cleanCodeAttributeCategory": "ADAPTABLE",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "HIGH"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "7b0b903f-09fb-4708-8b78-af3bf32a4b4d",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_hRDXdYKG8MaN0A",
+    "rule": "python:S1192",
+    "severity": "CRITICAL",
+    "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 120,
+    "hash": "ded3e5aed0d52a8851b66e69a647c2f2",
+    "textRange": {
+      "startLine": 120,
+      "endLine": 120,
+      "startOffset": 16,
+      "endOffset": 43
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+            "textRange": {
+              "startLine": 157,
+              "endLine": 157,
+              "startOffset": 25,
+              "endOffset": 52
+            },
+            "msg": "Duplication"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+            "textRange": {
+              "startLine": 220,
+              "endLine": 220,
+              "startOffset": 25,
+              "endOffset": 52
+            },
+            "msg": "Duplication"
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Define a constant instead of duplicating this literal \"Sai Surya Vamsi Sapireddy\" 3 times.",
+    "effort": "6min",
+    "debt": "6min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "design"
+    ],
+    "creationDate": "2026-06-04T15:47:53+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "CODE_SMELL",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "DISTINCT",
+    "cleanCodeAttributeCategory": "ADAPTABLE",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "HIGH"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "7b0b903f-09fb-4708-8b78-af3bf32a4b4d",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_hRDXdYKG8MaNz9",
+    "rule": "python:S1192",
+    "severity": "CRITICAL",
+    "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 245,
+    "hash": "d97585a9136716b92f341575c5b59c8d",
+    "textRange": {
+      "startLine": 245,
+      "endLine": 245,
+      "startOffset": 21,
+      "endOffset": 47
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+            "textRange": {
+              "startLine": 246,
+              "endLine": 246,
+              "startOffset": 21,
+              "endOffset": 47
+            },
+            "msg": "Duplication"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:backend/app/seed_data.py",
+            "textRange": {
+              "startLine": 254,
+              "endLine": 254,
+              "startOffset": 21,
+              "endOffset": 47
+            },
+            "msg": "Duplication"
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Define a constant instead of duplicating this literal \"2024-05-20T09:00:00.000Z\" 3 times.",
+    "effort": "6min",
+    "debt": "6min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "design"
+    ],
+    "creationDate": "2026-06-04T15:47:53+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "CODE_SMELL",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "DISTINCT",
+    "cleanCodeAttributeCategory": "ADAPTABLE",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "HIGH"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "7b0b903f-09fb-4708-8b78-af3bf32a4b4d",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_efDXdYKG8MaNw3",
+    "rule": "javascript:S3776",
+    "severity": "CRITICAL",
+    "component": "vamsi560_hr-onboarding-copy:src/components/Documents/Documents.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 283,
+    "hash": "3cd5a1d40cc04e8d051d41d79f02b694",
+    "textRange": {
+      "startLine": 283,
+      "endLine": 283,
+      "startOffset": 50,
+      "endOffset": 52
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Documents/Documents.js",
+            "textRange": {
+              "startLine": 285,
+              "endLine": 285,
+              "startOffset": 4,
+              "endOffset": 6
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Documents/Documents.js",
+            "textRange": {
+              "startLine": 287,
+              "endLine": 287,
+              "startOffset": 6,
+              "endOffset": 8
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Documents/Documents.js",
+            "textRange": {
+              "startLine": 292,
+              "endLine": 292,
+              "startOffset": 6,
+              "endOffset": 8
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Documents/Documents.js",
+            "textRange": {
+              "startLine": 298,
+              "endLine": 298,
+              "startOffset": 29,
+              "endOffset": 30
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Documents/Documents.js",
+            "textRange": {
+              "startLine": 322,
+              "endLine": 322,
+              "startOffset": 66,
+              "endOffset": 67
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Documents/Documents.js",
+            "textRange": {
+              "startLine": 323,
+              "endLine": 323,
+              "startOffset": 67,
+              "endOffset": 68
+            },
+            "msg": "+3 (incl. 2 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Documents/Documents.js",
+            "textRange": {
+              "startLine": 324,
+              "endLine": 324,
+              "startOffset": 67,
+              "endOffset": 68
+            },
+            "msg": "+4 (incl. 3 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Documents/Documents.js",
+            "textRange": {
+              "startLine": 333,
+              "endLine": 333,
+              "startOffset": 8,
+              "endOffset": 10
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Documents/Documents.js",
+            "textRange": {
+              "startLine": 335,
+              "endLine": 335,
+              "startOffset": 15,
+              "endOffset": 17
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Documents/Documents.js",
+            "textRange": {
+              "startLine": 337,
+              "endLine": 337,
+              "startOffset": 10,
+              "endOffset": 14
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Documents/Documents.js",
+            "textRange": {
+              "startLine": 341,
+              "endLine": 341,
+              "startOffset": 8,
+              "endOffset": 13
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/components/Documents/Documents.js",
+            "textRange": {
+              "startLine": 345,
+              "endLine": 345,
+              "startOffset": 6,
+              "endOffset": 8
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Refactor this function to reduce its Cognitive Complexity from 24 to the 15 allowed.",
+    "effort": "14min",
+    "debt": "14min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "brain-overload"
+    ],
+    "creationDate": "2026-06-04T15:47:53+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "CODE_SMELL",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "FOCUSED",
+    "cleanCodeAttributeCategory": "ADAPTABLE",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "HIGH"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "ecf1d261-3ba3-4357-969f-d22d00d55a4e",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_e_DXdYKG8MaNxM",
+    "rule": "javascript:S3776",
+    "severity": "CRITICAL",
+    "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 212,
+    "hash": "e100faef8e9a53bda9713e537c479ebf",
+    "textRange": {
+      "startLine": 212,
+      "endLine": 212,
+      "startOffset": 37,
+      "endOffset": 39
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 213,
+              "endLine": 213,
+              "startOffset": 6,
+              "endOffset": 8
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 218,
+              "endLine": 218,
+              "startOffset": 8,
+              "endOffset": 10
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 218,
+              "endLine": 218,
+              "startOffset": 17,
+              "endOffset": 19
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 220,
+              "endLine": 220,
+              "startOffset": 8,
+              "endOffset": 10
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 223,
+              "endLine": 223,
+              "startOffset": 10,
+              "endOffset": 12
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 223,
+              "endLine": 223,
+              "startOffset": 19,
+              "endOffset": 21
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 228,
+              "endLine": 228,
+              "startOffset": 10,
+              "endOffset": 12
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 228,
+              "endLine": 228,
+              "startOffset": 19,
+              "endOffset": 21
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 244,
+              "endLine": 244,
+              "startOffset": 10,
+              "endOffset": 12
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 244,
+              "endLine": 244,
+              "startOffset": 20,
+              "endOffset": 22
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 245,
+              "endLine": 245,
+              "startOffset": 15,
+              "endOffset": 17
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 248,
+              "endLine": 248,
+              "startOffset": 10,
+              "endOffset": 12
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 248,
+              "endLine": 248,
+              "startOffset": 28,
+              "endOffset": 30
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 251,
+              "endLine": 251,
+              "startOffset": 10,
+              "endOffset": 12
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 251,
+              "endLine": 251,
+              "startOffset": 25,
+              "endOffset": 27
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 254,
+              "endLine": 254,
+              "startOffset": 10,
+              "endOffset": 12
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 254,
+              "endLine": 254,
+              "startOffset": 23,
+              "endOffset": 25
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 256,
+              "endLine": 256,
+              "startOffset": 8,
+              "endOffset": 13
+            },
+            "msg": "+1"
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Refactor this function to reduce its Cognitive Complexity from 24 to the 15 allowed.",
+    "effort": "14min",
+    "debt": "14min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "brain-overload"
+    ],
+    "creationDate": "2026-06-04T15:47:53+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "CODE_SMELL",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "FOCUSED",
+    "cleanCodeAttributeCategory": "ADAPTABLE",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "HIGH"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "ecf1d261-3ba3-4357-969f-d22d00d55a4e",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AZ6Ta_e_DXdYKG8MaNxW",
+    "rule": "javascript:S3776",
+    "severity": "CRITICAL",
+    "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+    "project": "vamsi560_hr-onboarding-copy",
+    "line": 315,
+    "hash": "bb25f427eec609e922b4dfb375372e16",
+    "textRange": {
+      "startLine": 315,
+      "endLine": 315,
+      "startOffset": 45,
+      "endOffset": 47
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 317,
+              "endLine": 317,
+              "startOffset": 4,
+              "endOffset": 6
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 317,
+              "endLine": 317,
+              "startOffset": 17,
+              "endOffset": 19
+            },
+            "msg": "+1"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 320,
+              "endLine": 320,
+              "startOffset": 8,
+              "endOffset": 10
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 321,
+              "endLine": 321,
+              "startOffset": 65,
+              "endOffset": 66
+            },
+            "msg": "+3 (incl. 2 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 322,
+              "endLine": 322,
+              "startOffset": 63,
+              "endOffset": 64
+            },
+            "msg": "+4 (incl. 3 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 323,
+              "endLine": 323,
+              "startOffset": 63,
+              "endOffset": 64
+            },
+            "msg": "+5 (incl. 4 for nesting)"
+          }
+        ]
+      },
+      {
+        "locations": [
+          {
+            "component": "vamsi560_hr-onboarding-copy:src/context/AppContext.js",
+            "textRange": {
+              "startLine": 326,
+              "endLine": 326,
+              "startOffset": 8,
+              "endOffset": 13
+            },
+            "msg": "+2 (incl. 1 for nesting)"
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Refactor this function to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+    "effort": "8min",
+    "debt": "8min",
+    "assignee": "vamsi560@github",
+    "tags": [
+      "brain-overload"
+    ],
+    "creationDate": "2026-06-04T15:47:53+0000",
+    "updateDate": "2026-06-04T16:09:32+0000",
+    "type": "CODE_SMELL",
+    "organization": "vamsi560",
+    "cleanCodeAttribute": "FOCUSED",
+    "cleanCodeAttributeCategory": "ADAPTABLE",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "HIGH"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "hr-onboarding-copy",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "ecf1d261-3ba3-4357-969f-d22d00d55a4e",
+    "lastChangeSource": "ANALYSIS"
+  }
+]
