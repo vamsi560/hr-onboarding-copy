@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { api } from '../utils/api';
-import { sanitizeData } from '../utils/sanitize';
+import { sanitizeData, safeStringify } from '../utils/sanitize';
 
 const AppContext = createContext();
 
@@ -175,23 +175,23 @@ export const AppProvider = ({ children }) => {
   }, [organization]);
 
   useEffect(() => {
-    localStorage.setItem('formData', JSON.stringify(sanitizeData(formData)));
+    localStorage.setItem('formData', safeStringify(sanitizeData(formData)));
   }, [formData]);
 
   useEffect(() => {
-    localStorage.setItem('chatHistory', JSON.stringify(sanitizeData(chatHistory)));
+    localStorage.setItem('chatHistory', safeStringify(sanitizeData(chatHistory)));
   }, [chatHistory]);
 
   useEffect(() => {
-    localStorage.setItem('auditLog', JSON.stringify(sanitizeData(auditLog)));
+    localStorage.setItem('auditLog', safeStringify(sanitizeData(auditLog)));
   }, [auditLog]);
 
   useEffect(() => {
-    localStorage.setItem('referenceChecks', JSON.stringify(sanitizeData(referenceChecks)));
+    localStorage.setItem('referenceChecks', safeStringify(sanitizeData(referenceChecks)));
   }, [referenceChecks]);
 
   useEffect(() => {
-    localStorage.setItem('documentExpiry', JSON.stringify(sanitizeData(documentExpiry)));
+    localStorage.setItem('documentExpiry', safeStringify(sanitizeData(documentExpiry)));
   }, [documentExpiry]);
 
   useEffect(() => {
@@ -204,7 +204,7 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     if (userInfo) {
-      localStorage.setItem('userInfo', JSON.stringify(sanitizeData(userInfo)));
+      localStorage.setItem('userInfo', safeStringify(sanitizeData(userInfo)));
     }
   }, [userInfo]);
 

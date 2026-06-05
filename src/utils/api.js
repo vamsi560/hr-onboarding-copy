@@ -185,11 +185,23 @@ const safeFetch = async (url, options = {}) => {
       };
     }
     
-    // Validate the URL strictly to prevent SSRF and injection vulnerabilities
-    if (typeof url !== 'string' || (!url.startsWith(API_BASE) && !url.startsWith('/') && !url.startsWith('http://localhost:8000'))) {
-      throw new Error("Invalid or unsafe URL requested.");
-    }
+    // Validate the URL strictly to prevent SSRF
     const parsedUrl = new URL(url, globalThis.location.origin);
+    const allowedHosts = ['localhost', '127.0.0.1'];
+    // In production, you would add the production API host here
+    // e.g., allowedHosts.push(new URL(API_BASE).hostname);
+    try {
+      const baseHost = new URL(API_BASE).hostname;
+      if (baseHost && !allowedHosts.includes(baseHost)) {
+        allowedHosts.push(baseHost);
+      }
+    } catch {
+      // Ignore if API_BASE is invalid
+    }
+    
+    if (!allowedHosts.includes(parsedUrl.hostname)) {
+      throw new Error("SSRF Protection: Hostname not allowed.");
+    }
     const safeUrl = parsedUrl.toString();
     
     const res = await fetch(safeUrl, options);

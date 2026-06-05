@@ -38,3 +38,8 @@ export const sanitizeUrlParam = (param) => {
   if (param === null || param === undefined) return '';
   return encodeURIComponent(String(param).trim());
 };
+
+export const safeStringify = (data) => {
+  if (data === undefined) return undefined;
+  return JSON.stringify(data).replaceAll('<', '\\u003c').replaceAll('>', '\\u003e');
+};
