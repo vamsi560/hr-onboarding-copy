@@ -409,7 +409,9 @@ def generate_offer_letter_pdf(
 def password_protect_pdf(pdf_path: str, password: str = None):
     """Add password protection to PDF"""
     if password is None:
-        password = os.getenv("DEFAULT_OFFER_PASSWORD", "Offer2024")
+        password = os.getenv("DEFAULT_OFFER_PASSWORD")
+    if not password:
+        return
     try:
         writer = PdfWriter(clone_from=pdf_path)
         writer.encrypt(password)

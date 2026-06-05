@@ -21,7 +21,9 @@ const getLocal = (key, defaultVal) => {
 
 const setLocal = (key, data) => {
   const safeKey = String(key).replace(/[^a-zA-Z0-9_]/g, '');
-  localStorage.setItem(`mock_db_${safeKey}`, JSON.stringify(sanitizeData(data)));
+  const serialized = JSON.stringify(data || {});
+  const safeValue = serialized.replace(/</g, '\\u003c').replace(/>/g, '\\u003e');
+  localStorage.setItem(`mock_db_${safeKey}`, safeValue);
 };
 
 // Initialize Mock database in LocalStorage if empty
@@ -183,7 +185,10 @@ const safeFetch = async (url, options = {}) => {
       };
     }
     
-    // Validate the URL to prevent SSRF and injection vulnerabilities
+    // Validate the URL strictly to prevent SSRF and injection vulnerabilities
+    if (typeof url !== 'string' || (!url.startsWith(API_BASE) && !url.startsWith('/') && !url.startsWith('http://localhost:8000'))) {
+      throw new Error("Invalid or unsafe URL requested.");
+    }
     const parsedUrl = new URL(url, globalThis.location.origin);
     const safeUrl = parsedUrl.toString();
     
