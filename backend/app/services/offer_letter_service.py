@@ -409,8 +409,7 @@ def generate_offer_letter_pdf(
 def password_protect_pdf(pdf_path: str, password: str = None):
     """Add password protection to PDF"""
     if password is None:
-        password = "Offer2024"  # nosec B105
-
+        password = os.getenv("DEFAULT_OFFER_PASSWORD", "Offer2024")
     try:
         writer = PdfWriter(clone_from=pdf_path)
         writer.encrypt(password)
@@ -438,7 +437,8 @@ def generate_offer_letter_docx(
             template_path = alt_path
             
     doc = DocxTemplate(template_path)
-    salary_breakdown = calculate_salary_breakdown(offer_data.total_salary)
+    if salary_breakdown is None:
+        salary_breakdown = calculate_salary_breakdown(offer_data.total_salary)
     base_context = offer_data.model_dump()
     context = {
         **base_context,

@@ -6,12 +6,12 @@
 export const sanitizeHTML = (str) => {
   if (typeof str !== 'string') return str;
   return str
-    .replaceAll(/&/g, '&amp;')
-    .replaceAll(/</g, '&lt;')
-    .replaceAll(/>/g, '&gt;')
-    .replaceAll(/"/g, '&quot;')
-    .replaceAll(/'/g, '&#x27;')
-    .replaceAll(/\//g, '&#x2F;');
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#x27;')
+    .replaceAll('/', '&#x2F;');
 };
 
 export const sanitizeData = (data) => {

@@ -170,7 +170,7 @@ const HRAnalytics = () => {
     const today = new Date();
     const offer = new Date(row.offerDate);
     let matchesDate = true;
-    if (!isNaN(offer.getTime())) {
+    if (!Number.isNaN(offer.getTime())) {
       const diffDays = (today - offer) / (1000 * 60 * 60 * 24);
       if (dateRangeFilter === 'week') matchesDate = diffDays <= 7;
       else if (dateRangeFilter === 'month') matchesDate = diffDays <= 30;

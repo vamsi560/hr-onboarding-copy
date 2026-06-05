@@ -180,7 +180,10 @@ const HRCandidateWorkflow = ({ candidateId, onBack }) => {
             <Card key={phase.id} className="workflow-phase-card">
               <div
                 className="workflow-phase-header"
+                role="button"
+                tabIndex={0}
                 onClick={() => toggleSection(phase.id)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleSection(phase.id); } }}
               >
                 <div className="phase-title-row">
                   <span className="expand-icon">

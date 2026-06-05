@@ -232,7 +232,10 @@ const HRChat = () => {
               <div
                 key={chat.id}
                 className={`chat-item ${selectedChat === chat.id ? 'active' : ''}`}
+                role="button"
+                tabIndex={0}
                 onClick={() => setSelectedChat(chat.id)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedChat(chat.id); } }}
               >
                 <div className="chat-avatar">
                   {chat.avatar}

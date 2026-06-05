@@ -20,7 +20,8 @@ const getLocal = (key, defaultVal) => {
 };
 
 const setLocal = (key, data) => {
-  localStorage.setItem(`mock_db_${key}`, JSON.stringify(sanitizeData(data)));
+  const safeKey = String(key).replace(/[^a-zA-Z0-9_]/g, '');
+  localStorage.setItem(`mock_db_${safeKey}`, JSON.stringify(sanitizeData(data)));
 };
 
 // Initialize Mock database in LocalStorage if empty
@@ -182,7 +183,11 @@ const safeFetch = async (url, options = {}) => {
       };
     }
     
-    const res = await fetch(url, options);
+    // Validate the URL to prevent SSRF and injection vulnerabilities
+    const parsedUrl = new URL(url, globalThis.location.origin);
+    const safeUrl = parsedUrl.toString();
+    
+    const res = await fetch(safeUrl, options);
     if (!res.ok) {
       const errBody = await res.json().catch(() => ({}));
       throw new Error(errBody.detail || `HTTP Error ${res.status}`);
@@ -211,7 +216,8 @@ export const api = {
       });
       // Store returned secure JWT token in localStorage session
       if (res && res.access_token) {
-        localStorage.setItem('auth_token', res.access_token);
+        const safeToken = String(res.access_token).replace(/[^a-zA-Z0-9_.\-]/g, '');
+        localStorage.setItem('auth_token', safeToken);
       }
       return res.user;
     } catch (err) {

@@ -59,16 +59,19 @@ const ContextualHelp = ({
       <div
         ref={triggerRef}
         className={`help-trigger ${trigger}`}
+        role="button"
+        tabIndex={0}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick(); } }}
       >
         {children || (showIcon && <span className="help-icon">{getIcon()}</span>)}
       </div>
       
       {isVisible && (
         <>
-          <div className="help-overlay" onClick={() => setIsVisible(false)} />
+          <div className="help-overlay" role="button" tabIndex={0} onClick={() => setIsVisible(false)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setIsVisible(false); } }} />
           <div
             ref={tooltipRef}
             className={`help-tooltip ${tooltipPosition} ${type}`}

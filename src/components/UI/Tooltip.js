@@ -45,6 +45,8 @@ const Tooltip = ({ content, children, position = 'top', className = '' }) => {
     <span
       className={`tooltip-wrapper ${className}`}
       ref={triggerRef}
+      role="button"
+      tabIndex={0}
       onMouseEnter={() => setIsVisible(true)}
       onMouseLeave={() => setIsVisible(false)}
       onFocus={() => setIsVisible(true)}

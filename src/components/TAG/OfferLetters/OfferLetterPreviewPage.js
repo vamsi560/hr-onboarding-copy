@@ -133,7 +133,7 @@ Talent Acquisition Team`);
         pdf_path: candidateData.pdf_path || `/generated_offer_letters/vm_offer_letter_${candidateData.candidate_name.replace(/\s+/g, '_')}_mock.pdf`,
         candidate_name: candidateData.candidate_name,
         subject: emailSubject,
-        body: emailBody.replaceAll(/\n/g, '<br>'),
+        body: emailBody.replaceAll('\n', '<br>'),
         cc_email: ccEmail || undefined,
         designation: candidateData.designation,
         joining_date: candidateData.joining_date,
@@ -169,7 +169,7 @@ Talent Acquisition Team`);
   const formatDate = (dateStr) => {
     if (!dateStr) return '[Date]';
     const date = new Date(dateStr);
-    if (isNaN(date.getTime())) return dateStr;
+    if (Number.isNaN(date.getTime())) return dateStr;
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   };
 

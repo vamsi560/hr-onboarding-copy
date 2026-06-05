@@ -18,7 +18,7 @@ const Modal = ({ isOpen, onClose, children, title }) => {
 
   return (
     <div role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.click(); }} className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-content" role="presentation" onClick={(e) => e.stopPropagation()} onKeyDown={(e) => e.stopPropagation()}>
         {title && (
           <div className="modal-header">
             <h3>{title}</h3>

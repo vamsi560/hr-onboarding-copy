@@ -480,9 +480,9 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
             </div>
             
             <div className="form-group">
-              <label htmlFor="field_481">Aadhaar Card</label>
+              <label htmlFor="aadhaar-upload">Aadhaar Card</label>
               <div className="file-upload-wrapper">
-                <input id="field_481"
+                <input
                   type="file"
                   accept=".pdf,.jpg,.jpeg,.png"
                   onChange={(e) => handleFileChange('aadhaar', e)}

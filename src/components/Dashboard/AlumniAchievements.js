@@ -168,8 +168,8 @@ const AlumniAchievements = () => {
             <div>
               <h3>Congratulations!</h3>
               <p>
-                You have earned <strong>{totalAchievements} achievements</strong> during your 
-                <strong> 5.5 years</strong> with ValueMomentum. Your dedication and excellence 
+                You have earned <strong>{totalAchievements} achievements</strong> during your{' '}
+                <strong>5.5 years</strong> with ValueMomentum. Your dedication and excellence 
                 have made a lasting impact on our organization.
               </p>
             </div>

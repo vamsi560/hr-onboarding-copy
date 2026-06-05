@@ -186,6 +186,8 @@ const Header = ({ onMenuClick, onLogout, sidebarCollapsed }) => {
             <div
               ref={userMenuRef}
               className="user-menu-dropdown user-menu-dropdown-portal"
+              role="button"
+              tabIndex={0}
               style={{ 
                 position: 'fixed', 
                 top: userMenuPosition.top, 
@@ -193,6 +195,7 @@ const Header = ({ onMenuClick, onLogout, sidebarCollapsed }) => {
                 zIndex: 2000 
               }}
               onClick={(e) => e.stopPropagation()}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
             >
               <div className="user-menu-header">
                 <div className="user-menu-avatar">
