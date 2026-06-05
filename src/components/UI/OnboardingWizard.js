@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useApp } from '../../context/AppContext';
 import Button from '../UI/Button';
 import './OnboardingWizard.css';
@@ -166,6 +167,14 @@ const OnboardingWizard = ({ onComplete, onSkip }) => {
       </div>
     </>
   );
+};
+
+
+
+// Auto-generated PropTypes
+OnboardingWizard.propTypes = {
+  onComplete: PropTypes.any,
+  onSkip: PropTypes.any,
 };
 
 export default OnboardingWizard;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { useApp } from '../../context/AppContext';
 import { useToast } from '../../context/ToastContext';
 import Card from '../UI/Card';
@@ -1407,6 +1408,88 @@ const OnboardingForm = () => {
       )}
     </div>
   );
+};
+
+
+
+// Auto-generated PropTypes
+PersonalStep.propTypes = {
+  fieldErrors: PropTypes.any,
+  fieldErrors.email: PropTypes.any,
+  fieldErrors.firstName: PropTypes.any,
+  fieldErrors.lastName: PropTypes.any,
+  fieldErrors.linkedinUrl: PropTypes.any,
+  fieldErrors.mobile: PropTypes.any,
+  formValues: PropTypes.any,
+  formValues.address: PropTypes.any,
+  formValues.email: PropTypes.any,
+  formValues.firstName: PropTypes.any,
+  formValues.lastName: PropTypes.any,
+  formValues.linkedinUrl: PropTypes.any,
+  formValues.mobile: PropTypes.any,
+  formValues.resumeFile: PropTypes.any,
+  handleAutofill: PropTypes.any,
+  handleBlur: PropTypes.any,
+  handleChange: PropTypes.any,
+  nextStep: PropTypes.any,
+  showToast: PropTypes.any,
+  touchedFields: PropTypes.any,
+  touchedFields.email: PropTypes.any,
+  touchedFields.firstName: PropTypes.any,
+  touchedFields.lastName: PropTypes.any,
+  touchedFields.linkedinUrl: PropTypes.any,
+  touchedFields.mobile: PropTypes.any,
+};
+EducationalStep.propTypes = {
+  addCertification: PropTypes.any,
+  formValues: PropTypes.any,
+  formValues.certifications: PropTypes.any,
+  formValues.certifications.length: PropTypes.any,
+  formValues.educationalNotes: PropTypes.any,
+  formValues.educationalQualifications: PropTypes.any,
+  formValues.educationalQualifications.length: PropTypes.any,
+  handleCertificationChange: PropTypes.any,
+  handleChange: PropTypes.any,
+  nextStep: PropTypes.any,
+  prevStep: PropTypes.any,
+};
+ProfessionalStep.propTypes = {
+  addProfessionalDetail: PropTypes.any,
+  addSkill: PropTypes.any,
+  formValues: PropTypes.any,
+  formValues.certifications: PropTypes.any,
+  formValues.certifications.length: PropTypes.any,
+  formValues.certifications.map: PropTypes.any,
+  formValues.emergencyContact: PropTypes.any,
+  formValues.emergencyPhone: PropTypes.any,
+  formValues.hasVisa: PropTypes.any,
+  formValues.notes: PropTypes.any,
+  formValues.passportExpiry: PropTypes.any,
+  formValues.professionalDetails: PropTypes.any,
+  formValues.professionalDetails.length: PropTypes.any,
+  formValues.references: PropTypes.any,
+  formValues.references.length: PropTypes.any,
+  formValues.skillsWithRating: PropTypes.any,
+  formValues.visaExpiry: PropTypes.any,
+  formValues.visaType: PropTypes.any,
+  handleChange: PropTypes.any,
+  handleProfessionalDetailChange: PropTypes.any,
+  handleSkillChange: PropTypes.any,
+  nextStep: PropTypes.any,
+  prevStep: PropTypes.any,
+};
+ConsentStep.propTypes = {
+  formValues: PropTypes.any,
+  formValues.consentBackgroundCheck: PropTypes.any,
+  formValues.consentDataProcessing: PropTypes.any,
+  formValues.consentDocuments: PropTypes.any,
+  formValues.consentInformation: PropTypes.any,
+  formValues.signature: PropTypes.any,
+  formValues.signatureDate: PropTypes.any,
+  getOrganizationName: PropTypes.any,
+  handleChange: PropTypes.any,
+  prevStep: PropTypes.any,
+  showToast: PropTypes.any,
 };
 
 export default OnboardingForm;

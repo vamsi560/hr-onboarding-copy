@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './Modal.css';
 
 const Modal = ({ isOpen, onClose, children, title }) => {
@@ -16,7 +17,7 @@ const Modal = ({ isOpen, onClose, children, title }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.click(); }} className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         {title && (
           <div className="modal-header">
@@ -30,6 +31,16 @@ const Modal = ({ isOpen, onClose, children, title }) => {
       </div>
     </div>
   );
+};
+
+
+
+// Auto-generated PropTypes
+Modal.propTypes = {
+  children: PropTypes.any,
+  isOpen: PropTypes.any,
+  onClose: PropTypes.any,
+  title: PropTypes.any,
 };
 
 export default Modal;

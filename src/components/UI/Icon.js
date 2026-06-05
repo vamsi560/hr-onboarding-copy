@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Icon.css';
 
 // SVG Icon Component - Professional icon system
@@ -212,6 +213,15 @@ const Icon = ({ name, size = 20, className = '', ...props }) => {
       {IconComponent}
     </span>
   );
+};
+
+
+
+// Auto-generated PropTypes
+Icon.propTypes = {
+  className: PropTypes.any,
+  name: PropTypes.any,
+  size: PropTypes.any,
 };
 
 export default Icon;

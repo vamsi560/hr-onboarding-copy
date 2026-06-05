@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { api } from '../utils/api';
 import { sanitizeData } from '../utils/sanitize';
 
@@ -384,3 +385,9 @@ export const AppProvider = ({ children }) => {
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
+
+
+// Auto-generated PropTypes
+AppProvider.propTypes = {
+  children: PropTypes.any,
+};

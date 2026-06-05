@@ -419,7 +419,7 @@ const OfferLettersDashboard = () => {
                       />
                     </td>
                     <td>
-                      <div className="candidate-profile-cell" onClick={() => navigate(`/offer-letters/preview/${candidate.id}`)}>
+                      <div role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.click(); }} className="candidate-profile-cell" onClick={() => navigate(`/offer-letters/preview/${candidate.id}`)}>
                         <div className="profile-letter-avatar">
                           {candidate.name.charAt(0)}
                         </div>

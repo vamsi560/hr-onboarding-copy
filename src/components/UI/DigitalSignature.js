@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import Button from '../UI/Button';
 import './DigitalSignature.css';
 
@@ -182,6 +183,19 @@ const DigitalSignature = ({
       </div>
     </div>
   );
+};
+
+
+
+// Auto-generated PropTypes
+DigitalSignature.propTypes = {
+  height: PropTypes.any,
+  label: PropTypes.any,
+  onClear: PropTypes.any,
+  onSave: PropTypes.any,
+  required: PropTypes.any,
+  value: PropTypes.any,
+  width: PropTypes.any,
 };
 
 export default DigitalSignature;

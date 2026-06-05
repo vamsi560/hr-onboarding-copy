@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useApp } from '../../context/AppContext';
 import Card from '../UI/Card';
 import Button from '../UI/Button';
@@ -252,6 +253,14 @@ const HRCandidateWorkflow = ({ candidateId, onBack }) => {
       </button>
     </div>
   );
+};
+
+
+
+// Auto-generated PropTypes
+HRCandidateWorkflow.propTypes = {
+  candidateId: PropTypes.any,
+  onBack: PropTypes.any,
 };
 
 export default HRCandidateWorkflow;

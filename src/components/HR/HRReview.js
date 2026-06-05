@@ -209,7 +209,7 @@ const HRReview = () => {
                       />
                     </td>
                     <td>
-                      <span 
+                      <span role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.click(); }} 
                         className="candidate-name-link"
                         onClick={() => handleCandidateClick(candidate.id)}
                       >
@@ -231,8 +231,8 @@ const HRReview = () => {
       </Card>
 
       {statusModal.open && (
-        <div className="status-modal-backdrop" onClick={closeStatusModal}>
-          <div className="status-modal" onClick={(e) => e.stopPropagation()}>
+        <div role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.click(); }} className="status-modal-backdrop" onClick={closeStatusModal}>
+          <div role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.click(); }} className="status-modal" onClick={(e) => e.stopPropagation()}>
             <h4>Update Candidate Status</h4>
             <form onSubmit={handleStatusSubmit}>
               <div className="form-group">
@@ -281,8 +281,8 @@ const HRReview = () => {
       )}
 
       {joiningDateModal.open && (
-        <div className="status-modal-backdrop" onClick={closeJoiningDateModal}>
-          <div className="status-modal" onClick={(e) => e.stopPropagation()}>
+        <div role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.click(); }} className="status-modal-backdrop" onClick={closeJoiningDateModal}>
+          <div role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.click(); }} className="status-modal" onClick={(e) => e.stopPropagation()}>
             <h4>Edit Joining Date</h4>
             <p>Update joining date for {joiningDateModal.selectedIds.length} selected candidate(s)</p>
             <form onSubmit={handleJoiningDateSubmit}>

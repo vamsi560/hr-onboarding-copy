@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { useApp } from '../../context/AppContext';
 import Icon from '../UI/Icon';
@@ -247,6 +248,15 @@ const Header = ({ onMenuClick, onLogout, sidebarCollapsed }) => {
       </div>
     </header>
   );
+};
+
+
+
+// Auto-generated PropTypes
+Header.propTypes = {
+  onLogout: PropTypes.any,
+  onMenuClick: PropTypes.any,
+  sidebarCollapsed: PropTypes.any,
 };
 
 export default Header;

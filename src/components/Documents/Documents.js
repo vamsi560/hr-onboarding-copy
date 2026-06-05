@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { useApp } from '../../context/AppContext';
 import { api } from '../../utils/api';
 import { useToast } from '../../context/ToastContext';
@@ -518,6 +519,31 @@ Date: ______________________________________________________
       </Card>
     </div>
   );
+};
+
+
+
+// Auto-generated PropTypes
+DocumentCategorySection.propTypes = {
+  categoryName: PropTypes.any,
+  description: PropTypes.any,
+  documentTypes: PropTypes.any,
+  documentTypes.filter: PropTypes.any,
+  downloadCriminalVerificationForm: PropTypes.any,
+  fileInputRefs: PropTypes.any,
+  fileInputRefs.current: PropTypes.any,
+  getDocumentStatus: PropTypes.any,
+  handleDocumentUpload: PropTypes.any,
+  title: PropTypes.any,
+};
+CompanyDocumentsSection.propTypes = {
+  description: PropTypes.any,
+  fileInputRefs: PropTypes.any,
+  fileInputRefs.current: PropTypes.any,
+  getDocumentStatus: PropTypes.any,
+  handleDocumentUpload: PropTypes.any,
+  title: PropTypes.any,
+  triggerDownload: PropTypes.any,
 };
 
 export default Documents;

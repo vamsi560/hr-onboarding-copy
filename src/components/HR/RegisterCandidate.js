@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useApp } from '../../context/AppContext';
 import { useToast } from '../../context/ToastContext';
 import Card from '../UI/Card';
@@ -511,6 +512,14 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
       </Card>
     </div>
   );
+};
+
+
+
+// Auto-generated PropTypes
+RegisterCandidate.propTypes = {
+  onBack: PropTypes.any,
+  onSuccess: PropTypes.any,
 };
 
 export default RegisterCandidate;

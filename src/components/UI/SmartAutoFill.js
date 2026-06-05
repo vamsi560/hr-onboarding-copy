@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useToast } from '../../context/ToastContext';
 import Button from '../UI/Button';
 import './SmartAutoFill.css';
@@ -216,6 +217,14 @@ const SmartAutoFill = ({ onDataExtracted, acceptedTypes = '.pdf,.doc,.docx,.jpg,
       )}
     </div>
   );
+};
+
+
+
+// Auto-generated PropTypes
+SmartAutoFill.propTypes = {
+  acceptedTypes: PropTypes.any,
+  onDataExtracted: PropTypes.any,
 };
 
 export default SmartAutoFill;

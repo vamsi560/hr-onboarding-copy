@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './SessionTimeout.css';
 
 const SessionTimeout = ({ onLogout }) => {
@@ -84,6 +85,13 @@ const SessionTimeout = ({ onLogout }) => {
       </div>
     </div>
   );
+};
+
+
+
+// Auto-generated PropTypes
+SessionTimeout.propTypes = {
+  onLogout: PropTypes.any,
 };
 
 export default SessionTimeout;

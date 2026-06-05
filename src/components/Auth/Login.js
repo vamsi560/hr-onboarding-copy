@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Card from '../UI/Card';
 import Button from '../UI/Button';
 import Input from '../UI/Input';
@@ -316,6 +317,14 @@ const Login = ({ onLogin, onDemo }) => {
       </div>
     </div>
   );
+};
+
+
+
+// Auto-generated PropTypes
+Login.propTypes = {
+  onDemo: PropTypes.any,
+  onLogin: PropTypes.any,
 };
 
 export default Login;

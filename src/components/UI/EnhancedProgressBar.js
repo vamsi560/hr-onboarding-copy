@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './EnhancedProgressBar.css';
 
 const EnhancedProgressBar = ({ 
@@ -59,6 +60,18 @@ const EnhancedProgressBar = ({
       )}
     </div>
   );
+};
+
+
+
+// Auto-generated PropTypes
+EnhancedProgressBar.propTypes = {
+  animated: PropTypes.any,
+  milestones: PropTypes.any,
+  progress: PropTypes.any,
+  showMilestones: PropTypes.any,
+  showPercentage: PropTypes.any,
+  size: PropTypes.any,
 };
 
 export default EnhancedProgressBar;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useApp } from '../../context/AppContext';
 import { useToast } from '../../context/ToastContext';
 import Card from '../UI/Card';
@@ -550,6 +551,14 @@ const ResponseForm = ({ refId, onUpdate }) => {
       <Button type="submit">Save Response</Button>
     </form>
   );
+};
+
+
+
+// Auto-generated PropTypes
+ResponseForm.propTypes = {
+  onUpdate: PropTypes.any,
+  refId: PropTypes.any,
 };
 
 export default ReferenceCheck;

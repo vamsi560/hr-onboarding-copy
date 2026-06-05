@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './ContextualHelp.css';
 
 const ContextualHelp = ({ 
@@ -54,7 +55,7 @@ const ContextualHelp = ({
   };
 
   return (
-    <div className="contextual-help-container">
+    <div role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.click(); }} className="contextual-help-container">
       <div
         ref={triggerRef}
         className={`help-trigger ${trigger}`}
@@ -80,6 +81,19 @@ const ContextualHelp = ({
       )}
     </div>
   );
+};
+
+
+
+// Auto-generated PropTypes
+ContextualHelp.propTypes = {
+  children: PropTypes.any,
+  content: PropTypes.any,
+  position: PropTypes.any,
+  showIcon: PropTypes.any,
+  title: PropTypes.any,
+  trigger: PropTypes.any,
+  type: PropTypes.any,
 };
 
 export default ContextualHelp;

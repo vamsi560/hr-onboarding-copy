@@ -152,7 +152,7 @@ const Validation = () => {
               
               return (
                 <Card key={originalIndex} className={`timeline-item validation-item status-${validation.status}`}>
-                  <div className="validation-header" onClick={() => toggleExpand(originalIndex)}>
+                  <div role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.click(); }} className="validation-header" onClick={() => toggleExpand(originalIndex)}>
                     <div className="validation-header-left">
                       <div className="validation-status-badge" style={{ backgroundColor: getStatusColor(validation.status) }}>
                         <span className="status-icon">{getStatusIcon(validation.status)}</span>

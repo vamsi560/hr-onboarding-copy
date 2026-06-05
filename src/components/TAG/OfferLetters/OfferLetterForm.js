@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useToast } from '../../../context/ToastContext';
 import Card from '../../UI/Card';
@@ -1075,6 +1076,17 @@ const OfferLetterForm = () => {
       </form>
     </div>
   );
+};
+
+
+
+// Auto-generated PropTypes
+FormAccordion.propTypes = {
+  children: PropTypes.any,
+  iconName: PropTypes.any,
+  isOpen: PropTypes.any,
+  onToggle: PropTypes.any,
+  title: PropTypes.any,
 };
 
 export default OfferLetterForm;

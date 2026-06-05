@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Button.css';
 
 const Button = ({
@@ -21,6 +22,18 @@ const Button = ({
       {children}
     </button>
   );
+};
+
+
+
+// Auto-generated PropTypes
+Button.propTypes = {
+  children: PropTypes.any,
+  className: PropTypes.any,
+  disabled: PropTypes.any,
+  onClick: PropTypes.any,
+  type: PropTypes.any,
+  variant: PropTypes.any,
 };
 
 export default Button;

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './Tooltip.css';
 
 const Tooltip = ({ content, children, position = 'top', className = '' }) => {
@@ -62,6 +63,16 @@ const Tooltip = ({ content, children, position = 'top', className = '' }) => {
       )}
     </span>
   );
+};
+
+
+
+// Auto-generated PropTypes
+Tooltip.propTypes = {
+  children: PropTypes.any,
+  className: PropTypes.any,
+  content: PropTypes.any,
+  position: PropTypes.any,
 };
 
 export default Tooltip;

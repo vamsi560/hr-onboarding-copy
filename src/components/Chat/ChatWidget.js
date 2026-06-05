@@ -35,7 +35,7 @@ const ChatWidget = () => {
 
   if (!isOpen) {
     return (
-      <div className="chat-fab" onClick={() => setIsOpen(true)} title="Open chat">
+      <div role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.click(); }} className="chat-fab" onClick={() => setIsOpen(true)} title="Open chat">
         Chat
       </div>
     );
@@ -45,7 +45,7 @@ const ChatWidget = () => {
     <div className="chat-widget">
       <div className="chat-header">
         <div>Onboarding Assistant</div>
-        <div style={{ marginLeft: 'auto', cursor: 'pointer', fontSize: '18px', opacity: 0.8 }} onClick={() => setIsOpen(false)} title="Close">
+        <div role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.click(); }} style={{ marginLeft: 'auto', cursor: 'pointer', fontSize: '18px', opacity: 0.8 }} onClick={() => setIsOpen(false)} title="Close">
           ×
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Input.css';
 
 const Input = ({ className = '', error, ...props }) => {
@@ -8,6 +9,14 @@ const Input = ({ className = '', error, ...props }) => {
       {...props}
     />
   );
+};
+
+
+
+// Auto-generated PropTypes
+Input.propTypes = {
+  className: PropTypes.any,
+  error: PropTypes.any,
 };
 
 export default Input;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import Header from './Header';
@@ -185,6 +186,13 @@ const MainLayout = ({ onLogout }) => {
       <LoadingOverlay />
     </div>
   );
+};
+
+
+
+// Auto-generated PropTypes
+MainLayout.propTypes = {
+  onLogout: PropTypes.any,
 };
 
 export default MainLayout;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import Icon from '../UI/Icon';
@@ -189,6 +190,23 @@ const Sidebar = ({ onNavClick, isMobileOpen, onClose, onCollapseChange }) => {
       </nav>
     </>
   );
+};
+
+
+
+// Auto-generated PropTypes
+UserProfile.propTypes = {
+  collapsed: PropTypes.any,
+  location: PropTypes.any,
+  userInfo: PropTypes.any,
+  userInfo.name: PropTypes.any,
+  userRole: PropTypes.any,
+};
+Sidebar.propTypes = {
+  isMobileOpen: PropTypes.any,
+  onClose: PropTypes.any,
+  onCollapseChange: PropTypes.any,
+  onNavClick: PropTypes.any,
 };
 
 export default Sidebar;

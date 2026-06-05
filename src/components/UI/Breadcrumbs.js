@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Breadcrumbs.css';
 
 const Breadcrumbs = ({ items = [] }) => {
@@ -14,6 +15,13 @@ const Breadcrumbs = ({ items = [] }) => {
       ))}
     </div>
   );
+};
+
+
+
+// Auto-generated PropTypes
+Breadcrumbs.propTypes = {
+  items: PropTypes.any,
 };
 
 export default Breadcrumbs;
