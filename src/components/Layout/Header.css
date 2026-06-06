@@ -126,7 +126,7 @@
 
 .header-datetime {
   font-size: 14px;
-  color: #64748b;
+  color: #4a5568;
   font-weight: 500;
 }
 
@@ -166,7 +166,7 @@
 
 .search-icon {
   opacity: 0.6;
-  color: #64748b;
+  color: #4a5568;
 }
 
 .notification-badge {
@@ -310,13 +310,13 @@
 
 .notification-time {
   font-size: 12px;
-  color: #64748b;
+  color: #4a5568;
 }
 
 .notification-empty {
   padding: 40px 20px;
   text-align: center;
-  color: #64748b;
+  color: #4a5568;
   font-size: 14px;
 }
 
@@ -483,7 +483,7 @@
 
 .user-menu-email {
   font-size: 11px;
-  color: #64748b;
+  color: #4a5568;
 }
 
 .user-menu-email {
@@ -535,7 +535,7 @@
 }
 
 .user-menu-item .icon {
-  color: #64748b;
+  color: #4a5568;
 }
 
 .user-menu-item span {

@@ -450,14 +450,19 @@ const OfferLetterForm = () => {
         </div>
       </div>
 
-      {/* Steps Indicator */}
       <div className="steps-bar">
-        {[1, 2, 3].map(step => (
+        {[1, 2, 3].map(step => {
+          const getStepBubbleClass = (s) => {
+            if (s === currentStep) return 'active';
+            if (s < currentStep) return 'passed';
+            return '';
+          };
+          return (
           <div key={step} className="step-item-container">
             <div className="step-bubble-wrapper">
               <button 
                 type="button"
-                className={`step-bubble ${step === currentStep ? 'active' : step < currentStep ? 'passed' : ''}`}
+                className={`step-bubble ${getStepBubbleClass(step)}`}
                 onClick={() => {
                   if (step < currentStep) setCurrentStep(step);
                 }}
@@ -474,7 +479,7 @@ const OfferLetterForm = () => {
               <div className={`step-connector ${step < currentStep ? 'passed' : ''}`} />
             )}
           </div>
-        ))}
+        )})}
       </div>
 
       <form onSubmit={handleSubmit} className="offer-form">
@@ -1068,7 +1073,11 @@ const OfferLetterForm = () => {
                 disabled={loading || !salaryBreakdown}
                 style={{ marginLeft: 'auto' }}
               >
-                {loading ? 'Processing...' : id ? 'Update Offer details' : 'Submit & Build PDF'}
+                {(() => {
+                  if (loading) return 'Processing...';
+                  if (id) return 'Update Offer details';
+                  return 'Submit & Build PDF';
+                })()}
               </button>
             )}
           </div>

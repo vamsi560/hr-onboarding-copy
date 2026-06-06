@@ -35,7 +35,7 @@ if settings.USE_POSTGRES:
         Base.metadata.create_all(bind=engine)
         logger.info("Successfully connected to PostgreSQL database.")
     except Exception as e:
-        logger.error(f"Error connecting to PostgreSQL database: {e}")
+        logger.exception("Error connecting to PostgreSQL database:")
         logger.warning("Falling back to In-Memory Database store.")
         # Override setting since connection failed
         settings.USE_POSTGRES = False
@@ -126,10 +126,76 @@ class DatabaseDAL:
         
         return in_memory_db.candidates
 
+    def _register_candidate_postgres(self, email_clean: str, user_info: dict, candidate_data: dict):
+        db = self._get_postgres_session()
+        if db:
+            try:
+                db_user = UserModel(
+                    email=email_clean,
+                    password_hash=user_info["password_hash"],
+                    password_salt=user_info["password_salt"],
+                    name=user_info["name"],
+                    role=user_info["role"],
+                    location=user_info["location"],
+                    joining_bonus=user_info["joiningBonus"],
+                    relocation=user_info["relocation"],
+                    relocation_city=user_info["relocationCity"],
+                    alumni=user_info["alumni"],
+                    designation=user_info["designation"],
+                    department=user_info["department"]
+                )
+                db.add(db_user)
+                
+                db_candidate = CandidateModel(
+                    name=candidate_data["name"],
+                    email=email_clean,
+                    status="pending",
+                    docs=0,
+                    total=12,
+                    dept=candidate_data["department"].lower(),
+                    selected=False,
+                    pending_docs=[IDENTITY_PROOF, VISA_DOCUMENT, FINANCIAL_DOCUMENTS, PHOTO, PASSPORT]
+                )
+                db.add(db_candidate)
+                db.commit()
+                db.refresh(db_candidate)
+                
+                return {
+                    "id": db_candidate.id,
+                    "name": db_candidate.name,
+                    "email": db_candidate.email,
+                    "status": db_candidate.status,
+                    "docs": db_candidate.docs,
+                    "total": db_candidate.total,
+                    "dept": db_candidate.dept,
+                    "selected": db_candidate.selected,
+                    "pending": db_candidate.pending_docs
+                }
+            finally:
+                db.close()
+        return None
+
+    def _register_candidate_in_memory(self, email_clean: str, user_info: dict, candidate_data: dict):
+        in_memory_db.users[email_clean] = user_info
+        
+        new_id = max([c["id"] for c in in_memory_db.candidates]) + 1 if in_memory_db.candidates else 1
+        new_cand = {
+            "id": new_id,
+            "name": candidate_data["name"],
+            "email": email_clean,
+            "status": "pending",
+            "docs": 0,
+            "total": 12,
+            "dept": candidate_data["department"].lower(),
+            "selected": False,
+            "pending": [IDENTITY_PROOF, VISA_DOCUMENT, FINANCIAL_DOCUMENTS, PHOTO, PASSPORT]
+        }
+        in_memory_db.candidates.append(new_cand)
+        return new_cand
+
     def register_candidate(self, candidate_data: dict):
         email_clean = candidate_data["email"].strip().lower()
         
-        # 1. Add to User Database for login credentials
         from app.security import generate_salt, hash_password
         salt = generate_salt()
         hashed = hash_password(seed.DEMO_USER_PASSWORD, salt)
@@ -149,72 +215,11 @@ class DatabaseDAL:
         }
         
         if settings.USE_POSTGRES:
-            db = self._get_postgres_session()
-            if db:
-                try:
-                    # Save user login credentials
-                    db_user = UserModel(
-                        email=email_clean,
-                        password_hash=user_info["password_hash"],
-                        password_salt=user_info["password_salt"],
-                        name=user_info["name"],
-                        role=user_info["role"],
-                        location=user_info["location"],
-                        joining_bonus=user_info["joiningBonus"],
-                        relocation=user_info["relocation"],
-                        relocation_city=user_info["relocationCity"],
-                        alumni=user_info["alumni"],
-                        designation=user_info["designation"],
-                        department=user_info["department"]
-                    )
-                    db.add(db_user)
-                    
-                    # Save Candidate Profile
-                    db_candidate = CandidateModel(
-                        name=candidate_data["name"],
-                        email=email_clean,
-                        status="pending",
-                        docs=0,
-                        total=12,
-                        dept=candidate_data["department"].lower(),
-                        selected=False,
-                        pending_docs=[IDENTITY_PROOF, VISA_DOCUMENT, FINANCIAL_DOCUMENTS, PHOTO, PASSPORT]
-                    )
-                    db.add(db_candidate)
-                    db.commit()
-                    db.refresh(db_candidate)
-                    
-                    return {
-                        "id": db_candidate.id,
-                        "name": db_candidate.name,
-                        "email": db_candidate.email,
-                        "status": db_candidate.status,
-                        "docs": db_candidate.docs,
-                        "total": db_candidate.total,
-                        "dept": db_candidate.dept,
-                        "selected": db_candidate.selected,
-                        "pending": db_candidate.pending_docs
-                    }
-                finally:
-                    db.close()
+            res = self._register_candidate_postgres(email_clean, user_info, candidate_data)
+            if res:
+                return res
 
-        # In-Memory fallback
-        in_memory_db.users[email_clean] = user_info
-        
-        new_id = max([c["id"] for c in in_memory_db.candidates]) + 1 if in_memory_db.candidates else 1
-        new_cand = {
-            "id": new_id,
-            "name": candidate_data["name"],
-            "email": email_clean,
-            "status": "pending",
-            "docs": 0,
-            "total": 12,
-            "dept": candidate_data["department"].lower(),
-            "selected": False,
-            "pending": [IDENTITY_PROOF, VISA_DOCUMENT, FINANCIAL_DOCUMENTS, PHOTO, PASSPORT]
-        }
-        in_memory_db.candidates.append(new_cand)
-        return new_cand
+        return self._register_candidate_in_memory(email_clean, user_info, candidate_data)
 
     def _update_candidate_status_postgres(self, email_clean: str, status: str, pending_docs: list) -> bool:
         db = self._get_postgres_session()
@@ -296,7 +301,7 @@ class DatabaseDAL:
                     db.commit()
                     return True
                 except Exception as e:
-                    logger.error(f"Error saving onboarding form for {email_clean}: {e}")
+                    logger.exception(f"Error saving onboarding form for {email_clean}:")
                     return False
                 finally:
                     db.close()
@@ -370,7 +375,7 @@ class DatabaseDAL:
                     self._recalculate_candidate_docs(db, email_clean)
                     return True
                 except Exception as e:
-                    logger.error(f"Error adding document for {email_clean}: {e}")
+                    logger.exception(f"Error adding document for {email_clean}:")
                     return False
                 finally:
                     db.close()
@@ -743,7 +748,7 @@ class DatabaseDAL:
                     db.refresh(db_expiry)
                     return True
                 except Exception as e:
-                    logger.error(f"Error adding document expiry for {expiry_data.get('candidateName')}: {e}")
+                    logger.exception(f"Error adding document expiry for {expiry_data.get('candidateName')}:")
                     return False
                 finally:
                     db.close()
@@ -834,7 +839,7 @@ class DatabaseDAL:
                     db.commit()
                     return True
                 except Exception as e:
-                    logger.error(f"Error adding audit log: {e}")
+                    logger.exception("Error adding audit log:")
                     return False
                 finally:
                     db.close()
@@ -890,7 +895,7 @@ class DatabaseDAL:
                     db.commit()
                     return True
                 except Exception as e:
-                    logger.error(f"Error adding chat message for {email_clean}: {e}")
+                    logger.exception(f"Error adding chat message for {email_clean}:")
                     return False
                 finally:
                     db.close()
@@ -950,10 +955,75 @@ class DatabaseDAL:
             return self._get_offer_candidates_by_user_postgres(username_clean)
         return self._get_offer_candidates_by_user_in_memory(username_clean)
 
+    def _create_offer_details_postgres(self, offer_id: str, username: str, offer_data: dict, salary_breakdown: dict, joining_dt_parsed, extra_data: dict):
+        db = self._get_postgres_session()
+        if db:
+            try:
+                new_record = OfferDetailModel(
+                    id=offer_id,
+                    username=username,
+                    candidate_name=offer_data["candidate_name"],
+                    candidate_email=offer_data["candidate_email"],
+                    candidate_phone=offer_data["candidate_phone"],
+                    candidate_pan=offer_data["pan"],
+                    status=offer_data["status"],
+                    source=offer_data["source"],
+                    designation=offer_data["designation"],
+                    position=offer_data["position"],
+                    department=offer_data["department"],
+                    joining_date=joining_dt_parsed,
+                    facility=offer_data["facility"],
+                    work_mode=offer_data.get("work_mode") or offer_data["employment_type"],
+                    total_salary=float(offer_data["total_salary"]),
+                    current_ctc=float(offer_data.get("current_ctc") or 0.0),
+                    extra_data=extra_data,
+                    created_at=datetime.datetime.now(),
+                    pdf_path=offer_data.get("pdf_path"),
+                    salary_breakdown=json.dumps(salary_breakdown)
+                )
+                db.add(new_record)
+                db.commit()
+                return offer_id
+            finally:
+                db.close()
+        return None
+
+    def _create_offer_details_in_memory(self, offer_id: str, username: str, offer_data: dict, salary_breakdown: dict, joining_dt, extra_data: dict):
+        new_inmem = {
+            "id": offer_id,
+            "username": username,
+            "candidate_name": offer_data["candidate_name"],
+            "candidate_email": offer_data["candidate_email"],
+            "candidate_phone": offer_data["candidate_phone"],
+            "candidate_pan": offer_data["pan"],
+            "status": offer_data["status"],
+            "source": offer_data["source"],
+            "designation": offer_data["designation"],
+            "position": offer_data["position"],
+            "department": offer_data["department"],
+            "joining_date": joining_dt,
+            "facility": offer_data["facility"],
+            "work_mode": offer_data.get("work_mode") or offer_data["employment_type"],
+            "total_salary": float(offer_data["total_salary"]),
+            "current_ctc": float(offer_data.get("current_ctc") or 0.0),
+            "extra_data": extra_data,
+            "created_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "pdf_path": offer_data.get("pdf_path"),
+            "salary_breakdown": json.dumps(salary_breakdown)
+        }
+        new_inmem.update({
+            "name": offer_data["candidate_name"],
+            "email": offer_data["candidate_email"],
+            "salary": float(offer_data["total_salary"]),
+            "offer_date": joining_dt,
+            "tag_poc": offer_data.get("tag_poc", "")
+        })
+        in_memory_db.offer_details.append(new_inmem)
+        return offer_id
+
     def create_offer_details_record(self, username: str, offer_data: dict, salary_breakdown: dict) -> str:
         offer_id = str(uuid.uuid4())
         
-        # Parse joining date
         joining_dt = offer_data.get("joining_date")
         if isinstance(joining_dt, str):
             joining_dt_parsed = datetime.datetime.strptime(joining_dt, "%Y-%m-%d").date()
@@ -977,70 +1047,11 @@ class DatabaseDAL:
                 extra_data[k] = offer_data[k]
                 
         if settings.USE_POSTGRES:
-            db = self._get_postgres_session()
-            if db:
-                try:
-                    new_record = OfferDetailModel(
-                        id=offer_id,
-                        username=username,
-                        candidate_name=offer_data["candidate_name"],
-                        candidate_email=offer_data["candidate_email"],
-                        candidate_phone=offer_data["candidate_phone"],
-                        candidate_pan=offer_data["pan"],
-                        status=offer_data["status"],
-                        source=offer_data["source"],
-                        designation=offer_data["designation"],
-                        position=offer_data["position"],
-                        department=offer_data["department"],
-                        joining_date=joining_dt_parsed,
-                        facility=offer_data["facility"],
-                        work_mode=offer_data.get("work_mode") or offer_data["employment_type"],
-                        total_salary=float(offer_data["total_salary"]),
-                        current_ctc=float(offer_data.get("current_ctc") or 0.0),
-                        extra_data=extra_data,
-                        created_at=datetime.datetime.now(),
-                        pdf_path=offer_data.get("pdf_path"),
-                        salary_breakdown=json.dumps(salary_breakdown)
-                    )
-                    db.add(new_record)
-                    db.commit()
-                    return offer_id
-                finally:
-                    db.close()
+            res = self._create_offer_details_postgres(offer_id, username, offer_data, salary_breakdown, joining_dt_parsed, extra_data)
+            if res:
+                return res
                     
-        # In-Memory Store
-        new_inmem = {
-            "id": offer_id,
-            "username": username,
-            "candidate_name": offer_data["candidate_name"],
-            "candidate_email": offer_data["candidate_email"],
-            "candidate_phone": offer_data["candidate_phone"],
-            "candidate_pan": offer_data["pan"],
-            "status": offer_data["status"],
-            "source": offer_data["source"],
-            "designation": offer_data["designation"],
-            "position": offer_data["position"],
-            "department": offer_data["department"],
-            "joining_date": joining_dt,
-            "facility": offer_data["facility"],
-            "work_mode": offer_data.get("work_mode") or offer_data["employment_type"],
-            "total_salary": float(offer_data["total_salary"]),
-            "current_ctc": float(offer_data.get("current_ctc") or 0.0),
-            "extra_data": extra_data,
-            "created_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "pdf_path": offer_data.get("pdf_path"),
-            "salary_breakdown": json.dumps(salary_breakdown)
-        }
-        # For candidate summary items in list
-        new_inmem.update({
-            "name": offer_data["candidate_name"],
-            "email": offer_data["candidate_email"],
-            "salary": float(offer_data["total_salary"]),
-            "offer_date": joining_dt,
-            "tag_poc": offer_data.get("tag_poc", "")
-        })
-        in_memory_db.offer_details.append(new_inmem)
-        return offer_id
+        return self._create_offer_details_in_memory(offer_id, username, offer_data, salary_breakdown, joining_dt, extra_data)
 
     def _get_offer_detail_by_id_postgres(self, offer_id: str, username_clean: str) -> dict:
         db = self._get_postgres_session()

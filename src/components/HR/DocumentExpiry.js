@@ -285,6 +285,12 @@ const DocumentExpiry = () => {
     );
   };
 
+  const getDaysClass = (days) => {
+    if (days < 0) return 'text-danger';
+    if (days <= 30) return 'text-warning';
+    return '';
+  };
+
   // Group by status for summary
   const summary = {
     expired: filteredExpiry.filter(exp => exp.status === 'expired').length,
@@ -536,7 +542,7 @@ const DocumentExpiry = () => {
                     {exp.daysUntilExpiry !== null && (
                       <div className="info-item">
                         <span className="info-label">Days Until Expiry:</span>
-                        <span className={exp.daysUntilExpiry < 0 ? 'text-danger' : exp.daysUntilExpiry <= 30 ? 'text-warning' : ''}>
+                        <span className={getDaysClass(exp.daysUntilExpiry)}>
                           {exp.daysUntilExpiry < 0 ? `Expired ${Math.abs(exp.daysUntilExpiry)} days ago` : `${exp.daysUntilExpiry} days`}
                         </span>
                       </div>

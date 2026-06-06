@@ -144,6 +144,12 @@ const HRChat = () => {
     }
   }, [selectedChat, chats]);
 
+  const getChatStatusClass = (status) => {
+    if (status.includes('online')) return 'online';
+    if (status.includes('writes')) return 'typing';
+    return '';
+  };
+
   const filteredChats = chats.filter(chat =>
     chat.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -246,7 +252,7 @@ const HRChat = () => {
                     <span className="chat-time">{chat.lastMessageTime}</span>
                   </div>
                   <div className="chat-item-footer">
-                    <span className={`chat-status ${chat.status.includes('online') ? 'online' : chat.status.includes('writes') ? 'typing' : ''}`}>
+                    <span className={`chat-status ${getChatStatusClass(chat.status)}`}>
                       {chat.status}
                     </span>
                     {chat.unread > 0 && (

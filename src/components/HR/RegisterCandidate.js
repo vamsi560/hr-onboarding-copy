@@ -110,7 +110,13 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
       }
       
       setFormData(prev => ({ ...prev, [field]: file }));
-      showToast(`${field === 'resume' ? 'Resume' : field === 'pan' ? 'PAN Card' : 'Aadhaar Card'} uploaded successfully`, 'success');
+      const fieldNames = {
+        resume: 'Resume',
+        pan: 'PAN Card',
+        aadhaar: 'Aadhaar Card'
+      };
+      const fieldName = fieldNames[field] || 'Document';
+      showToast(`${fieldName} uploaded successfully`, 'success');
     }
   };
 
@@ -168,9 +174,11 @@ const RegisterCandidate = ({ onBack, onSuccess }) => {
       setCandidates(prev => [...prev, newCandidate]);
       setIsSubmitting(false);
       
-      const docMessage = uploadedDocsCount > 0 
-        ? ` with ${uploadedDocsCount} document${uploadedDocsCount > 1 ? 's' : ''} uploaded`
-        : '';
+      let docMessage = '';
+      if (uploadedDocsCount > 0) {
+        const plural = uploadedDocsCount > 1 ? 's' : '';
+        docMessage = ` with ${uploadedDocsCount} document${plural} uploaded`;
+      }
       showToast(`Email has been sent to the candidate successfully!${docMessage}`, 'success');
       
       if (onSuccess) {

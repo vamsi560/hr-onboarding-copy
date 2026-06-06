@@ -251,7 +251,7 @@
   padding-bottom: 8px;
   margin-bottom: 20px;
   font-size: 9pt;
-  color: #718096;
+  color: #4a5568;
 }
 
 .page-header .company-watermark {
@@ -266,7 +266,7 @@
   padding-top: 8px;
   margin-top: 20px;
   font-size: 9pt;
-  color: #718096;
+  color: #4a5568;
 }
 
 .page-footer .footer-clause {
@@ -320,14 +320,14 @@
 .logo-section p {
   margin: 2px 0 0 0;
   font-size: 8.5pt;
-  color: #718096;
+  color: #4a5568;
 }
 
 .doc-id-box {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  border: 1px solid #a0aec0;
+  border: 1px solid #2d3748;
   padding: 6px 12px;
   border-radius: 4px;
   background: #f7fafc;
@@ -336,7 +336,7 @@
 .doc-lbl {
   font-size: 7.5pt;
   font-weight: 700;
-  color: #718096;
+  color: #4a5568;
   letter-spacing: 1px;
 }
 
@@ -433,7 +433,7 @@
 .verification-clause {
   font-size: 9pt;
   color: #4a5568;
-  border-left: 3px solid #718096;
+  border-left: 3px solid #4a5568;
   padding-left: 12px;
   margin-top: 16px;
 }
@@ -498,7 +498,7 @@
 .preview-details-table th,
 .preview-details-table td {
   padding: 6px 12px;
-  border-bottom: 1px solid #a0aec0;
+  border-bottom: 1px solid #2d3748;
 }
 
 .preview-details-table th {

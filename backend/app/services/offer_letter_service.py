@@ -73,6 +73,64 @@ def _replace_placeholders_in_text(text: str, lookup: dict, legacy_aliases: dict)
     )
     return normalized
 
+def _process_field(paragraph, children, idx, field_begin_idx, field_separate_idx, ns, lookup, legacy_aliases):
+    result_runs = children[field_separate_idx + 1:idx]
+    result_text_nodes = []
+    replacement_run = None
+    for run in result_runs:
+        texts = run.findall(W_T_PATH, ns)
+        if texts:
+            result_text_nodes.extend(texts)
+            replacement_run = replacement_run or copy.deepcopy(run)
+
+    combined = "".join(node.text or "" for node in result_text_nodes)
+    replaced = _replace_placeholders_in_text(combined, lookup, legacy_aliases)
+    
+    if replaced != combined and replacement_run is not None:
+        replacement_text_nodes = replacement_run.findall(W_T_PATH, ns)
+        if replacement_text_nodes:
+            replacement_text_nodes[0].text = replaced
+            for node in replacement_text_nodes[1:]:
+                node.text = ""
+            for run in children[field_begin_idx:idx + 1]:
+                paragraph.remove(run)
+            paragraph.insert(field_begin_idx, replacement_run)
+            return field_begin_idx, None, None, list(paragraph)
+
+    return idx, None, None, children
+
+def _process_paragraph(paragraph, ns, lookup, legacy_aliases):
+    children = list(paragraph)
+    field_begin_idx = None
+    field_separate_idx = None
+    idx = 0
+    while idx < len(children):
+        child = children[idx]
+        fld_char = child.find("w:fldChar", ns)
+        if fld_char is not None:
+            fld_type = fld_char.attrib.get(f"{{{ns['w']}}}fldCharType")
+            if fld_type == "begin":
+                field_begin_idx = idx
+                field_separate_idx = None
+            elif fld_type == "separate" and field_begin_idx is not None:
+                field_separate_idx = idx
+            elif (
+                fld_type == "end"
+                and field_begin_idx is not None
+                and field_separate_idx is not None
+            ):
+                idx, field_begin_idx, field_separate_idx, children = _process_field(
+                    paragraph, children, idx, field_begin_idx, field_separate_idx, ns, lookup, legacy_aliases
+                )
+                continue
+        idx += 1
+
+    for text_node in paragraph.findall(W_T_PATH, ns):
+        original = text_node.text or ""
+        replaced = _replace_placeholders_in_text(original, lookup, legacy_aliases)
+        if replaced != original:
+            text_node.text = replaced
+
 def _replace_placeholder_runs_in_xml(xml_text: str, lookup: dict, legacy_aliases: dict) -> str:
     ns = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
     try:
@@ -81,60 +139,7 @@ def _replace_placeholder_runs_in_xml(xml_text: str, lookup: dict, legacy_aliases
         return _replace_placeholders_in_text(xml_text, lookup, legacy_aliases)
 
     for paragraph in root.findall(".//w:p", ns):
-        children = list(paragraph)
-        field_begin_idx = None
-        field_separate_idx = None
-        idx = 0
-        while idx < len(children):
-            child = children[idx]
-            fld_char = child.find("w:fldChar", ns)
-            if fld_char is not None:
-                fld_type = fld_char.attrib.get(f"{{{ns['w']}}}fldCharType")
-                if fld_type == "begin":
-                    field_begin_idx = idx
-                    field_separate_idx = None
-                elif fld_type == "separate" and field_begin_idx is not None:
-                    field_separate_idx = idx
-                elif (
-                    fld_type == "end"
-                    and field_begin_idx is not None
-                    and field_separate_idx is not None
-                ):
-                    result_runs = children[field_separate_idx + 1:idx]
-                    result_text_nodes = []
-                    replacement_run = None
-                    for run in result_runs:
-                        texts = run.findall(W_T_PATH, ns)
-                        if texts:
-                            result_text_nodes.extend(texts)
-                            replacement_run = replacement_run or copy.deepcopy(run)
-
-                    combined = "".join(node.text or "" for node in result_text_nodes)
-                    replaced = _replace_placeholders_in_text(combined, lookup, legacy_aliases)
-                    if replaced != combined and replacement_run is not None:
-                        replacement_text_nodes = replacement_run.findall(W_T_PATH, ns)
-                        if replacement_text_nodes:
-                            replacement_text_nodes[0].text = replaced
-                            for node in replacement_text_nodes[1:]:
-                                node.text = ""
-                            for run in children[field_begin_idx:idx + 1]:
-                                paragraph.remove(run)
-                            paragraph.insert(field_begin_idx, replacement_run)
-                            children = list(paragraph)
-                            idx = field_begin_idx
-                            field_begin_idx = None
-                            field_separate_idx = None
-                            continue
-
-                    field_begin_idx = None
-                    field_separate_idx = None
-            idx += 1
-
-        for text_node in paragraph.findall(W_T_PATH, ns):
-            original = text_node.text or ""
-            replaced = _replace_placeholders_in_text(original, lookup, legacy_aliases)
-            if replaced != original:
-                text_node.text = replaced
+        _process_paragraph(paragraph, ns, lookup, legacy_aliases)
 
     return ET.tostring(root, encoding="unicode")
 

@@ -268,7 +268,7 @@ const Login = ({ onLogin, onDemo }) => {
                     <div className="password-strength-bar"></div>
                   </div>
                   <span className={`password-strength-text ${passwordStrength}`}>
-                    {passwordStrength === 'weak' ? 'Weak' : passwordStrength === 'medium' ? 'Medium' : 'Strong'}
+                    {{weak: 'Weak', medium: 'Medium', strong: 'Strong'}[passwordStrength] || 'Strong'}
                   </span>
                 </div>
               )}

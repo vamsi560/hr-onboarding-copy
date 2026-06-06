@@ -62,7 +62,7 @@
   background: none;
   border: none;
   font-size: 24px;
-  color: #64748b;
+  color: #4a5568;
   cursor: pointer;
   padding: 0;
   width: 30px;
@@ -85,7 +85,7 @@
 
 .wizard-body p {
   margin: 0;
-  color: #64748b;
+  color: #4a5568;
   line-height: 1.6;
   font-size: 14px;
 }
@@ -104,7 +104,7 @@
 
 .wizard-progress span {
   font-size: 12px;
-  color: #64748b;
+  color: #4a5568;
   font-weight: 500;
 }
 

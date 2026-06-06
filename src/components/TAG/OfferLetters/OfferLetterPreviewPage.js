@@ -285,7 +285,11 @@ Talent Acquisition Team`);
                 onClick={handleSendEmail}
                 disabled={emailSending}
               >
-                {emailSending ? 'Sending...' : emailSent ? 'Email Dispatched!' : 'Send Secure Offer'}
+                {(() => {
+                  if (emailSending) return 'Sending...';
+                  if (emailSent) return 'Email Dispatched!';
+                  return 'Send Secure Offer';
+                })()}
               </button>
             </div>
           </Card>

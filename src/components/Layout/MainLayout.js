@@ -133,6 +133,12 @@ const MainLayout = ({ onLogout }) => {
     }
   };
 
+  const getDefaultRoute = (role) => {
+    if (role === 'hr') return '/hr';
+    if (role === 'tag') return '/tag';
+    return '/dashboard';
+  };
+
   return (
     <div className="main-layout">
       <Sidebar
@@ -177,7 +183,7 @@ const MainLayout = ({ onLogout }) => {
                 <Route path="/offer-letters/preview/:id" element={<OfferLetterPreviewPage />} />
               </>
             )}
-            <Route path="/*" element={<Navigate to={userRole === 'hr' ? "/hr" : userRole === 'tag' ? "/tag" : "/dashboard"} replace />} />
+            <Route path="/*" element={<Navigate to={getDefaultRoute(userRole)} replace />} />
           </Routes>
         </div>
       </main>
