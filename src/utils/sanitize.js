@@ -3,15 +3,11 @@
  * rendering to DOM, or constructing URLs, preventing XSS and injection vulnerabilities.
  */
 
+import DOMPurify from 'dompurify';
+
 export const sanitizeHTML = (str) => {
   if (typeof str !== 'string') return str;
-  return str
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#x27;')
-    .replaceAll('/', '&#x2F;');
+  return DOMPurify.sanitize(str);
 };
 
 export const sanitizeData = (data) => {
